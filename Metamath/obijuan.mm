@@ -4,15 +4,26 @@ $(
 ========================================
 $)
 
-  $( ----Alfabeto--------- $)
-  $c ( ) -> -. wff |- $.  
+  $( -----------------Alfabeto (simbolos terminales)--------- $)
+  $c ( ) -> -. wff |- $.
+
+  $( -- Variables proposicionales. 
+     NO se usan en las demostraciones. Se incluyen aqui para poder
+     expresar formulas terminales, que se puedan utilizar en ejemplos $)
+  $c p q r $.  $(  $)
   
+  $( ----------------- Simbolos NO terminales ---------------- $)
   $( --- Variables para refereirse a wff ---- $)
   $( --- wff: Well formed formula $)
   $( psi chi theta tau eta $)
   $v ph ps ch th ta et $. 
 
-$(  --- Reglas de contruccion de formulas (Gramatica) --- $)
+  $( --- Reglas de contruccion de formulas (Gramatica) ------- $)
+
+  $( Regla 0: las variables proposicionales son wff $)
+  wpp $a wff p $.
+  wpq $a wff q $.
+  wpr $a wff r $.
 
   $( Regla 1: Estas variables son wffs $)
   wph $f wff ph $.  $( La variable ph es una wff $)
@@ -28,7 +39,7 @@ $(  --- Reglas de contruccion de formulas (Gramatica) --- $)
   $( Regla 3: Si ph y ps son wffs, entonces ( ph -> ps ) es una wff $)
   wi $a wff ( ph -> ps ) $.
 
-$( --- AXIOMAS ----- $)
+$( --------- AXIOMA para INFERENCIAS  --------------------------- $)
 
   $( Axioma para regla de inferencia. Indica como obtener un teorema a partir 
       de otras premisas que son teoremas. $)
@@ -41,6 +52,32 @@ $( --- AXIOMAS ----- $)
     ax-mp $a |- ps $.
   $}
 
+$( --- EJEMPLOS DE PRUEBA del LENGUAJE TERMINAL ---- $)
+
+  $( Para un sistema concreto, establecemos el significado de
+     las proposiciones:
+      p="Interruptor conectado"
+      q="Luz encendida"
+  $)
+
+  $( Mediante los axiomas especificamos las relaciones
+     preestablecidas entre las proposiciones $)
+  $( Al activar este interruptor se enciende la luz $)
+  ax-obi1 $a |- ( p -> q ) $.
+  
+  $( Los teoremas son las leyes que rigen en este universo, 
+     que derivan de los axiomas $)
+  $( Teorema deduccion: La luz esta encendida $)
+  ${
+    $( Premisa: Interruptor conectado $)
+    th-obi1.1 $e |- p $.
+
+    $( Deduccion: Concluimos que la luz se enciende $)
+    th-obi1 $p |- q $= wpp wpq th-obi1.1 ax-obi1 ax-mp  $.
+  $}
+
+
+$( ----------------- AXIOMAS ------------------------------------ $)
   $( Axiom _Simp_.  "the principle of simplification" 
     "it enables us to pass from the joint assertion of ` ph ` and ` ps ` to 
      the assertion of ` ph ` simply".  $)
@@ -54,7 +91,6 @@ $( --- AXIOMAS ----- $)
      It swaps or "transposes" the order of the consequents when negation is 
      removed  $)
   ax-3 $a |- ( ( -. ph -> -. ps ) -> ( ps -> ph ) ) $.
-
 
 $(
 =============================================================
