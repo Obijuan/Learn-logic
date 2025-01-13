@@ -230,11 +230,12 @@ def mp2(
     step_11 = ax_mp(step_1, step_2, step_3, step_10, debug=True)
     print()
 
+    conclusion = step_11
     print("CONCLUSION: ")
-    print(step_11)
-
+    print(conclusion)
 
     print()
+    return conclusion
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 
