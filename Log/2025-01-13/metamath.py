@@ -171,7 +171,70 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
     #-- Devolver el teorema conclusión
     return conclusion
 
+#------- TEOREMAS
 
+def mp2(
+        #-- wff
+        wph : str, wps: str, wch : str,
+
+        #-- Teoremas hipótesis
+        mp2_1: str,  #-- ⊢ 𝜑 
+        mp2_2: str,  #-- ⊢ 𝜓
+        mp2_3: str   #-- ⊢ (𝜑 → (𝜓 → 𝜒))
+        ) -> str: 
+    
+    """
+    ⊢ 𝜑
+    ⊢ 𝜓
+    ⊢ (𝜑 → (𝜓 → 𝜒))
+    ───────────────
+    ⊢ 𝜒
+    """
+
+    """
+     Demostracion en Metamath:     
+     1 wps           $f wff ps
+     2 wch           $f wff ch
+     3 mp2.2         $e |- ps
+     4 wph           $f wff ph
+     5 wps           $f wff ps
+     6 wch           $f wff ch
+     7 5,6 wi        $a wff ( ps -> ch )
+     8 mp2.1         $e |- ph
+     9 mp2.3         $e |- ( ph -> ( ps -> ch ) )
+    10 4,7,8,9 ax-mp  $a |- ( ps -> ch )
+    11 1,2,3,10 ax-mp  $a |- ch
+    """
+
+    print("HIPOTESIS:")
+    debug_wff(wph)
+    debug_wff(wps)
+    debug_wff(wch)
+    debug_wff(mp2_1)
+    debug_wff(mp2_2)
+    debug_wff(mp2_3)
+    print()
+
+    print("DEMOSTRACION:")
+    step_1 = wps
+    step_2 = wch
+    step_3 = mp2_2
+    step_4 = wph
+    step_5 = wps
+    step_6 = wch
+    step_7 = wi (step_5, step_6) #  wff (𝜓 → 𝜒)
+    step_8 = mp2_1
+    step_9 = mp2_3
+    step_10 = ax_mp(step_4, step_7, step_8, step_9, debug=True)
+    print()
+    step_11 = ax_mp(step_1, step_2, step_3, step_10, debug=True)
+    print()
+
+    print("CONCLUSION: ")
+    print(step_11)
+
+
+    print()
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 
@@ -391,3 +454,23 @@ min = theorem(wph)
 maj = theorem( wi ( wph, wps) ) 
 ax_mp(wph, wps, min, maj, debug=True)
 print()
+
+#------------- MP2
+print("--- TEOREMA: MP2 ----")
+
+wph = wφ()
+wps = w𝜓()
+wch = w𝜒()
+mp2_1 = theorem(wph)  #-- ⊢ 𝜑 
+mp2_2 = theorem(wps)  #-- ⊢ 𝜓
+mp2_3 = theorem(wi(wph, wi(wps, wch))) #-- ⊢ (𝜑 → (𝜓 → 𝜒))
+mp2(wph, wps, wch, mp2_1, mp2_2, mp2_3)
+
+
+"""
+    ⊢ 𝜑
+    ⊢ 𝜓
+    ⊢ (𝜑 → (𝜓 → 𝜒))
+    ───────────────
+    ⊢ 𝜒
+"""
