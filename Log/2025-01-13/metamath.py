@@ -162,11 +162,15 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
 
     #-- Si estamos en modo DEBUG, se imprimen las premisas y las conclusiones
     if (debug):
-        print(min)
-        print(maj)
+        print("══════════")
+        print("🟢️ ax-mp: ")
+        debug_wff(wph)
+        debug_wff(wps)  
+        print(min)  
+        print(maj)  
         print(f"{"─"*len(maj)}") #-- Dibujar linea
         print(conclusion)
-
+        print()
 
     #-- Devolver el teorema conclusión
     return conclusion
@@ -210,31 +214,40 @@ def mp2(
     debug_wff(wph)
     debug_wff(wps)
     debug_wff(wch)
-    debug_wff(mp2_1)
-    debug_wff(mp2_2)
-    debug_wff(mp2_3)
+    print(f"• mp2.1: {mp2_1}")
+    print(f"• mp2.2: {mp2_2}")
+    print(f"• mp2.3: {mp2_3}")
     print()
 
     print("DEMOSTRACION:")
-    step_1 = wps
-    step_2 = wch
-    step_3 = mp2_2
-    step_4 = wph
-    step_5 = wps
-    step_6 = wch
-    step_7 = wi (step_5, step_6) #  wff (𝜓 → 𝜒)
-    step_8 = mp2_1
-    step_9 = mp2_3
-    step_10 = ax_mp(step_4, step_7, step_8, step_9, debug=True)
-    print()
-    step_11 = ax_mp(step_1, step_2, step_3, step_10, debug=True)
+    print("📜️ Paso 1:")
+    step_1  = ax_mp(wph,            # • wff 𝜑
+                    wi(wps, wch),   # • wff ( 𝜓 → 𝜒 )
+                    mp2_1,          # ⊢ 𝜑
+                    mp2_3,          # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+                    debug=True)  
+                        # Conclusion: ⊢ ( 𝜓 → 𝜒 )
+
+    print("📜️ Paso 2:")
+    step_2 = ax_mp(wps,             # • wff 𝜓
+                   wch,             # • wff 𝜒
+                   mp2_2,           # ⊢ 𝜓
+                   step_1,          # ⊢ ( 𝜓 → 𝜒 )
+                   debug=True)
+                       # Conclusion: ⊢ 𝜒
+    print("q.e.d")
     print()
 
-    conclusion = step_11
-    print("CONCLUSION: ")
+    conclusion = step_2
+    print("══════════")
+    print("RESUMEN: ")
+    print(f"{mp2_1}")
+    print(f"{mp2_2}")
+    print(f"{mp2_3}")
+    print(f"{"─"*len(mp2_3)}") #-- Dibujar linea
     print(conclusion)
-
     print()
+
     return conclusion
 
 #-- FUNCIONES PARA TESTS UNITARIOS
@@ -462,16 +475,9 @@ print("--- TEOREMA: MP2 ----")
 wph = wφ()
 wps = w𝜓()
 wch = w𝜒()
-mp2_1 = theorem(wph)  #-- ⊢ 𝜑 
-mp2_2 = theorem(wps)  #-- ⊢ 𝜓
-mp2_3 = theorem(wi(wph, wi(wps, wch))) #-- ⊢ (𝜑 → (𝜓 → 𝜒))
-mp2(wph, wps, wch, mp2_1, mp2_2, mp2_3)
+mp2_1 = theorem(wph)                    # ⊢ 𝜑 
+mp2_2 = theorem(wps)                    # ⊢ 𝜓
+mp2_3 = theorem(wi(wph, wi(wps, wch)))  # ⊢ (𝜑 → (𝜓 → 𝜒))
+                                        #─────────────────
+mp2(wph, wps, wch, mp2_1, mp2_2, mp2_3) # ⊢ 𝜒
 
-
-"""
-    ⊢ 𝜑
-    ⊢ 𝜓
-    ⊢ (𝜑 → (𝜓 → 𝜒))
-    ───────────────
-    ⊢ 𝜒
-"""
