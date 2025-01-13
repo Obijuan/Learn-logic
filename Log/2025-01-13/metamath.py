@@ -39,6 +39,8 @@ def debug_wff(w : str):
     print(f"• {w}")
     return
 
+#-- Construccion de fórmulas
+
 def w𝜑() -> str:
     """La variable 𝜑 es una fórmula bien formada (wff)"""
 
@@ -119,6 +121,58 @@ def theorem(w : str) -> str:
 
     return th
 
+#------- Axiomas
+def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
+    """Regla de inferencia ax-mp (Modus pones)"""
+
+    #---- Comprobar el teorema min
+
+    #-- 𝜑 es una wff
+    #-- Guardamos la fórmula (sin el wff)
+    𝜑 = assert_wff(wph)
+
+    #-- ⊢ 𝜑 es un teorema
+    #-- En fmin metemos la fórmula (sin el ⊢)
+    fmin = assert_theorem(min)
+
+    #-- fmin es ahora una wff
+    fmin = wff(fmin)
+
+    #-- Comprobar que las fórmulas son iguales
+    assert fmin == wph
+
+    # ---- Comprobar el teorema maj
+    #-- 𝜓 es una wff
+    #-- Guardamos la fórmula (sin el wff)
+    𝜓 = assert_wff(wps)
+
+    #-- ⊢ ( 𝜑 → 𝜓 ) es un teorema
+    #-- Guardar en fmaj la formula (sin el ⊢)
+    fmaj = assert_theorem(maj)
+
+    #-- fmaj es ahora una wff
+    fmaj = wff(fmaj)
+
+    #-- Comprobar que fmaj es de la forma ( 𝜑 → 𝜓 )
+    assert fmaj == wi(wph, wps)
+
+    #-- Conclusion
+    #-- Podemos asegurar, en este caso, que 𝜓 es un teorema
+    conclusion = theorem(wps)
+
+    #-- Si estamos en modo DEBUG, se imprimen las premisas y las conclusiones
+    if (debug):
+        print(min)
+        print(maj)
+        print(f"{"─"*len(maj)}") #-- Dibujar linea
+        print(conclusion)
+
+
+    #-- Devolver el teorema conclusión
+    return conclusion
+
+
+
 #-- FUNCIONES PARA TESTS UNITARIOS
 
 def test_w𝜑():
@@ -198,42 +252,52 @@ def test_theorem():
     assert theorem( wi(wφ(), wi(wφ(), wψ()) ) ) == "⊢ ( 𝜑 → ( 𝜑 → 𝜓 ) )"
     print("✅️ theorem. Test 4")
 
-def ax_mp(wph : str, wps : str, min : str, maj : str) -> str:
-    """Regla de inferencia ax-mp (Modus pones)"""
+def test_ax_mp():
+    """Prueba del axioma ax_mp"""
 
-    #---- Comprobar el teorema min
+    assert ax_mp("wff 𝜑", "wff 𝜓", "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )") == "⊢ 𝜓"
+    print("✅️ ax-mp. Test 1")
 
-    #-- 𝜑 es una wff
-    #-- Guardamos la fórmula (sin el wff)
-    𝜑 = assert_wff(wph)
+    assert ax_mp("wff 𝜓", "wff 𝜒", "⊢ 𝜓", "⊢ ( 𝜓 → 𝜒 )") == "⊢ 𝜒"
+    print("✅️ ax-mp. Test 2")
 
-    #-- ⊢ 𝜑 es un teorema
-    #-- En fmin metemos la fórmula (sin el ⊢)
-    fmin = assert_theorem(min)
+    assert ax_mp("wff 𝜑", "wff ( 𝜓 → 𝜒 )", 
+                 "⊢ 𝜑", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )") == "⊢ ( 𝜓 → 𝜒 )"
+    print("✅️ ax-mp. Test 3")
+    
+    assert ax_mp("wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )",
+                  "⊢ ( 𝜑 → 𝜒 )", 
+                  "⊢ ( ( 𝜑 → 𝜒 ) → ( 𝜓 → 𝜑 ) )") == "⊢ ( 𝜓 → 𝜑 )"
+    print("✅️ ax-mp. Test 4")
 
-    #-- fmin es ahora una wff
-    fmin = wff(fmin)
+    wph = wφ()
+    wps = wψ()
+    min = theorem(wph)
+    maj = theorem( wi(wph,wps) )
+    assert ax_mp(wph, wps, min, maj) == "⊢ 𝜓"
+    print("✅️ ax-mp. Test 5")
 
-    #-- Comprobar que las fórmulas son iguales
-    assert fmin == wph
+    wph = w𝜓()
+    wps = w𝜒()
+    min = theorem(wph)
+    maj = theorem( wi ( wph, wps) ) 
+    assert ax_mp(wph, wps, min, maj) == "⊢ 𝜒"
+    print("✅️ ax-mp. Test 6")
 
-    # ---- Comprobar el teorema maj
-    #-- 𝜓 es una wff
-    #-- Guardamos la fórmula (sin el wff)
-    𝜓 = assert_wff(wps)
+    wph = wφ()
+    wps = wi( w𝜓(), w𝜒())
+    min = theorem(wph)
+    maj = theorem( wi ( wph, wps) ) 
+    assert ax_mp(wph, wps, min, maj) == "⊢ ( 𝜓 → 𝜒 )"
+    print("✅️ ax-mp. Test 7")
 
-    #-- ⊢ ( 𝜑 → 𝜓 ) es un teorema
-    #-- Guardar en fmaj la formula (sin el ⊢)
-    fmaj = assert_theorem(maj)
+    wph = wi (wφ(), w𝜒())
+    wps = wi( w𝜓(), w𝜒())
+    min = theorem(wph)
+    maj = theorem( wi ( wph, wps) ) 
+    assert ax_mp(wph, wps, min, maj) == "⊢ ( 𝜓 → 𝜒 )"
+    print("✅️ ax-mp. Test 8")
 
-    #-- fmaj es ahora una wff
-    fmaj = wff(fmaj)
-
-    #-- Comprobar que fmaj es de la forma ( 𝜑 → 𝜓 )
-    assert fmaj == wi(wph, wps)
-
-    #-- Podemos asegurar, en este caso, que 𝜓 es un teorema
-    return theorem(wps)
 
 
 #-- Tests
@@ -251,8 +315,11 @@ test_wχ()
 print("-- Implicación: ")
 test_wi()
 
-print("Teorema: ")
+print("--Teorema: ")
 test_theorem()
+
+print("-- ax-mp:")
+test_ax_mp()
 
 print()
 
@@ -284,43 +351,43 @@ debug_wff(w6)
 w7 = theorem(w3)
 debug_wff(w7)
 
+print()
 
-#-- Prueba de ax-mp
-print("--- MODUS PONEN ----")
+
+#----------- Prueba de ax-mp
+print("--- MODUS PONENS ----")
+
+#---- PRUEBA 1
+#-- Premisas
 wph = wφ()
 wps = wψ()
 min = theorem(wph)
 maj = theorem( wi(wph,wps) )
-debug_wff(wph)
-debug_wff(wps)
-print(min)
-print(maj)
-print(f"{"─"*len(maj)}")
 
-#-- Aplicamos el axioma de modus ponens
-th1 = ax_mp(wph, wps, min, maj)
-
-#-- Mostrar la conclusion
-print(th1)
-
-#---- Otra prueba de ax-mp
-print("--- MODUS PONEN ----")
-mp2_wph = w𝜓()
-mp2_wps = w𝜒()
-min = theorem(mp2_wph)
-maj = theorem( wi ( mp2_wph, mp2_wps) ) 
-print(min)
-print(maj)
-th2 = ax_mp(
-    mp2_wph, 
-    mp2_wps, 
-    min,
-    maj
-)
-
-#-- Imprimir la conclusion
-print(th2)
-
+#-- Conclusión
+ax_mp(wph, wps, min, maj, debug=True)
 print()
 
+#----- PRUEBA 2
+wph = w𝜓()
+wps = w𝜒()
+min = theorem(wph)
+maj = theorem( wi ( wph, wps) ) 
+ax_mp(wph, wps, min, maj, debug=True)
+print()
 
+#------ PRUEBA 3
+wph = wφ()
+wps = wi( w𝜓(), w𝜒())
+min = theorem(wph)
+maj = theorem( wi ( wph, wps) ) 
+ax_mp(wph, wps, min, maj, debug=True)
+print()
+
+#----- PRUEBA 4
+wph = wi (wφ(), w𝜒())
+wps = wi( w𝜓(), wφ())
+min = theorem(wph)
+maj = theorem( wi ( wph, wps) ) 
+ax_mp(wph, wps, min, maj, debug=True)
+print()
