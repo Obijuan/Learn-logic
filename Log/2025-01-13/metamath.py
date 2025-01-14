@@ -19,6 +19,12 @@ th = {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
                 "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )"
+    },
+    "mpd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )"
     }
 }
 
@@ -431,67 +437,46 @@ def a2i(hyp: list, show_proof = False) -> str:
     conclusion = step_2
     return conclusion
 
-def mpd(wph: str, wps: str, wch: str,  #-- wffs
-        
-        #-- Hipotesis
-        mpd_1,          # ⊢ ( 𝜑 → 𝜓 ) 
-        mpd_2,          # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) ) 
-        level = 0,
-        show_proof = False
-        ):
+def mpd(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒 
+        ⊢ ( 𝜑 → 𝜓 )           (mpd_1)
+        ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )   (mpd_2)
+        ────────────────────
+        ⊢ ( 𝜑 → 𝜒 )
+    """
     
     # https://us.metamath.org/mpeuni/mpd.html
 
-    if (level == 0):
-        print("───────────────┤ TEOREMA mpd ├────────────────")
+    #-- Obtener las hipótesis
+    wph, wps, wch, mpd_1, mpd_2 = hyp
     
-        #-- Teorema
-        #• wff 𝜑
-        #• wff 𝜓
-        #• wff 𝜒
-        print("""\
-⊢ ( 𝜑 → 𝜓 )
-⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )      
-────────────────────
-⊢ ( 𝜑 → 𝜒 )
-        """)
-    
-    """
-     1 wph           $f wff ph
-     2 wps           $f wff ps
-     3 1,2 wi        $a wff ( ph -> ps )
-     4 wph           $f wff ph
-     5 wch           $f wff ch
-     6 4,5 wi        $a wff ( ph -> ch )
-     7 mpd.1         $e |- ( ph -> ps )
-     8 wph           $f wff ph
-     9 wps           $f wff ps
-    10 wch           $f wff ch
-    11 mpd.2         $e |- ( ph -> ( ps -> ch ) )
-    12 8,9,10,11 a2i  $p |- ( ( ph -> ps ) -> ( ph -> ch ) )
-    13 3,6,7,12 ax-mp  $a |- ( ph -> ch )
-    """
+    #-- Paso 1
+    # wff 𝜑
+    # wff 𝜓
+    # wff 𝜒
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+    hyps = [wph, wps, wch, mpd_2]
+    step_1  = a2i(hyps)
+    # ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )
+     
+    if (show_proof):
+        print("\n🟢️ Paso 1: a2i")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # wff ( 𝜑 → 𝜓 )
+    # wff ( 𝜑 → 𝜒 )
+    # ⊢ ( 𝜑 → 𝜓 )
+    # ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )
+    hyps = [wi(wph, wps), wi(wph,wch), mpd_1, step_1]
+    step_2 = ax_mp(*hyps)
 
     if (show_proof):
-        print("📜️ Paso 1:")
-    step_1 = a2i(wph, wps, wch, mpd_2, level = level + 1)
-
-    if (show_proof):
-        print("📜️ Paso 2:")
-    step_2 = ax_mp( wi(wph, wps), wi(wph,wch), mpd_1, step_1)
-    #print(step_2)
+        print("\n🟢️ Paso 2: ax_mp")
+        show_inference(hyps, step_2)
 
     conclusion = step_2
-
-    #-- Debug
-    print("══════════")
-    print("RESUMEN: ")
-    print(f"{mpd_1}")
-    print(f"{mpd_2}")
-    print(f"{"─"*len(conclusion)}") #-- Dibujar linea
-    print(conclusion)
-    print()
-
     return conclusion
 
 
@@ -848,7 +833,8 @@ print()
 #check_theorem("mp2", mp2)
 #check_theorem("mp2b", mp2b)
 #check_theorem("a1i", a1i)
-check_theorem("a2i", a2i)
+#check_theorem("a2i", a2i)
+check_theorem("mpd", mpd)
 
 print()
 
