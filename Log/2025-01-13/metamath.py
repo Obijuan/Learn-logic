@@ -202,6 +202,38 @@ def ax_1(wph: str, wps: str, debug=False) -> str:
 
     return conclusion
 
+def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
+    """Axioma de Frege
+    si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
+    ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
+    """
+
+    # -- wph es una wff
+    assert_wff(wph)
+
+    # -- wps es una wff
+    assert_wff(wps)
+
+    # -- wch es una wff
+    assert_wff(wch)
+
+    antecedente = wi(wph, wi(wps, wch))
+    consecuente = wi(wi(wph,wps), wi(wph, wch))
+    conclusion = theorem (wi(antecedente, consecuente))
+
+    #-- Modo debug
+    if (debug):
+        print("══════════")
+        print("🟢️ ax-2: ")
+        debug_wff(wph)
+        debug_wff(wps)
+        debug_wff(wch)
+        print(f"{"─"*len(conclusion)}") #-- Dibujar linea
+        print(conclusion)
+        print()
+
+    return conclusion
+
 #------- TEOREMAS
 def mp2(
         #-- wff
@@ -570,6 +602,36 @@ def test_ax_1():
     assert ax_1(wph, wps) == "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜒 ) ) )"
     print("✅️ ax-1. Test 8")
 
+def test_ax_2():
+    """Prueba del axioma ax_2"""
+
+    assert ax_2("wff 𝜑", "wff 𝜓", "wff 𝜒") == \
+      "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )"
+    print("✅️ ax-2. Test 1")
+
+    assert ax_2("wff 𝜓", "wff 𝜒", "wff 𝜑") == \
+      "⊢ ( ( 𝜓 → ( 𝜒 → 𝜑 ) ) → ( ( 𝜓 → 𝜒 ) → ( 𝜓 → 𝜑 ) ) )"
+    print("✅️ ax-2. Test 2")
+
+    assert ax_2("wff 𝜑", "wff ( 𝜓 → 𝜒 )", "wff 𝜒") == \
+        "⊢ ( ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜒 ) ) → ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( 𝜑 → 𝜒 ) ) )"
+    print("✅️ ax-2. Test 3")
+
+    assert ax_2("wff ( 𝜑 → 𝜓 )", "wff ( 𝜓 → 𝜒 )", "wff ( 𝜒 → 𝜑 )") == \
+        "⊢ ( ( ( 𝜑 → 𝜓 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜒 → 𝜑 ) ) ) → "\
+        "( ( ( 𝜑 → 𝜓 ) → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜒 → 𝜑 ) ) ) )"
+    print("✅️ ax-2. Test 4")
+
+    assert ax_2(wφ(), wψ(), wχ()) == \
+        "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )"
+    print("✅️ ax-2. Test 5")
+
+    assert ax_2(wi(wφ(), wψ()), wi(wψ(), wχ()), wi(wχ(),wφ())) == \
+        "⊢ ( ( ( 𝜑 → 𝜓 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜒 → 𝜑 ) ) ) → "\
+        "( ( ( 𝜑 → 𝜓 ) → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜒 → 𝜑 ) ) ) )"
+    print("✅️ ax-2. Test 6")
+
+
 def unittest():
     print("-------Test unitarios-------")
     print("-- Variables proposicionales: ")
@@ -593,6 +655,9 @@ def unittest():
 
     print("-- ax-1:")
     test_ax_1()
+
+    print("-- ax-2:")
+    test_ax_2()
 
     print()
 
@@ -702,6 +767,7 @@ def check_a1i():
 #-- Tests
 #unittest()
 
+
 #print("------- Main---------")
 #demo_wff()
 #demo_ax_mp()
@@ -710,7 +776,8 @@ def check_a1i():
 print()
 #check_mp2()
 #check_mp2b()
-check_a1i()
+#check_a1i()
+
 
 print()
 
