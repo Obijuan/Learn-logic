@@ -25,6 +25,10 @@ th = {
                 "⊢ ( 𝜑 → 𝜓 )",
                 "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ ( 𝜑 → 𝜒 )"
+    },
+    "id": {
+        "hyp": ["wff 𝜑"],
+        "conc":"⊢ ( 𝜑 → 𝜑 )"
     }
 }
 
@@ -479,6 +483,56 @@ def mpd(hyp: list, show_proof = False) -> str:
     conclusion = step_2
     return conclusion
 
+def id(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑
+        ──────────
+        ⊢ (𝜑 → 𝜑)
+    """
+
+    # https://us.metamath.org/mpeuni/id.html
+
+    #-- Obtener las hipótesis
+    wph = hyp[0]
+
+    #-- Paso 1
+    # wff 𝜑
+    hyps = [wph, wph]
+    step_1  = ax_1(*hyps)
+    # ⊢ (𝜑 → (𝜑 → 𝜑))
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_1")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # wff 𝜑
+    # wff (𝜑 → 𝜑)
+    hyps = [wph, wi(wph, wph)]
+    step_2 = ax_1(*hyps)
+    # ⊢ (𝜑 → ((𝜑 → 𝜑) → 𝜑))
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: ax_1")
+        show_inference(hyps, step_2)
+
+    #-- Paso 3
+    # wff 𝜑 
+    # wff ( 𝜑 → 𝜑 )
+    # wff 𝜑 
+    # ⊢ (𝜑 → (𝜑 → 𝜑))
+    # ⊢ (𝜑 → ((𝜑 → 𝜑) → 𝜑))
+    hyps = [wph, wi(wph,wph), wph, step_1, step_2]
+    step_3 = mpd(hyps)
+
+    if (show_proof):
+        print("\n🟢️ Paso 3: mpd")
+        show_inference(hyps, step_3)
+
+    conclusion = step_3
+    return conclusion
+
+    
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -834,7 +888,8 @@ print()
 #check_theorem("mp2b", mp2b)
 #check_theorem("a1i", a1i)
 #check_theorem("a2i", a2i)
-check_theorem("mpd", mpd)
+#check_theorem("mpd", mpd)
+check_theorem("id",id)
 
 print()
 
