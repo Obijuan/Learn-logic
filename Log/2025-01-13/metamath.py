@@ -175,6 +175,33 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
     #-- Devolver el teorema conclusión
     return conclusion
 
+def ax_1(wph: str, wps: str, debug=False) -> str:
+    """Axioma de Simplificacion
+       si 𝜑 y 𝜓 son wff, entonces esta formula es un teorema
+       ⊢ (𝜑 → (𝜓 → 𝜑))
+    """
+
+    # -- wph es una wff
+    assert_wff(wph)
+
+    # -- wps es una wff
+    assert_wff(wps)
+
+    # -- Construir el teorema
+    conclusion = theorem (wi (wph, wi (wps, wph)))
+
+    #-- Modo debug
+    if (debug):
+        print("══════════")
+        print("🟢️ ax-1: ")
+        debug_wff(wph)
+        debug_wff(wps)
+        print(f"{"─"*len(conclusion)}") #-- Dibujar linea
+        print(conclusion)
+        print()
+
+    return conclusion
+
 #------- TEOREMAS
 def mp2(
         #-- wff
@@ -332,7 +359,39 @@ def mp2b(#-- wff
 
     return conclusion
 
+def a1i(wph: str, wps: str,  #-- wff
+        
+        #-- Hipotesis
+        a1i_1: str  # ⊢ 𝜑 
+        ) -> str:
 
+    # https://us.metamath.org/mpeuni/a1i.html
+    print("───────────────┤ TEOREMA a1i ├────────────────")
+
+    #-- Teorema
+    #• wff 𝜑
+    #• wff 𝜓
+    print("""\
+⊢ 𝜑
+────────────
+⊢ ( 𝜓 → 𝜑 )
+""")
+
+    """
+    1 wph            $f wff ph
+    2 wps            $f wff ps
+    3 wph            $f wff ph
+    4 2,3 wi         $a wff ( ps -> ph )
+    5 a1i.1          $e |- ph
+    6 wph            $f wff ph
+    7 wps            $f wff ps
+    8 6,7 ax-1       $a |- ( ph -> ( ps -> ph ) )
+    9 1,4,5,8 ax-mp  $a |- ( ps -> ph )
+    """
+
+    print("📜️ Paso 1:")
+    wi(wps, wph)   # wff ( 𝜓 → 𝜑 )
+    pass
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -458,6 +517,37 @@ def test_ax_mp():
     assert ax_mp(wph, wps, min, maj) == "⊢ ( 𝜓 → 𝜒 )"
     print("✅️ ax-mp. Test 8")
 
+def test_ax_1():
+    """Prueba del axioma ax_1"""
+
+    assert ax_1("wff 𝜑", "wff 𝜓") == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
+    print("✅️ ax-1. Test 1")
+
+    assert ax_1("wff 𝜓", "wff 𝜒") == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
+    print("✅️ ax-1. Test 2")
+
+    assert ax_1("wff 𝜑", "wff ( 𝜓 → 𝜒 )") == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
+    print("✅️ ax-1. Test 3")
+
+    assert ax_1("wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )") == \
+                "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜑 ) → ( 𝜑 → 𝜒 ) ) )"
+    print("✅️ ax-1. Test 4")
+
+    assert ax_1(wφ(), wψ()) == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
+    print("✅️ ax-1. Test 5")
+
+    assert ax_1(w𝜓(), w𝜒()) == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
+    print("✅️ ax-1. Test 6")
+
+    assert ax_1(wφ(), wi( w𝜓(), w𝜒())) == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
+    print("✅️ ax-1. Test 7")    
+   
+    wph = wi (wφ(), w𝜒())
+    wps = wi( w𝜓(), w𝜒())
+    assert ax_1(wph, wps) == "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜒 ) ) )"
+    print("✅️ ax-1. Test 8")
+
+
 def unittest():
     print("-------Test unitarios-------")
     print("-- Variables proposicionales: ")
@@ -478,6 +568,9 @@ def unittest():
 
     print("-- ax-mp:")
     test_ax_mp()
+
+    print("-- ax-1:")
+    test_ax_1()
 
     print()
 
@@ -576,9 +669,17 @@ def check_mp2b():
                                          #─────────────────
     mp2b(wph, wps, wch, h1, h2, h3)      # ⊢ 𝜒
 
+
+def check_a1i():
+    wph = wφ()        
+    wps = w𝜓()       
+    h1 = theorem(wph)   # ⊢ 𝜑
+                        #──────
+    a1i(wph, wps, h1)   # ⊢ (𝜓 → 𝜑)
+
 #--------------------- MAIN ------------------
 #-- Tests
-#unittest()
+unittest()
 
 #print("------- Main---------")
 #demo_wff()
@@ -586,6 +687,11 @@ def check_mp2b():
 
 #------------- TEOREMAS
 print()
-check_mp2()
-check_mp2b()
+#check_mp2()
+#check_mp2b()
+#check_a1i()
+
+print()
+print("----------------")
+
 print()
