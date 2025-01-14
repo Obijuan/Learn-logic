@@ -390,8 +390,31 @@ def a1i(wph: str, wps: str,  #-- wff
     """
 
     print("📜️ Paso 1:")
-    wi(wps, wph)   # wff ( 𝜓 → 𝜑 )
-    pass
+    step_1 = ax_1(wph,          # • wff 𝜑
+                  wps,          # • wff 𝜓
+                  debug=True)
+                    # Conclusion: ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
+
+    print("📜️ Paso 2:")
+    step_2 = ax_mp(wph,           # • wff 𝜑
+                   wi(wps, wph),  # • wff ( 𝜓 → 𝜑 )
+                   a1i_1,  # ⊢ 𝜑
+                   step_1,        # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
+                   debug=True)
+                    # Conclusion:   ⊢ ( 𝜓 → 𝜑 )
+
+    conclusion = step_2
+
+    #-- Debug
+    #print("══════════")
+    #print("RESUMEN: ")
+    #print(f"{a1i_1}")
+    #print(f"{"─"*len(conclusion)}") #-- Dibujar linea
+    #print(conclusion)
+    #print()
+
+    return conclusion
+
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -679,7 +702,7 @@ def check_a1i():
 
 #--------------------- MAIN ------------------
 #-- Tests
-unittest()
+#unittest()
 
 #print("------- Main---------")
 #demo_wff()
@@ -689,7 +712,7 @@ unittest()
 print()
 #check_mp2()
 #check_mp2b()
-#check_a1i()
+check_a1i()
 
 print()
 print("----------------")
