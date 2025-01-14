@@ -1,5 +1,18 @@
 import sys
 
+th = {
+    "mp2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ (𝜑 → (𝜓 → 𝜒))"],
+        "conc": "⊢ 𝜒"
+    },
+    "mp2b": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ 𝜒"
+    }
+}
+
+
 def assert_wff(w : str) -> str:
     """Comprobar que s es una fórmula bien formada (wff)"""
     """En caso de serlo, se retorna la fórmula"""
@@ -235,159 +248,91 @@ def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
     return conclusion
 
 #------- TEOREMAS
-def mp2(
-        #-- wff
-        wph : str, wps: str, wch : str,
-
-        #-- Teoremas hipótesis
-        mp2_1: str,  #-- ⊢ 𝜑 
-        mp2_2: str,  #-- ⊢ 𝜓
-        mp2_3: str   #-- ⊢ (𝜑 → (𝜓 → 𝜒))
-        ) -> str: 
-    
-    print()
-    print("───────────────┤ TEOREMA mp2 ├────────────────")
-
-    #-- Teorema
-    #• wff 𝜑
-    #• wff 𝜓
-    #• wff 𝜒
-    print("""\
-⊢ 𝜑
-⊢ 𝜓
-⊢ (𝜑 → (𝜓 → 𝜒))
-───────────────
-⊢ 𝜒
-""")
-
-    """
-     Demostracion en Metamath:     
-     1 wps           $f wff ps
-     2 wch           $f wff ch
-     3 mp2.2         $e |- ps
-     4 wph           $f wff ph
-     5 wps           $f wff ps
-     6 wch           $f wff ch
-     7 5,6 wi        $a wff ( ps -> ch )
-     8 mp2.1         $e |- ph
-     9 mp2.3         $e |- ( ph -> ( ps -> ch ) )
-    10 4,7,8,9 ax-mp  $a |- ( ps -> ch )
-    11 1,2,3,10 ax-mp  $a |- ch
+def mp2(hyp: list, show_proof = False) -> str:
+    """Teorema mp2:
+       hypostesis:
+         wff 𝜑, wff 𝜓, wff 𝜒
+         ⊢ 𝜑               (mp2_1)
+         ⊢ 𝜓               (mp2_2)
+         ⊢ (𝜑 → (𝜓 → 𝜒))  (mp2_3)
+       conclusion:
+         ⊢ 𝜒
     """
 
-    # -- Debug
-    # print("HIPOTESIS:")
-    # debug_wff(wph)
-    # debug_wff(wps)
-    # debug_wff(wch)
-    # print(f"• mp2.1: {mp2_1}")
-    # print(f"• mp2.2: {mp2_2}")
-    # print(f"• mp2.3: {mp2_3}")
-    # print()
+    #-- Obtener las hipótesis
+    wph, wps, wch, mp2_1, mp2_2, mp2_3 = hyp
 
-    print("📜️ Paso 1:")
-    step_1  = ax_mp(wph,            # • wff 𝜑
-                    wi(wps, wch),   # • wff ( 𝜓 → 𝜒 )
-                    mp2_1,          # ⊢ 𝜑
-                    mp2_3,          # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
-                    debug=True)  
-                        # Conclusion: ⊢ ( 𝜓 → 𝜒 )
+    #-- Paso 1
+    # wff 𝜑
+    # wff ( 𝜓 → 𝜒 )
+    # ⊢ 𝜑
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+    hyps = [wph, wi(wps, wch), mp2_1, mp2_3]
+    step_1  = ax_mp(*hyps) 
+    # ⊢ ( 𝜓 → 𝜒 )  Conclusion
 
-    print("📜️ Paso 2:")
-    step_2 = ax_mp(wps,             # • wff 𝜓
-                   wch,             # • wff 𝜒
-                   mp2_2,           # ⊢ 𝜓
-                   step_1,          # ⊢ ( 𝜓 → 𝜒 )
-                   debug=True)
-                       # Conclusion: ⊢ 𝜒
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_mp")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # • wff 𝜓
+    # • wff 𝜒
+    # ⊢ 𝜓
+    # ⊢ ( 𝜓 → 𝜒 )
+    hyps = [wps, wch, mp2_2, step_1]
+    step_2 = ax_mp(*hyps)      
+    # ⊢ 𝜒   Conclusion
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: ax_mp")
+        show_inference(hyps, step_2)
     
     conclusion = step_2
-
-    #-- Debug
-    #print("══════════")
-    #print("RESUMEN: ")
-    #print(f"{mp2_1}")
-    #print(f"{mp2_2}")
-    #print(f"{mp2_3}")
-    #print(f"{"─"*len(mp2_3)}") #-- Dibujar linea
-    #print(conclusion)
-    #print()
-
     return conclusion
 
-def mp2b(#-- wff
-        wph : str, wps: str, wch : str,
-
-        #-- Teoremas hipótesis
-        mp2b_1: str,  #-- ⊢ 𝜑 
-        mp2b_2: str,  #-- ⊢ ( 𝜑 → 𝜓 )
-        mp2b_3: str   #-- ⊢ ( 𝜓 → 𝜒 )
-        ) -> str:
-    
+def mp2b(hyp: list, show_proof = False) -> str:
+    """Teorema mp2b
+       Hypotesis:
+         wff 𝜑, wff 𝜓, wff 𝜒
+         ⊢ 𝜑          (mp2b_1)
+         ⊢ ( 𝜑 → 𝜓 )  (mp2b_2)
+         ⊢ ( 𝜓 → 𝜒 )  (mp2b_3)
+       Conclusion:
+         ⊢ 𝜒
+    """
     # https://us.metamath.org/mpeuni/mp2b.html
-    print("───────────────┤ TEOREMA mp2b ├────────────────")
-
-    #-- Teorema
-    #• wff 𝜑
-    #• wff 𝜓
-    #• wff 𝜒
-    print("""\
-⊢ 𝜑
-⊢ ( 𝜑 → 𝜓 )
-⊢ ( 𝜓 → 𝜒 )
-───────────────
-⊢ 𝜒 
-""")
     
-    """
-    Demostracion en Metamath:
-    1 wps            # • wff 𝜓
-    2 wch            # • wff 𝜒
-    3 wph            # • wff 𝜑
-    4 wps            # • wff 𝜓
-    5 mp2b.1         # ⊢ 𝜑
-    6 mp2b.2         # ⊢ ( 𝜑 → 𝜓 )
-    7 3,4,5,6 ax-mp  # ⊢ 𝜓
-    8 mp2b.3         # ⊢ ( 𝜓 → 𝜒 )
-    9 1,2,7,8 ax-mp  # ⊢ 𝜒
-    """
+     #-- Obtener las hipótesis
+    wph, wps, wch, mp2b_1, mp2b_2, mp2b_3 = hyp
 
-    #-- Debug
-    #print("HIPOTESIS:")
-    #debug_wff(wph)
-    #debug_wff(wps)
-    #debug_wff(wch)
-    #print(f"• mpb2.1: {mp2b_1}")
-    #print(f"• mpb2.2: {mp2b_2}")
-    #print(f"• mpb2.3: {mp2b_3}")
-    #print()
+    #-- Paso 1
+    # wff 𝜑
+    # wff 𝜓
+    # ⊢ 𝜑
+    # ⊢ ( 𝜑 → 𝜓 )
+    hyps = [wph, wps, mp2b_1, mp2b_2]
+    step_1  = ax_mp(*hyps) 
+    # ⊢ 𝜓  Conclusion
 
-    print("📜️ Paso 1:")
-    step_1 = ax_mp(wφ(),          # • wff 𝜑
-                   wψ(),          # • wff 𝜓
-                   mp2b_1,        # ⊢ 𝜑
-                   mp2b_2,        # ⊢ ( 𝜑 → 𝜓 )
-                   debug = True) 
-                      # Conclusion: ⊢ 𝜓
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_mp")
+        show_inference(hyps, step_1)
 
-    print("📜️ Paso 2:")
-    step_2 = ax_mp(wψ(),          # • wff 𝜓
-                   wχ(),          # • wff 𝜒
-                   step_1,        # ⊢ 𝜓
-                   mp2b_3,        # ⊢ ( 𝜓 → 𝜒 )
-                   debug = True)
-                      # Conclusion: ⊢ 𝜒
+    #-- Paso 2
+    # wff 𝜑
+    # wff 𝜒
+    # ⊢ 𝜓
+    # ⊢ ( 𝜓 → 𝜒 )
+    hyps = [wps, wch, step_1, mp2b_3]
+    step_2  = ax_mp(*hyps)
+    # ⊢ 𝜒  Conclusion
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: ax_mp")
+        show_inference(hyps, step_2)
+
     conclusion = step_2
-
-    #-- Debug
-    #print("══════════")
-    #print("RESUMEN: ")
-    #print(f"{mp2b_1}")
-    #print(f"{mp2b_2}")
-    #print(f"{mp2b_3}")
-    #print(f"{"─"*len(mp2b_3)}") #-- Dibujar linea
-    #print(conclusion)
-    #print()
 
     return conclusion
 
@@ -450,21 +395,25 @@ def a1i(wph: str, wps: str,  #-- wff
 def a2i(wph: str, wps: str, wch: str,  #-- wffs 
         
         #-- Hipotesis
-        a2i_1: str   # ⊢ (𝜑 → (𝜓 → 𝜒))
+        a2i_1: str,   # ⊢ (𝜑 → (𝜓 → 𝜒))
+        level: int = 0,
+        show_proof = False
         ) -> str: 
     
     # https://us.metamath.org/mpeuni/a2i.html
-    print("───────────────┤ TEOREMA a2i ├────────────────")
+
+    if (level == 0):
+        print("───────────────┤ TEOREMA a2i ├────────────────")
     
-    #-- Teorema
-    #• wff 𝜑
-    #• wff 𝜓
-    #• wff 𝜒
-    print("""\
+        #-- Teorema
+        #• wff 𝜑
+        #• wff 𝜓
+        #• wff 𝜒
+        print("""\
 ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
 ──────────────────────
 ⊢ ( ( 𝜑 → 𝜓 ) → (𝜑 → 𝜒 ) )
-""")
+        """)
     
     """
      1 wph           $f wff ph
@@ -488,21 +437,23 @@ def a2i(wph: str, wps: str, wch: str,  #-- wffs
     18 5,12,13,17 ax-mp  $a |- ( ( ph -> ps ) -> ( ph -> ch ) )
     """
     
-    print("📜️ Paso 1:")
+    if (level == 0):
+        print("📜️ Paso 1:")
     step_1 = ax_2(
         wph,          # • wff 𝜑
         wps,          # • wff 𝜓
         wch,          # • wff 𝜒
-        debug = True) 
+        debug = False) 
           # Conclusion: ⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
 
-    print("📜️ Paso 2:")
+    if (level == 0):
+        print("📜️ Paso 2:")
     step_2 = ax_mp (
         wi(wph, wi (wps, wch)),         # • wff ( 𝜑 → ( 𝜓 → 𝜒 ) )
         wi(wi(wph, wps) ,wi(wph, wch)), # • wff ( ( 𝜑 → 𝜓 ) → (𝜑 → 𝜒 ) )  
         a2i_1,                          # ⊢ (𝜑 → (𝜓 → 𝜒))
         step_1,        # ⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
-        debug=True)
+        debug=False)
           # Conclusion:                   ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
 
     conclusion = step_2
@@ -514,6 +465,69 @@ def a2i(wph: str, wps: str, wch: str,  #-- wffs
     #print(f"{"─"*len(conclusion)}") #-- Dibujar linea
     #print(conclusion)
     #print()
+
+    return conclusion
+
+def mpd(wph: str, wps: str, wch: str,  #-- wffs
+        
+        #-- Hipotesis
+        mpd_1,          # ⊢ ( 𝜑 → 𝜓 ) 
+        mpd_2,          # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) ) 
+        level = 0,
+        show_proof = False
+        ):
+    
+    # https://us.metamath.org/mpeuni/mpd.html
+
+    if (level == 0):
+        print("───────────────┤ TEOREMA mpd ├────────────────")
+    
+        #-- Teorema
+        #• wff 𝜑
+        #• wff 𝜓
+        #• wff 𝜒
+        print("""\
+⊢ ( 𝜑 → 𝜓 )
+⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )      
+────────────────────
+⊢ ( 𝜑 → 𝜒 )
+        """)
+    
+    """
+     1 wph           $f wff ph
+     2 wps           $f wff ps
+     3 1,2 wi        $a wff ( ph -> ps )
+     4 wph           $f wff ph
+     5 wch           $f wff ch
+     6 4,5 wi        $a wff ( ph -> ch )
+     7 mpd.1         $e |- ( ph -> ps )
+     8 wph           $f wff ph
+     9 wps           $f wff ps
+    10 wch           $f wff ch
+    11 mpd.2         $e |- ( ph -> ( ps -> ch ) )
+    12 8,9,10,11 a2i  $p |- ( ( ph -> ps ) -> ( ph -> ch ) )
+    13 3,6,7,12 ax-mp  $a |- ( ph -> ch )
+    """
+
+    if (show_proof):
+        print("📜️ Paso 1:")
+    step_1 = a2i(wph, wps, wch, mpd_2, level = level + 1)
+
+    if (show_proof):
+        print("📜️ Paso 2:")
+    step_2 = ax_mp( wi(wph, wps), wi(wph,wch), mpd_1, step_1)
+    #print(step_2)
+
+    conclusion = step_2
+
+    #-- Debug
+    print("══════════")
+    print("RESUMEN: ")
+    print(f"{mpd_1}")
+    print(f"{mpd_2}")
+    print(f"{"─"*len(conclusion)}") #-- Dibujar linea
+    print(conclusion)
+    print()
 
     return conclusion
 
@@ -805,6 +819,11 @@ def demo_ax_mp():
 #--- Comprobar teoremas
 def check_mp2():
     
+    print()
+    print("───────────────┤ TEOREMA mp2 ├────────────────")
+    
+    show_inference(th["mp2"]["hyp"], th["mp2"]["conc"])
+
     wph = wφ()
     wps = w𝜓()
     wch = w𝜒()
@@ -812,9 +831,13 @@ def check_mp2():
     mp2_2 = theorem(wps)                    # ⊢ 𝜓
     mp2_3 = theorem(wi(wph, wi(wps, wch)))  # ⊢ (𝜑 → (𝜓 → 𝜒))
                                             #─────────────────
-    mp2(wph, wps, wch, mp2_1, mp2_2, mp2_3) # ⊢ 𝜒
+    mp2([wph, wps, wch, mp2_1, mp2_2, mp2_3], show_proof=True) # ⊢ 𝜒
 
 def check_mp2b():
+
+    print()
+    print("───────────────┤ TEOREMA mp2b ├────────────────")
+    show_inference(th["mp2b"]["hyp"], th["mp2b"]["conc"])
 
     wph = wφ()
     wps = w𝜓()
@@ -823,7 +846,7 @@ def check_mp2b():
     h2 = theorem(wi(wph, wps))           # ⊢ ( 𝜑 → 𝜓 )
     h3 = theorem(wi(wps, wch))           # ⊢ ( 𝜓 → 𝜒 )
                                          #─────────────────
-    mp2b(wph, wps, wch, h1, h2, h3)      # ⊢ 𝜒
+    mp2b([wph, wps, wch, h1, h2, h3], show_proof=True)      # ⊢ 𝜒
 
 def check_a1i():
     wph = wφ()        
@@ -840,6 +863,35 @@ def check_a2i():
                                         # ──────
     a2i(wph, wps, wch, h1)              # ⊢ ((𝜑 → 𝜓) → (𝜑 → 𝜒))
     
+def check_mpd():
+
+    wph = wφ()        
+    wps = w𝜓()
+    wch = wχ()
+    h1 = theorem(wi(wph, wps))          # ⊢ (𝜑 → 𝜓)
+    h2 = theorem(wi(wph, wi(wps, wch))) # ⊢ (𝜑 → (𝜓 → 𝜒))
+                                        # ──────
+    mpd(wph, wps, wch, h1, h2)          # ⊢ (𝜑 → 𝜒)
+
+def show_inference(hypotesis: list, conclusion: str):
+    """Imprimir el razonamiento
+      * list: Lista de hipotesis
+      * conclusion: Conclusion obtenida
+    """
+    #-- Primero se imprimen las hipotesis
+    for hyp in hypotesis:
+        print(hyp)
+
+    #-- Calcular el tamaño de la cadena mas larga
+    tam = max([len(hyp) for hyp in hypotesis])
+
+    #-- Imprimir linea horizontal
+    #-- Su tamano es igual al de la cadena mas larga
+    print(f"{"─" * tam}") #-- Dibujar linea
+
+    #-- Imprimir conclusion
+    print(conclusion)
+
 
 #--------------------- MAIN ------------------
 #-- Tests
@@ -853,10 +905,9 @@ def check_a2i():
 #------------- TEOREMAS
 print()
 #check_mp2()
-#check_mp2b()
+check_mp2b()
 #check_a1i()
-check_a2i()
-
+#check_a2i()
 
 print()
 
