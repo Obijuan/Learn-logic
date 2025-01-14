@@ -447,6 +447,76 @@ def a1i(wph: str, wps: str,  #-- wff
 
     return conclusion
 
+def a2i(wph: str, wps: str, wch: str,  #-- wffs 
+        
+        #-- Hipotesis
+        a2i_1: str   # ⊢ (𝜑 → (𝜓 → 𝜒))
+        ) -> str: 
+    
+    # https://us.metamath.org/mpeuni/a2i.html
+    print("───────────────┤ TEOREMA a2i ├────────────────")
+    
+    #-- Teorema
+    #• wff 𝜑
+    #• wff 𝜓
+    #• wff 𝜒
+    print("""\
+⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+──────────────────────
+⊢ ( ( 𝜑 → 𝜓 ) → (𝜑 → 𝜒 ) )
+""")
+    
+    """
+     1 wph           $f wff ph
+     2 wps           $f wff ps
+     3 wch           $f wff ch
+     4 2,3 wi        $a wff ( ps -> ch )
+     5 1,4 wi        $a wff ( ph -> ( ps -> ch ) )
+     6 wph           $f wff ph
+     7 wps           $f wff ps
+     8 6,7 wi        $a wff ( ph -> ps )
+     9 wph           $f wff ph
+    10 wch           $f wff ch
+    11 9,10 wi       $a wff ( ph -> ch )
+    12 8,11 wi       $a wff ( ( ph -> ps ) -> ( ph -> ch ) )
+    13 a2i.1         $e |- ( ph -> ( ps -> ch ) )
+    14 wph           $f wff ph
+    15 wps           $f wff ps
+    16 wch           $f wff ch
+    17 14,15,16 ax-2  $a |- ( ( ph -> ( ps -> ch ) ) -> 
+                         ( ( ph -> ps ) -> ( ph -> ch ) ) )
+    18 5,12,13,17 ax-mp  $a |- ( ( ph -> ps ) -> ( ph -> ch ) )
+    """
+    
+    print("📜️ Paso 1:")
+    step_1 = ax_2(
+        wph,          # • wff 𝜑
+        wps,          # • wff 𝜓
+        wch,          # • wff 𝜒
+        debug = True) 
+          # Conclusion: ⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
+
+    print("📜️ Paso 2:")
+    step_2 = ax_mp (
+        wi(wph, wi (wps, wch)),         # • wff ( 𝜑 → ( 𝜓 → 𝜒 ) )
+        wi(wi(wph, wps) ,wi(wph, wch)), # • wff ( ( 𝜑 → 𝜓 ) → (𝜑 → 𝜒 ) )  
+        a2i_1,                          # ⊢ (𝜑 → (𝜓 → 𝜒))
+        step_1,        # ⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
+        debug=True)
+          # Conclusion:                   ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )
+
+    conclusion = step_2
+
+    #-- Debug
+    #print("══════════")
+    #print("RESUMEN: ")
+    #print(f"{a2i_1}")
+    #print(f"{"─"*len(conclusion)}") #-- Dibujar linea
+    #print(conclusion)
+    #print()
+
+    return conclusion
+
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -631,7 +701,6 @@ def test_ax_2():
         "( ( ( 𝜑 → 𝜓 ) → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜒 → 𝜑 ) ) ) )"
     print("✅️ ax-2. Test 6")
 
-
 def unittest():
     print("-------Test unitarios-------")
     print("-- Variables proposicionales: ")
@@ -763,6 +832,15 @@ def check_a1i():
                         #──────
     a1i(wph, wps, h1)   # ⊢ (𝜓 → 𝜑)
 
+def check_a2i():
+    wph = wφ()        
+    wps = w𝜓()
+    wch = wχ()
+    h1 = theorem(wi(wph, wi(wps, wch))) # ⊢ (𝜑 → (𝜓 → 𝜒))
+                                        # ──────
+    a2i(wph, wps, wch, h1)              # ⊢ ((𝜑 → 𝜓) → (𝜑 → 𝜒))
+    
+
 #--------------------- MAIN ------------------
 #-- Tests
 #unittest()
@@ -777,6 +855,7 @@ print()
 #check_mp2()
 #check_mp2b()
 #check_a1i()
+check_a2i()
 
 
 print()
