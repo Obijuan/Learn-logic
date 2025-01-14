@@ -570,7 +570,6 @@ def test_ax_1():
     assert ax_1(wph, wps) == "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜒 ) ) )"
     print("✅️ ax-1. Test 8")
 
-
 def unittest():
     print("-------Test unitarios-------")
     print("-- Variables proposicionales: ")
@@ -692,7 +691,6 @@ def check_mp2b():
                                          #─────────────────
     mp2b(wph, wps, wch, h1, h2, h3)      # ⊢ 𝜒
 
-
 def check_a1i():
     wph = wφ()        
     wps = w𝜓()       
@@ -715,6 +713,4 @@ print()
 check_a1i()
 
 print()
-print("----------------")
 
-print()
