@@ -1,14 +1,19 @@
 import sys
+from collections.abc import Callable
 
 th = {
     "mp2": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ (𝜑 → (𝜓 → 𝜒))"],
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ 𝜒"
     },
     "mp2b": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
                 "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜓 → 𝜒 )"],
         "conc": "⊢ 𝜒"
+    },
+    "a1i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 → 𝜑 )"
     }
 }
 
@@ -303,7 +308,7 @@ def mp2b(hyp: list, show_proof = False) -> str:
     """
     # https://us.metamath.org/mpeuni/mp2b.html
     
-     #-- Obtener las hipótesis
+    #-- Obtener las hipótesis
     wph, wps, wch, mp2b_1, mp2b_2, mp2b_3 = hyp
 
     #-- Paso 1
@@ -336,60 +341,44 @@ def mp2b(hyp: list, show_proof = False) -> str:
 
     return conclusion
 
-def a1i(wph: str, wps: str,  #-- wff
-        
-        #-- Hipotesis
-        a1i_1: str  # ⊢ 𝜑 
-        ) -> str:
+def a1i(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓
+        ⊢ 𝜑           (a1i.1)
+        ─────
+        ⊢ ( 𝜓 → 𝜑 )
+    """
 
     # https://us.metamath.org/mpeuni/a1i.html
-    print("───────────────┤ TEOREMA a1i ├────────────────")
 
-    #-- Teorema
-    #• wff 𝜑
-    #• wff 𝜓
-    print("""\
-⊢ 𝜑
-────────────
-⊢ ( 𝜓 → 𝜑 )
-""")
+    #-- Obtener las hipótesis
+    wph, wps, a1i_1 = hyp
 
-    """
-    1 wph            $f wff ph
-    2 wps            $f wff ps
-    3 wph            $f wff ph
-    4 2,3 wi         $a wff ( ps -> ph )
-    5 a1i.1          $e |- ph
-    6 wph            $f wff ph
-    7 wps            $f wff ps
-    8 6,7 ax-1       $a |- ( ph -> ( ps -> ph ) )
-    9 1,4,5,8 ax-mp  $a |- ( ps -> ph )
-    """
+    #-- Paso 1
+    # wff 𝜑
+    # wff 𝜓
+    hyps = [wph, wps]
+    step_1  = ax_1(*hyps) 
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )  Conclusion
 
-    print("📜️ Paso 1:")
-    step_1 = ax_1(wph,          # • wff 𝜑
-                  wps,          # • wff 𝜓
-                  debug=True)
-                    # Conclusion: ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_mp")
+        show_inference(hyps, step_1)
 
-    print("📜️ Paso 2:")
-    step_2 = ax_mp(wph,           # • wff 𝜑
-                   wi(wps, wph),  # • wff ( 𝜓 → 𝜑 )
-                   a1i_1,  # ⊢ 𝜑
-                   step_1,        # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
-                   debug=True)
-                    # Conclusion:   ⊢ ( 𝜓 → 𝜑 )
+    #-- Paso 2
+    # wff 𝜑
+    # wff ( 𝜓 → 𝜑 )
+    # ⊢ 𝜑
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
+    hyps = [wph, wi(wps, wph), a1i_1, step_1]
+    step_2 = ax_mp(*hyps)
+    # ⊢ ( 𝜓 → 𝜑 ) Conclusion
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: ax_mp")
+        show_inference(hyps, step_2)
 
     conclusion = step_2
-
-    #-- Debug
-    #print("══════════")
-    #print("RESUMEN: ")
-    #print(f"{a1i_1}")
-    #print(f"{"─"*len(conclusion)}") #-- Dibujar linea
-    #print(conclusion)
-    #print()
-
     return conclusion
 
 def a2i(wph: str, wps: str, wch: str,  #-- wffs 
@@ -817,43 +806,21 @@ def demo_ax_mp():
     print()
 
 #--- Comprobar teoremas
-def check_mp2():
-    
-    print()
-    print("───────────────┤ TEOREMA mp2 ├────────────────")
-    
-    show_inference(th["mp2"]["hyp"], th["mp2"]["conc"])
+def check_theorem(name: str, exec: Callable):
 
-    wph = wφ()
-    wps = w𝜓()
-    wch = w𝜒()
-    mp2_1 = theorem(wph)                    # ⊢ 𝜑 
-    mp2_2 = theorem(wps)                    # ⊢ 𝜓
-    mp2_3 = theorem(wi(wph, wi(wps, wch)))  # ⊢ (𝜑 → (𝜓 → 𝜒))
-                                            #─────────────────
-    mp2([wph, wps, wch, mp2_1, mp2_2, mp2_3], show_proof=True) # ⊢ 𝜒
+    print(f"\n───────────────┤ TEOREMA {name} ├────────────────")
 
-def check_mp2b():
+    #-- Mostrar el teorema
+    show_inference(th[name]["hyp"], th[name]["conc"])
 
-    print()
-    print("───────────────┤ TEOREMA mp2b ├────────────────")
-    show_inference(th["mp2b"]["hyp"], th["mp2b"]["conc"])
+    #-- Calcular la conclusion
+    conclusion = exec(th[name]["hyp"], show_proof=True)
 
-    wph = wφ()
-    wps = w𝜓()
-    wch = w𝜒()
-    h1 = theorem(wph)                    # ⊢ 𝜑 
-    h2 = theorem(wi(wph, wps))           # ⊢ ( 𝜑 → 𝜓 )
-    h3 = theorem(wi(wps, wch))           # ⊢ ( 𝜓 → 𝜒 )
-                                         #─────────────────
-    mp2b([wph, wps, wch, h1, h2, h3], show_proof=True)      # ⊢ 𝜒
-
-def check_a1i():
-    wph = wφ()        
-    wps = w𝜓()       
-    h1 = theorem(wph)   # ⊢ 𝜑
-                        #──────
-    a1i(wph, wps, h1)   # ⊢ (𝜓 → 𝜑)
+    #-- Verificar si la conclusión es correcta
+    if conclusion == th[name]["conc"]:
+        print ("✅️ Prueba correcta")
+    else:
+        print("❌️ Prueba incorrecta")   
 
 def check_a2i():
     wph = wφ()        
@@ -896,18 +863,15 @@ def show_inference(hypotesis: list, conclusion: str):
 #--------------------- MAIN ------------------
 #-- Tests
 #unittest()
-
-
 #print("------- Main---------")
 #demo_wff()
 #demo_ax_mp()
 
 #------------- TEOREMAS
 print()
-#check_mp2()
-check_mp2b()
-#check_a1i()
-#check_a2i()
+check_theorem("mp2", mp2)
+check_theorem("mp2b", mp2b)
+check_theorem("a1i", a1i)
 
 print()
 
