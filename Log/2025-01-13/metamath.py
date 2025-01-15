@@ -144,6 +144,19 @@ def wi(wa : str, wc : str) -> str:
     
     return w
 
+def wn(w: str) -> str:
+    """Si w es una fórmula bien formada (wff), """
+    """entonces ¬ w es una fórmula bien formada (wff) """
+
+    #-- Obtener la fórmula
+    𝜑 = assert_wff(w)
+
+    #-- Crear la cadena wff resultante
+    w = f"wff ¬{𝜑}"
+
+    return w
+
+
 def theorem(w : str) -> str:
     """Afirmar que w es un teorema"""
 
@@ -267,6 +280,7 @@ def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
         print()
 
     return conclusion
+
 
 #------- TEOREMAS
 def mp2(hyp: list, show_proof = False) -> str:
@@ -596,6 +610,29 @@ def test_wi():
     assert wff2 == "wff ( 𝜑 → ( 𝜑 → 𝜓 ) )"
     print("✅️ wi. Test 3")
 
+def test_wn():
+    """Prueba de la funcion wn()"""
+
+    #-- Verificar que wn() retorna la cadena correcta
+    assert wn("wff p") == "wff ¬p"
+    print("✅️ wn. Test 1")
+
+    assert wn("wff 𝜑") == "wff ¬𝜑"
+    print("✅️ wn. Test 2")
+
+    assert wn("wff 𝜓") == "wff ¬𝜓"
+    print("✅️ wn. Test 3")
+
+    assert wn("wff ( 𝜑 → 𝜓 )") == "wff ¬( 𝜑 → 𝜓 )"
+    print("✅️ wn. Test 4")
+
+    wff1 = wn(wi(wn(wφ()), wψ()))
+    wff2 = wi(wn(wφ()), wff1)
+    assert wff1 == "wff ¬( ¬𝜑 → 𝜓 )"
+    assert wff2 == "wff ( ¬𝜑 → ¬( ¬𝜑 → 𝜓 ) )"
+    print("✅️ wn. Test 5")
+
+
 def test_theorem():
     """Prueba la función theorem()"""
     
@@ -731,6 +768,9 @@ def unittest():
 
     print("-- Implicación: ")
     test_wi()
+
+    print("-- Negacion:")
+    test_wn()
 
     print("--Teorema: ")
     test_theorem()
@@ -877,7 +917,7 @@ def show_inference(hypotesis: list, conclusion: str):
 
 #--------------------- MAIN ------------------
 #-- Tests
-#unittest()
+unittest()
 #print("------- Main---------")
 #demo_wff()
 #demo_ax_mp()
@@ -890,6 +930,7 @@ print()
 #check_theorem("a2i", a2i)
 #check_theorem("mpd", mpd)
 check_theorem("id",id)
+
 
 print()
 
