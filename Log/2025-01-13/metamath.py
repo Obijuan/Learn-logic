@@ -47,6 +47,14 @@ th = {
 }
 
 
+"""
+MM> show statement con4d /full
+  wph $f wff ph $.
+  wps $f wff ps $.
+  wch $f wff ch $.
+  con4d.1 $e |- ( ph -> ( -. ps -> -. ch ) ) $.
+"""
+
 def assert_wff(w : str) -> str:
     """Comprobar que s es una fórmula bien formada (wff)"""
     """En caso de serlo, se retorna la fórmula"""
@@ -648,11 +656,10 @@ def syl(hyp: list, show_proof = False) -> str:
     conclusion = step_2
     return conclusion
     
-
 def con4d(hyp: list, show_proof = False) -> str:
     """
         wff 𝜑, wff 𝜓, wff 𝜒
-        ⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )
+        ⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )  (con4d.1)
         ────────────────────
         ⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )
     """
@@ -662,8 +669,35 @@ def con4d(hyp: list, show_proof = False) -> str:
     #-- Obtener las hipótesis
     wph, wps, wch, con4d_1 = hyp
 
+    #-- Paso 1
+    # wff 𝜓
+    # wff 𝜒
+    hyps = [wps, wch]
+    step_1  = con4(hyps)
+    # ⊢ ( ( ¬𝜓 → ¬𝜒 ) → ( 𝜒 → 𝜓 ) )
 
+    if (show_proof):
+        print("\n🟢️ Paso 1: con4")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # wff 𝜑
+    # wff ( ¬𝜓 → ¬𝜒 )
+    # wff ( 𝜒 → 𝜓 )
+    # ⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) ) (con4d.1)
+    # ⊢ ( ( ¬𝜓 → ¬𝜒 ) → ( 𝜒 → 𝜓 ) ) (step_1)
+    hyps = [wph, wi(wn(wps), wn(wch)), wi(wch,wps),
+            con4d_1, step_1]
+    step_2 = syl(hyps)
+    # ⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )
       
+    if (show_proof):
+        print("\n🟢️ Paso 2: syl")
+        show_inference(hyps, step_2)
+
+    conclusion = step_2
+    return conclusion
+    
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -1077,7 +1111,8 @@ print()
 #check_theorem("mpd", mpd)
 #check_theorem("id",id)
 #check_theorem("con4", con4)
-check_theorem("syl", syl)
+#check_theorem("syl", syl)
+check_theorem("con4d", con4d)
 
 print()
 
