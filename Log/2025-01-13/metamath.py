@@ -33,9 +33,18 @@ th = {
     "con4": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc":"⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )"
+    },
+    "syl": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )"
+    },
+    "con4d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )"                
     }
 }
-
 
 
 def assert_wff(w : str) -> str:
@@ -572,7 +581,7 @@ def id(hyp: list, show_proof = False) -> str:
 def con4(hyp: list, show_proof = False) -> str:
     """
         wff 𝜑, wff 𝜓 
-        ────────────
+        ───────────────────────────
         ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
     """
 
@@ -594,6 +603,67 @@ def con4(hyp: list, show_proof = False) -> str:
 
     conclusion = step_1
     return conclusion
+
+def syl(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒
+        ⊢ ( 𝜑 → 𝜓 )  (syl.1)
+        ⊢ ( 𝜓 → 𝜒 )  (syl.2)
+        ─────────────────────
+        ⊢ ( 𝜑 → 𝜒 )
+    """
+
+    # https://us.metamath.org/mpeuni/syl.html
+
+    #-- Obtener las hipótesis
+    wph, wps, wch, syl_1, syl_2 = hyp
+
+    #-- Paso 1
+    # wff (𝜓 → 𝜒 )
+    # wff 𝜑
+    # ⊢ ( 𝜓 → 𝜒 )
+    hyps = [wi(wps, wch), wph, syl_2]
+    step_1  = a1i(hyps)
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: a1i")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # wff 𝜑
+    # wff 𝜓
+    # wff 𝜒
+    # ⊢ ( 𝜑 → 𝜓 )  (syl.1)
+    # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
+    hyps = [wph, wps, wch, syl_1, step_1]
+    step_2 = mpd(hyps)
+    # ⊢ ( 𝜑 → 𝜒 )
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: mpd")
+        show_inference(hyps, step_2)
+
+
+    conclusion = step_2
+    return conclusion
+    
+
+def con4d(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒
+        ⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )
+        ────────────────────
+        ⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )
+    """
+
+    # https://us.metamath.org/mpeuni/con4d.html
+
+    #-- Obtener las hipótesis
+    wph, wps, wch, con4d_1 = hyp
+
+
+      
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -1006,7 +1076,8 @@ print()
 #check_theorem("a2i", a2i)
 #check_theorem("mpd", mpd)
 #check_theorem("id",id)
-check_theorem("con4", con4)
+#check_theorem("con4", con4)
+check_theorem("syl", syl)
 
 print()
 
