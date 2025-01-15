@@ -281,6 +281,25 @@ def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
 
     return conclusion
 
+def ax_3(wph: str, wps: str) -> str:
+    """Axiom Transposicion
+    si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
+    ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
+    """
+
+    # -- wph es una wff
+    assert_wff(wph)
+
+    # -- wps es una wff
+    assert_wff(wps)
+
+    conclusion = theorem(wi(
+                            wi(wn(wph), wn(wps)), 
+                            wi(wps, wph)
+                           )
+                        )
+    return conclusion
+
 
 #------- TEOREMAS
 def mp2(hyp: list, show_proof = False) -> str:
@@ -754,6 +773,35 @@ def test_ax_2():
         "( ( ( 𝜑 → 𝜓 ) → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜒 → 𝜑 ) ) ) )"
     print("✅️ ax-2. Test 6")
 
+def test_ax_3():
+    """Prueba del axioma ax_3"""
+
+    assert ax_3("wff 𝜑", "wff 𝜓") == \
+      "⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )"
+    print("✅️ ax-3. Test 1")
+
+    assert ax_3("wff 𝜓", "wff 𝜑") == \
+      "⊢ ( ( ¬𝜓 → ¬𝜑 ) → ( 𝜑 → 𝜓 ) )"
+    print("✅️ ax-3. Test 2")
+
+    assert ax_3("wff 𝜓", "wff 𝜑") == \
+      "⊢ ( ( ¬𝜓 → ¬𝜑 ) → ( 𝜑 → 𝜓 ) )"
+    print("✅️ ax-3. Test 3")
+
+    assert ax_3("wff ( 𝜑 → 𝜓 )", "wff ( 𝜓 → 𝜒 )") == \
+      "⊢ ( ( ¬( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜒 ) ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜓 ) ) )"
+    print("✅️ ax-3. Test 4")
+
+    assert ax_3(wφ(), wψ()) == \
+        "⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )"
+    print("✅️ ax-3. Test 5")
+
+    assert ax_3(wφ(), wn(wψ())) == \
+        "⊢ ( ( ¬𝜑 → ¬¬𝜓 ) → ( ¬𝜓 → 𝜑 ) )"
+    print("✅️ ax-3. Test 6")
+
+
+
 def unittest():
     print("-------Test unitarios-------")
     print("-- Variables proposicionales: ")
@@ -783,6 +831,9 @@ def unittest():
 
     print("-- ax-2:")
     test_ax_2()
+
+    print("-- ax-3:")
+    test_ax_3()
 
     print()
 
@@ -929,7 +980,8 @@ print()
 #check_theorem("a1i", a1i)
 #check_theorem("a2i", a2i)
 #check_theorem("mpd", mpd)
-check_theorem("id",id)
+#check_theorem("id",id)
+
 
 
 print()
