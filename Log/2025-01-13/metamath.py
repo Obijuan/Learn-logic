@@ -29,6 +29,10 @@ th = {
     "id": {
         "hyp": ["wff 𝜑"],
         "conc":"⊢ ( 𝜑 → 𝜑 )"
+    },
+    "con4": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc":"⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )"
     }
 }
 
@@ -565,7 +569,31 @@ def id(hyp: list, show_proof = False) -> str:
     conclusion = step_3
     return conclusion
 
+def con4(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓 
+        ────────────
+        ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
+    """
+
+    # https://us.metamath.org/mpeuni/con4.html
+
+    #-- Obtener las hipótesis
+    wph, wps = hyp
     
+    #-- Paso 1
+    # wff 𝜑
+    # wff 𝜓
+    hyps = [wph, wps]
+    step_1  = ax_3(*hyps)
+    # ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_3")
+        show_inference(hyps, step_1)
+
+    conclusion = step_1
+    return conclusion
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -650,7 +678,6 @@ def test_wn():
     assert wff1 == "wff ¬( ¬𝜑 → 𝜓 )"
     assert wff2 == "wff ( ¬𝜑 → ¬( ¬𝜑 → 𝜓 ) )"
     print("✅️ wn. Test 5")
-
 
 def test_theorem():
     """Prueba la función theorem()"""
@@ -799,8 +826,6 @@ def test_ax_3():
     assert ax_3(wφ(), wn(wψ())) == \
         "⊢ ( ( ¬𝜑 → ¬¬𝜓 ) → ( ¬𝜓 → 𝜑 ) )"
     print("✅️ ax-3. Test 6")
-
-
 
 def unittest():
     print("-------Test unitarios-------")
@@ -968,7 +993,7 @@ def show_inference(hypotesis: list, conclusion: str):
 
 #--------------------- MAIN ------------------
 #-- Tests
-unittest()
+#unittest()
 #print("------- Main---------")
 #demo_wff()
 #demo_ax_mp()
@@ -981,8 +1006,7 @@ print()
 #check_theorem("a2i", a2i)
 #check_theorem("mpd", mpd)
 #check_theorem("id",id)
-
-
+check_theorem("con4", con4)
 
 print()
 
