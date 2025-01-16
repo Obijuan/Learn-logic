@@ -19,6 +19,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓",
                 "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )"],
         "conc": "⊢ 𝜓"
+    },
+    "ax-1": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
     }
 }
 
@@ -87,7 +91,7 @@ def wch():
     """La variable 𝜒 es una fórmula bien formada (wff)"""
     stack.append("wff 𝜒")
 
-def wn():
+def wn(show_proof = False):
     """Si w es una fórmula bien formada (wff), """
     """entonces ¬w es una fórmula bien formada (wff) """
 
@@ -103,7 +107,7 @@ def wn():
     #-- Meterla en la pila
     stack.append(w)
 
-def wi():
+def wi(show_proof = False):
     """Si wa y wc son fórmulas bien formadas (wff), """
     """entonces (wa → wc) es una fórmula bien formada (wff)"""
 
@@ -125,7 +129,7 @@ def wi():
     #-- Meterla en la pila
     stack.append(w)
 
-def ax_mp():
+def ax_mp(show_proof = False):
     """Regla de inferencia ax-mp (Modus pones)
        si 𝜑 y 𝜓 son wff
        si ⊢ 𝜑 y ⊢ (𝜑 → 𝜓 ) son teoremas, entonces
@@ -172,7 +176,55 @@ def ax_mp():
     #-- Meterla en la pila
     stack.append(conclusion)
     
+def ax_1(show_proof=False):
+    """Axioma de Simplificacion
+       si 𝜑 y 𝜓 son wff, entonces esta formula es un teorema
+       ⊢ (𝜑 → (𝜓 → 𝜑))
+    """
 
+    #-- Obtener las hipótesis
+    wps = stack.pop()
+    wph = stack.pop()
+
+    #-- Comprobar que las hipotesis son wff
+    assert_wff(wph)  #-- wph es una wff
+    assert_wff(wps)  #-- wps es una wff
+
+    #-- Demostracion: Construir el teorema
+    step_1 = wph
+    stack.append(step_1)
+
+    step_2 = wps
+    stack.append(step_2)
+
+    step_3 = wph
+    stack.append(step_3)
+
+    wi()
+    step_4 = stack[-1]
+
+    wi()
+    step_5 = stack[-1]
+
+    step_6 = theorem(step_5)
+    stack.append(step_6)
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: wff 𝜑")
+        print(step_1)
+        print ("\n🟢️ Paso 2: wff 𝜓")
+        print(step_2)
+        print ("\n🟢️ Paso 3: wff 𝜑")
+        print(step_3)
+        print ("\n🟢️ Paso 4: wi")
+        print(step_4)
+        print ("\n🟢️ Paso 5: wi")
+        print(step_5)
+        print ("\n🟢️ Paso 6: Es Axioma")
+        print (step_6)
+
+    
+    
 
 def print_top():
     """Print the current formula (at the top of stack)"""
@@ -183,7 +235,7 @@ def print_top():
     #-- Imprimir la fórmula!
     print(w)
 
-def exec(name: str):
+def exec(name: str, show_proof=False):
     """Ejecutar el teorema a partir de su nombre"""
 
     #-- Obtener el nombre de la función asociada
@@ -192,7 +244,7 @@ def exec(name: str):
     func = globals()[name.replace("-", "_").replace(".", "_")]
 
     #-- Ejecutar el teorema!
-    func()
+    func(show_proof)
 
 def proof(ths: list[str]):
     """Proof a lists of theorems"""
@@ -221,7 +273,7 @@ def print_theorem(name: str):
     #-- Imprimir la conclusion
     print(th_db[name]["conc"])
 
-def check_theorem(name: str):
+def check_theorem(name: str, show_proof=False):
     """Comprobar el teorema dado por su nombre en metamath"""
 
     print(f"\n───────────────┤ TEOREMA {name} ├────────────────")
@@ -234,7 +286,7 @@ def check_theorem(name: str):
         stack.append(h)
 
     #-- Ejecutar el teorema
-    exec(name)
+    exec(name, show_proof)
 
     #-- Extraer la conclusion de la pila
     conclusion = stack.pop()
@@ -253,6 +305,8 @@ print()
 check_theorem("wn")
 check_theorem("wi")
 check_theorem("ax-mp")
+check_theorem("ax-1", True)
+
 
 print()
 

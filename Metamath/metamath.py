@@ -1205,7 +1205,7 @@ demo_ax_mp()
 #------------- TEOREMAS
 print()
 check_all()
-check_theorem("ax-mp")
+check_theorem("ax-1")
 
 print()
 
