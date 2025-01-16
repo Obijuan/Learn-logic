@@ -3,7 +3,7 @@ from collections.abc import Callable
 
 #-- Base de datos con los Teoremas
 th = {
-    "ax_1": {
+    "ax-1": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
     },
@@ -1096,7 +1096,9 @@ def check_theorem(name: str):
     """Comprobar el teorema dado por su nombre en metamath"""
 
     #-- Obtener el nombre de la función asociada
-    exec = globals()[name]
+    #-- Los caracteres '-' y '.' se convierten a '_'
+    #-- Ya que los nombres de las funciones no pueden tener '-' ni '.'
+    exec = globals()[name.replace("-", "_").replace(".", "_")]
 
     print(f"\n───────────────┤ TEOREMA {name} ├────────────────")
 
@@ -1151,12 +1153,11 @@ def check_all():
 
 #------------- TEOREMAS
 print()
-#check_all()
-#check_theorem(a1d)
-
-check_theorem("ax_1")
-test_ax_1()
 check_all()
+check_theorem("a1d")
+check_all()
+check_theorem("ax-1")
+
 
 print()
 
