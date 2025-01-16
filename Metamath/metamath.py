@@ -907,47 +907,47 @@ def test_theorem():
 def test_ax_mp():
     """Prueba del axioma ax_mp"""
 
-    assert ax_mp("wff 𝜑", "wff 𝜓", "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )") == "⊢ 𝜓"
+    assert ax_mp(["wff 𝜑", "wff 𝜓", "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )"]) == "⊢ 𝜓"
     print("✅️ ax-mp. Test 1")
 
-    assert ax_mp("wff 𝜓", "wff 𝜒", "⊢ 𝜓", "⊢ ( 𝜓 → 𝜒 )") == "⊢ 𝜒"
+    assert ax_mp(["wff 𝜓", "wff 𝜒", "⊢ 𝜓", "⊢ ( 𝜓 → 𝜒 )"]) == "⊢ 𝜒"
     print("✅️ ax-mp. Test 2")
 
-    assert ax_mp("wff 𝜑", "wff ( 𝜓 → 𝜒 )", 
-                 "⊢ 𝜑", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )") == "⊢ ( 𝜓 → 𝜒 )"
+    assert ax_mp(["wff 𝜑", "wff ( 𝜓 → 𝜒 )", 
+                 "⊢ 𝜑", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"]) == "⊢ ( 𝜓 → 𝜒 )"
     print("✅️ ax-mp. Test 3")
     
-    assert ax_mp("wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )",
+    assert ax_mp(["wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )",
                   "⊢ ( 𝜑 → 𝜒 )", 
-                  "⊢ ( ( 𝜑 → 𝜒 ) → ( 𝜓 → 𝜑 ) )") == "⊢ ( 𝜓 → 𝜑 )"
+                  "⊢ ( ( 𝜑 → 𝜒 ) → ( 𝜓 → 𝜑 ) )"]) == "⊢ ( 𝜓 → 𝜑 )"
     print("✅️ ax-mp. Test 4")
 
     wph = wφ()
     wps = wψ()
     min = theorem(wph)
     maj = theorem( wi(wph,wps) )
-    assert ax_mp(wph, wps, min, maj) == "⊢ 𝜓"
+    assert ax_mp([wph, wps, min, maj]) == "⊢ 𝜓"
     print("✅️ ax-mp. Test 5")
 
     wph = w𝜓()
     wps = w𝜒()
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    assert ax_mp(wph, wps, min, maj) == "⊢ 𝜒"
+    assert ax_mp([wph, wps, min, maj]) == "⊢ 𝜒"
     print("✅️ ax-mp. Test 6")
 
     wph = wφ()
     wps = wi( w𝜓(), w𝜒())
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    assert ax_mp(wph, wps, min, maj) == "⊢ ( 𝜓 → 𝜒 )"
+    assert ax_mp([wph, wps, min, maj]) == "⊢ ( 𝜓 → 𝜒 )"
     print("✅️ ax-mp. Test 7")
 
     wph = wi (wφ(), w𝜒())
     wps = wi( w𝜓(), w𝜒())
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    assert ax_mp(wph, wps, min, maj) == "⊢ ( 𝜓 → 𝜒 )"
+    assert ax_mp([wph, wps, min, maj]) == "⊢ ( 𝜓 → 𝜒 )"
     print("✅️ ax-mp. Test 8")
 
 def test_ax_1():
@@ -1116,7 +1116,7 @@ def demo_ax_mp():
     maj = theorem( wi(wph,wps) )
 
     #-- Conclusión
-    ax_mp(wph, wps, min, maj, debug=True)
+    ax_mp([wph, wps, min, maj])
     print()
 
     #----- PRUEBA 2
@@ -1124,7 +1124,7 @@ def demo_ax_mp():
     wps = w𝜒()
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    ax_mp(wph, wps, min, maj, debug=True)
+    ax_mp([wph, wps, min, maj])
     print()
 
     #------ PRUEBA 3
@@ -1132,7 +1132,7 @@ def demo_ax_mp():
     wps = wi( w𝜓(), w𝜒())
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    ax_mp(wph, wps, min, maj, debug=True)
+    ax_mp([wph, wps, min, maj])
     print()
 
     #----- PRUEBA 4
@@ -1140,7 +1140,7 @@ def demo_ax_mp():
     wps = wi( w𝜓(), wφ())
     min = theorem(wph)
     maj = theorem( wi ( wph, wps) ) 
-    ax_mp(wph, wps, min, maj, debug=True)
+    ax_mp([wph, wps, min, maj])
     print()
 
 #--- Comprobar teoremas
@@ -1198,14 +1198,14 @@ def check_all():
 
 #--------------------- MAIN ------------------
 #-- Tests
-#unittest()
+unittest()
 #print("------- Main---------")
-#demo_wff()
-#demo_ax_mp()
+demo_wff()
+demo_ax_mp()
 
 #------------- TEOREMAS
 print()
-#check_all()
+check_all()
 check_theorem("ax-3")
 check_theorem("ax-mp")
 
