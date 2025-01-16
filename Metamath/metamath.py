@@ -1092,10 +1092,11 @@ def demo_ax_mp():
     print()
 
 #--- Comprobar teoremas
-def check_theorem(exec: Callable):
+def check_theorem(name: str):
+    """Comprobar el teorema dado por su nombre en metamath"""
 
-    #-- Obtener cadena con el nombre de la funcion pasada como parametro
-    name = exec.__name__
+    #-- Obtener el nombre de la función asociada
+    exec = globals()[name]
 
     print(f"\n───────────────┤ TEOREMA {name} ├────────────────")
 
@@ -1138,11 +1139,8 @@ def check_all():
     #-- Obtener en name el nombre (cadena) del teorema
     for name in th:
 
-        #-- Obtener la función cuyo nombre es name
-        func = globals()[name]
-
         #-- Pasar esa funcion como parametro a check_theorem
-        check_theorem(func)
+        check_theorem(name)
 
 #--------------------- MAIN ------------------
 #-- Tests
@@ -1156,7 +1154,7 @@ print()
 #check_all()
 #check_theorem(a1d)
 
-check_theorem(ax_1)
+check_theorem("ax_1")
 test_ax_1()
 check_all()
 
