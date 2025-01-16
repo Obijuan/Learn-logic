@@ -7,6 +7,10 @@ th = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
     },
+    "ax-2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
+        "conc": "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )"
+    },
     "mp2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ 𝜒"
@@ -282,36 +286,58 @@ def ax_1(hyp: list, show_proof = False) -> str:
     conclusion = step_5
     return conclusion
 
-def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
+def ax_2(hyp: list, show_proof = False) -> str:
     """Axioma de Frege
     si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
     ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
     """
 
-    # -- wph es una wff
-    assert_wff(wph)
+    # https://us.metamath.org/mpeuni/ax-2.html
 
-    # -- wps es una wff
-    assert_wff(wps)
+    #-- Obtener las hipótesis
+    wph, wps, wch = hyp
 
-    # -- wch es una wff
-    assert_wff(wch)
+    #-- Comprobar que las hipotesis son wff
+    assert_wff(wph)  #-- wph es una wff
+    assert_wff(wps)  #-- wps es una wff
+    assert_wff(wch)  #-- wch es una wff
 
-    antecedente = wi(wph, wi(wps, wch))
-    consecuente = wi(wi(wph,wps), wi(wph, wch))
-    conclusion = theorem (wi(antecedente, consecuente))
+    #-- Demostracion: Construir el teorema
+    step_1 = wph
+    step_2 = wps
+    step_3 = wch
+    step_4 = wi(wps, wch)
+    step_5 = wi(wph, step_4)
+    step_6 = wi(wph, wps)
+    step_7 = wi(wph, wch)
+    step_8 = wi(step_6, step_7)
+    step_9 = wi(step_5, step_8)
+    step_10 = theorem(step_9)
 
-    #-- Modo debug
-    if (debug):
-        print("══════════")
-        print("🟢️ ax-2: ")
-        debug_wff(wph)
-        debug_wff(wps)
-        debug_wff(wch)
-        print(f"{"─"*len(conclusion)}") #-- Dibujar linea
-        print(conclusion)
-        print()
+    if (show_proof):
+        print("\n🟢️ Paso 1: wff 𝜑")
+        print(step_1)
+        print ("\n🟢️ Paso 2: wff 𝜓")
+        print(step_2)
+        print ("\n🟢️ Paso 3: wff 𝜒")
+        print(step_3)
+        print ("\n🟢️ Paso 4: wi")
+        print(step_4)
+        print ("\n🟢️ Paso 5: wi")
+        print(step_5)
+        print ("\n🟢️ Paso 6: wi")
+        print(step_6)
+        print ("\n🟢️ Paso 7: wi")
+        print(step_7)
+        print ("\n🟢️ Paso 8: wi")
+        print(step_8)
+        print ("\n🟢️ Paso 9: wi")
+        print(step_9)
+        print ("\n🟢️ Paso 10: Es Axioma")
+        print(step_10)
 
+    
+    conclusion = step_10
     return conclusion
 
 def ax_3(wph: str, wps: str) -> str:
@@ -481,7 +507,7 @@ def a2i(hyp: list, show_proof = False) -> str:
     # wff 𝜓
     # wff 𝜒
     hyps = [wph, wps, wch]
-    step_1  = ax_2(*hyps) 
+    step_1  = ax_2(hyps) 
     # ⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )  Conclusion
 
     if (show_proof):
@@ -1154,10 +1180,8 @@ def check_all():
 #------------- TEOREMAS
 print()
 check_all()
-check_theorem("a1d")
-check_all()
 check_theorem("ax-1")
-
+check_theorem("ax-2")
 
 print()
 
