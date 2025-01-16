@@ -3,6 +3,10 @@ from collections.abc import Callable
 
 #-- Base de datos con los Teoremas
 th = {
+    "ax_1": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
+    },
     "mp2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ 𝜒"
@@ -241,31 +245,41 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
     #-- Devolver el teorema conclusión
     return conclusion
 
-def ax_1(wph: str, wps: str, debug=False) -> str:
+def ax_1(hyp: list, show_proof = False) -> str:
     """Axioma de Simplificacion
        si 𝜑 y 𝜓 son wff, entonces esta formula es un teorema
        ⊢ (𝜑 → (𝜓 → 𝜑))
     """
 
-    # -- wph es una wff
-    assert_wff(wph)
+    # https://us.metamath.org/mpeuni/ax-1.html
+    
+    #-- Obtener las hipótesis
+    wph, wps = hyp
 
-    # -- wps es una wff
-    assert_wff(wps)
+    #-- Comprobar que las hipotesis son wff
+    assert_wff(wph)  #-- wph es una wff
+    assert_wff(wps)  #-- wps es una wff
 
-    # -- Construir el teorema
-    conclusion = theorem (wi (wph, wi (wps, wph)))
+    #-- Demostracion: Construir el teorema
+    step_1 = wph
+    step_2 = wps
+    step_3 = wi (wps, wph)
+    step_4 = wi(wph, step_3)
+    step_5 = theorem(step_4)
+    
+    if (show_proof):
+        print("\n🟢️ Paso 1: wff 𝜑")
+        print(step_1)
+        print ("\n🟢️ Paso 2: wff 𝜓")
+        print(step_2)
+        print ("\n🟢️ Paso 3: wi")
+        print(step_3)
+        print ("\n🟢️ Paso 4: wi")
+        print(step_4)
+        print ("\n🟢️ Paso 5: Es Axioma")
+        print (step_5)
 
-    #-- Modo debug
-    if (debug):
-        print("══════════")
-        print("🟢️ ax-1: ")
-        debug_wff(wph)
-        debug_wff(wps)
-        print(f"{"─"*len(conclusion)}") #-- Dibujar linea
-        print(conclusion)
-        print()
-
+    conclusion = step_5
     return conclusion
 
 def ax_2(wph: str, wps: str, wch: str, debug=False) -> str:
@@ -426,7 +440,7 @@ def a1i(hyp: list, show_proof = False) -> str:
     # wff 𝜑
     # wff 𝜓
     hyps = [wph, wps]
-    step_1  = ax_1(*hyps) 
+    step_1  = ax_1(hyps) 
     # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )  Conclusion
 
     if (show_proof):
@@ -550,7 +564,7 @@ def id(hyp: list, show_proof = False) -> str:
     #-- Paso 1
     # wff 𝜑
     hyps = [wph, wph]
-    step_1  = ax_1(*hyps)
+    step_1  = ax_1(hyps)
     # ⊢ (𝜑 → (𝜑 → 𝜑))
 
     if (show_proof):
@@ -561,7 +575,7 @@ def id(hyp: list, show_proof = False) -> str:
     # wff 𝜑
     # wff (𝜑 → 𝜑)
     hyps = [wph, wi(wph, wph)]
-    step_2 = ax_1(*hyps)
+    step_2 = ax_1(hyps)
     # ⊢ (𝜑 → ((𝜑 → 𝜑) → 𝜑))
 
     if (show_proof):
@@ -713,7 +727,7 @@ def a1d(hyp: list, show_proof = False) -> str:
     # wff 𝜓
     # wff 𝜒
     hyps = [wps, wch]
-    step_1  = ax_1(*hyps)
+    step_1  = ax_1(hyps)
     # ⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )
 
     if (show_proof):
@@ -887,31 +901,31 @@ def test_ax_mp():
 def test_ax_1():
     """Prueba del axioma ax_1"""
 
-    assert ax_1("wff 𝜑", "wff 𝜓") == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
+    assert ax_1(["wff 𝜑", "wff 𝜓"]) == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
     print("✅️ ax-1. Test 1")
 
-    assert ax_1("wff 𝜓", "wff 𝜒") == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
+    assert ax_1(["wff 𝜓", "wff 𝜒"]) == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
     print("✅️ ax-1. Test 2")
 
-    assert ax_1("wff 𝜑", "wff ( 𝜓 → 𝜒 )") == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
+    assert ax_1(["wff 𝜑", "wff ( 𝜓 → 𝜒 )"]) == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
     print("✅️ ax-1. Test 3")
 
-    assert ax_1("wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )") == \
+    assert ax_1(["wff ( 𝜑 → 𝜒 )", "wff ( 𝜓 → 𝜑 )"]) == \
                 "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜑 ) → ( 𝜑 → 𝜒 ) ) )"
     print("✅️ ax-1. Test 4")
 
-    assert ax_1(wφ(), wψ()) == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
+    assert ax_1([wφ(), wψ()]) == "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
     print("✅️ ax-1. Test 5")
 
-    assert ax_1(w𝜓(), w𝜒()) == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
+    assert ax_1([w𝜓(), w𝜒()]) == "⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )"
     print("✅️ ax-1. Test 6")
 
-    assert ax_1(wφ(), wi( w𝜓(), w𝜒())) == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
+    assert ax_1([wφ(), wi( w𝜓(), w𝜒())]) == "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → 𝜑 ) )"
     print("✅️ ax-1. Test 7")    
    
     wph = wi (wφ(), w𝜒())
     wps = wi( w𝜓(), w𝜒())
-    assert ax_1(wph, wps) == "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜒 ) ) )"
+    assert ax_1([wph, wps]) == "⊢ ( ( 𝜑 → 𝜒 ) → ( ( 𝜓 → 𝜒 ) → ( 𝜑 → 𝜒 ) ) )"
     print("✅️ ax-1. Test 8")
 
 def test_ax_2():
@@ -1139,8 +1153,12 @@ def check_all():
 
 #------------- TEOREMAS
 print()
+#check_all()
+#check_theorem(a1d)
+
+check_theorem(ax_1)
+test_ax_1()
 check_all()
-check_theorem(a1d)
 
 print()
 
