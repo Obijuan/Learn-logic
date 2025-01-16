@@ -1,6 +1,7 @@
 import sys
 from collections.abc import Callable
 
+#-- Base de datos con los Teoremas
 th = {
     "mp2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
@@ -1077,7 +1078,10 @@ def demo_ax_mp():
     print()
 
 #--- Comprobar teoremas
-def check_theorem(name: str, exec: Callable):
+def check_theorem(exec: Callable):
+
+    #-- Obtener cadena con el nombre de la funcion pasada como parametro
+    name = exec.__name__
 
     print(f"\n───────────────┤ TEOREMA {name} ├────────────────")
 
@@ -1094,24 +1098,6 @@ def check_theorem(name: str, exec: Callable):
         print("❌️ Prueba incorrecta")
         print(conclusion)
         print(th[name]["conc"])
-
-def check_a2i():
-    wph = wφ()        
-    wps = w𝜓()
-    wch = wχ()
-    h1 = theorem(wi(wph, wi(wps, wch))) # ⊢ (𝜑 → (𝜓 → 𝜒))
-                                        # ──────
-    a2i(wph, wps, wch, h1)              # ⊢ ((𝜑 → 𝜓) → (𝜑 → 𝜒))
-    
-def check_mpd():
-
-    wph = wφ()        
-    wps = w𝜓()
-    wch = wχ()
-    h1 = theorem(wi(wph, wps))          # ⊢ (𝜑 → 𝜓)
-    h2 = theorem(wi(wph, wi(wps, wch))) # ⊢ (𝜑 → (𝜓 → 𝜒))
-                                        # ──────
-    mpd(wph, wps, wch, h1, h2)          # ⊢ (𝜑 → 𝜒)
 
 def show_inference(hypotesis: list, conclusion: str):
     """Imprimir el razonamiento
@@ -1132,6 +1118,17 @@ def show_inference(hypotesis: list, conclusion: str):
     #-- Imprimir conclusion
     print(conclusion)
 
+def check_all():
+    """Comprobar todos los teoremas disponibles en la base de datos"""
+
+    #-- Obtener en name el nombre (cadena) del teorema
+    for name in th:
+
+        #-- Obtener la función cuyo nombre es name
+        func = globals()[name]
+
+        #-- Pasar esa funcion como parametro a check_theorem
+        check_theorem(func)
 
 #--------------------- MAIN ------------------
 #-- Tests
@@ -1142,16 +1139,8 @@ def show_inference(hypotesis: list, conclusion: str):
 
 #------------- TEOREMAS
 print()
-#check_theorem("mp2", mp2)
-#check_theorem("mp2b", mp2b)
-#check_theorem("a1i", a1i)
-#check_theorem("a2i", a2i)
-#check_theorem("mpd", mpd)
-#check_theorem("id",id)
-#check_theorem("con4", con4)
-#check_theorem("syl", syl)
-#check_theorem("con4d", con4d)
-check_theorem("a1d", a1d)
+check_all()
+check_theorem(a1d)
 
 print()
 
