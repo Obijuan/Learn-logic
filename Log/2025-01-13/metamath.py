@@ -43,16 +43,20 @@ th = {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
                 "⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )"],
         "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )"                
+    },
+    "a1d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )"
     }
 }
 
 
 """
-MM> show statement con4d /full
   wph $f wff ph $.
   wps $f wff ps $.
   wch $f wff ch $.
-  con4d.1 $e |- ( ph -> ( -. ps -> -. ch ) ) $.
+  a1d.1 $e |- ( ph -> ps ) $.
 """
 
 def assert_wff(w : str) -> str:
@@ -698,6 +702,47 @@ def con4d(hyp: list, show_proof = False) -> str:
     conclusion = step_2
     return conclusion
     
+def a1d(hyp: list, show_proof = False) -> str:
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒
+        ⊢ ( 𝜑 → 𝜓 )  (a1d.1)
+        ────────────────────
+        ⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )
+    """
+
+    # https://us.metamath.org/mpeuni/a1d.html
+
+    #-- Obtener las hipótesis
+    wph, wps, wch, a1d_1 = hyp
+
+    #-- Paso 1
+    # wff 𝜓
+    # wff 𝜒
+    hyps = [wps, wch]
+    step_1  = ax_1(*hyps)
+    # ⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: ax_1")
+        show_inference(hyps, step_1)
+
+    #-- Paso 2
+    # wff 𝜑
+    # wff 𝜓
+    # wff ( 𝜒 → 𝜓 )
+    # ⊢ ( 𝜑 → 𝜓 )
+    # ⊢ ( 𝜓 → ( 𝜒 → 𝜓 ) )
+    hyps = [wph, wps, wi(wch,wps),
+            a1d_1, step_1]
+    step_2  = syl(hyps)
+
+    if (show_proof):
+        print("\n🟢️ Paso 2: syl")
+        show_inference(hyps, step_2)
+
+    conclusion = step_2
+    return conclusion
+
 
 #-- FUNCIONES PARA TESTS UNITARIOS
 def test_w𝜑():
@@ -1112,7 +1157,8 @@ print()
 #check_theorem("id",id)
 #check_theorem("con4", con4)
 #check_theorem("syl", syl)
-check_theorem("con4d", con4d)
+#check_theorem("con4d", con4d)
+check_theorem("a1d", a1d)
 
 print()
 
