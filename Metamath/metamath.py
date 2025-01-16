@@ -11,6 +11,10 @@ th = {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
         "conc": "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )"
     },
+    "ax-3": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )"
+    },
     "mp2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ 𝜒"
@@ -340,23 +344,51 @@ def ax_2(hyp: list, show_proof = False) -> str:
     conclusion = step_10
     return conclusion
 
-def ax_3(wph: str, wps: str) -> str:
+def ax_3(hyp: list, show_proof = False) -> str:
     """Axiom Transposicion
-    si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
+    si 𝜑 y 𝜓  son wffs, entonces esta formula es un teorema
     ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
     """
 
-    # -- wph es una wff
-    assert_wff(wph)
+    # https://us.metamath.org/mpeuni/ax-3.html
 
-    # -- wps es una wff
-    assert_wff(wps)
+    #-- Obtener las hipótesis
+    wph, wps = hyp
 
-    conclusion = theorem(wi(
-                            wi(wn(wph), wn(wps)), 
-                            wi(wps, wph)
-                           )
-                        )
+    #-- Comprobar que las hipotesis son wff
+    assert_wff(wph)  #-- wph es una wff
+    assert_wff(wps)  #-- wps es una wff
+
+    #-- Demostracion: Construir el teorema
+    step_1 = wph
+    step_2 = wn(step_1)
+    step_3 = wps
+    step_4 = wn(step_3)
+    step_5 = wi(step_2, step_4)
+    step_6 = wi(step_3, step_1)
+    step_7 = wi(step_5, step_6)
+    step_8 = theorem(step_7)
+
+    if (show_proof):
+        print("\n🟢️ Paso 1: wff 𝜑")
+        print(step_1)
+        print ("\n🟢️ Paso 2: wn")
+        print(step_2)
+        print ("\n🟢️ Paso 3: wff 𝜓")
+        print(step_3)
+        print ("\n🟢️ Paso 4: wn")
+        print(step_4)
+        print ("\n🟢️ Paso 5: wi")
+        print(step_5)
+        print ("\n🟢️ Paso 6: wi")
+        print(step_6)
+        print ("\n🟢️ Paso 7: wi")
+        print(step_7)
+        print ("\n🟢️ Paso 8: Es Axioma")
+        print(step_8)
+    
+
+    conclusion = step_8
     return conclusion
 
 
@@ -640,7 +672,7 @@ def con4(hyp: list, show_proof = False) -> str:
     # wff 𝜑
     # wff 𝜓
     hyps = [wph, wps]
-    step_1  = ax_3(*hyps)
+    step_1  = ax_3(hyps)
     # ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
 
     if (show_proof):
@@ -1180,8 +1212,7 @@ def check_all():
 #------------- TEOREMAS
 print()
 check_all()
-check_theorem("ax-1")
-check_theorem("ax-2")
+check_theorem("ax-3")
 
 print()
 
