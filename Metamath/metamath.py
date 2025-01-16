@@ -3,6 +3,11 @@ from collections.abc import Callable
 
 #-- Base de datos con los Teoremas
 th = {
+    "ax-mp": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ 𝜓"
+    },
     "ax-1": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )"
@@ -200,14 +205,21 @@ def theorem(w : str) -> str:
     return th
 
 #------- Axiomas
-def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
-    """Regla de inferencia ax-mp (Modus pones)"""
+def ax_mp(hyp: list, show_proof = False) -> str:
+    """Regla de inferencia ax-mp (Modus pones)
+       si 𝜑 y 𝜓 son wff
+       si ⊢ 𝜑 y ⊢ (𝜑 → 𝜓 ) son teoremas, entonces
+       ⊢ 𝜓 es un teorema
+    """
 
-    #---- Comprobar el teorema min
+    # https://us.metamath.org/mpeuni/ax-mp.html
 
-    #-- 𝜑 es una wff
-    #-- Guardamos la fórmula (sin el wff)
-    𝜑 = assert_wff(wph)
+    #-- Obtener las hipótesis
+    wph, wps, min, maj = hyp
+
+    #-- Comprobar que las hipotesis son wff
+    assert_wff(wph)  #-- wph es una wff
+    assert_wff(wps)  #-- wps es una wff
 
     #-- ⊢ 𝜑 es un teorema
     #-- En fmin metemos la fórmula (sin el ⊢)
@@ -218,11 +230,6 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
 
     #-- Comprobar que las fórmulas son iguales
     assert fmin == wph
-
-    # ---- Comprobar el teorema maj
-    #-- 𝜓 es una wff
-    #-- Guardamos la fórmula (sin el wff)
-    𝜓 = assert_wff(wps)
 
     #-- ⊢ ( 𝜑 → 𝜓 ) es un teorema
     #-- Guardar en fmaj la formula (sin el ⊢)
@@ -237,21 +244,8 @@ def ax_mp(wph : str, wps : str, min : str, maj : str, debug=False) -> str:
     #-- Conclusion
     #-- Podemos asegurar, en este caso, que 𝜓 es un teorema
     conclusion = theorem(wps)
-
-    #-- Si estamos en modo DEBUG, se imprimen las premisas y las conclusiones
-    if (debug):
-        print("══════════")
-        print("🟢️ ax-mp: ")
-        #debug_wff(wph)
-        #debug_wff(wps)  
-        print(min)  
-        print(maj)  
-        print(f"{"─"*len(maj)}") #-- Dibujar linea
-        print(conclusion)
-        print()
-
-    #-- Devolver el teorema conclusión
     return conclusion
+
 
 def ax_1(hyp: list, show_proof = False) -> str:
     """Axioma de Simplificacion
@@ -413,7 +407,7 @@ def mp2(hyp: list, show_proof = False) -> str:
     # ⊢ 𝜑
     # ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )
     hyps = [wph, wi(wps, wch), mp2_1, mp2_3]
-    step_1  = ax_mp(*hyps) 
+    step_1  = ax_mp(hyps) 
     # ⊢ ( 𝜓 → 𝜒 )  Conclusion
 
     if (show_proof):
@@ -426,7 +420,7 @@ def mp2(hyp: list, show_proof = False) -> str:
     # ⊢ 𝜓
     # ⊢ ( 𝜓 → 𝜒 )
     hyps = [wps, wch, mp2_2, step_1]
-    step_2 = ax_mp(*hyps)      
+    step_2 = ax_mp(hyps)      
     # ⊢ 𝜒   Conclusion
 
     if (show_proof):
@@ -457,7 +451,7 @@ def mp2b(hyp: list, show_proof = False) -> str:
     # ⊢ 𝜑
     # ⊢ ( 𝜑 → 𝜓 )
     hyps = [wph, wps, mp2b_1, mp2b_2]
-    step_1  = ax_mp(*hyps) 
+    step_1  = ax_mp(hyps) 
     # ⊢ 𝜓  Conclusion
 
     if (show_proof):
@@ -470,7 +464,7 @@ def mp2b(hyp: list, show_proof = False) -> str:
     # ⊢ 𝜓
     # ⊢ ( 𝜓 → 𝜒 )
     hyps = [wps, wch, step_1, mp2b_3]
-    step_2  = ax_mp(*hyps)
+    step_2  = ax_mp(hyps)
     # ⊢ 𝜒  Conclusion
 
     if (show_proof):
@@ -511,7 +505,7 @@ def a1i(hyp: list, show_proof = False) -> str:
     # ⊢ 𝜑
     # ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
     hyps = [wph, wi(wps, wph), a1i_1, step_1]
-    step_2 = ax_mp(*hyps)
+    step_2 = ax_mp(hyps)
     # ⊢ ( 𝜓 → 𝜑 ) Conclusion
 
     if (show_proof):
@@ -555,7 +549,7 @@ def a2i(hyp: list, show_proof = False) -> str:
             wi(wi(wph, wps), wi(wph, wch)),
             a2i_1,
             step_1]
-    step_2  = ax_mp(*hyps)
+    step_2  = ax_mp(hyps)
     #  ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) ) Conclusion
     #  
     if (show_proof):
@@ -598,7 +592,7 @@ def mpd(hyp: list, show_proof = False) -> str:
     # ⊢ ( 𝜑 → 𝜓 )
     # ⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )
     hyps = [wi(wph, wps), wi(wph,wch), mpd_1, step_1]
-    step_2 = ax_mp(*hyps)
+    step_2 = ax_mp(hyps)
 
     if (show_proof):
         print("\n🟢️ Paso 2: ax_mp")
@@ -1204,15 +1198,16 @@ def check_all():
 
 #--------------------- MAIN ------------------
 #-- Tests
-unittest()
-print("------- Main---------")
-demo_wff()
-demo_ax_mp()
+#unittest()
+#print("------- Main---------")
+#demo_wff()
+#demo_ax_mp()
 
 #------------- TEOREMAS
 print()
-check_all()
+#check_all()
 check_theorem("ax-3")
+check_theorem("ax-mp")
 
 print()
 
