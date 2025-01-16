@@ -1,5 +1,4 @@
 import sys
-from collections.abc import Callable
 
 #-- Base de datos con los Teoremas
 th = {
@@ -1199,14 +1198,13 @@ def check_all():
 #--------------------- MAIN ------------------
 #-- Tests
 unittest()
-#print("------- Main---------")
+print("------- Main---------")
 demo_wff()
 demo_ax_mp()
 
 #------------- TEOREMAS
 print()
 check_all()
-check_theorem("ax-3")
 check_theorem("ax-mp")
 
 print()
