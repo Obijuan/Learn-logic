@@ -52,13 +52,6 @@ th = {
 }
 
 
-"""
-  wph $f wff ph $.
-  wps $f wff ps $.
-  wch $f wff ch $.
-  a1d.1 $e |- ( ph -> ps ) $.
-"""
-
 def assert_wff(w : str) -> str:
     """Comprobar que s es una fórmula bien formada (wff)"""
     """En caso de serlo, se retorna la fórmula"""
