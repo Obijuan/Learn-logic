@@ -50,8 +50,8 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
                 "⊢ 𝜑", "⊢ 𝜓", "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
         "conc": "⊢ 𝜒",
-        "proof": ["wps", "wch", "hyp.2", "wph", "wps", "wch", "wi", "hyp.1", "hyp.3",
-         "ax-mp", "ax-mp"]
+        "proof": ["wps", "wch", "hyp.2", "wph", "wps", "wch", "wi", "hyp.1", 
+                  "hyp.3", "ax-mp", "ax-mp"]
     },
     "mp2b": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
@@ -64,7 +64,8 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓", 
                 "⊢ 𝜑"],
         "conc": "⊢ ( 𝜓 → 𝜑 )",
-        "proof": []
+        "proof": ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1",
+                  "ax-mp"]
     },
 }
 
@@ -501,6 +502,10 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         hyp_orig.insert(0, stack[-1-i])
         #hyp_orig.insert(0, stack.pop())
 
+    #-- DEBUG: Vaciar la pila...
+    for i in range(nh_orig):
+        stack.pop()
+
 
     #-- Recorrer la lista de teoremas de una prueba
     for step,name in enumerate(proof, 1):
@@ -639,27 +644,28 @@ check_theorem("ax-2", True)
 check_theorem("ax-3", True)
 check_theorem("mp2", True)
 check_theorem("mp2b", True)
+check_theorem("a1i", True)
 
 
 print("----------------")
 sys.exit(0)
 
-name = "a1i"
-
-#-- Meter las hipotesis en la pila
-for h in th_db[name]["hyp"]:
-    stack.append(h)
-
-#-- Obtener el numero de wffs
-wffs = count_wff(th_db[name]["hyp"])
-
-#-- Obtener el numero total de hipotesis (wffs + ths)
-nhyp = len(th_db[name]["hyp"])
-
-proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
-
-proof_theorems(proof, nhyp, wffs, True)
-print(stack)
+#name = "a1i"
+#
+##-- Meter las hipotesis en la pila
+#for h in th_db[name]["hyp"]:
+#    stack.append(h)
+#
+##-- Obtener el numero de wffs
+#wffs = count_wff(th_db[name]["hyp"])
+#
+##-- Obtener el numero total de hipotesis (wffs + ths)
+#nhyp = len(th_db[name]["hyp"])
+#
+#proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
+#
+#proof_theorems(proof, nhyp, wffs, True)
+#print(stack)
 
 
 print()
