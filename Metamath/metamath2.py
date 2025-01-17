@@ -53,6 +53,19 @@ th_db = {
         "proof": ["wps", "wch", "hyp.2", "wph", "wps", "wch", "wi", "hyp.1", "hyp.3",
          "ax-mp", "ax-mp"]
     },
+    "mp2b": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ 𝜒",
+        "proof": ["wps", "wch", "wph", "wps", "hyp.1", "hyp.2", "ax-mp",
+                  "hyp.3", "ax-mp"]
+    },
+    "a1i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 → 𝜑 )",
+        "proof": []
+    },
 }
 
 
@@ -250,19 +263,21 @@ def ax_1(show_proof=False):
     """
 
     #-- Obtener las hipótesis
-    wps = stack.pop()
-    wph = stack.pop()
+    #wps = stack.pop()
+    #wph = stack.pop()
 
     #-- Comprobar que las hipotesis son wff
-    assert_wff(wph)  #-- wph es una wff
-    assert_wff(wps)  #-- wps es una wff
+    #assert_wff(wph)  #-- wph es una wff
+    #assert_wff(wps)  #-- wps es una wff
+
+    proof_theorems(th_db["ax-1"]["proof"],2,2)
+
+    print("-----------------------")
+    print("HOLI????")
 
     #-- TODO! PENSAR!!! 🚧
 
-    #-- Demostracion: Construir el teorema
-    proof = ["wph", "wi", "wi", "ax-th"]
     
-    proof_theorems(proof, 2)
 
 def ax_1_old(show_proof=False):
     """Axioma de Simplificacion
@@ -425,7 +440,17 @@ def mp2(show_proof=False):
     wps wch mp2.2 wph wps wch wi hyp.1 mp2.3 ax-mp ax-mp
     """
     
-    
+def mp2b(show_proof=False):
+    """Teorema mp2b
+       Hypotesis:
+         wff 𝜑, wff 𝜓, wff 𝜒
+         ⊢ 𝜑          (mp2b_1)
+         ⊢ ( 𝜑 → 𝜓 )  (mp2b_2)
+         ⊢ ( 𝜓 → 𝜒 )  (mp2b_3)
+       Conclusion:
+         ⊢ 𝜒
+    """
+    pass
 
 def print_top():
     """Print the current formula (at the top of stack)"""
@@ -485,8 +510,8 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int):
     #-- Se meten en la lista hyp_orig
     hyp_orig = []
     for i in range(nh_orig):
-        #hyp_orig.insert(0, stack[-1-i])
-        hyp_orig.insert(0, stack.pop())
+        hyp_orig.insert(0, stack[-1-i])
+        #hyp_orig.insert(0, stack.pop())
 
 
     #-- Recorrer la lista de teoremas de una prueba
@@ -605,51 +630,42 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
-#check_theorem("wn")
-#check_theorem("wi")
-#check_theorem("ax-th")
-#check_theorem("ax-mp")
-#check_theorem("ax-1")
-#check_theorem("ax-2")
-#check_theorem("ax-3")
+check_theorem("wn")
+check_theorem("wi")
+check_theorem("ax-th")
+check_theorem("ax-mp")
+check_theorem("ax-1")
+check_theorem("ax-2")
+check_theorem("ax-3")
 check_theorem("mp2")
+check_theorem("mp2b")
 
 
 print("----------------")
 sys.exit(0)
 
-#count = count_wff(th_db["ax-mp"]["hyp"])
-#print(count)
+#name = "a1i"
+#
+##-- Meter las hipotesis en la pila
+#for h in th_db[name]["hyp"]:
+#    stack.append(h)
+#
+##-- Obtener el numero de wffs
+#wffs = count_wff(th_db[name]["hyp"])
+#
+##-- Obtener el numero total de hipotesis (wffs + ths)
+#nhyp = len(th_db[name]["hyp"])
+#
+#
+#proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
 
 wph()
+wn()
 wps()
-wch()
-
-wph()
-exec("ax-th")
-
-wps()
-exec("ax-th")
-
-wph()
-wps()
-wch()
-wi()
-wi()
-exec("ax-th")
-
+proof = ["ax-1"]
+proof_theorems(proof, 2, 2)
 print(stack)
 
 
-#proof = ["wps", "wch", "hyp.2", "wph", "wps", "wch", "wi", "hyp.1", "hyp.3",
-#         "ax-mp", "ax-mp"]
-
-proof = ["wps", "wch", "hyp.2"]
-proof_theorems(proof, 6, 3)
-print(stack)
-
-"""
-wps wch mp2.2 wph wps wch wi mp2.1 mp2.3 ax-mp ax-mp
-"""
 print()
  
