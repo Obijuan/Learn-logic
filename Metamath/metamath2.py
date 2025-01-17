@@ -34,7 +34,9 @@ th_db = {
     },
     "ax-2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
-        "conc": "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )"
+        "conc": "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )",
+        "proof": ["wi", "wi", "wph", "wps", "wi", "wph", "wch", "wi",
+                  "wi", "wi", "ax-th"]
     }
 }
 
@@ -504,34 +506,24 @@ def check_theorem(name: str, show_proof=False):
         print(th_db[name]["conc"])
 
 
-
-
-
 print()
-check_theorem("wn")
-check_theorem("wi")
-check_theorem("ax-th")
-check_theorem("ax-mp")
-check_theorem("ax-1")
+#check_theorem("wn")
+#check_theorem("wi")
+#check_theorem("ax-th")
+#check_theorem("ax-mp")
+#check_theorem("ax-1")
+check_theorem("ax-2")
 
-#check_theorem("ax-2", True)
 
 #--- Hipotesis iniciales
 wph()
 wps()
+wch()
 
-#-- Construccion de ⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )
-#-- Prueba
-#-- wff 𝜑
-#-- wff 𝜓
-#-- wff 𝜑
-#-- 1: wi:  wff ( 𝜓 → 𝜑 )
-#-- 2: wi:  wff ( 𝜑 → ( 𝜓 → 𝜑 ) )
+proof = ["wi", "wi", "wph", "wps", "wi", "wph", "wch", "wi",
+         "wi", "wi", "ax-th"]
+#proof_theorems(proof, 3)
 
-
-proof = ["wph", "wi", "wi", "ax-th"]
-
-#proof_theorems(proof, 2)
 
 
 print()
