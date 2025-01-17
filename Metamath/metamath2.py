@@ -9,16 +9,17 @@ th_db = {
     "wn": {
         "hyp": ["wff 𝜑"],
         "conc": "wff ¬𝜑",
-        "proof": ["wn"]
+        "proof": ["wph", "wn"]
     },
     "wi": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 → 𝜓 )",
-        "proof": ["wi"]
+        "proof": ["wph", "wps", "wi"]
     },
     "ax-th": {
         "hyp": ["wff 𝜑"],
-        "conc": "⊢ 𝜑"
+        "conc": "⊢ 𝜑",
+        "proof": ["wph", "ax-th"]
     },
     #--------- AXIOMAS --------------------
     "ax-mp": {
@@ -30,15 +31,25 @@ th_db = {
     "ax-1": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )",
-        "proof": ["wph", "wi", "wi", "ax-th"]
+        "proof": ["wph", "wps", "wph", "wi", "wi", "ax-th"]
     },
     "ax-2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
         "conc": "⊢ ( ( 𝜑 → ( 𝜓 → 𝜒 ) ) → ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) ) )",
-        "proof": ["wi", "wi", "wph", "wps", "wi", "wph", "wch", "wi",
-                  "wi", "wi", "ax-th"]
+        "proof": ["wph", "wps", "wch", "wi", "wi", "wph", "wps", "wi", "wph",
+                  "wch", "wi", "wi", "wi", "ax-th"]
+    },
+    "ax-3": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )",
+        "proof": ["wph", "wn", "wps", "wn", "wi", "wps", "wph", "wi", "wi",
+                  "ax-th"]
     }
 }
+
+"""
+⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
+"""
 
 def assert_wff(w : str) -> str:
     """Comprobar que w es una fórmula bien formada (wff)"""
@@ -411,7 +422,8 @@ def proof_theorems(proof: list[str], nh_orig: int):
     #-- Se meten en la lista hyp_orig
     hyp_orig = []
     for i in range(nh_orig):
-        hyp_orig.insert(0, stack[-1-i])
+        #hyp_orig.insert(0, stack[-1-i])
+        hyp_orig.insert(0, stack.pop())
 
 
     #-- Recorrer la lista de teoremas de una prueba
@@ -507,23 +519,20 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
-#check_theorem("wn")
-#check_theorem("wi")
-#check_theorem("ax-th")
-#check_theorem("ax-mp")
-#check_theorem("ax-1")
+check_theorem("wn")
+check_theorem("wi")
+check_theorem("ax-th")
+check_theorem("ax-mp")
+check_theorem("ax-1")
 check_theorem("ax-2")
-
+check_theorem("ax-3")
 
 #--- Hipotesis iniciales
 wph()
 wps()
-wch()
 
-proof = ["wi", "wi", "wph", "wps", "wi", "wph", "wch", "wi",
-         "wi", "wi", "ax-th"]
-#proof_theorems(proof, 3)
-
-
+print("----------------")
+proof = ["wph", "wn", "wps", "wn", "wi", "wps", "wph", "wi", "wi", "ax-th"]
+#proof_theorems(proof, 2)
 
 print()
