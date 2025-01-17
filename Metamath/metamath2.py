@@ -263,20 +263,7 @@ def ax_1(show_proof=False):
     """
 
     #-- Obtener las hipótesis
-    #wps = stack.pop()
-    #wph = stack.pop()
-
-    #-- Comprobar que las hipotesis son wff
-    #assert_wff(wph)  #-- wph es una wff
-    #assert_wff(wps)  #-- wps es una wff
-
     proof_theorems(th_db["ax-1"]["proof"],2,2)
-
-    print("-----------------------")
-    print("HOLI????")
-
-    #-- TODO! PENSAR!!! 🚧
-
     
 
 def ax_1_old(show_proof=False):
@@ -500,7 +487,8 @@ def print_theorem(name: str):
     print(th_db[name]["conc"])
 
 
-def proof_theorems(proof: list[str], nh_orig: int, wffs: int):
+def proof_theorems(proof: list[str], nh_orig: int, wffs: int, 
+                   show_proof=False):
     """Probar una lista de teoremas
        nh_orig: Numero de hipotesis del teorema original
        wffs: Numero de wffs
@@ -517,42 +505,51 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int):
     #-- Recorrer la lista de teoremas de una prueba
     for step,name in enumerate(proof, 1):
 
-        print(f"\n🟢️ Paso {step}: {name}")
+        if (show_proof):
+            print(f"\n🟢️ Paso {step}: {name}")
+
+        #-- TODO 🚧: REFACTOR!! Eliminar los IFs!!!
 
         #-- Caso especial: Meter hipotesis 1 en la pila
         if name == "wph":
             stack.append(hyp_orig[0])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
         #-- Caso especial: Meter hipotesis 2 en la pila
         if name == "wps":
             stack.append(hyp_orig[1])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
         #-- Caso especial: Meter hipotesis 3 en la pila
         if name == "wch":
             stack.append(hyp_orig[2])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
         #-- Caso especial: teorema hip. 1
         if name == "hyp.1":
             stack.append(hyp_orig[wffs])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
         #-- Caso especial: teorema hip. 2
         if name == "hyp.2":
             stack.append(hyp_orig[wffs+1])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
         #-- Caso especial: teorema hip. 3
         if name == "hyp.3":
             stack.append(hyp_orig[wffs+2])
-            print_top()
+            if (show_proof):
+                print_top()
             continue
 
 
@@ -573,9 +570,10 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int):
         #-- Ejecutar el teorema
         exec(name)
 
-        #-- Mostrar las hipotesis
-        for i, h in enumerate(hyp, 1):
-            print(f"{h}")
+        if (show_proof):
+            #-- Mostrar las hipotesis
+            for i, h in enumerate(hyp, 1):
+                print(f"{h}")
 
         #-- Leer la conclusion y meterla en hyp para calcular
         #-- su longitud
@@ -586,10 +584,12 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int):
         tam = max([len(f) for f in hyp])
 
         #-- Imprimir linea horizontal
-        print("─" * tam)
+        if (show_proof):
+            print("─" * tam)
 
         #-- Imprimir la conclusion
-        print_top()
+        if (show_proof):
+            print_top()
 
 
 def check_theorem(name: str, show_proof=False):
@@ -612,7 +612,7 @@ def check_theorem(name: str, show_proof=False):
 
     #-- Comprobar si el teorema tiene prueba
     if "proof" in th_db[name]:
-        proof_theorems(th_db[name]["proof"], nhyp, wffs)
+        proof_theorems(th_db[name]["proof"], nhyp, wffs, show_proof)
     else:
         #-- No hay prueba: Ejecutar el teorema
         exec(name, show_proof)
@@ -630,40 +630,35 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
-check_theorem("wn")
-check_theorem("wi")
-check_theorem("ax-th")
-check_theorem("ax-mp")
-check_theorem("ax-1")
-check_theorem("ax-2")
-check_theorem("ax-3")
-check_theorem("mp2")
-check_theorem("mp2b")
+check_theorem("wn", True)
+check_theorem("wi", True)
+check_theorem("ax-th", True)
+check_theorem("ax-mp", True)
+check_theorem("ax-1", True)
+check_theorem("ax-2", True)
+check_theorem("ax-3", True)
+check_theorem("mp2", True)
+check_theorem("mp2b", True)
 
 
 print("----------------")
 sys.exit(0)
 
-#name = "a1i"
-#
-##-- Meter las hipotesis en la pila
-#for h in th_db[name]["hyp"]:
-#    stack.append(h)
-#
-##-- Obtener el numero de wffs
-#wffs = count_wff(th_db[name]["hyp"])
-#
-##-- Obtener el numero total de hipotesis (wffs + ths)
-#nhyp = len(th_db[name]["hyp"])
-#
-#
-#proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
+name = "a1i"
 
-wph()
-wn()
-wps()
-proof = ["ax-1"]
-proof_theorems(proof, 2, 2)
+#-- Meter las hipotesis en la pila
+for h in th_db[name]["hyp"]:
+    stack.append(h)
+
+#-- Obtener el numero de wffs
+wffs = count_wff(th_db[name]["hyp"])
+
+#-- Obtener el numero total de hipotesis (wffs + ths)
+nhyp = len(th_db[name]["hyp"])
+
+proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
+
+proof_theorems(proof, nhyp, wffs, True)
 print(stack)
 
 
