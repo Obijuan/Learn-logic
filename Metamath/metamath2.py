@@ -219,13 +219,24 @@ th_db = {
         "conc": "⊢ ( 𝜒 → ¬𝜑 )", 
         "proof": ["wch", "wph", "wps", "hyp.2", "wph", "wps", "wn", "wi", 
                   "wch", "hyp.1", "a1i", "mt2d"]
+    },
+    "con2i": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ ( 𝜑 → ¬𝜓 )"],
+        "conc": "⊢ ( 𝜓 → ¬𝜑 )",
+        "proof": ["wph", "wps", "wps", "hyp.1", "wps", "id", "nsyl3"]
     }
 }
 
 
 """
-    "nsyl3": {
-        "hyp": ["wff 𝜑"],
+ 
+
+"""
+
+"""
+    "con2i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃"],
         "conc": "",
         "proof": []
     }
@@ -647,50 +658,13 @@ def check_theorem(name: str, show_proof=False):
         print(th_db[name]["conc"])
 
 
+
+#------------------ MAIN --------------------
 print()
 
 #-- Check all the theorems in the database
 for th in th_db:
     check_theorem(th, True)
-
-#check_theorem("wn", True)
-#check_theorem("wi", True)
-#check_theorem("ax-th", True)
-#check_theorem("ax-mp", True)
-#check_theorem("ax-1", True)
-#check_theorem("ax-2", True)
-#check_theorem("ax-3", True)
-#check_theorem("mp2", True)
-#check_theorem("mp2b", True)
-#check_theorem("a1i", True)
-#check_theorem("a2i", True)
-#check_theorem("mpd", True)
-#check_theorem("id", True)
-#check_theorem("con4", True)
-#check_theorem("syl", True)
-#check_theorem("con4d", True)
-#check_theorem("a1d",True)
-#check_theorem("pm2.21d", True)
-#check_theorem("pm2.21", True)
-#check_theorem("jarli", True)
-#check_theorem("mt4d", True)
-#check_theorem("sylcom", True)
-#check_theorem("pm2.18d", True)
-#check_theorem("pm2.18", True)
-#check_theorem("notnotr", True)
-#check_theorem("syl5com", True)
-#check_theorem("com12", True)
-#check_theorem("syl5", True)
-#check_theorem("con2d", True)
-#check_theorem("mt2d", True)
-#check_theorem("nsyl3", True)
-
-
-#check_theorem("name", True)
-#check_theorem("name", True)
-#check_theorem("name", True)
-#check_theorem("name", True)
-
 
 print()
  
