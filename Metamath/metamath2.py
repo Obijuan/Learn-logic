@@ -81,6 +81,12 @@ th_db = {
         "proof": ["wph", "wps", "wi", "wph", "wch", "wi", "hyp.1", "wph", "wps", "wch",
          "hyp.2", "a2i", "ax-mp"]
     },
+    "id": {
+        "hyp": ["wff 𝜑"],
+        "conc":"⊢ ( 𝜑 → 𝜑 )",
+        "proof": ["wph", "wph", "wph", "wi", "wph", "wph", "wph", "ax-1", "wph", 
+         "wph", "wph", "wi", "ax-1", "mpd"],
+    },
 }
 
 
@@ -349,7 +355,6 @@ def a2i(show_proof=False):
 
     proof_theorems(th_db["a2i"]["proof"],4,3)
 
-
 def mpd(show_proof=False):
     """
         wff 𝜑, wff 𝜓, wff 𝜒 
@@ -357,6 +362,14 @@ def mpd(show_proof=False):
         ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )   (mpd_2)
         ────────────────────
         ⊢ ( 𝜑 → 𝜒 )
+    """
+    proof_theorems(th_db["mpd"]["proof"],5,3)
+
+def id(show_proof=False):
+    """
+        wff 𝜑
+        ──────────
+        ⊢ (𝜑 → 𝜑)
     """
     pass
 
@@ -566,13 +579,14 @@ print()
 #check_theorem("mp2b", True)
 #check_theorem("a1i", True)
 #check_theorem("a2i", True)
-check_theorem("mpd", True)
+#check_theorem("mpd", True)
+check_theorem("id", True)
 
 
 print("----------------")
-#sys.exit(0)
+sys.exit(0)
 
-name = "mpd"
+name = "id"
 
 #-- Meter las hipotesis en la pila
 for h in th_db[name]["hyp"]:
@@ -584,15 +598,15 @@ wffs = count_wff(th_db[name]["hyp"])
 #-- Obtener el numero total de hipotesis (wffs + ths)
 nhyp = len(th_db[name]["hyp"])
 
-proof = ["wph", "wps", "wi", "wph", "wch", "wi", "hyp.1", "wph", "wps", "wch",
-         "hyp.2", "a2i", "ax-mp"]
+proof = ["wph", "wph", "wph", "wi", "wph", "wph", "wph", "ax-1", "wph", 
+         "wph", "wph", "wi", "ax-1", "mpd"]
 
-#proof_theorems(proof, nhyp, wffs, True)
-#print(stack)
+proof_theorems(proof, nhyp, wffs, True)
+print(stack)
 
 
 print()
  
 """
-
+wph wph wph wi wph wph wph ax-1 wph wph wph wi ax-1 mpd
 """ 
