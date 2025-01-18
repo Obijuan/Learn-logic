@@ -27,7 +27,6 @@ th_db = {
                 "⊢ 𝜑", "⊢ ( 𝜑 → 𝜓 )"],
         "conc": "⊢ 𝜓"
     },
-    
     "ax-1": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜑 ) )",
@@ -73,6 +72,14 @@ th_db = {
         "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )",
         "proof": ["wph", "wps", "wch", "wi", "wi", "wph", "wps", "wi", "wph", "wch",
          "wi", "wi", "hyp.1", "wph", "wps", "wch", "ax-2", "ax-mp"]
+    },
+    "mpd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ["wph", "wps", "wi", "wph", "wch", "wi", "hyp.1", "wph", "wps", "wch",
+         "hyp.2", "a2i", "ax-mp"]
     },
 }
 
@@ -268,92 +275,16 @@ def ax_1(show_proof=False):
        ⊢ (𝜑 → (𝜓 → 𝜑))
     """
 
-    #-- Obtener las hipótesis
     proof_theorems(th_db["ax-1"]["proof"],2,2)
     
-
 def ax_2(show_proof=False):
     """Axioma de Frege
     si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
     ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
     """
 
-    #-- Obtener las hipótesis
     proof_theorems(th_db["ax-2"]["proof"],3,3)
 
-
-def ax_2_old(show_proof=False):
-    """Axioma de Frege
-    si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
-    ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
-    """
-
-    #-- Obtener las hipótesis
-    wch = stack.pop()
-    wps = stack.pop()
-    wph = stack.pop()
-    
-    #-- Comprobar que las hipotesis son wff
-    assert_wff(wph)  #-- wph es una wff
-    assert_wff(wps)  #-- wps es una wff
-    assert_wff(wch)  #-- wch es una wff
-
-    #-- Demostracion: Construir el teorema
-    step_1 = wph         # wff 𝜑
-    stack.append(step_1)
-
-    step_2 = wps         # wff 𝜓
-    stack.append(step_2)
-
-    step_3 = wch
-    stack.append(step_3) # wff 𝜒
-
-    wi()
-    step_4 = stack[-1]   # wff (𝜓 → 𝜒)
-
-    wi()
-    step_5 = stack[-1]   # wff (𝜑 → (𝜓 → 𝜒))
-
-    stack.append(step_1)
-    stack.append(step_2)
-    wi()
-    step_6 = stack[-1]   #  wff (𝜑 → 𝜓)
-
-    stack.append(step_1)  # wff (𝜑 → 𝜒)
-    stack.append(step_3)
-    wi() 
-    step_7 = stack[-1]
-
-    wi()
-    step_8 = stack[-1]  # wff ((𝜑 → 𝜓) → (𝜑 → 𝜒))
-
-    wi()
-    step_9 = stack[-1]  # wff ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
-
-    step_10 = theorem(step_9)
-    stack.append(step_10)
-
-    if (show_proof):
-        print("\n🟢️ Paso 1: wff 𝜑")
-        print(step_1)
-        print ("\n🟢️ Paso 2: wff 𝜓")
-        print(step_2)
-        print ("\n🟢️ Paso 3: wff 𝜒")
-        print(step_3)
-        print ("\n🟢️ Paso 4: wi")
-        print(step_4)
-        print ("\n🟢️ Paso 5: wi")
-        print(step_5)
-        print ("\n🟢️ Paso 6: wi")
-        print(step_6)
-        print ("\n🟢️ Paso 7: wi")
-        print(step_7)
-        print ("\n🟢️ Paso 8: wi")
-        print(step_8)
-        print ("\n🟢️ Paso 9: wi")
-        print(step_9)
-        print ("\n🟢️ Paso 10: Es Axioma")
-        print (step_10)
 
 def mp2(show_proof=False):
     """Teorema mp2:
@@ -405,6 +336,27 @@ def mp2b(show_proof=False):
          ⊢ ( 𝜓 → 𝜒 )  (mp2b_3)
        Conclusion:
          ⊢ 𝜒
+    """
+    pass
+
+def a2i(show_proof=False):
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒
+        ⊢ (𝜑 → (𝜓 → 𝜒))     (a2i.1)
+        ────────────────
+        ⊢ ( ( 𝜑 → 𝜓 ) → (𝜑 → 𝜒 ) )
+    """
+
+    proof_theorems(th_db["a2i"]["proof"],4,3)
+
+
+def mpd(show_proof=False):
+    """
+        wff 𝜑, wff 𝜓, wff 𝜒 
+        ⊢ ( 𝜑 → 𝜓 )           (mpd_1)
+        ⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )   (mpd_2)
+        ────────────────────
+        ⊢ ( 𝜑 → 𝜒 )
     """
     pass
 
@@ -613,13 +565,14 @@ print()
 #check_theorem("mp2", True)
 #check_theorem("mp2b", True)
 #check_theorem("a1i", True)
-check_theorem("a2i", True)
+#check_theorem("a2i", True)
+check_theorem("mpd", True)
 
 
 print("----------------")
-sys.exit(0)
+#sys.exit(0)
 
-name = "a2i"
+name = "mpd"
 
 #-- Meter las hipotesis en la pila
 for h in th_db[name]["hyp"]:
@@ -631,14 +584,15 @@ wffs = count_wff(th_db[name]["hyp"])
 #-- Obtener el numero total de hipotesis (wffs + ths)
 nhyp = len(th_db[name]["hyp"])
 
-proof = ["wph", "wps", "wch", "wi", "wi", "wph", "wps", "wi", "wph", "wch",
-         "wi", "wi", "hyp.1", "wph", "wps", "wch", "ax-2", "ax-mp"]
+proof = ["wph", "wps", "wi", "wph", "wch", "wi", "hyp.1", "wph", "wps", "wch",
+         "hyp.2", "a2i", "ax-mp"]
 
-proof_theorems(proof, nhyp, wffs, True)
-print(stack)
+#proof_theorems(proof, nhyp, wffs, True)
+#print(stack)
 
 
 print()
  
 """
+
 """ 
