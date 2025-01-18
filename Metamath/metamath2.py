@@ -3,6 +3,22 @@ import sys
 #-- Pila
 stack = []
 
+#------ Diccionarios para asignar un numero a las hipotesis
+
+#-- Diccionario de hipotesis Wff
+HYP_WFF = {
+    "wph": 0,
+    "wps": 1,
+    "wch": 2,
+}
+
+#-- Diccionario de hipotesis teoremas
+HYP_TH = {
+    "hyp.1": 0,
+    "hyp.2": 1,
+    "hyp.3": 2
+}
+
 #-- Base de datos de teoremas
 th_db = {
     #--------- Reglas de construccion -----
@@ -403,51 +419,21 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         if (show_proof):
             print(f"\n🟢️ Paso {step}: {name}")
 
-        #-- TODO 🚧: REFACTOR!! Eliminar los IFs!!!
-
-        #-- Caso especial: Meter hipotesis 1 en la pila
-        if name == "wph":
-            stack.append(hyp_orig[0])
+        #-- Meter las hipotesis wff en la pila
+        if name in ["wph", "wps", "wch"]:
+            stack.append(hyp_orig[HYP_WFF[name]])
             if (show_proof):
                 print_top()
             continue
 
-        #-- Caso especial: Meter hipotesis 2 en la pila
-        if name == "wps":
-            stack.append(hyp_orig[1])
+        #-- Meter las hipotesis de teoremas en la pila
+        #-- Su orden no es fijo, depende de la cantidad de hipotesis wff
+        #-- que haya: 1,2 ó 3
+        if name in ["hyp.1", "hyp.2", "hyp.3"]:
+            stack.append(hyp_orig[wffs + HYP_TH[name]])
             if (show_proof):
                 print_top()
             continue
-
-        #-- Caso especial: Meter hipotesis 3 en la pila
-        if name == "wch":
-            stack.append(hyp_orig[2])
-            if (show_proof):
-                print_top()
-            continue
-
-        #-- Caso especial: teorema hip. 1
-        if name == "hyp.1":
-            stack.append(hyp_orig[wffs])
-            if (show_proof):
-                print_top()
-            continue
-
-        #-- Caso especial: teorema hip. 2
-        if name == "hyp.2":
-            stack.append(hyp_orig[wffs+1])
-            if (show_proof):
-                print_top()
-            continue
-
-        #-- Caso especial: teorema hip. 3
-        if name == "hyp.3":
-            stack.append(hyp_orig[wffs+2])
-            if (show_proof):
-                print_top()
-            continue
-
-
 
         hyp = []  #-- Lista para lectura de las hipotesis
 
@@ -554,7 +540,7 @@ check_theorem("id", True)
 check_theorem("con4", True)
 check_theorem("syl", True)
 check_theorem("con4d", True)
-check_theorem("a1d", True)
+check_theorem("a1d",True)
 
 
 print("----------------")
