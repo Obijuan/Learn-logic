@@ -132,6 +132,11 @@ th_db = {
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
         "proof": ["wph", "wch", "wps", "wph", "wps", "wn", "wch", "wn", 
                   "hyp.1", "a1d", "con4d"]
+    },
+    "pm2.21": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ¬𝜑 → ( 𝜑 → 𝜓 ) )",
+        "proof": ["wph", "wn", "wph", "wps", "wph", "wn", "id", "pm2.21d"]
     }
 }
 
@@ -567,7 +572,10 @@ print()
 #check_theorem("syl", True)
 #check_theorem("con4d", True)
 #check_theorem("a1d",True)
-check_theorem("pm2.21d", True)
+#check_theorem("pm2.21d", True)
+check_theorem("pm2.21", True)
+#check_theorem("name", True)
+
 
 
 print("----------------")
