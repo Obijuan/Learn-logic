@@ -103,6 +103,13 @@ th_db = {
         "proof": ["wph", "wps", "wn", "wch", "wn", "wi", "wch", "wps", "wi",
                   "hyp.1", "wps", "wch", "con4", "syl"]                
     },
+    "a1d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )",
+        "proof": ["wph", "wps", "wch", "wps", "wi", "hyp.1", "wps", "wch",
+                  "ax-1", "syl"]
+    }
 }
 
 
@@ -547,6 +554,7 @@ check_theorem("id", True)
 check_theorem("con4", True)
 check_theorem("syl", True)
 check_theorem("con4d", True)
+check_theorem("a1d", True)
 
 
 print("----------------")
@@ -569,9 +577,5 @@ sys.exit(0)
 #proof_theorems(proof, nhyp, wffs, True)
 #print(stack)
 
-
 print()
  
-"""
-wph wps ax-3
-""" 
