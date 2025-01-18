@@ -225,6 +225,11 @@ th_db = {
                 "⊢ ( 𝜑 → ¬𝜓 )"],
         "conc": "⊢ ( 𝜓 → ¬𝜑 )",
         "proof": ["wph", "wps", "wps", "hyp.1", "wps", "id", "nsyl3"]
+    },
+    "notnot": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 → ¬¬𝜑 )",
+        "proof": ['wph', 'wn', 'wph', 'wph', 'wn', 'id', 'con2i']
     }
 }
 
@@ -234,11 +239,13 @@ th_db = {
 
 """
 
+
+
 """
-    "con2i": {
+    "notnot": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃"],
         "conc": "",
-        "proof": []
+        "proof": 
     }
     
     "name": {
