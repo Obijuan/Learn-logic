@@ -167,12 +167,43 @@ th_db = {
         "proof": ["wph", "wph", "wps", "wph", "id", "wph", "wps", "wn", "wps",
                   "wph", "wn", "hyp.1", "wps", "wph", "wn", "pm2.21",
                   "sylcom", "mt4d"]
+    },
+    "pm2.18": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ( ¬𝜑 → 𝜑 ) → 𝜑 )",
+        "proof": ["wph", "wn", "wph", "wi", "wph", "wph", "wn", "wph", "wi",
+                  "id", "pm2.18d"]
+    },
+    "notnotr": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ¬¬𝜑 → 𝜑 )",
+        "proof": ["wph", "wn", "wph", "wph", "wph", "pm2.18", "jarli"]
+    },
+    "syl5com": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜒 → ( 𝜓 → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜃 ) )",
+        "proof": ["wph", "wch", "wps", "wth", "wph", "wps", "wch", "hyp.1",
+                  "a1d", "hyp.2", "sylcom"]
+    },
+    "com12": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜓 → ( 𝜑 → 𝜒 ) )",
+        "proof": ["wps", "wps", "wph", "wch", "wps", "id", "hyp.1", "syl5com"]
+    },
+    "syl5": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → 𝜓 )", "⊢ ( 𝜒 → ( 𝜓 → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 → 𝜃 ) )",
+        "proof": ["wph", "wch", "wth", "wph", "wps", "wch", "wth", "hyp.1", 
+                  "hyp.2", "syl5com", "com12"]
     }
 }
 
 
 """
-    "pm2.18d": {
+    "com12": {
         "hyp": ["wff 𝜑"],
         "conc": "",
         "proof": []
@@ -618,8 +649,13 @@ print()
 #check_theorem("jarli", True)
 #check_theorem("mt4d", True)
 #check_theorem("sylcom", True)
-check_theorem("pm2.18d", True)
+#check_theorem("pm2.18d", True)
+#check_theorem("pm2.18", True)
+#check_theorem("notnotr", True)
+#check_theorem("syl5com", True)
+check_theorem("com12", True)
 
+#check_theorem("syl5", True)
 
 #check_theorem("name", True)
 #check_theorem("name", True)
