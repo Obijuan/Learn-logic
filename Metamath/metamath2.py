@@ -67,6 +67,13 @@ th_db = {
         "proof": ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1",
                   "ax-mp"]
     },
+    "a2i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( 𝜑 → 𝜒 ) )",
+        "proof": ["wph", "wps", "wch", "wi", "wi", "wph", "wps", "wi", "wph", "wch",
+         "wi", "wi", "hyp.1", "wph", "wps", "wch", "ax-2", "ax-mp"]
+    },
 }
 
 
@@ -87,7 +94,6 @@ def count_wff(wffs: list):
 
     #-- Retornar el contador
     return cont
-
 
 def assert_wff(w : str) -> str:
     """Comprobar que w es una fórmula bien formada (wff)"""
@@ -133,7 +139,6 @@ def theorem(w : str) -> str:
     th = f"⊢ {𝜑}"
 
     return th
-
 
 def wp():
     """La proposición p es una fórmula bien formada (wff)"""
@@ -267,54 +272,17 @@ def ax_1(show_proof=False):
     proof_theorems(th_db["ax-1"]["proof"],2,2)
     
 
-def ax_1_old(show_proof=False):
-    """Axioma de Simplificacion
-       si 𝜑 y 𝜓 son wff, entonces esta formula es un teorema
-       ⊢ (𝜑 → (𝜓 → 𝜑))
+def ax_2(show_proof=False):
+    """Axioma de Frege
+    si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
+    ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
     """
 
     #-- Obtener las hipótesis
-    wps = stack.pop()
-    wph = stack.pop()
+    proof_theorems(th_db["ax-2"]["proof"],3,3)
 
-    #-- Comprobar que las hipotesis son wff
-    assert_wff(wph)  #-- wph es una wff
-    assert_wff(wps)  #-- wps es una wff
 
-    #-- Demostracion: Construir el teorema
-    step_1 = wph
-    stack.append(step_1)
-
-    step_2 = wps
-    stack.append(step_2)
-
-    step_3 = wph
-    stack.append(step_3)
-
-    wi()
-    step_4 = stack[-1]
-
-    wi()
-    step_5 = stack[-1]
-
-    step_6 = theorem(step_5)
-    stack.append(step_6)
-
-    if (show_proof):
-        print("\n🟢️ Paso 1: wff 𝜑")
-        print(step_1)
-        print ("\n🟢️ Paso 2: wff 𝜓")
-        print(step_2)
-        print ("\n🟢️ Paso 3: wff 𝜑")
-        print(step_3)
-        print ("\n🟢️ Paso 4: wi")
-        print(step_4)
-        print ("\n🟢️ Paso 5: wi")
-        print(step_5)
-        print ("\n🟢️ Paso 6: Es Axioma")
-        print (step_6)
-
-def ax_2(show_proof=False):
+def ax_2_old(show_proof=False):
     """Axioma de Frege
     si 𝜑, 𝜓 y 𝜒 son wffs, entonces esta formula es un teorema
     ⊢ ((𝜑 → (𝜓 → 𝜒)) → ((𝜑 → 𝜓) → (𝜑 → 𝜒)))
@@ -635,38 +603,42 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
-check_theorem("wn", True)
-check_theorem("wi", True)
-check_theorem("ax-th", True)
-check_theorem("ax-mp", True)
-check_theorem("ax-1", True)
-check_theorem("ax-2", True)
-check_theorem("ax-3", True)
-check_theorem("mp2", True)
-check_theorem("mp2b", True)
-check_theorem("a1i", True)
+#check_theorem("wn", True)
+#check_theorem("wi", True)
+#check_theorem("ax-th", True)
+#check_theorem("ax-mp", True)
+#check_theorem("ax-1", True)
+#check_theorem("ax-2", True)
+#check_theorem("ax-3", True)
+#check_theorem("mp2", True)
+#check_theorem("mp2b", True)
+#check_theorem("a1i", True)
+check_theorem("a2i", True)
 
 
 print("----------------")
 sys.exit(0)
 
-#name = "a1i"
-#
-##-- Meter las hipotesis en la pila
-#for h in th_db[name]["hyp"]:
-#    stack.append(h)
-#
-##-- Obtener el numero de wffs
-#wffs = count_wff(th_db[name]["hyp"])
-#
-##-- Obtener el numero total de hipotesis (wffs + ths)
-#nhyp = len(th_db[name]["hyp"])
-#
-#proof = ["wph", "wps", "wph", "wi", "hyp.1", "wph", "wps", "ax-1", "ax-mp"]
-#
-#proof_theorems(proof, nhyp, wffs, True)
-#print(stack)
+name = "a2i"
+
+#-- Meter las hipotesis en la pila
+for h in th_db[name]["hyp"]:
+    stack.append(h)
+
+#-- Obtener el numero de wffs
+wffs = count_wff(th_db[name]["hyp"])
+
+#-- Obtener el numero total de hipotesis (wffs + ths)
+nhyp = len(th_db[name]["hyp"])
+
+proof = ["wph", "wps", "wch", "wi", "wi", "wph", "wps", "wi", "wph", "wch",
+         "wi", "wi", "hyp.1", "wph", "wps", "wch", "ax-2", "ax-mp"]
+
+proof_theorems(proof, nhyp, wffs, True)
+print(stack)
 
 
 print()
  
+"""
+""" 
