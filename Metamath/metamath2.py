@@ -416,14 +416,14 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
     #-- Recorrer la lista de teoremas de una prueba
     for step,name in enumerate(proof, 1):
 
-        if (show_proof):
-            print(f"\n🟢️ Paso {step}: {name}")
+        #-- TODO: 🚧 Refactorizar la parte de visualizacion
 
         #-- Meter las hipotesis wff en la pila
         if name in ["wph", "wps", "wch"]:
             stack.append(hyp_orig[HYP_WFF[name]])
             if (show_proof):
-                print_top()
+                #print_top()
+                pass
             continue
 
         #-- Meter las hipotesis de teoremas en la pila
@@ -432,8 +432,13 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         if name in ["hyp.1", "hyp.2", "hyp.3"]:
             stack.append(hyp_orig[wffs + HYP_TH[name]])
             if (show_proof):
-                print_top()
+                #print_top()
+                pass
             continue
+
+        if (show_proof):
+            if name not in ["wn", "wi"]:
+                print(f"\n🟢️ Paso {step}: {name}")
 
         hyp = []  #-- Lista para lectura de las hipotesis
 
@@ -467,8 +472,9 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         if (show_proof):
             #-- Mostrar las hipotesis
-            for i, h in enumerate(hyp, 1):
-                print(f"{h}")
+            if name not in ["wi","wn"]:
+                for i, h in enumerate(hyp, 1):
+                    print(f"{h}")
 
         #-- Leer la conclusion y meterla en hyp para calcular
         #-- su longitud
@@ -480,11 +486,13 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         #-- Imprimir linea horizontal
         if (show_proof):
-            print("─" * tam)
+            if name not in ["wi","wn"]:
+                print("─" * tam)
 
         #-- Imprimir la conclusion
         if (show_proof):
-            print_top()
+            if name not in ["wi", "wn"]:
+                print_top()
 
 def check_theorem(name: str, show_proof=False):
     """Comprobar el teorema dado por su nombre en metamath"""
