@@ -198,12 +198,33 @@ th_db = {
         "conc": "⊢ ( 𝜒 → ( 𝜑 → 𝜃 ) )",
         "proof": ["wph", "wch", "wth", "wph", "wps", "wch", "wth", "hyp.1", 
                   "hyp.2", "syl5com", "com12"]
+    },
+    "con2d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → ( 𝜓 → ¬𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → ¬𝜓 ) )",
+        "proof": ["wph", "wps", "wn", "wch", "wps", "wn", "wn", "wps", "wph",
+                  "wch", "wn", "wps", "notnotr", "hyp.1", "syl5", "con4d"]
+    },
+    "mt2d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → 𝜒 )", "⊢ ( 𝜑 → ( 𝜓 → ¬𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ¬𝜓 )",
+        "proof": ["wph", "wch", "wps", "wn", "hyp.1", "wph", "wps", "wch",
+                  "hyp.2", "con2d", "mpd"]
+    },
+    "nsyl3": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → ¬𝜓 )", "⊢ ( 𝜒 → 𝜓 )"],
+        "conc": "⊢ ( 𝜒 → ¬𝜑 )", 
+        "proof": ["wch", "wph", "wps", "hyp.2", "wph", "wps", "wn", "wi", 
+                  "wch", "hyp.1", "a1i", "mt2d"]
     }
 }
 
 
 """
-    "com12": {
+    "nsyl3": {
         "hyp": ["wff 𝜑"],
         "conc": "",
         "proof": []
@@ -627,6 +648,11 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
+
+#-- Check all the theorems in the database
+for th in th_db:
+    check_theorem(th, True)
+
 #check_theorem("wn", True)
 #check_theorem("wi", True)
 #check_theorem("ax-th", True)
@@ -653,11 +679,13 @@ print()
 #check_theorem("pm2.18", True)
 #check_theorem("notnotr", True)
 #check_theorem("syl5com", True)
-check_theorem("com12", True)
-
+#check_theorem("com12", True)
 #check_theorem("syl5", True)
+#check_theorem("con2d", True)
+#check_theorem("mt2d", True)
+#check_theorem("nsyl3", True)
 
-#check_theorem("name", True)
+
 #check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
