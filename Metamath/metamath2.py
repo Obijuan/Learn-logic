@@ -412,6 +412,8 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
     for i in range(nh_orig):
         stack.pop()
 
+    #--- Numeracion de los pasos mostrados
+    step_shown = 1
 
     #-- Recorrer la lista de teoremas de una prueba
     for step,name in enumerate(proof, 1):
@@ -438,7 +440,9 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         if (show_proof):
             if name not in ["wn", "wi"]:
-                print(f"\n🟢️ Paso {step}: {name}")
+                #print(f"\n🟢️ Paso {step}: {name}")
+                print(f"\n🟢️ Paso {step_shown}: {name}")
+                step_shown += 1
 
         hyp = []  #-- Lista para lectura de las hipotesis
 
