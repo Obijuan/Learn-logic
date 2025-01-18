@@ -125,9 +125,23 @@ th_db = {
         "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )",
         "proof": ["wph", "wps", "wch", "wps", "wi", "hyp.1", "wps", "wch",
                   "ax-1", "syl"]
+    },
+    "pm2.21d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → ¬𝜓 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+        "proof": ["wph", "wch", "wps", "wph", "wps", "wn", "wch", "wn", 
+                  "hyp.1", "a1d", "con4d"]
     }
 }
 
+"""
+    "name": {
+        "hyp": ["wff 𝜑"],
+        "conc": "",
+        "proof": []
+    }
+"""
 
 def count_wff(wffs: list):
     """Obtener el numero de wffs en una lista"""
@@ -536,23 +550,24 @@ def check_theorem(name: str, show_proof=False):
 
 
 print()
-check_theorem("wn", True)
-check_theorem("wi", True)
-check_theorem("ax-th", True)
-check_theorem("ax-mp", True)
-check_theorem("ax-1", True)
-check_theorem("ax-2", True)
-check_theorem("ax-3", True)
-check_theorem("mp2", True)
-check_theorem("mp2b", True)
-check_theorem("a1i", True)
-check_theorem("a2i", True)
-check_theorem("mpd", True)
-check_theorem("id", True)
-check_theorem("con4", True)
-check_theorem("syl", True)
-check_theorem("con4d", True)
-check_theorem("a1d",True)
+#check_theorem("wn", True)
+#check_theorem("wi", True)
+#check_theorem("ax-th", True)
+#check_theorem("ax-mp", True)
+#check_theorem("ax-1", True)
+#check_theorem("ax-2", True)
+#check_theorem("ax-3", True)
+#check_theorem("mp2", True)
+#check_theorem("mp2b", True)
+#check_theorem("a1i", True)
+#check_theorem("a2i", True)
+#check_theorem("mpd", True)
+#check_theorem("id", True)
+#check_theorem("con4", True)
+#check_theorem("syl", True)
+#check_theorem("con4d", True)
+#check_theorem("a1d",True)
+check_theorem("pm2.21d", True)
 
 
 print("----------------")
