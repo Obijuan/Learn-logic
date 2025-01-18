@@ -10,6 +10,7 @@ HYP_WFF = {
     "wph": 0,
     "wps": 1,
     "wch": 2,
+    "wth": 3,
 }
 
 #-- Diccionario de hipotesis teoremas
@@ -151,12 +152,19 @@ th_db = {
         "conc": "⊢ ( 𝜑 → 𝜒 )",
         "proof": ["wph", "wps", "wch", "hyp.1", "wph", "wch", "wps", "hyp.2",
                   "con4d", "mpd"]
+    },
+    "sylcom": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )", "⊢ ( 𝜓 → ( 𝜒 → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜃 ) )", 
+        "proof": ["wph", "wps", "wch", "wi", "wps", "wth", "wi", "hyp.1",
+                  "wps", "wch", "wth", "hyp.2", "a2i", "syl"]
     }
 }
 
 
 """
-    "mt4d": {
+    "sylcom": {
         "hyp": ["wff 𝜑"],
         "conc": "",
         "proof": []
@@ -251,6 +259,10 @@ def wps():
 def wch():
     """La variable 𝜒 es una fórmula bien formada (wff)"""
     stack.append("wff 𝜒")
+
+def wth():
+    """La variable 𝜃 es una fórmula bien formada (wff)"""
+    stack.append("wff 𝜃")
 
 def wn(show_proof = False):
     """Si w es una fórmula bien formada (wff), """
@@ -461,7 +473,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         #-- TODO: 🚧 Refactorizar la parte de visualizacion
 
         #-- Meter las hipotesis wff en la pila
-        if name in ["wph", "wps", "wch"]:
+        if name in ["wph", "wps", "wch", "wth"]:
             stack.append(hyp_orig[HYP_WFF[name]])
             if (show_proof):
                 #print_top()
@@ -596,10 +608,9 @@ print()
 #check_theorem("pm2.21d", True)
 #check_theorem("pm2.21", True)
 #check_theorem("jarli", True)
-check_theorem("mt4d", True)
+#check_theorem("mt4d", True)
+check_theorem("sylcom", True)
 
-
-#check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
