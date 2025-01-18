@@ -87,6 +87,11 @@ th_db = {
         "proof": ["wph", "wph", "wph", "wi", "wph", "wph", "wph", "ax-1", "wph", 
          "wph", "wph", "wi", "ax-1", "mpd"],
     },
+    "con4": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc":"⊢ ( ( ¬𝜑 → ¬𝜓 ) → ( 𝜓 → 𝜑 ) )",
+        "proof": ["wph", "wps", "ax-3"]
+    },
 }
 
 
@@ -291,6 +296,13 @@ def ax_2(show_proof=False):
 
     proof_theorems(th_db["ax-2"]["proof"],3,3)
 
+def ax_3(show_proof=False):
+    """Axiom Transposicion
+    si 𝜑 y 𝜓  son wffs, entonces esta formula es un teorema
+    ⊢ ((¬ 𝜑 → ¬ 𝜓) → (𝜓 → 𝜑))
+    """
+
+    proof_theorems(th_db["ax-3"]["proof"],2,2)
 
 def mp2(show_proof=False):
     """Teorema mp2:
@@ -371,6 +383,9 @@ def id(show_proof=False):
         ──────────
         ⊢ (𝜑 → 𝜑)
     """
+    pass
+
+def con4(show_proof=False):
     pass
 
 def print_top():
@@ -580,13 +595,14 @@ print()
 #check_theorem("a1i", True)
 #check_theorem("a2i", True)
 #check_theorem("mpd", True)
-check_theorem("id", True)
+#check_theorem("id", True)
+check_theorem("con4", True)
 
 
 print("----------------")
 sys.exit(0)
 
-name = "id"
+name = "con4"
 
 #-- Meter las hipotesis en la pila
 for h in th_db[name]["hyp"]:
@@ -598,8 +614,7 @@ wffs = count_wff(th_db[name]["hyp"])
 #-- Obtener el numero total de hipotesis (wffs + ths)
 nhyp = len(th_db[name]["hyp"])
 
-proof = ["wph", "wph", "wph", "wi", "wph", "wph", "wph", "ax-1", "wph", 
-         "wph", "wph", "wi", "ax-1", "mpd"]
+proof = ["wph", "wps", "ax-3"]
 
 proof_theorems(proof, nhyp, wffs, True)
 print(stack)
@@ -608,5 +623,5 @@ print(stack)
 print()
  
 """
-wph wph wph wi wph wph wph ax-1 wph wph wph wi ax-1 mpd
+wph wps ax-3
 """ 
