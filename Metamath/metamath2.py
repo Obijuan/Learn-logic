@@ -159,12 +159,20 @@ th_db = {
         "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜃 ) )", 
         "proof": ["wph", "wps", "wch", "wi", "wps", "wth", "wi", "hyp.1",
                   "wps", "wch", "wth", "hyp.2", "a2i", "syl"]
+    },
+    "pm2.18d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 → ( ¬𝜓 → 𝜓 ) )"],
+        "conc": "⊢ ( 𝜑 → 𝜓 )",
+        "proof": ["wph", "wph", "wps", "wph", "id", "wph", "wps", "wn", "wps",
+                  "wph", "wn", "hyp.1", "wps", "wph", "wn", "pm2.21",
+                  "sylcom", "mt4d"]
     }
 }
 
 
 """
-    "sylcom": {
+    "pm2.18d": {
         "hyp": ["wff 𝜑"],
         "conc": "",
         "proof": []
@@ -609,37 +617,16 @@ print()
 #check_theorem("pm2.21", True)
 #check_theorem("jarli", True)
 #check_theorem("mt4d", True)
-check_theorem("sylcom", True)
+#check_theorem("sylcom", True)
+check_theorem("pm2.18d", True)
+
 
 #check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
 #check_theorem("name", True)
-#check_theorem("name", True)
 
-
-
-
-print("----------------")
-sys.exit(0)
-
-#name = "con4"
-#
-##-- Meter las hipotesis en la pila
-#for h in th_db[name]["hyp"]:
-#    stack.append(h)
-#
-##-- Obtener el numero de wffs
-#wffs = count_wff(th_db[name]["hyp"])
-#
-##-- Obtener el numero total de hipotesis (wffs + ths)
-#nhyp = len(th_db[name]["hyp"])
-#
-#proof = ["wph", "wps", "ax-3"]
-#
-#proof_theorems(proof, nhyp, wffs, True)
-#print(stack)
 
 print()
  
