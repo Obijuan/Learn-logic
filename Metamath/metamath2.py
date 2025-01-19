@@ -292,6 +292,14 @@ th_db = {
         "proof": ['wch', 'wph', 'wph', 'wps', 'wch', 'hyp.1', 'hyp.2',
                    'nsyl3', 'con2i']
     },
+    "nsyl2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ¬𝜓 )",
+                "⊢ ( ¬𝜒 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wch', 'wph', 'wph', 'wps', 'wch', 'wn', 'hyp.1',
+                  'hyp.2', 'nsyl3', 'con4i']
+    },
 }
 
 
@@ -303,7 +311,7 @@ th_db = {
 
 
 """
-    "nsyl": {
+    "nsyl2": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ""],
         "conc": "",
