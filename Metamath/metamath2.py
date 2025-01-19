@@ -31,6 +31,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 → 𝜓 )"
     },
+    "wb": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "wff ( 𝜑 ↔ 𝜓 )"
+    },
     "ax-th": {
         "hyp": ["wff 𝜑"],
         "conc": "⊢ 𝜑"
@@ -390,6 +394,24 @@ th_db = {
                   'wph', 'wi', 'wph', 'id', 'wph', 'wph', 'wi', 'pm2.01', 
                   'mt2']
     },
+    "bijust": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ¬( ( ¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) → ¬( ( 𝜑 → 𝜓 ) → "
+                "¬( 𝜓 → 𝜑 ) ) ) → ¬( ¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) → "
+                "¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) ) )",
+        "proof": ['wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wn', 'wi', 'wn',
+                  'bijust0']
+    },
+    #--- DEFINICION
+    "df-bi": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ¬( ( ( 𝜑 ↔ 𝜓 ) → ¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) ) → "
+                "¬( ¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) → ( 𝜑 ↔ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
+                  'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 'wi', 'wps', 'wph',
+                  'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wn',
+                  'wi', 'wn', "ax-th"] 
+    }
 }
 
 
@@ -400,7 +422,7 @@ th_db = {
 
 
 """
-    "bijust0": {
+    "bijust": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ""],
         "conc": "",
@@ -537,6 +559,24 @@ def wi(show_proof = False):
     #-- Crear la cadena wff
     w = f"wff ( {𝜑} → {𝜓} )"
     
+    #-- Meterla en la pila
+    stack.append(w)
+
+def wb(show_proof = False):
+    """Si wa y wb son fórmulas bien formadas (wff), """
+    """entonces (wa ↔ wb) es una fórmula bien formada (wff)"""
+    
+    #-- Leer formulas de la pila
+    w2 = stack.pop()
+    w1 = stack.pop()
+
+    #-- Obtener las dos fórmulas
+    𝜑 = assert_wff(w1)
+    𝜓 = assert_wff(w2)
+
+    #-- Crear la cadena wff
+    w = f"wff ( {𝜑} ↔ {𝜓} )"
+
     #-- Meterla en la pila
     stack.append(w)
 
@@ -729,7 +769,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
             continue
 
         if (show_proof):
-            if name not in ["wn", "wi"]:
+            if name not in ["wn", "wi", "wb"]:
                 #print(f"\n🟢️ Paso {step}: {name}")
                 print(f"\n🟢️ Paso {step_shown}: {name}")
                 step_shown += 1
@@ -766,7 +806,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         if (show_proof):
             #-- Mostrar las hipotesis
-            if name not in ["wi","wn"]:
+            if name not in ["wi","wn", "wb"]:
                 for i, h in enumerate(hyp, 1):
                     print(f"{h}")
 
@@ -780,12 +820,12 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         #-- Imprimir linea horizontal
         if (show_proof):
-            if name not in ["wi","wn"]:
+            if name not in ["wi","wn", "wb"]:
                 print("─" * tam)
 
         #-- Imprimir la conclusion
         if (show_proof):
-            if name not in ["wi", "wn"]:
+            if name not in ["wi", "wn", "wb"]:
                 print_top()
 
 def check_theorem(name: str, show_proof=False):
@@ -830,8 +870,47 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-for th in th_db:
-    check_theorem(th, True)
+#for th in th_db:
+#    check_theorem(th, True)
 
+print("-----------------------")
+
+check_theorem("df-bi", True)
+print(stack)
 print()
  
+['wph', 'wps', 'wb', #-- 3
+ 'wph', 'wps', 'wi', #-- 4
+ 'wps', 'wph', 'wi', #-- 5
+ 'wn',               #-- 6
+ 'wi',               #-- 7
+ 'wn',               #-- 8
+ 'wi',               #-- 9
+
+ 'wph', 'wps', 'wi', #-- 4
+ 'wps', 'wph', 'wi', #-- 5
+ 'wn',               #-- 6
+ 'wi',               #-- 7
+ 'wn',               #-- 8
+ 'wph', 'wps', 'wb', #-- 3
+ 'wi',               #-- 10
+ 'wn',               #-- 11
+ 'wi',               #-- 12
+ 'wn'                #-- 13
+] 
+
+"""
+1	 	wph	. . . . 5 wff 𝜑
+2	 	wps	. . . . 5 wff 𝜓
+3	1, 2	wb 205	. . . 4 wff (𝜑 ↔ 𝜓)
+4	1, 2	wi 4	. . . . . 6 wff (𝜑 → 𝜓)
+5	2, 1	wi 4	. . . . . . 7 wff (𝜓 → 𝜑)
+6	5	wn 3	. . . . . 6 wff ¬ (𝜓 → 𝜑)
+7	4, 6	wi 4	. . . . 5 wff ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑))
+8	7	wn 3	. . . 4 wff ¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑))
+9	3, 8	wi 4	. . 3 wff ((𝜑 ↔ 𝜓) → ¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑)))
+10	8, 3	wi 4	. . . 4 wff (¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑)) → (𝜑 ↔ 𝜓))
+11	10	wn 3	. . 3 wff ¬ (¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑)) → (𝜑 ↔ 𝜓))
+12	9, 11	wi 4	. 2 wff (((𝜑 ↔ 𝜓) → ¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑))) → ¬ (¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑)) → (𝜑 ↔ 𝜓)))
+
+13	12	wn 3	1 wff ¬ (((𝜑 ↔ 𝜓) → ¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑))) → ¬ (¬ ((𝜑 → 𝜓) → ¬ (𝜓 → 𝜑)) → (𝜑 ↔ 𝜓)))"""
