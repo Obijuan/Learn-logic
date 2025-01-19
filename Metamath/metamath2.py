@@ -300,6 +300,67 @@ th_db = {
         "proof": ['wch', 'wph', 'wph', 'wps', 'wch', 'wn', 'hyp.1',
                   'hyp.2', 'nsyl3', 'con4i']
     },
+    "con1d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( ¬𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ¬𝜒 → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wn', 'wph', 'wps', 'wn', 'wch',
+                  'wch', 'wn', 'wn', 'hyp.1', 'wch', 'notnot', 'syl6', 'con4d']
+    },
+    "con1i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( ¬𝜑 → 𝜓 )"],
+        "conc": "⊢ ( ¬𝜓 → 𝜑 )",
+        "proof": ['wps', 'wn', 'wps', 'wph', 'wps', 'wn', 'id', 'hyp.1',
+                  'nsyl2']
+    },
+    "con3i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ ( ¬𝜓 → ¬𝜑 )",
+        "proof": ['wps', 'wn', 'wps', 'wph', 'wps', 'wn', 'id', 'hyp.1',
+                  'nsyl']
+    },
+    "nsyl4": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( ¬𝜑 → 𝜒 )"],
+        "conc": "⊢ ( ¬𝜒 → 𝜓 )",
+        "proof": ['wch', 'wn', 'wph', 'wps', 'wph', 'wch', 'hyp.2',
+                  'con1i', 'hyp.1', 'syl']
+    },
+    "pm2.61d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( ¬𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wch', 'wph', 'wch', 'wn', 'wps', 'wch', 'wph',
+                  'wps', 'wch', 'hyp.2', 'con1d', 'hyp.1', 'syld', 'pm2.18d']
+    },
+    "pm2.61d1": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( ¬𝜓 → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wps', 'wn', 'wch',
+                  'wi', 'wph', 'hyp.2', 'a1i', 'pm2.61d']
+    },
+    "pm2.61i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( ¬𝜑 → 𝜓 )"],
+        "conc": "⊢ 𝜓",
+        "proof": ['wps', 'wph', 'wps', 'wps', 'hyp.1', 'hyp.2',
+                  'nsyl4', 'pm2.18i']
+    },
+    "ja": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( ¬𝜑 → 𝜒 )",
+                "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) → 𝜒 )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wch', 'wps', 'wch', 'wph',
+                  'hyp.2', 'imim2i', 'hyp.1', 'pm2.61d1']
+    },
 }
 
 
@@ -309,20 +370,20 @@ th_db = {
 """
 
 
-
 """
-    "nsyl2": {
+    "pm2.65i": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ""],
         "conc": "",
         "proof": []
     },
     
-    "name": {
-        "hyp": ["wff 𝜑"],
+    "pm2.61d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                ""],
         "conc": "",
         "proof": []
-    }
+    },
 """
 
 def count_wff(wffs: list):
