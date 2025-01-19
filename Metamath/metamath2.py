@@ -230,6 +230,21 @@ th_db = {
         "hyp": ["wff 𝜑"],
         "conc": "⊢ ( 𝜑 → ¬¬𝜑 )",
         "proof": ['wph', 'wn', 'wph', 'wph', 'wn', 'id', 'con2i']
+    },
+    "imim2i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → 𝜓 )" ],
+        "conc": "⊢ ( ( 𝜒 → 𝜑 ) → ( 𝜒 → 𝜓 ) )",
+        "proof": ['wch', 'wph', 'wps', 'wph', 'wps', 'wi', 'wch', 'hyp.1',
+                   'a1i', 'a2i']
+    },
+    "a2d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → ( 𝜓 → 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wi', 'wi', 'wps', 'wch', 'wi',
+                  'wps', 'wth', 'wi', 'wi', 'hyp.1', 'wps', 'wch', 'wth', 
+                  'ax-2', 'syl']
     }
 }
 
@@ -242,8 +257,9 @@ th_db = {
 
 
 """
-    "notnot": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃"],
+    "a2d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                ],
         "conc": "",
         "proof": 
     }
