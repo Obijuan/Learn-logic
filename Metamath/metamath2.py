@@ -262,18 +262,29 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'wi', 'wps', 'wth', 'wi', 'hyp.1',
                   'wph', 'wps', 'wch', 'wth', 'hyp.2', 'a2d', 'mpd']
     },
+    "syld": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜒 → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'hyp.1', 'wph', 'wch',
+                   'wth', 'wi', 'wps', 'hyp.2', 'a1d', 'mpdd']
+    },
 }
 
 
 """
- 
+ syld.1	
+syld.2	⊢ (𝜑 → (𝜒 → 𝜃))
+Assertion Ref 	Expression
+syld	⊢ (𝜑 → (𝜓 → 𝜃))
 
 """
 
 
 
 """
-    "mpdd": {
+    "syld": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ],
         "conc": "",
