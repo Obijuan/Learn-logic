@@ -254,6 +254,14 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'wth', 'hyp.1', 'wch', 'wth', 'wi',
                   'wps', 'hyp.2', 'a1i', 'sylcom']
     },
+    "mpdd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wi', 'wps', 'wth', 'wi', 'hyp.1',
+                  'wph', 'wps', 'wch', 'wth', 'hyp.2', 'a2d', 'mpd']
+    },
 }
 
 
@@ -265,7 +273,7 @@ th_db = {
 
 
 """
-    "syl6": {
+    "mpdd": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ],
         "conc": "",
