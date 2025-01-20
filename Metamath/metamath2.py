@@ -881,14 +881,9 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
     #-- Recorrer la lista de teoremas de una prueba
     for step,name in enumerate(proof, 1):
 
-        #-- TODO: 🚧 Refactorizar la parte de visualizacion
-
         #-- Meter las hipotesis wff en la pila
         if name in ["wph", "wps", "wch", "wth"]:
             stack.append(hyp_orig[HYP_WFF[name]])
-            if (show_proof):
-                #print_top()
-                pass
             continue
 
         #-- Meter las hipotesis de teoremas en la pila
@@ -896,16 +891,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         #-- que haya: 1,2 ó 3
         if name in ["hyp.1", "hyp.2", "hyp.3"]:
             stack.append(hyp_orig[wffs + HYP_TH[name]])
-            if (show_proof):
-                #print_top()
-                pass
             continue
-
-        if (show_proof):
-            if name not in ["wn", "wi", "wb", "wa"]:
-                #print(f"\n🟢️ Paso {step}: {name}")
-                print(f"\n🟢️ Paso {step_shown}: {name}")
-                step_shown += 1
 
         hyp = []  #-- Lista para lectura de las hipotesis
 
@@ -936,13 +922,6 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
             #-- No hay prueba: Ejecutar el teorema
             exec(name, show_proof)
 
-
-        if (show_proof):
-            #-- Mostrar las hipotesis
-            if name not in ["wi","wn", "wb", "wa"]:
-                for i, h in enumerate(hyp, 1):
-                    print(f"{h}")
-
         #-- Leer la conclusion y meterla en hyp para calcular
         #-- su longitud
         hyp.append(stack[-1])
@@ -951,14 +930,21 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         #-- (hipotesis + conclusion)
         tam = max([len(f) for f in hyp])
 
-        #-- Imprimir linea horizontal
+        #-- Modo verbose: Mostrar el paso actual
         if (show_proof):
-            if name not in ["wi","wn", "wb", "wa"]:
-                print("─" * tam)
+            if name not in ["wn", "wi", "wb", "wa"]:
+                #print(f"\n🟢️ Paso {step}: {name}")
+                print(f"\n🟢️ Paso {step_shown}: {name}")
+                step_shown += 1
 
-        #-- Imprimir la conclusion
-        if (show_proof):
-            if name not in ["wi", "wn", "wb", "wa"]:
+                #-- Mostrar las hipotesis
+                for i, h in enumerate(hyp, 1):
+                    print(f"{h}")
+
+                #-- Imprimir linea horizontal
+                print("─" * tam)                
+
+                #-- Imprimir la conclusion
                 print_top()
 
 def check_theorem(name: str, show_proof=False):
@@ -996,6 +982,7 @@ def check_theorem(name: str, show_proof=False):
         print("❌️ Prueba incorrecta")
         print(conclusion)
         print(th_db[name]["conc"])
+        sys.exit(1)
 
 
 
