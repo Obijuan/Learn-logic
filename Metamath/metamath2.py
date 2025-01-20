@@ -411,7 +411,29 @@ th_db = {
                   'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 'wi', 'wps', 'wph',
                   'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wn',
                   'wi', 'wn', "ax-th"] 
-    }
+    },
+    "con3d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ¬𝜒 → ¬𝜓 ) )",
+        "proof": ['wph', 'wps', 'wn', 'wch', 'wps', 'wn', 'wn', 'wps', 'wph',
+                  'wch', 'wps', 'notnotr', 'hyp.1', 'syl5', 'con1d']
+    },
+    "con3rr3": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( ¬𝜒 → ( 𝜑 → ¬𝜓 ) )",
+        "proof": ['wph', 'wch', 'wn', 'wps', 'wn', 'wph', 'wps', 'wch',
+                  'hyp.1', 'con3d', 'com12']
+    },
+    "impi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( ¬( 𝜑 → ¬𝜓 ) → 𝜒 )",
+        "proof": ['wch', 'wph', 'wps', 'wn', 'wi', 'wph', 'wps', 'wch',
+                  'hyp.1', 'con3rr3', 'con1i']
+    },
+
 }
 
 
@@ -422,11 +444,11 @@ th_db = {
 
 
 """
-    "bijust": {
+    "impi": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ""],
         "conc": "",
-        "proof": []
+        "proof": 
     },
     
     "pm2.61d": {
