@@ -35,6 +35,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 ↔ 𝜓 )"
     },
+    "wa": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "wff ( 𝜑 ∧ 𝜓 )"
+    },
     "ax-th": {
         "hyp": ["wff 𝜑"],
         "conc": "⊢ 𝜑"
@@ -402,7 +406,7 @@ th_db = {
         "proof": ['wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wn', 'wi', 'wn',
                   'bijust0']
     },
-    #--- DEFINICION
+    #--- DEFINICION ↔
     "df-bi": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ¬( ( ( 𝜑 ↔ 𝜓 ) → ¬( ( 𝜑 → 𝜓 ) → ¬( 𝜓 → 𝜑 ) ) ) → "
@@ -412,6 +416,7 @@ th_db = {
                   'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wn',
                   'wi', 'wn', "ax-th"] 
     },
+    #--- TEOREMAS
     "con3d": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
                 "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
@@ -433,22 +438,110 @@ th_db = {
         "proof": ['wch', 'wph', 'wps', 'wn', 'wi', 'wph', 'wps', 'wch',
                   'hyp.1', 'con3rr3', 'con1i']
     },
+    "pm2.27": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜑 → 𝜓 ) → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wps', 'wph', 'wps', 'wi', 'id', 'com12']
+    },
+    "pm3.2im": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ¬( 𝜑 → ¬𝜓 ) ) )",
+        "proof": ['wph', 'wph', 'wps', 'wn', 'wi', 'wps', 'wph', 'wps',
+                  'wn', 'pm2.27', 'con2d']
+    },
+    "expi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( ¬( 𝜑 → ¬𝜓 ) → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wn', 'wi', 'wn', 'wch',
+                  'wph', 'wps', 'pm3.2im', 'hyp.1', 'syl6']
+    },
+    "idd": {
+        "hyp": ["wff 𝜑", "wff 𝜓"], 
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜓 ) )",
+        "proof": ['wps', 'wps', 'wi', 'wph', 'wps', 'id', 'a1i']
+    },
+    "simprim": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ¬( 𝜑 → ¬𝜓 ) → 𝜓 )",
+        "proof": ['wph', 'wps', 'wps', 'wph', 'wps', 'idd', 'impi']
+    },
+    "impbi": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( ( 𝜓 → 𝜑 ) → ( 𝜑 ↔ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wph', 'wps', 
+                  'wb', 'wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 
+                  'wph', 'wi', 'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 'wi', 
+                  'wps', 'wph', 'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 
+                  'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wi', 'wps', 'wph', 
+                  'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wph', 
+                  'wps', 'df-bi', 'wph', 'wps', 'wb', 'wph', 'wps', 'wi', 
+                  'wps', 'wph', 'wi', 'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 
+                  'wi', 'wps', 'wph', 'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 
+                  'wb', 'wi', 'simprim', 'ax-mp', 'expi']
+
+    },
+    "impbii": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜓 → 𝜑 )"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜓 )",
+        "proof": ['wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wph', 'wps', 'wb',
+                  'hyp.1', 'hyp.2', 'wph', 'wps', 'impbi', 'mp2']
+    },
+    "biid": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜑 )",
+        "proof": ['wph', 'wph', 'wph', 'id', 'wph', 'id', 'impbii']
+    },
+    "2th": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑",
+                "⊢ 𝜓"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜓 )",
+        "proof": ['wph', 'wps', 'wps', 'wph', 'hyp.2', 'a1i', 'wph', 'wps',
+                  'hyp.1', 'a1i', 'impbii']
+    },
+    "notnotb": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ¬¬𝜑 )",
+        "proof": ['wph', 'wph', 'wn', 'wn', 'wph', 'notnot', 'wph',
+                  'notnotr', 'impbii']
+    },
+    "con3": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( ¬𝜓 → ¬𝜑 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wps', 'wph', 'wps',
+                  'wi', 'id', 'con3d']
+    },
+    "con34b": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( ¬𝜓 → ¬𝜑 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wps', 'wn', 'wph', 'wn', 'wi', 'wph',
+                  'wps', 'con3', 'wps', 'wph', 'con4', 'impbii']
+    },
+    #--- DEFINICION ∧
+    "df-an": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜓 ) ↔ ¬( 𝜑 → ¬𝜓 ) )",
+        "proof": ["wph", "wps", "wa", "wph", "wps", "wn", "wi", "wn", 
+                  "wb", "ax-th"]
+    },
 
 }
 
 
 """
 
-
 """
 
 
 """
-    "impi": {
+    "df-an": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
                 ""],
         "conc": "",
-        "proof": 
+        "proof": []
     },
     
     "pm2.61d": {
@@ -598,6 +691,24 @@ def wb(show_proof = False):
 
     #-- Crear la cadena wff
     w = f"wff ( {𝜑} ↔ {𝜓} )"
+
+    #-- Meterla en la pila
+    stack.append(w)
+
+def wa(show_proof = False):
+    """Si wa y wb son fórmulas bien formadas (wff), """
+    """entonces (wa ∧ wb) es una fórmula bien formada (wff)"""
+    
+    #-- Leer formulas de la pila
+    w2 = stack.pop()
+    w1 = stack.pop()
+
+    #-- Obtener las dos fórmulas
+    𝜑 = assert_wff(w1)
+    𝜓 = assert_wff(w2)
+
+    #-- Crear la cadena wff
+    w = f"wff ( {𝜑} ∧ {𝜓} )"
 
     #-- Meterla en la pila
     stack.append(w)
@@ -791,7 +902,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
             continue
 
         if (show_proof):
-            if name not in ["wn", "wi", "wb"]:
+            if name not in ["wn", "wi", "wb", "wa"]:
                 #print(f"\n🟢️ Paso {step}: {name}")
                 print(f"\n🟢️ Paso {step_shown}: {name}")
                 step_shown += 1
@@ -828,7 +939,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         if (show_proof):
             #-- Mostrar las hipotesis
-            if name not in ["wi","wn", "wb"]:
+            if name not in ["wi","wn", "wb", "wa"]:
                 for i, h in enumerate(hyp, 1):
                     print(f"{h}")
 
@@ -842,12 +953,12 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         #-- Imprimir linea horizontal
         if (show_proof):
-            if name not in ["wi","wn", "wb"]:
+            if name not in ["wi","wn", "wb", "wa"]:
                 print("─" * tam)
 
         #-- Imprimir la conclusion
         if (show_proof):
-            if name not in ["wi", "wn", "wb"]:
+            if name not in ["wi", "wn", "wb", "wa"]:
                 print_top()
 
 def check_theorem(name: str, show_proof=False):
@@ -896,8 +1007,6 @@ for th in th_db:
     check_theorem(th, True)
 
 print("-----------------------")
-
-#check_theorem("df-bi", True)
 
 print()
  

@@ -2248,3 +2248,2528 @@ $)
       wch wps wph wps wch sylbbr.2 biimpri sylbbr.1 sylibr $.
   $}
   
+  ${
+    sylbb1.1 $e |- ( ph <-> ps ) $.
+    sylbb1.2 $e |- ( ph <-> ch ) $.
+    $( A mixed syllogism inference from two biconditionals.  (Contributed by
+       BJ, 21-Apr-2019.) $)
+    sylbb1 $p |- ( ps -> ch ) $=
+      wps wph wch wph wps sylbb1.1 biimpri sylbb1.2 sylib $.
+  $}
+
+  ${
+    sylbb2.1 $e |- ( ph <-> ps ) $.
+    sylbb2.2 $e |- ( ch <-> ps ) $.
+    $( A mixed syllogism inference from two biconditionals.  (Contributed by
+       BJ, 21-Apr-2019.) $)
+    sylbb2 $p |- ( ph -> ch ) $=
+      wph wps wch sylbb2.1 wch wps sylbb2.2 biimpri sylbi $.
+  $}
+
+  ${
+    sylibd.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    sylibd.2 $e |- ( ph -> ( ch <-> th ) ) $.
+    $( A syllogism deduction.  (Contributed by NM, 3-Aug-1994.) $)
+    sylibd $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth sylibd.1 wph wch wth sylibd.2 biimpd syld $.
+  $}
+
+  ${
+    sylbid.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    sylbid.2 $e |- ( ph -> ( ch -> th ) ) $.
+    $( A syllogism deduction.  (Contributed by NM, 3-Aug-1994.) $)
+    sylbid $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth wph wps wch sylbid.1 biimpd sylbid.2 syld $.
+  $}
+
+  ${
+    mpbidi.min $e |- ( th -> ( ph -> ps ) ) $.
+    mpbidi.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( A deduction from a biconditional, related to modus ponens.  (Contributed
+       by NM, 9-Aug-1994.) $)
+    mpbidi $p |- ( th -> ( ph -> ch ) ) $=
+      wth wph wps wch mpbidi.min wph wps wch mpbidi.maj biimpd sylcom $.
+  $}
+
+  ${
+    biimtrid.1 $e |- ( ph <-> ps ) $.
+    biimtrid.2 $e |- ( ch -> ( ps -> th ) ) $.
+    $( A mixed syllogism inference from a nested implication and a
+       biconditional.  Useful for substituting an embedded antecedent with a
+       definition.  (Contributed by NM, 12-Jan-1993.) $)
+    biimtrid $p |- ( ch -> ( ph -> th ) ) $=
+      wph wps wch wth wph wps biimtrid.1 biimpi biimtrid.2 syl5 $.
+  $}
+
+  ${
+    syl5bi.1 $e |- ( ph <-> ps ) $.
+    syl5bi.2 $e |- ( ch -> ( ps -> th ) ) $.
+    $( A mixed syllogism inference from a nested implication and a
+       biconditional.  Useful for substituting an embedded antecedent with a
+       definition.  This is in the process of being renamed to ~ biimtrid so
+       use that name instead.  (Contributed by NM, 12-Jan-1993.) $)
+    syl5bi $p |- ( ch -> ( ph -> th ) ) $=
+      wph wps wch wth wph wps syl5bi.1 biimpi syl5bi.2 syl5 $.
+  $}
+
+  ${
+    syl5bir.1 $e |- ( ps <-> ph ) $.
+    syl5bir.2 $e |- ( ch -> ( ps -> th ) ) $.
+    $( A mixed syllogism inference from a nested implication and a
+       biconditional.  (Contributed by NM, 21-Jun-1993.) $)
+    syl5bir $p |- ( ch -> ( ph -> th ) ) $=
+      wph wps wch wth wps wph syl5bir.1 biimpri syl5bir.2 syl5 $.
+  $}
+
+  ${
+    syl5ib.1 $e |- ( ph -> ps ) $.
+    syl5ib.2 $e |- ( ch -> ( ps <-> th ) ) $.
+    $( A mixed syllogism inference.  (Contributed by NM, 12-Jan-1993.) $)
+    syl5ib $p |- ( ch -> ( ph -> th ) ) $=
+      wph wps wch wth syl5ib.1 wch wps wth syl5ib.2 biimpd syl5 $.
+
+    $( A mixed syllogism inference.  (Contributed by NM, 19-Jun-2007.) $)
+    syl5ibcom $p |- ( ph -> ( ch -> th ) ) $=
+      wch wph wth wph wps wch wth syl5ib.1 syl5ib.2 syl5ib com12 $.
+  $}
+
+  ${
+    syl5ibr.1 $e |- ( ph -> th ) $.
+    syl5ibr.2 $e |- ( ch -> ( ps <-> th ) ) $.
+    $( A mixed syllogism inference.  (Contributed by NM, 3-Apr-1994.) $)
+    syl5ibr $p |- ( ch -> ( ph -> ps ) ) $=
+      wph wth wch wps syl5ibr.1 wch wps wth syl5ibr.2 bicomd syl5ib $.
+
+    $( A mixed syllogism inference.  (Contributed by NM, 20-Jun-2007.) $)
+    syl5ibrcom $p |- ( ph -> ( ch -> ps ) ) $=
+      wch wph wps wph wps wch wth syl5ibr.1 syl5ibr.2 syl5ibr com12 $.
+  $}
+
+  ${
+    biimprd.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Deduce a converse implication from a logical equivalence.  Deduction
+       associated with ~ biimpr and ~ biimpri .  (Contributed by NM,
+       11-Jan-1993.)  (Proof shortened by Wolf Lammen, 22-Sep-2013.) $)
+    biimprd $p |- ( ph -> ( ch -> ps ) ) $=
+      wch wps wph wch wch id biimprd.1 syl5ibr $.
+  $}
+
+  ${
+    biimpcd.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Deduce a commuted implication from a logical equivalence.  (Contributed
+       by NM, 3-May-1994.)  (Proof shortened by Wolf Lammen, 22-Sep-2013.) $)
+    biimpcd $p |- ( ps -> ( ph -> ch ) ) $=
+      wps wps wph wch wps id biimpcd.1 syl5ibcom $.
+
+    $( Deduce a converse commuted implication from a logical equivalence.
+       (Contributed by NM, 3-May-1994.)  (Proof shortened by Wolf Lammen,
+       20-Dec-2013.) $)
+    biimprcd $p |- ( ch -> ( ph -> ps ) ) $=
+      wch wps wph wch wch id biimpcd.1 syl5ibrcom $.
+  $}
+
+  ${
+    syl6ib.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    syl6ib.2 $e |- ( ch <-> th ) $.
+    $( A mixed syllogism inference from a nested implication and a
+       biconditional.  (Contributed by NM, 21-Jun-1993.) $)
+    syl6ib $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth syl6ib.1 wch wth syl6ib.2 biimpi syl6 $.
+  $}
+
+  ${
+    syl6ibr.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    syl6ibr.2 $e |- ( th <-> ch ) $.
+    $( A mixed syllogism inference from a nested implication and a
+       biconditional.  Useful for substituting an embedded consequent with a
+       definition.  (Contributed by NM, 10-Jan-1993.) $)
+    syl6ibr $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth syl6ibr.1 wth wch syl6ibr.2 biimpri syl6 $.
+  $}
+
+  ${
+    syl6bi.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    syl6bi.2 $e |- ( ch -> th ) $.
+    $( A mixed syllogism inference.  (Contributed by NM, 2-Jan-1994.) $)
+    syl6bi $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth wph wps wch syl6bi.1 biimpd syl6bi.2 syl6 $.
+  $}
+
+  ${
+    syl6bir.1 $e |- ( ph -> ( ch <-> ps ) ) $.
+    syl6bir.2 $e |- ( ch -> th ) $.
+    $( A mixed syllogism inference.  (Contributed by NM, 18-May-1994.) $)
+    syl6bir $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth wph wch wps syl6bir.1 biimprd syl6bir.2 syl6 $.
+  $}
+
+  ${
+    syl7bi.1 $e |- ( ph <-> ps ) $.
+    syl7bi.2 $e |- ( ch -> ( th -> ( ps -> ta ) ) ) $.
+    $( A mixed syllogism inference from a doubly nested implication and a
+       biconditional.  (Contributed by NM, 14-May-1993.) $)
+    syl7bi $p |- ( ch -> ( th -> ( ph -> ta ) ) ) $=
+      wph wps wch wth wta wph wps syl7bi.1 biimpi syl7bi.2 syl7 $.
+  $}
+
+  ${
+    syl8ib.1 $e |- ( ph -> ( ps -> ( ch -> th ) ) ) $.
+    syl8ib.2 $e |- ( th <-> ta ) $.
+    $( A syllogism rule of inference.  The second premise is used to replace
+       the consequent of the first premise.  (Contributed by NM,
+       1-Aug-1994.) $)
+    syl8ib $p |- ( ph -> ( ps -> ( ch -> ta ) ) ) $=
+      wph wps wch wth wta syl8ib.1 wth wta syl8ib.2 biimpi syl8 $.
+  $}
+
+  ${
+    mpbird.min $e |- ( ph -> ch ) $.
+    mpbird.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( A deduction from a biconditional, related to modus ponens.  (Contributed
+       by NM, 5-Aug-1993.) $)
+    mpbird $p |- ( ph -> ps ) $=
+      wph wch wps mpbird.min wph wps wch mpbird.maj biimprd mpd $.
+  $}
+
+  ${
+    mpbiri.min $e |- ch $.
+    mpbiri.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( An inference from a nested biconditional, related to modus ponens.
+       (Contributed by NM, 21-Jun-1993.)  (Proof shortened by Wolf Lammen,
+       25-Oct-2012.) $)
+    mpbiri $p |- ( ph -> ps ) $=
+      wph wps wch wch wph mpbiri.min a1i mpbiri.maj mpbird $.
+  $}
+
+  ${
+    sylibrd.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    sylibrd.2 $e |- ( ph -> ( th <-> ch ) ) $.
+    $( A syllogism deduction.  (Contributed by NM, 3-Aug-1994.) $)
+    sylibrd $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth sylibrd.1 wph wth wch sylibrd.2 biimprd syld $.
+  $}
+
+  ${
+    sylbird.1 $e |- ( ph -> ( ch <-> ps ) ) $.
+    sylbird.2 $e |- ( ph -> ( ch -> th ) ) $.
+    $( A syllogism deduction.  (Contributed by NM, 3-Aug-1994.) $)
+    sylbird $p |- ( ph -> ( ps -> th ) ) $=
+      wph wps wch wth wph wch wps sylbird.1 biimprd sylbird.2 syld $.
+  $}
+
+  $( Principle of identity for logical equivalence.  Theorem *4.2 of
+     [WhiteheadRussell] p. 117.  This is part of Frege's eighth axiom per
+     Proposition 54 of [Frege1879] p. 50; see also ~ eqid .  (Contributed by
+     NM, 2-Jun-1993.) $)
+  biid $p |- ( ph <-> ph ) $=
+    wph wph wph id wph id impbii $.
+
+  $( Principle of identity with antecedent.  (Contributed by NM,
+     25-Nov-1995.) $)
+  biidd $p |- ( ph -> ( ps <-> ps ) ) $=
+    wps wps wb wph wps biid a1i $.
+
+  $( Two propositions are equivalent if they are both true.  Closed form of
+     ~ 2th .  Equivalent to a ~ biimp -like version of the xor-connective.
+     This theorem stays true, no matter how you permute its operands.  This is
+     evident from its sharper version ` ( ph <-> ( ps <-> ( ph <-> ps ) ) ) ` .
+     (Contributed by Wolf Lammen, 12-May-2013.) $)
+  pm5.1im $p |- ( ph -> ( ps -> ( ph <-> ps ) ) ) $=
+    wph wps wph wps wps wph ax-1 wph wps ax-1 impbid21d $.
+
+  ${
+    2th.1 $e |- ph $.
+    2th.2 $e |- ps $.
+    $( Two truths are equivalent.  (Contributed by NM, 18-Aug-1993.) $)
+    2th $p |- ( ph <-> ps ) $=
+      wph wps wps wph 2th.2 a1i wph wps 2th.1 a1i impbii $.
+  $}
+
+  ${
+    2thd.1 $e |- ( ph -> ps ) $.
+    2thd.2 $e |- ( ph -> ch ) $.
+    $( Two truths are equivalent.  Deduction form.  (Contributed by NM,
+       3-Jun-2012.) $)
+    2thd $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wps wch wb 2thd.1 2thd.2 wps wch pm5.1im sylc $.
+  $}
+
+  $( Two self-implications (see ~ id ) are equivalent.  This theorem, rather
+     trivial in our axiomatization, is (the biconditional form of) a standard
+     axiom for monothetic BCI logic.  This is the most general theorem of which
+     ~ trujust is an instance.  Relatedly, this would be the justification
+     theorem if the definition of ` T. ` were ~ dftru2 .  (Contributed by BJ,
+     7-Sep-2022.) $)
+  monothetic $p |- ( ( ph -> ph ) <-> ( ps -> ps ) ) $=
+    wph wph wi wps wps wi wph id wps id 2th $.
+
+  ${
+    ibi.1 $e |- ( ph -> ( ph <-> ps ) ) $.
+    $( Inference that converts a biconditional implied by one of its arguments,
+       into an implication.  (Contributed by NM, 17-Oct-2003.) $)
+    ibi $p |- ( ph -> ps ) $=
+      wph wph wps wph id ibi.1 mpbid $.
+  $}
+
+  ${
+    ibir.1 $e |- ( ph -> ( ps <-> ph ) ) $.
+    $( Inference that converts a biconditional implied by one of its arguments,
+       into an implication.  (Contributed by NM, 22-Jul-2004.) $)
+    ibir $p |- ( ph -> ps ) $=
+      wph wps wph wps wph ibir.1 bicomd ibi $.
+  $}
+
+  ${
+    ibd.1 $e |- ( ph -> ( ps -> ( ps <-> ch ) ) ) $.
+    $( Deduction that converts a biconditional implied by one of its arguments,
+       into an implication.  Deduction associated with ~ ibi .  (Contributed by
+       NM, 26-Jun-2004.) $)
+    ibd $p |- ( ph -> ( ps -> ch ) ) $=
+      wps wph wps wch wb wch ibd.1 wps wch biimp syli $.
+  $}
+
+  $( Distribution of implication over biconditional.  Theorem *5.74 of
+     [WhiteheadRussell] p. 126.  (Contributed by NM, 1-Aug-1994.)  (Proof
+     shortened by Wolf Lammen, 11-Apr-2013.) $)
+  pm5.74 $p |- ( ( ph -> ( ps <-> ch ) ) <->
+               ( ( ph -> ps ) <-> ( ph -> ch ) ) ) $=
+    wph wps wch wb wi wph wps wi wph wch wi wb wph wps wch wb wi wph wps wi wph
+    wch wi wps wch wb wps wch wph wps wch biimp imim3i wps wch wb wch wps wph
+    wps wch biimpr imim3i impbid wph wps wi wph wch wi wb wph wps wch wph wps
+    wi wph wch wi wb wph wps wch wph wps wi wph wch wi biimp pm2.86d wph wps wi
+    wph wch wi wb wph wch wps wph wps wi wph wch wi biimpr pm2.86d impbidd
+    impbii $.
+
+  ${
+    pm5.74i.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Distribution of implication over biconditional (inference form).
+       (Contributed by NM, 1-Aug-1994.) $)
+    pm5.74i $p |- ( ( ph -> ps ) <-> ( ph -> ch ) ) $=
+      wph wps wch wb wi wph wps wi wph wch wi wb pm5.74i.1 wph wps wch pm5.74
+      mpbi $.
+  $}
+
+  ${
+    pm5.74ri.1 $e |- ( ( ph -> ps ) <-> ( ph -> ch ) ) $.
+    $( Distribution of implication over biconditional (reverse inference form).
+       (Contributed by NM, 1-Aug-1994.) $)
+    pm5.74ri $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wb wi wph wps wi wph wch wi wb pm5.74ri.1 wph wps wch pm5.74
+      mpbir $.
+  $}
+
+  ${
+    pm5.74d.1 $e |- ( ph -> ( ps -> ( ch <-> th ) ) ) $.
+    $( Distribution of implication over biconditional (deduction form).
+       (Contributed by NM, 21-Mar-1996.) $)
+    pm5.74d $p |- ( ph -> ( ( ps -> ch ) <-> ( ps -> th ) ) ) $=
+      wph wps wch wth wb wi wps wch wi wps wth wi wb pm5.74d.1 wps wch wth
+      pm5.74 sylib $.
+  $}
+
+  ${
+    pm5.74rd.1 $e |- ( ph -> ( ( ps -> ch ) <-> ( ps -> th ) ) ) $.
+    $( Distribution of implication over biconditional (deduction form).
+       (Contributed by NM, 19-Mar-1997.) $)
+    pm5.74rd $p |- ( ph -> ( ps -> ( ch <-> th ) ) ) $=
+      wph wps wch wi wps wth wi wb wps wch wth wb wi pm5.74rd.1 wps wch wth
+      pm5.74 sylibr $.
+  $}
+
+  ${
+    bitri.1 $e |- ( ph <-> ps ) $.
+    bitri.2 $e |- ( ps <-> ch ) $.
+    $( An inference from transitive law for logical equivalence.  (Contributed
+       by NM, 3-Jan-1993.)  (Proof shortened by Wolf Lammen, 13-Oct-2012.) $)
+    bitri $p |- ( ph <-> ch ) $=
+      wph wch wph wps wch bitri.1 bitri.2 sylbb wph wps wch bitri.1 bitri.2
+      sylbbr impbii $.
+  $}
+
+  ${
+    bitr2i.1 $e |- ( ph <-> ps ) $.
+    bitr2i.2 $e |- ( ps <-> ch ) $.
+    $( An inference from transitive law for logical equivalence.  (Contributed
+       by NM, 12-Mar-1993.) $)
+    bitr2i $p |- ( ch <-> ph ) $=
+      wph wch wph wps wch bitr2i.1 bitr2i.2 bitri bicomi $.
+  $}
+
+  ${
+    bitr3i.1 $e |- ( ps <-> ph ) $.
+    bitr3i.2 $e |- ( ps <-> ch ) $.
+    $( An inference from transitive law for logical equivalence.  (Contributed
+       by NM, 2-Jun-1993.) $)
+    bitr3i $p |- ( ph <-> ch ) $=
+      wph wps wch wps wph bitr3i.1 bicomi bitr3i.2 bitri $.
+  $}
+
+  ${
+    bitr4i.1 $e |- ( ph <-> ps ) $.
+    bitr4i.2 $e |- ( ch <-> ps ) $.
+    $( An inference from transitive law for logical equivalence.  (Contributed
+       by NM, 3-Jan-1993.) $)
+    bitr4i $p |- ( ph <-> ch ) $=
+      wph wps wch bitr4i.1 wch wps bitr4i.2 bicomi bitri $.
+  $}
+
+  $( Register '<->' as an equality for its type (wff). $)
+  $( $j
+    equality 'wb' from 'biid' 'bicomi' 'bitri';
+    definition 'dfbi1' for 'wb';
+  $)
+
+  ${
+    bitrd.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitrd.2 $e |- ( ph -> ( ch <-> th ) ) $.
+    $( Deduction form of ~ bitri .  (Contributed by NM, 12-Mar-1993.)  (Proof
+       shortened by Wolf Lammen, 14-Apr-2013.) $)
+    bitrd $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wps wth wph wps wi wph wch wi wph wth wi wph wps wch bitrd.1 pm5.74i
+      wph wch wth bitrd.2 pm5.74i bitri pm5.74ri $.
+  $}
+
+  ${
+    bitr2d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr2d.2 $e |- ( ph -> ( ch <-> th ) ) $.
+    $( Deduction form of ~ bitr2i .  (Contributed by NM, 9-Jun-2004.) $)
+    bitr2d $p |- ( ph -> ( th <-> ps ) ) $=
+      wph wps wth wph wps wch wth bitr2d.1 bitr2d.2 bitrd bicomd $.
+  $}
+
+  ${
+    bitr3d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr3d.2 $e |- ( ph -> ( ps <-> th ) ) $.
+    $( Deduction form of ~ bitr3i .  (Contributed by NM, 14-May-1993.) $)
+    bitr3d $p |- ( ph -> ( ch <-> th ) ) $=
+      wph wch wps wth wph wps wch bitr3d.1 bicomd bitr3d.2 bitrd $.
+  $}
+
+  ${
+    bitr4d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr4d.2 $e |- ( ph -> ( th <-> ch ) ) $.
+    $( Deduction form of ~ bitr4i .  (Contributed by NM, 30-Jun-1993.) $)
+    bitr4d $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wps wch wth bitr4d.1 wph wth wch bitr4d.2 bicomd bitrd $.
+  $}
+
+  ${
+    bitrid.1 $e |- ( ph <-> ps ) $.
+    bitrid.2 $e |- ( ch -> ( ps <-> th ) ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       12-Mar-1993.) $)
+    bitrid $p |- ( ch -> ( ph <-> th ) ) $=
+      wch wph wps wth wph wps wb wch bitrid.1 a1i bitrid.2 bitrd $.
+  $}
+
+  ${
+    bitr2id.1 $e |- ( ph <-> ps ) $.
+    bitr2id.2 $e |- ( ch -> ( ps <-> th ) ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       1-Aug-1993.) $)
+    bitr2id $p |- ( ch -> ( th <-> ph ) ) $=
+      wch wph wth wph wps wch wth bitr2id.1 bitr2id.2 bitrid bicomd $.
+  $}
+
+  ${
+    bitr3id.1 $e |- ( ps <-> ph ) $.
+    bitr3id.2 $e |- ( ch -> ( ps <-> th ) ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       5-Aug-1993.) $)
+    bitr3id $p |- ( ch -> ( ph <-> th ) ) $=
+      wph wps wch wth wps wph bitr3id.1 bicomi bitr3id.2 bitrid $.
+  $}
+
+  ${
+    bitr3di.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr3di.2 $e |- ( ps <-> th ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       25-Nov-1994.) $)
+    bitr3di $p |- ( ph -> ( ch <-> th ) ) $=
+      wth wps wph wch wps wth bitr3di.2 bicomi bitr3di.1 bitr2id $.
+  $}
+
+  ${
+    bitrdi.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitrdi.2 $e |- ( ch <-> th ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       12-Mar-1993.) $)
+    bitrdi $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wps wch wth bitrdi.1 wch wth wb wph bitrdi.2 a1i bitrd $.
+  $}
+
+  ${
+    bitr2di.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr2di.2 $e |- ( ch <-> th ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       5-Aug-1993.) $)
+    bitr2di $p |- ( ph -> ( th <-> ps ) ) $=
+      wph wps wth wph wps wch wth bitr2di.1 bitr2di.2 bitrdi bicomd $.
+  $}
+
+  ${
+    bitr4di.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bitr4di.2 $e |- ( th <-> ch ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       12-Mar-1993.) $)
+    bitr4di $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wps wch wth bitr4di.1 wth wch bitr4di.2 bicomi bitrdi $.
+  $}
+
+  ${
+    bitr4id.2 $e |- ( ps <-> ch ) $.
+    bitr4id.1 $e |- ( ph -> ( th <-> ch ) ) $.
+    $( A syllogism inference from two biconditionals.  (Contributed by NM,
+       25-Nov-1994.) $)
+    bitr4id $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wth wch wps bitr4id.1 wps wch bitr4id.2 bicomi bitr2di $.
+  $}
+
+  ${
+    3imtr3.1 $e |- ( ph -> ps ) $.
+    3imtr3.2 $e |- ( ph <-> ch ) $.
+    3imtr3.3 $e |- ( ps <-> th ) $.
+    $( A mixed syllogism inference, useful for removing a definition from both
+       sides of an implication.  (Contributed by NM, 10-Aug-1994.) $)
+    3imtr3i $p |- ( ch -> th ) $=
+      wch wps wth wch wph wps 3imtr3.2 3imtr3.1 sylbir 3imtr3.3 sylib $.
+  $}
+
+  ${
+    3imtr4.1 $e |- ( ph -> ps ) $.
+    3imtr4.2 $e |- ( ch <-> ph ) $.
+    3imtr4.3 $e |- ( th <-> ps ) $.
+    $( A mixed syllogism inference, useful for applying a definition to both
+       sides of an implication.  (Contributed by NM, 3-Jan-1993.) $)
+    3imtr4i $p |- ( ch -> th ) $=
+      wch wps wth wch wph wps 3imtr4.2 3imtr4.1 sylbi 3imtr4.3 sylibr $.
+  $}
+
+  ${
+    3imtr3d.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    3imtr3d.2 $e |- ( ph -> ( ps <-> th ) ) $.
+    3imtr3d.3 $e |- ( ph -> ( ch <-> ta ) ) $.
+    $( More general version of ~ 3imtr3i .  Useful for converting conditional
+       definitions in a formula.  (Contributed by NM, 8-Apr-1996.) $)
+    3imtr3d $p |- ( ph -> ( th -> ta ) ) $=
+      wph wth wps wta 3imtr3d.2 wph wps wch wta 3imtr3d.1 3imtr3d.3 sylibd
+      sylbird $.
+  $}
+
+  ${
+    3imtr4d.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    3imtr4d.2 $e |- ( ph -> ( th <-> ps ) ) $.
+    3imtr4d.3 $e |- ( ph -> ( ta <-> ch ) ) $.
+    $( More general version of ~ 3imtr4i .  Useful for converting conditional
+       definitions in a formula.  (Contributed by NM, 26-Oct-1995.) $)
+    3imtr4d $p |- ( ph -> ( th -> ta ) ) $=
+      wph wth wps wta 3imtr4d.2 wph wps wch wta 3imtr4d.1 3imtr4d.3 sylibrd
+      sylbid $.
+  $}
+
+  ${
+    3imtr3g.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    3imtr3g.2 $e |- ( ps <-> th ) $.
+    3imtr3g.3 $e |- ( ch <-> ta ) $.
+    $( More general version of ~ 3imtr3i .  Useful for converting definitions
+       in a formula.  (Contributed by NM, 20-May-1996.)  (Proof shortened by
+       Wolf Lammen, 20-Dec-2013.) $)
+    3imtr3g $p |- ( ph -> ( th -> ta ) ) $=
+      wph wth wch wta wth wps wph wch 3imtr3g.2 3imtr3g.1 syl5bir 3imtr3g.3
+      syl6ib $.
+  $}
+
+  ${
+    3imtr4g.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    3imtr4g.2 $e |- ( th <-> ps ) $.
+    3imtr4g.3 $e |- ( ta <-> ch ) $.
+    $( More general version of ~ 3imtr4i .  Useful for converting definitions
+       in a formula.  (Contributed by NM, 20-May-1996.)  (Proof shortened by
+       Wolf Lammen, 20-Dec-2013.) $)
+    3imtr4g $p |- ( ph -> ( th -> ta ) ) $=
+      wph wth wch wta wth wps wph wch 3imtr4g.2 3imtr4g.1 biimtrid 3imtr4g.3
+      syl6ibr $.
+  $}
+
+  ${
+    3bitri.1 $e |- ( ph <-> ps ) $.
+    3bitri.2 $e |- ( ps <-> ch ) $.
+    3bitri.3 $e |- ( ch <-> th ) $.
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 3-Jan-1993.) $)
+    3bitri $p |- ( ph <-> th ) $=
+      wph wps wth 3bitri.1 wps wch wth 3bitri.2 3bitri.3 bitri bitri $.
+
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 4-Aug-2006.) $)
+    3bitrri $p |- ( th <-> ph ) $=
+      wth wch wph 3bitri.3 wph wps wch 3bitri.1 3bitri.2 bitr2i bitr3i $.
+  $}
+
+  ${
+    3bitr2i.1 $e |- ( ph <-> ps ) $.
+    3bitr2i.2 $e |- ( ch <-> ps ) $.
+    3bitr2i.3 $e |- ( ch <-> th ) $.
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 4-Aug-2006.) $)
+    3bitr2i $p |- ( ph <-> th ) $=
+      wph wch wth wph wps wch 3bitr2i.1 3bitr2i.2 bitr4i 3bitr2i.3 bitri $.
+
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 4-Aug-2006.) $)
+    3bitr2ri $p |- ( th <-> ph ) $=
+      wph wch wth wph wps wch 3bitr2i.1 3bitr2i.2 bitr4i 3bitr2i.3 bitr2i $.
+  $}
+
+  ${
+    3bitr3i.1 $e |- ( ph <-> ps ) $.
+    3bitr3i.2 $e |- ( ph <-> ch ) $.
+    3bitr3i.3 $e |- ( ps <-> th ) $.
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 19-Aug-1993.) $)
+    3bitr3i $p |- ( ch <-> th ) $=
+      wch wps wth wch wph wps 3bitr3i.2 3bitr3i.1 bitr3i 3bitr3i.3 bitri $.
+
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 21-Jun-1993.) $)
+    3bitr3ri $p |- ( th <-> ch ) $=
+      wth wps wch 3bitr3i.3 wps wph wch 3bitr3i.1 3bitr3i.2 bitr3i bitr3i $.
+  $}
+
+  ${
+    3bitr4i.1 $e |- ( ph <-> ps ) $.
+    3bitr4i.2 $e |- ( ch <-> ph ) $.
+    3bitr4i.3 $e |- ( th <-> ps ) $.
+    $( A chained inference from transitive law for logical equivalence.  This
+       inference is frequently used to apply a definition to both sides of a
+       logical equivalence.  (Contributed by NM, 3-Jan-1993.) $)
+    3bitr4i $p |- ( ch <-> th ) $=
+      wch wph wth 3bitr4i.2 wph wps wth 3bitr4i.1 3bitr4i.3 bitr4i bitri $.
+
+    $( A chained inference from transitive law for logical equivalence.
+       (Contributed by NM, 2-Sep-1995.) $)
+    3bitr4ri $p |- ( th <-> ch ) $=
+      wch wph wth 3bitr4i.2 wph wps wth 3bitr4i.1 3bitr4i.3 bitr4i bitr2i $.
+  $}
+
+  ${
+    3bitrd.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitrd.2 $e |- ( ph -> ( ch <-> th ) ) $.
+    3bitrd.3 $e |- ( ph -> ( th <-> ta ) ) $.
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       13-Aug-1999.) $)
+    3bitrd $p |- ( ph -> ( ps <-> ta ) ) $=
+      wph wps wth wta wph wps wch wth 3bitrd.1 3bitrd.2 bitrd 3bitrd.3 bitrd $.
+
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       4-Aug-2006.) $)
+    3bitrrd $p |- ( ph -> ( ta <-> ps ) ) $=
+      wph wth wta wps 3bitrd.3 wph wps wch wth 3bitrd.1 3bitrd.2 bitr2d bitr3d
+      $.
+  $}
+
+  ${
+    3bitr2d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitr2d.2 $e |- ( ph -> ( th <-> ch ) ) $.
+    3bitr2d.3 $e |- ( ph -> ( th <-> ta ) ) $.
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       4-Aug-2006.) $)
+    3bitr2d $p |- ( ph -> ( ps <-> ta ) ) $=
+      wph wps wth wta wph wps wch wth 3bitr2d.1 3bitr2d.2 bitr4d 3bitr2d.3
+      bitrd $.
+
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       4-Aug-2006.) $)
+    3bitr2rd $p |- ( ph -> ( ta <-> ps ) ) $=
+      wph wps wth wta wph wps wch wth 3bitr2d.1 3bitr2d.2 bitr4d 3bitr2d.3
+      bitr2d $.
+  $}
+
+  ${
+    3bitr3d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitr3d.2 $e |- ( ph -> ( ps <-> th ) ) $.
+    3bitr3d.3 $e |- ( ph -> ( ch <-> ta ) ) $.
+    $( Deduction from transitivity of biconditional.  Useful for converting
+       conditional definitions in a formula.  (Contributed by NM,
+       24-Apr-1996.) $)
+    3bitr3d $p |- ( ph -> ( th <-> ta ) ) $=
+      wph wth wch wta wph wps wth wch 3bitr3d.2 3bitr3d.1 bitr3d 3bitr3d.3
+      bitrd $.
+
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       4-Aug-2006.) $)
+    3bitr3rd $p |- ( ph -> ( ta <-> th ) ) $=
+      wph wch wta wth 3bitr3d.3 wph wps wch wth 3bitr3d.1 3bitr3d.2 bitr3d
+      bitr3d $.
+  $}
+
+  ${
+    3bitr4d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitr4d.2 $e |- ( ph -> ( th <-> ps ) ) $.
+    3bitr4d.3 $e |- ( ph -> ( ta <-> ch ) ) $.
+    $( Deduction from transitivity of biconditional.  Useful for converting
+       conditional definitions in a formula.  (Contributed by NM,
+       18-Oct-1995.) $)
+    3bitr4d $p |- ( ph -> ( th <-> ta ) ) $=
+      wph wth wps wta 3bitr4d.2 wph wps wch wta 3bitr4d.1 3bitr4d.3 bitr4d
+      bitrd $.
+
+    $( Deduction from transitivity of biconditional.  (Contributed by NM,
+       4-Aug-2006.) $)
+    3bitr4rd $p |- ( ph -> ( ta <-> th ) ) $=
+      wph wta wps wth wph wta wch wps 3bitr4d.3 3bitr4d.1 bitr4d 3bitr4d.2
+      bitr4d $.
+  $}
+
+  ${
+    3bitr3g.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitr3g.2 $e |- ( ps <-> th ) $.
+    3bitr3g.3 $e |- ( ch <-> ta ) $.
+    $( More general version of ~ 3bitr3i .  Useful for converting definitions
+       in a formula.  (Contributed by NM, 4-Jun-1995.) $)
+    3bitr3g $p |- ( ph -> ( th <-> ta ) ) $=
+      wph wth wch wta wth wps wph wch 3bitr3g.2 3bitr3g.1 bitr3id 3bitr3g.3
+      bitrdi $.
+  $}
+
+  ${
+    3bitr4g.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    3bitr4g.2 $e |- ( th <-> ps ) $.
+    3bitr4g.3 $e |- ( ta <-> ch ) $.
+    $( More general version of ~ 3bitr4i .  Useful for converting definitions
+       in a formula.  (Contributed by NM, 11-May-1993.) $)
+    3bitr4g $p |- ( ph -> ( th <-> ta ) ) $=
+      wph wth wch wta wth wps wph wch 3bitr4g.2 3bitr4g.1 bitrid 3bitr4g.3
+      bitr4di $.
+  $}
+
+  $( Double negation.  Theorem *4.13 of [WhiteheadRussell] p. 117.
+     (Contributed by NM, 3-Jan-1993.) $)
+  notnotb $p |- ( ph <-> -. -. ph ) $=
+    wph wph wn wn wph notnot wph notnotr impbii $.
+
+  $( A biconditional form of contraposition.  Theorem *4.1 of
+     [WhiteheadRussell] p. 116.  (Contributed by NM, 11-May-1993.) $)
+  con34b $p |- ( ( ph -> ps ) <-> ( -. ps -> -. ph ) ) $=
+    wph wps wi wps wn wph wn wi wph wps con3 wps wph con4 impbii $.
+
+  ${
+    con4bid.1 $e |- ( ph -> ( -. ps <-> -. ch ) ) $.
+    $( A contraposition deduction.  (Contributed by NM, 21-May-1994.) $)
+    con4bid $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wph wch wps wph wps wn wch wn con4bid.1 biimprd con4d wph wps
+      wn wch wn con4bid.1 biimpd impcon4bid $.
+  $}
+
+  ${
+    notbid.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Deduction negating both sides of a logical equivalence.  (Contributed by
+       NM, 21-May-1994.) $)
+    notbid $p |- ( ph -> ( -. ps <-> -. ch ) ) $=
+      wph wps wn wch wn wph wps wch wps wn wn wch wn wn notbid.1 wps notnotb
+      wch notnotb 3bitr3g con4bid $.
+  $}
+
+  $( Contraposition.  Theorem *4.11 of [WhiteheadRussell] p. 117.  (Contributed
+     by NM, 21-May-1994.)  (Proof shortened by Wolf Lammen, 12-Jun-2013.) $)
+  notbi $p |- ( ( ph <-> ps ) <-> ( -. ph <-> -. ps ) ) $=
+    wph wps wb wph wn wps wn wb wph wps wb wph wps wph wps wb id notbid wph wn
+    wps wn wb wph wps wph wn wps wn wb id con4bid impbii $.
+
+  ${
+    notbii.1 $e |- ( ph <-> ps ) $.
+    $( Negate both sides of a logical equivalence.  (Contributed by NM,
+       3-Jan-1993.)  (Proof shortened by Wolf Lammen, 19-May-2013.) $)
+    notbii $p |- ( -. ph <-> -. ps ) $=
+      wph wps wb wph wn wps wn wb notbii.1 wph wps notbi mpbi $.
+
+    $( Theorem notbii is the congruence law for negation. $)
+    $( $j congruence 'notbii'; $)
+  $}
+
+  ${
+    con4bii.1 $e |- ( -. ph <-> -. ps ) $.
+    $( A contraposition inference.  (Contributed by NM, 21-May-1994.) $)
+    con4bii $p |- ( ph <-> ps ) $=
+      wph wps wb wph wn wps wn wb con4bii.1 wph wps notbi mpbir $.
+  $}
+
+  ${
+    mtbi.1 $e |- -. ph $.
+    mtbi.2 $e |- ( ph <-> ps ) $.
+    $( An inference from a biconditional, related to modus tollens.
+       (Contributed by NM, 15-Nov-1994.)  (Proof shortened by Wolf Lammen,
+       25-Oct-2012.) $)
+    mtbi $p |- -. ps $=
+      wps wph mtbi.1 wph wps mtbi.2 biimpri mto $.
+  $}
+
+  ${
+    mtbir.1 $e |- -. ps $.
+    mtbir.2 $e |- ( ph <-> ps ) $.
+    $( An inference from a biconditional, related to modus tollens.
+       (Contributed by NM, 15-Nov-1994.)  (Proof shortened by Wolf Lammen,
+       14-Oct-2012.) $)
+    mtbir $p |- -. ph $=
+      wps wph mtbir.1 wph wps mtbir.2 bicomi mtbi $.
+  $}
+
+  ${
+    mtbid.min $e |- ( ph -> -. ps ) $.
+    mtbid.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( A deduction from a biconditional, similar to modus tollens.
+       (Contributed by NM, 26-Nov-1995.) $)
+    mtbid $p |- ( ph -> -. ch ) $=
+      wph wch wps mtbid.min wph wps wch mtbid.maj biimprd mtod $.
+  $}
+
+  ${
+    mtbird.min $e |- ( ph -> -. ch ) $.
+    mtbird.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( A deduction from a biconditional, similar to modus tollens.
+       (Contributed by NM, 10-May-1994.) $)
+    mtbird $p |- ( ph -> -. ps ) $=
+      wph wps wch mtbird.min wph wps wch mtbird.maj biimpd mtod $.
+  $}
+
+  ${
+    mtbii.min $e |- -. ps $.
+    mtbii.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( An inference from a biconditional, similar to modus tollens.
+       (Contributed by NM, 27-Nov-1995.) $)
+    mtbii $p |- ( ph -> -. ch ) $=
+      wph wch wps mtbii.min wph wps wch mtbii.maj biimprd mtoi $.
+  $}
+
+  ${
+    mtbiri.min $e |- -. ch $.
+    mtbiri.maj $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( An inference from a biconditional, similar to modus tollens.
+       (Contributed by NM, 24-Aug-1995.) $)
+    mtbiri $p |- ( ph -> -. ps ) $=
+      wph wps wch mtbiri.min wph wps wch mtbiri.maj biimpd mtoi $.
+  $}
+
+  ${
+    sylnib.1 $e |- ( ph -> -. ps ) $.
+    sylnib.2 $e |- ( ps <-> ch ) $.
+    $( A mixed syllogism inference from an implication and a biconditional.
+       (Contributed by Wolf Lammen, 16-Dec-2013.) $)
+    sylnib $p |- ( ph -> -. ch ) $=
+      wph wps wch sylnib.1 wps wch sylnib.2 biimpri nsyl $.
+  $}
+
+  ${
+    sylnibr.1 $e |- ( ph -> -. ps ) $.
+    sylnibr.2 $e |- ( ch <-> ps ) $.
+    $( A mixed syllogism inference from an implication and a biconditional.
+       Useful for substituting a consequent with a definition.  (Contributed by
+       Wolf Lammen, 16-Dec-2013.) $)
+    sylnibr $p |- ( ph -> -. ch ) $=
+      wph wps wch sylnibr.1 wch wps sylnibr.2 bicomi sylnib $.
+  $}
+
+  ${
+    sylnbi.1 $e |- ( ph <-> ps ) $.
+    sylnbi.2 $e |- ( -. ps -> ch ) $.
+    $( A mixed syllogism inference from a biconditional and an implication.
+       Useful for substituting an antecedent with a definition.  (Contributed
+       by Wolf Lammen, 16-Dec-2013.) $)
+    sylnbi $p |- ( -. ph -> ch ) $=
+      wph wn wps wn wch wph wps sylnbi.1 notbii sylnbi.2 sylbi $.
+  $}
+
+  ${
+    sylnbir.1 $e |- ( ps <-> ph ) $.
+    sylnbir.2 $e |- ( -. ps -> ch ) $.
+    $( A mixed syllogism inference from a biconditional and an implication.
+       (Contributed by Wolf Lammen, 16-Dec-2013.) $)
+    sylnbir $p |- ( -. ph -> ch ) $=
+      wph wps wch wps wph sylnbir.1 bicomi sylnbir.2 sylnbi $.
+  $}
+
+  ${
+    xchnxbi.1 $e |- ( -. ph <-> ps ) $.
+    xchnxbi.2 $e |- ( ph <-> ch ) $.
+    $( Replacement of a subexpression by an equivalent one.  (Contributed by
+       Wolf Lammen, 27-Sep-2014.) $)
+    xchnxbi $p |- ( -. ch <-> ps ) $=
+      wch wn wph wn wps wph wch xchnxbi.2 notbii xchnxbi.1 bitr3i $.
+  $}
+
+  ${
+    xchnxbir.1 $e |- ( -. ph <-> ps ) $.
+    xchnxbir.2 $e |- ( ch <-> ph ) $.
+    $( Replacement of a subexpression by an equivalent one.  (Contributed by
+       Wolf Lammen, 27-Sep-2014.) $)
+    xchnxbir $p |- ( -. ch <-> ps ) $=
+      wph wps wch xchnxbir.1 wch wph xchnxbir.2 bicomi xchnxbi $.
+  $}
+
+  ${
+    xchbinx.1 $e |- ( ph <-> -. ps ) $.
+    xchbinx.2 $e |- ( ps <-> ch ) $.
+    $( Replacement of a subexpression by an equivalent one.  (Contributed by
+       Wolf Lammen, 27-Sep-2014.) $)
+    xchbinx $p |- ( ph <-> -. ch ) $=
+      wph wps wn wch wn xchbinx.1 wps wch xchbinx.2 notbii bitri $.
+  $}
+
+  ${
+    xchbinxr.1 $e |- ( ph <-> -. ps ) $.
+    xchbinxr.2 $e |- ( ch <-> ps ) $.
+    $( Replacement of a subexpression by an equivalent one.  (Contributed by
+       Wolf Lammen, 27-Sep-2014.) $)
+    xchbinxr $p |- ( ph <-> -. ch ) $=
+      wph wps wch xchbinxr.1 wch wps xchbinxr.2 bicomi xchbinx $.
+  $}
+
+  ${
+    imbi2i.1 $e |- ( ph <-> ps ) $.
+    $( Introduce an antecedent to both sides of a logical equivalence.  This
+       and the next three rules are useful for building up wff's around a
+       definition, in order to make use of the definition.  (Contributed by NM,
+       3-Jan-1993.)  (Proof shortened by Wolf Lammen, 6-Feb-2013.) $)
+    imbi2i $p |- ( ( ch -> ph ) <-> ( ch -> ps ) ) $=
+      wch wph wps wph wps wb wch imbi2i.1 a1i pm5.74i $.
+  $}
+
+  ${
+    jcndOLD.1 $e |- ( ph -> ps ) $.
+    jcndOLD.2 $e |- ( ph -> -. ch ) $.
+    $( Obsolete version of ~ jcnd as of 10-Apr-2024.  (Contributed by Glauco
+       Siliprandi, 11-Dec-2019.)  (New usage is discouraged.)
+       (Proof modification is discouraged.) $)
+    jcndOLD $p |- ( ph -> -. ( ps -> ch ) ) $=
+      wph wps wch wn wn wi wps wch wi wph wps wch wn jcndOLD.1 jcndOLD.2 jc wch
+      wch wn wn wps wch notnotb imbi2i sylnibr $.
+  $}
+
+  ${
+    bibi2i.1 $e |- ( ph <-> ps ) $.
+    $( Inference adding a biconditional to the left in an equivalence.
+       (Contributed by NM, 26-May-1993.)  (Proof shortened by Andrew Salmon,
+       7-May-2011.)  (Proof shortened by Wolf Lammen, 16-May-2013.) $)
+    bibi2i $p |- ( ( ch <-> ph ) <-> ( ch <-> ps ) ) $=
+      wch wph wb wch wps wb wch wph wb wch wph wps wch wph wb id bibi2i.1
+      bitrdi wch wps wb wch wps wph wch wps wb id bibi2i.1 bitr4di impbii $.
+
+    $( Inference adding a biconditional to the right in an equivalence.
+       (Contributed by NM, 26-May-1993.) $)
+    bibi1i $p |- ( ( ph <-> ch ) <-> ( ps <-> ch ) ) $=
+      wph wch wb wch wph wb wch wps wb wps wch wb wph wch bicom wph wps wch
+      bibi2i.1 bibi2i wch wps bicom 3bitri $.
+
+    ${
+      bibi12i.2 $e |- ( ch <-> th ) $.
+      $( The equivalence of two equivalences.  (Contributed by NM,
+         26-May-1993.) $)
+      bibi12i $p |- ( ( ph <-> ch ) <-> ( ps <-> th ) ) $=
+        wph wch wb wph wth wb wps wth wb wch wth wph bibi12i.2 bibi2i wph wps
+        wth bibi2i.1 bibi1i bitri $.
+    $}
+  $}
+
+  ${
+    imbid.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Deduction adding an antecedent to both sides of a logical equivalence.
+       (Contributed by NM, 11-May-1993.) $)
+    imbi2d $p |- ( ph -> ( ( th -> ps ) <-> ( th -> ch ) ) ) $=
+      wph wth wps wch wph wps wch wb wth imbid.1 a1d pm5.74d $.
+
+    $( Deduction adding a consequent to both sides of a logical equivalence.
+       (Contributed by NM, 11-May-1993.)  (Proof shortened by Wolf Lammen,
+       17-Sep-2013.) $)
+    imbi1d $p |- ( ph -> ( ( ps -> th ) <-> ( ch -> th ) ) ) $=
+      wph wps wth wi wch wth wi wph wch wps wth wph wps wch imbid.1 biimprd
+      imim1d wph wps wch wth wph wps wch imbid.1 biimpd imim1d impbid $.
+
+    $( Deduction adding a biconditional to the left in an equivalence.
+       (Contributed by NM, 11-May-1993.)  (Proof shortened by Wolf Lammen,
+       19-May-2013.) $)
+    bibi2d $p |- ( ph -> ( ( th <-> ps ) <-> ( th <-> ch ) ) ) $=
+      wph wth wps wb wth wch wb wph wth wi wph wps wi wb wph wth wi wph wch wi
+      wb wph wth wps wb wi wph wth wch wb wi wph wps wi wph wch wi wph wth wi
+      wph wps wch imbid.1 pm5.74i bibi2i wph wth wps pm5.74 wph wth wch pm5.74
+      3bitr4i pm5.74ri $.
+
+    $( Deduction adding a biconditional to the right in an equivalence.
+       (Contributed by NM, 11-May-1993.) $)
+    bibi1d $p |- ( ph -> ( ( ps <-> th ) <-> ( ch <-> th ) ) ) $=
+      wph wth wps wb wth wch wb wps wth wb wch wth wb wph wps wch wth imbid.1
+      bibi2d wps wth bicom wch wth bicom 3bitr4g $.
+  $}
+
+  ${
+    imbi12d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    imbi12d.2 $e |- ( ph -> ( th <-> ta ) ) $.
+    $( Deduction joining two equivalences to form equivalence of implications.
+       (Contributed by NM, 16-May-1993.) $)
+    imbi12d $p |- ( ph -> ( ( ps -> th ) <-> ( ch -> ta ) ) ) $=
+      wph wps wth wi wch wth wi wch wta wi wph wps wch wth imbi12d.1 imbi1d wph
+      wth wta wch imbi12d.2 imbi2d bitrd $.
+
+    $( Deduction joining two equivalences to form equivalence of
+       biconditionals.  (Contributed by NM, 26-May-1993.) $)
+    bibi12d $p |- ( ph -> ( ( ps <-> th ) <-> ( ch <-> ta ) ) ) $=
+      wph wps wth wb wch wth wb wch wta wb wph wps wch wth imbi12d.1 bibi1d wph
+      wth wta wch imbi12d.2 bibi2d bitrd $.
+  $}
+
+  $( Closed form of ~ imbi12i .  Was automatically derived from its "Virtual
+     Deduction" version and the Metamath program "MM-PA> MINIMIZE__WITH *"
+     command.  (Contributed by Alan Sare, 18-Mar-2012.) $)
+  imbi12 $p |- ( ( ph <-> ps ) ->
+                    ( ( ch <-> th ) -> ( ( ph -> ch ) <-> ( ps -> th ) ) ) ) $=
+    wph wps wb wch wth wb wph wch wi wps wth wi wb wph wps wb wch wth wb wn wi
+    wn wph wps wch wth wph wps wb wch wth wb wn simplim wph wps wb wch wth wb
+    simprim imbi12d expi $.
+
+  $( Theorem *4.84 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.) $)
+  imbi1 $p |- ( ( ph <-> ps ) -> ( ( ph -> ch ) <-> ( ps -> ch ) ) ) $=
+    wph wps wb wph wps wch wph wps wb id imbi1d $.
+
+  $( Theorem *4.85 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 19-May-2013.) $)
+  imbi2 $p |- ( ( ph <-> ps ) -> ( ( ch -> ph ) <-> ( ch -> ps ) ) ) $=
+    wph wps wb wph wps wch wph wps wb id imbi2d $.
+
+  ${
+    imbi1i.1 $e |- ( ph <-> ps ) $.
+    $( Introduce a consequent to both sides of a logical equivalence.
+       (Contributed by NM, 3-Jan-1993.)  (Proof shortened by Wolf Lammen,
+       17-Sep-2013.) $)
+    imbi1i $p |- ( ( ph -> ch ) <-> ( ps -> ch ) ) $=
+      wph wps wb wph wch wi wps wch wi wb imbi1i.1 wph wps wch imbi1 ax-mp $.
+  $}
+
+  ${
+    imbi12i.1 $e |- ( ph <-> ps ) $.
+    imbi12i.2 $e |- ( ch <-> th ) $.
+    $( Join two logical equivalences to form equivalence of implications.
+       (Contributed by NM, 1-Aug-1993.) $)
+    imbi12i $p |- ( ( ph -> ch ) <-> ( ps -> th ) ) $=
+      wph wps wb wch wth wb wph wch wi wps wth wi wb imbi12i.1 imbi12i.2 wph
+      wps wch wth imbi12 mp2 $.
+
+    $( Theorem imbi12i is the congruence law for implication. $)
+    $( $j congruence 'imbi12i'; $)
+  $}
+
+  $( Theorem *4.86 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.) $)
+  bibi1 $p |- ( ( ph <-> ps ) -> ( ( ph <-> ch ) <-> ( ps <-> ch ) ) ) $=
+    wph wps wb wph wps wch wph wps wb id bibi1d $.
+
+  $( Closed nested implication form of ~ bitr3i .  Derived automatically from
+     ~ bitr3VD .  (Contributed by Alan Sare, 31-Dec-2011.) $)
+  bitr3 $p |- ( ( ph <-> ps ) -> ( ( ph <-> ch ) -> ( ps <-> ch ) ) ) $=
+    wph wps wb wph wch wb wps wch wb wph wps wch bibi1 biimpd $.
+
+  $( Contraposition.  Theorem *4.12 of [WhiteheadRussell] p. 117.  (Contributed
+     by NM, 15-Apr-1995.)  (Proof shortened by Wolf Lammen, 3-Jan-2013.) $)
+  con2bi $p |- ( ( ph <-> -. ps ) <-> ( ps <-> -. ph ) ) $=
+    wph wps wn wb wph wn wps wn wn wb wph wn wps wb wps wph wn wb wph wps wn
+    notbi wps wps wn wn wph wn wps notnotb bibi2i wph wn wps bicom 3bitr2i $.
+
+  ${
+    con2bid.1 $e |- ( ph -> ( ps <-> -. ch ) ) $.
+    $( A contraposition deduction.  (Contributed by NM, 15-Apr-1995.) $)
+    con2bid $p |- ( ph -> ( ch <-> -. ps ) ) $=
+      wph wps wch wn wb wch wps wn wb con2bid.1 wch wps con2bi sylibr $.
+  $}
+
+  ${
+    con1bid.1 $e |- ( ph -> ( -. ps <-> ch ) ) $.
+    $( A contraposition deduction.  (Contributed by NM, 9-Oct-1999.) $)
+    con1bid $p |- ( ph -> ( -. ch <-> ps ) ) $=
+      wph wps wch wn wph wch wps wph wps wn wch con1bid.1 bicomd con2bid bicomd
+      $.
+  $}
+
+  ${
+    con1bii.1 $e |- ( -. ph <-> ps ) $.
+    $( A contraposition inference.  (Contributed by NM, 12-Mar-1993.)  (Proof
+       shortened by Wolf Lammen, 13-Oct-2012.) $)
+    con1bii $p |- ( -. ps <-> ph ) $=
+      wph wps wn wph wph wn wps wph notnotb con1bii.1 xchbinx bicomi $.
+  $}
+
+  ${
+    con2bii.1 $e |- ( ph <-> -. ps ) $.
+    $( A contraposition inference.  (Contributed by NM, 12-Mar-1993.) $)
+    con2bii $p |- ( ps <-> -. ph ) $=
+      wps wps wn wph wps notnotb con2bii.1 xchbinxr $.
+  $}
+
+  $( Contraposition.  Bidirectional version of ~ con1 .  (Contributed by NM,
+     3-Jan-1993.) $)
+  con1b $p |- ( ( -. ph -> ps ) <-> ( -. ps -> ph ) ) $=
+    wph wn wps wi wps wn wph wi wph wps con1 wps wph con1 impbii $.
+
+  $( Contraposition.  Bidirectional version of ~ con2 .  (Contributed by NM,
+     12-Mar-1993.) $)
+  con2b $p |- ( ( ph -> -. ps ) <-> ( ps -> -. ph ) ) $=
+    wph wps wn wi wps wph wn wi wph wps con2 wps wph con2 impbii $.
+
+  $( A wff is equivalent to itself with true antecedent.  (Contributed by NM,
+     28-Jan-1996.) $)
+  biimt $p |- ( ph -> ( ps <-> ( ph -> ps ) ) ) $=
+    wph wps wph wps wi wps wph ax-1 wph wps pm2.27 impbid2 $.
+
+  $( Theorem *5.5 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.5 $p |- ( ph -> ( ( ph -> ps ) <-> ps ) ) $=
+    wph wps wph wps wi wph wps biimt bicomd $.
+
+  ${
+    a1bi.1 $e |- ph $.
+    $( Inference introducing a theorem as an antecedent.  (Contributed by NM,
+       5-Aug-1993.)  (Proof shortened by Wolf Lammen, 11-Nov-2012.) $)
+    a1bi $p |- ( ps <-> ( ph -> ps ) ) $=
+      wph wps wph wps wi wb a1bi.1 wph wps biimt ax-mp $.
+  $}
+
+  ${
+    mt2bi.1 $e |- ph $.
+    $( A false consequent falsifies an antecedent.  (Contributed by NM,
+       19-Aug-1993.)  (Proof shortened by Wolf Lammen, 12-Nov-2012.) $)
+    mt2bi $p |- ( -. ps <-> ( ps -> -. ph ) ) $=
+      wps wn wph wps wn wi wps wph wn wi wph wps wn mt2bi.1 a1bi wph wps con2b
+      bitri $.
+  $}
+
+  $( Modus-tollens-like theorem.  (Contributed by NM, 7-Apr-2001.)  (Proof
+     shortened by Wolf Lammen, 12-Nov-2012.) $)
+  mtt $p |- ( -. ph -> ( -. ps <-> ( ps -> ph ) ) ) $=
+    wph wn wps wn wph wn wps wn wi wps wph wi wph wn wps wn biimt wps wph
+    con34b bitr4di $.
+
+  $( If a proposition is false, then implying it is equivalent to being false.
+     One of four theorems that can be used to simplify an implication
+     ` ( ph -> ps ) ` , the other ones being ~ ax-1 (true consequent), ~ pm2.21
+     (false antecedent), ~ pm5.5 (true antecedent).  (Contributed by Mario
+     Carneiro, 26-Apr-2019.)  (Proof shortened by Wolf Lammen, 26-May-2019.) $)
+  imnot $p |- ( -. ps -> ( ( ph -> ps ) <-> -. ph ) ) $=
+    wps wn wph wn wph wps wi wps wph mtt bicomd $.
+
+  $( Theorem *5.501 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.501 $p |- ( ph -> ( ps <-> ( ph <-> ps ) ) ) $=
+    wph wps wph wps wb wph wps pm5.1im wph wps wb wph wps wph wps biimp com12
+    impbid $.
+
+  $( Implication in terms of implication and biconditional.  (Contributed by
+     NM, 31-Mar-1994.)  (Proof shortened by Wolf Lammen, 24-Jan-2013.) $)
+  ibib $p |- ( ( ph -> ps ) <-> ( ph -> ( ph <-> ps ) ) ) $=
+    wph wps wph wps wb wph wps pm5.501 pm5.74i $.
+
+  $( Implication in terms of implication and biconditional.  (Contributed by
+     NM, 29-Apr-2005.)  (Proof shortened by Wolf Lammen, 21-Dec-2013.) $)
+  ibibr $p |- ( ( ph -> ps ) <-> ( ph -> ( ps <-> ph ) ) ) $=
+    wph wps wps wph wb wph wps wph wps wb wps wph wb wph wps pm5.501 wph wps
+    bicom bitrdi pm5.74i $.
+
+  ${
+    tbt.1 $e |- ph $.
+    $( A wff is equivalent to its equivalence with a truth.  (Contributed by
+       NM, 18-Aug-1993.)  (Proof shortened by Andrew Salmon, 13-May-2011.) $)
+    tbt $p |- ( ps <-> ( ps <-> ph ) ) $=
+      wph wps wps wph wb wb tbt.1 wph wps wps wph wb wph wps ibibr pm5.74ri
+      ax-mp $.
+  $}
+
+  $( The negation of a wff is equivalent to the wff's equivalence to falsehood.
+     (Contributed by Juha Arpiainen, 19-Jan-2006.)  (Proof shortened by Wolf
+     Lammen, 28-Jan-2013.) $)
+  nbn2 $p |- ( -. ph -> ( -. ps <-> ( ph <-> ps ) ) ) $=
+    wph wn wps wn wph wn wps wn wb wph wps wb wph wn wps wn pm5.501 wph wps
+    notbi bitr4di $.
+
+  $( Transfer negation via an equivalence.  (Contributed by NM, 3-Oct-2007.)
+     (Proof shortened by Wolf Lammen, 28-Jan-2013.) $)
+  bibif $p |- ( -. ps -> ( ( ph <-> ps ) <-> -. ph ) ) $=
+    wps wn wph wn wps wph wb wph wps wb wps wph nbn2 wps wph bicom bitr2di $.
+
+  ${
+    nbn.1 $e |- -. ph $.
+    $( The negation of a wff is equivalent to the wff's equivalence to
+       falsehood.  (Contributed by NM, 21-Jun-1993.)  (Proof shortened by Wolf
+       Lammen, 3-Oct-2013.) $)
+    nbn $p |- ( -. ps <-> ( ps <-> ph ) ) $=
+      wps wph wb wps wn wph wn wps wph wb wps wn wb nbn.1 wps wph bibif ax-mp
+      bicomi $.
+  $}
+
+  ${
+    nbn3.1 $e |- ph $.
+    $( Transfer falsehood via equivalence.  (Contributed by NM,
+       11-Sep-2006.) $)
+    nbn3 $p |- ( -. ps <-> ( ps <-> -. ph ) ) $=
+      wph wn wps wph nbn3.1 notnoti nbn $.
+  $}
+
+  $( Two propositions are equivalent if they are both false.  Closed form of
+     ~ 2false .  Equivalent to a ~ biimpr -like version of the xor-connective.
+     (Contributed by Wolf Lammen, 13-May-2013.) $)
+  pm5.21im $p |- ( -. ph -> ( -. ps -> ( ph <-> ps ) ) ) $=
+    wph wn wps wn wph wps wb wph wps nbn2 biimpd $.
+
+  ${
+    2false.1 $e |- -. ph $.
+    2false.2 $e |- -. ps $.
+    $( Two falsehoods are equivalent.  (Contributed by NM, 4-Apr-2005.)  (Proof
+       shortened by Wolf Lammen, 19-May-2013.) $)
+    2false $p |- ( ph <-> ps ) $=
+      wph wps wph wn wps wn 2false.1 2false.2 2th con4bii $.
+  $}
+
+  ${
+    2falsed.1 $e |- ( ph -> -. ps ) $.
+    2falsed.2 $e |- ( ph -> -. ch ) $.
+    $( Two falsehoods are equivalent (deduction form).  (Contributed by NM,
+       11-Oct-2013.)  (Proof shortened by Wolf Lammen, 11-Apr-2024.) $)
+    2falsed $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wph wps wn wch wn 2falsed.1 2falsed.2 2thd con4bid $.
+
+    $( Obsolete version of ~ 2falsed as of 11-Apr-2024.  (Contributed by NM,
+       11-Oct-2013.)  (Proof modification is discouraged.)
+       (New usage is discouraged.) $)
+    2falsedOLD $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wph wps wch 2falsed.1 pm2.21d wph wch wps 2falsed.2 pm2.21d
+      impbid $.
+  $}
+
+  ${
+    pm5.21ni.1 $e |- ( ph -> ps ) $.
+    pm5.21ni.2 $e |- ( ch -> ps ) $.
+    $( Two propositions implying a false one are equivalent.  (Contributed by
+       NM, 16-Feb-1996.)  (Proof shortened by Wolf Lammen, 19-May-2013.) $)
+    pm5.21ni $p |- ( -. ps -> ( ph <-> ch ) ) $=
+      wps wn wph wch wph wps pm5.21ni.1 con3i wch wps pm5.21ni.2 con3i 2falsed
+      $.
+
+    ${
+      pm5.21nii.3 $e |- ( ps -> ( ph <-> ch ) ) $.
+      $( Eliminate an antecedent implied by each side of a biconditional.
+         (Contributed by NM, 21-May-1999.) $)
+      pm5.21nii $p |- ( ph <-> ch ) $=
+        wps wph wch wb pm5.21nii.3 wph wps wch pm5.21ni.1 pm5.21ni.2 pm5.21ni
+        pm2.61i $.
+    $}
+  $}
+
+  ${
+    pm5.21ndd.1 $e |- ( ph -> ( ch -> ps ) ) $.
+    pm5.21ndd.2 $e |- ( ph -> ( th -> ps ) ) $.
+    pm5.21ndd.3 $e |- ( ph -> ( ps -> ( ch <-> th ) ) ) $.
+    $( Eliminate an antecedent implied by each side of a biconditional,
+       deduction version.  (Contributed by Paul Chapman, 21-Nov-2012.)  (Proof
+       shortened by Wolf Lammen, 6-Oct-2013.) $)
+    pm5.21ndd $p |- ( ph -> ( ch <-> th ) ) $=
+      wph wps wch wth wb pm5.21ndd.3 wph wps wn wch wn wth wn wch wth wb wph
+      wch wps pm5.21ndd.1 con3d wph wth wps pm5.21ndd.2 con3d wch wth pm5.21im
+      syl6c pm2.61d $.
+  $}
+
+  ${
+    bija.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    bija.2 $e |- ( -. ph -> ( -. ps -> ch ) ) $.
+    $( Combine antecedents into a single biconditional.  This inference,
+       reminiscent of ~ ja , is reversible:  The hypotheses can be deduced from
+       the conclusion alone (see ~ pm5.1im and ~ pm5.21im ).  (Contributed by
+       Wolf Lammen, 13-May-2013.) $)
+    bija $p |- ( ( ph <-> ps ) -> ch ) $=
+      wph wps wb wps wch wps wph wps wb wph wch wph wps biimpr bija.1 syli wps
+      wn wph wps wb wph wn wch wph wps wb wph wps wph wps biimp con3d bija.2
+      syli pm2.61d $.
+  $}
+
+  $( Theorem *5.18 of [WhiteheadRussell] p. 124.  This theorem says that
+     logical equivalence is the same as negated "exclusive or".  (Contributed
+     by NM, 28-Jun-2002.)  (Proof shortened by Andrew Salmon, 20-Jun-2011.)
+     (Proof shortened by Wolf Lammen, 15-Oct-2013.) $)
+  pm5.18 $p |- ( ( ph <-> ps ) <-> -. ( ph <-> -. ps ) ) $=
+    wph wph wps wb wph wps wn wb wn wb wph wph wps wn wb wn wps wph wps wb wph
+    wps wph wps wn wb wph wps wn pm5.501 con1bid wph wps pm5.501 bitr2d wph wn
+    wph wps wn wb wn wps wn wph wps wb wph wn wps wn wph wps wn wb wph wps wn
+    nbn2 con1bid wph wps nbn2 bitr2d pm2.61i $.
+
+  $( Two ways to express "exclusive or".  (Contributed by NM, 1-Jan-2006.) $)
+  xor3 $p |- ( -. ( ph <-> ps ) <-> ( ph <-> -. ps ) ) $=
+    wph wps wn wb wph wps wb wn wph wps wb wph wps wn wb wph wps pm5.18 con2bii
+    bicomi $.
+
+  $( Move negation outside of biconditional.  Compare Theorem *5.18 of
+     [WhiteheadRussell] p. 124.  (Contributed by NM, 27-Jun-2002.)  (Proof
+     shortened by Wolf Lammen, 20-Sep-2013.) $)
+  nbbn $p |- ( ( -. ph <-> ps ) <-> -. ( ph <-> ps ) ) $=
+    wph wps wb wn wph wps wn wb wps wph wn wb wph wn wps wb wph wps xor3 wph
+    wps con2bi wps wph wn bicom 3bitrri $.
+
+  $( Associative law for the biconditional.  An axiom of system DS in Vladimir
+     Lifschitz, "On calculational proofs", Annals of Pure and Applied Logic,
+     113:207-224, 2002,
+     ~ http://www.cs.utexas.edu/users/ai-lab/pub-view.php?PubID=26805 .
+     Interestingly, this law was not included in _Principia Mathematica_ but
+     was apparently first noted by Jan Lukasiewicz circa 1923.  (Contributed by
+     NM, 8-Jan-2005.)  (Proof shortened by Juha Arpiainen, 19-Jan-2006.)
+     (Proof shortened by Wolf Lammen, 21-Sep-2013.) $)
+  biass $p |- ( ( ( ph <-> ps ) <-> ch ) <-> ( ph <-> ( ps <-> ch ) ) ) $=
+    wph wph wps wb wch wb wph wps wch wb wb wb wph wps wch wb wph wps wb wch wb
+    wph wps wch wb wb wph wps wph wps wb wch wph wps pm5.501 bibi1d wph wps wch
+    wb pm5.501 bitr3d wph wn wps wch wb wn wph wps wb wch wb wph wps wch wb wb
+    wps wch wb wn wps wn wch wb wph wn wph wps wb wch wb wps wch nbbn wph wn
+    wps wn wph wps wb wch wph wps nbn2 bibi1d bitr3id wph wps wch wb nbn2
+    bitr3d pm2.61i $.
+
+  $( Lukasiewicz's shortest axiom for equivalential calculus.  Storrs McCall,
+     ed., _Polish Logic 1920-1939_ (Oxford, 1967), p. 96.  (Contributed by NM,
+     10-Jan-2005.) $)
+  biluk $p |- ( ( ph <-> ps ) <-> ( ( ch <-> ps ) <-> ( ph <-> ch ) ) ) $=
+    wph wps wb wch wps wph wch wb wb wb wch wps wb wph wch wb wb wph wps wb wch
+    wb wps wph wch wb wb wb wph wps wb wch wps wph wch wb wb wb wb wph wps wb
+    wch wb wps wph wb wch wb wps wph wch wb wb wph wps wb wps wph wb wch wph
+    wps bicom bibi1i wps wph wch biass bitri wph wps wb wch wps wph wch wb wb
+    biass mpbi wch wps wph wch wb biass bitr4i $.
+
+  $( Theorem *5.19 of [WhiteheadRussell] p. 124.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.19 $p |- -. ( ph <-> -. ph ) $=
+    wph wph wb wph wph wn wb wn wph biid wph wph pm5.18 mpbi $.
+
+  $( Logical equivalence of commuted antecedents.  Part of Theorem *4.87 of
+     [WhiteheadRussell] p. 122.  (Contributed by NM, 11-May-1993.) $)
+  bi2.04 $p |- ( ( ph -> ( ps -> ch ) ) <-> ( ps -> ( ph -> ch ) ) ) $=
+    wph wps wch wi wi wps wph wch wi wi wph wps wch pm2.04 wps wph wch pm2.04
+    impbii $.
+
+  $( Antecedent absorption implication.  Theorem *5.4 of [WhiteheadRussell]
+     p. 125.  (Contributed by NM, 5-Aug-1993.) $)
+  pm5.4 $p |- ( ( ph -> ( ph -> ps ) ) <-> ( ph -> ps ) ) $=
+    wph wph wps wi wps wph wps pm5.5 pm5.74i $.
+
+  $( Distributive law for implication.  Compare Theorem *5.41 of
+     [WhiteheadRussell] p. 125.  (Contributed by NM, 5-Aug-1993.) $)
+  imdi $p |- ( ( ph -> ( ps -> ch ) ) <->
+               ( ( ph -> ps ) -> ( ph -> ch ) ) ) $=
+    wph wps wch wi wi wph wps wi wph wch wi wi wph wps wch ax-2 wph wps wch
+    pm2.86 impbii $.
+
+  $( Theorem *5.41 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 12-Oct-2012.) $)
+  pm5.41 $p |- ( ( ( ph -> ps ) -> ( ph -> ch ) ) <->
+                ( ph -> ( ps -> ch ) ) ) $=
+    wph wps wch wi wi wph wps wi wph wch wi wi wph wps wch imdi bicomi $.
+
+  $( The antecedent of one side of a biconditional can be moved out of the
+     biconditional to become the antecedent of the remaining biconditional.
+     (Contributed by BJ, 1-Jan-2025.)  (Proof shortened by Wolf Lammen,
+     5-Jan-2025.) $)
+  imbibi $p |- ( ( ( ph -> ps ) <-> ch ) -> ( ph -> ( ps <-> ch ) ) ) $=
+    wph wps wi wch wb wph wps wch wph wps wi wph wph wps wi wi wph wps wi wch
+    wb wph wch wi wph wps pm5.4 wph wps wi wch wph imbi2 bitr3id pm5.74rd $.
+
+  $( Theorem *4.8 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.8 $p |- ( ( ph -> -. ph ) <-> -. ph ) $=
+    wph wph wn wi wph wn wph pm2.01 wph wn wph ax-1 impbii $.
+
+  $( A formula is equivalent to its negation implying it.  Theorem *4.81 of
+     [WhiteheadRussell] p. 122.  Note that the second step, using ~ pm2.24 ,
+     could also use ~ ax-1 .  (Contributed by NM, 3-Jan-2005.) $)
+  pm4.81 $p |- ( ( -. ph -> ph ) <-> ph ) $=
+    wph wn wph wi wph wph pm2.18 wph wph pm2.24 impbii $.
+
+  $( Simplify an implication between two implications when the antecedent of
+     the first is a consequence of the antecedent of the second.  The reverse
+     form is useful in producing the successor step in induction proofs.
+     (Contributed by Paul Chapman, 22-Jun-2011.)  (Proof shortened by Wolf
+     Lammen, 14-Sep-2013.) $)
+  imim21b $p |- ( ( ps -> ph ) ->
+           ( ( ( ph -> ch ) -> ( ps -> th ) ) <-> ( ps -> ( ch -> th ) ) ) ) $=
+    wph wch wi wps wth wi wi wps wph wch wi wth wi wi wps wph wi wps wch wth wi
+    wi wph wch wi wps wth bi2.04 wps wph wi wps wph wch wi wth wi wch wth wi
+    wph wph wch wi wth wi wch wth wi wb wps wph wph wch wi wch wth wph wch
+    pm5.5 imbi1d imim2i pm5.74d bitrid $.
+
+
+$(
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  Logical conjunction
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+  This section defines conjunction of two formulas, denoted by infix " ` /\ ` "
+  and read "and".  It is defined in terms of implication and negation, which is
+  possible in classical logic (but not in intuitionistic logic: see iset.mm).
+
+  After the definition, we briefly introduce conversion of simple expressions
+  to and from conjunction.  Two simple operations called importation ( ~ imp )
+  and exportation ( ~ ex ) follow.  In the propositions-as-types
+  interpretation, they correspond to uncurrying and currying respectively. They
+  are foundational for this section.  Most of the theorems proved here trace
+  back to them, mostly indirectly, in a layered fashion, where more complex
+  expressions are built from simpler ones.  Here are some of these successive
+  layers:
+  importation and exportation,
+  commutativity and associativity laws,
+  adding antecedents and simplifying,
+  conjunction of consequents,
+  syllogisms,
+  etc.
+
+  As indicated in the "note on definitions" in the section comment for logical
+  equivalence, some theorems containing only implication, negation and
+  conjunction are placed in the section after disjunction since theirs proofs
+  use disjunction (although this is not required since definitions are
+  conservative, see said section comment).
+
+$)
+
+  $( Declare connective for conjunction ("and"). $)
+  $c /\ $.  $( Wedge (read:  "and") $)
+
+  $( Extend wff definition to include conjunction ("and"). $)
+  wa $a wff ( ph /\ ps ) $.
+
+  $( Define conjunction (logical "and").  Definition of [Margaris] p. 49.  When
+     both the left and right operand are true, the result is true; when either
+     is false, the result is false.  For example, it is true that
+     ` ( 2 = 2 /\ 3 = 3 ) ` .  After we define the constant true ` T. `
+     ( ~ df-tru ) and the constant false ` F. ` ( ~ df-fal ), we will be able
+     to prove these truth table values: ` ( ( T. /\ T. ) <-> T. ) `
+     ( ~ truantru ), ` ( ( T. /\ F. ) <-> F. ) ` ( ~ truanfal ),
+     ` ( ( F. /\ T. ) <-> F. ) ` ( ~ falantru ), and
+     ` ( ( F. /\ F. ) <-> F. ) ` ( ~ falanfal ).
+
+     This is our first use of the biconditional connective in a definition; we
+     use the biconditional connective in place of the traditional "<=def=>",
+     which means the same thing, except that we can manipulate the
+     biconditional connective directly in proofs rather than having to rely on
+     an informal definition substitution rule.  Note that if we mechanically
+     substitute ` -. ( ph -> -. ps ) ` for ` ( ph /\ ps ) ` , we end up with an
+     instance of previously proved theorem ~ biid .  This is the justification
+     for the definition, along with the fact that it introduces a new symbol
+     ` /\ ` .  Contrast with ` \/ ` ( ~ df-or ), ` -> ` ( ~ wi ), ` -/\ `
+     ( ~ df-nan ), and ` \/_ ` ( ~ df-xor ).  (Contributed by NM,
+     5-Jan-1993.) $)
+  df-an $a |- ( ( ph /\ ps ) <-> -. ( ph -> -. ps ) ) $.
+
+  $( Theorem *4.63 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.63 $p |- ( -. ( ph -> -. ps ) <-> ( ph /\ ps ) ) $=
+    wph wps wa wph wps wn wi wn wph wps df-an bicomi $.
+
+  $( Theorem *4.67 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.67 $p |- ( -. ( -. ph -> -. ps ) <-> ( -. ph /\ ps ) ) $=
+    wph wn wps pm4.63 $.
+
+  $( Express an implication in terms of a negated conjunction.  (Contributed by
+     NM, 9-Apr-1994.) $)
+  imnan $p |- ( ( ph -> -. ps ) <-> -. ( ph /\ ps ) ) $=
+    wph wps wa wph wps wn wi wph wps df-an con2bii $.
+
+  ${
+    imnani.1 $e |- -. ( ph /\ ps ) $.
+    $( Infer an implication from a negated conjunction.  (Contributed by Mario
+       Carneiro, 28-Sep-2015.) $)
+    imnani $p |- ( ph -> -. ps ) $=
+      wph wps wn wi wph wps wa wn imnani.1 wph wps imnan mpbir $.
+  $}
+
+  $( Implication in terms of conjunction and negation.  Theorem 3.4(27) of
+     [Stoll] p. 176.  (Contributed by NM, 12-Mar-1993.)  (Proof shortened by
+     Wolf Lammen, 30-Oct-2012.) $)
+  iman $p |- ( ( ph -> ps ) <-> -. ( ph /\ -. ps ) ) $=
+    wph wps wi wph wps wn wn wi wph wps wn wa wn wps wps wn wn wph wps notnotb
+    imbi2i wph wps wn imnan bitri $.
+
+  $( Law of noncontradiction.  Theorem *3.24 of [WhiteheadRussell] p. 111 (who
+     call it the "law of contradiction").  (Contributed by NM, 16-Sep-1993.)
+     (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+  pm3.24 $p |- -. ( ph /\ -. ph ) $=
+    wph wph wi wph wph wn wa wn wph id wph wph iman mpbi $.
+
+  $( Express a conjunction in terms of a negated implication.  (Contributed by
+     NM, 2-Aug-1994.) $)
+  annim $p |- ( ( ph /\ -. ps ) <-> -. ( ph -> ps ) ) $=
+    wph wps wi wph wps wn wa wph wps iman con2bii $.
+
+  $( Theorem *4.61 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.61 $p |- ( -. ( ph -> ps ) <-> ( ph /\ -. ps ) ) $=
+    wph wps wn wa wph wps wi wn wph wps annim bicomi $.
+
+  $( Theorem *4.65 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.65 $p |- ( -. ( -. ph -> ps ) <-> ( -. ph /\ -. ps ) ) $=
+    wph wn wps pm4.61 $.
+
+  ${
+    imp.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Importation inference.  (Contributed by NM, 3-Jan-1993.)  (Proof
+       shortened by Eric Schmidt, 22-Dec-2006.) $)
+    imp $p |- ( ( ph /\ ps ) -> ch ) $=
+      wph wps wa wph wps wn wi wn wch wph wps df-an wph wps wch imp.1 impi
+      sylbi $.
+
+    $( Importation inference with commuted antecedents.  (Contributed by NM,
+       25-May-2005.) $)
+    impcom $p |- ( ( ps /\ ph ) -> ch ) $=
+      wps wph wch wph wps wch imp.1 com12 imp $.
+  $}
+
+  ${
+    con3dimp.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Variant of ~ con3d with importation.  (Contributed by Jonathan Ben-Naim,
+       3-Jun-2011.) $)
+    con3dimp $p |- ( ( ph /\ -. ch ) -> -. ps ) $=
+      wph wch wn wps wn wph wps wch con3dimp.1 con3d imp $.
+  $}
+
+  ${
+    mpnanrd.1 $e |- ( ph -> ps ) $.
+    mpnanrd.2 $e |- ( ph -> -. ( ps /\ ch ) ) $.
+    $( Eliminate the right side of a negated conjunction in an implication.
+       (Contributed by ML, 17-Oct-2020.) $)
+    mpnanrd $p |- ( ph -> -. ch ) $=
+      wph wps wch wn mpnanrd.1 wph wps wch wa wn wps wch wn wi mpnanrd.2 wps
+      wch imnan sylibr mpd $.
+  $}
+
+  ${
+    impd.1 $e |- ( ph -> ( ps -> ( ch -> th ) ) ) $.
+    $( Importation deduction.  (Contributed by NM, 31-Mar-1994.) $)
+    impd $p |- ( ph -> ( ( ps /\ ch ) -> th ) ) $=
+      wps wch wa wph wth wps wch wph wth wi wph wps wch wth impd.1 com3l imp
+      com12 $.
+
+    $( Importation deduction with commuted antecedents.  (Contributed by Peter
+       Mazsa, 24-Sep-2022.)  (Proof shortened by Wolf Lammen, 22-Oct-2022.) $)
+    impcomd $p |- ( ph -> ( ( ch /\ ps ) -> th ) ) $=
+      wph wch wps wth wph wps wch wth impd.1 com23 impd $.
+  $}
+
+  ${
+    ex.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Exportation inference.  (This theorem used to be labeled "exp" but was
+       changed to "ex" so as not to conflict with the math token "exp", per the
+       June 2006 Metamath spec change.)  A translation of natural deduction
+       rule ` -> ` I ( ` -> ` introduction), see ~ natded .  (Contributed by
+       NM, 3-Jan-1993.)  (Proof shortened by Eric Schmidt, 22-Dec-2006.) $)
+    ex $p |- ( ph -> ( ps -> ch ) ) $=
+      wph wps wch wph wps wn wi wn wph wps wa wch wph wps df-an ex.1 sylbir
+      expi $.
+
+    $( Exportation inference with commuted antecedents.  (Contributed by NM,
+       25-May-2005.) $)
+    expcom $p |- ( ps -> ( ph -> ch ) ) $=
+      wph wps wch wph wps wch ex.1 ex com12 $.
+  $}
+
+  ${
+    expd.1 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( Commuted form of ~ expd .  (Contributed by Alan Sare, 18-Mar-2012.)
+       Shorten ~ expd .  (Revised by Wolf Lammen, 28-Jul-2022.) $)
+    expdcom $p |- ( ps -> ( ch -> ( ph -> th ) ) ) $=
+      wps wch wph wth wi wph wps wch wa wth expd.1 com12 ex $.
+
+    $( Exportation deduction.  (Contributed by NM, 20-Aug-1993.)  (Proof
+       shortened by Wolf Lammen, 28-Jul-2022.) $)
+    expd $p |- ( ph -> ( ps -> ( ch -> th ) ) ) $=
+      wps wch wph wth wph wps wch wth expd.1 expdcom com3r $.
+  $}
+
+  ${
+    expcomd.1 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( Deduction form of ~ expcom .  (Contributed by Alan Sare,
+       22-Jul-2012.) $)
+    expcomd $p |- ( ph -> ( ch -> ( ps -> th ) ) ) $=
+      wph wps wch wth wph wps wch wth expcomd.1 expd com23 $.
+  $}
+
+  ${
+    imp31.1 $e |- ( ph -> ( ps -> ( ch -> th ) ) ) $.
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp31 $p |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $=
+      wph wps wa wch wth wph wps wch wth wi imp31.1 imp imp $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp32 $p |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $=
+      wph wps wch wa wth wph wps wch wth imp31.1 impd imp $.
+  $}
+
+  ${
+    exp31.1 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp31 $p |- ( ph -> ( ps -> ( ch -> th ) ) ) $=
+      wph wps wch wth wi wph wps wa wch wth exp31.1 ex ex $.
+  $}
+
+  ${
+    exp32.1 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp32 $p |- ( ph -> ( ps -> ( ch -> th ) ) ) $=
+      wph wps wch wth wph wps wch wa wth exp32.1 ex expd $.
+  $}
+
+  ${
+    imp4.1 $e |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $.
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.)  Shorten
+       ~ imp4a .  (Revised by Wolf Lammen, 19-Jul-2021.) $)
+    imp4b $p |- ( ( ph /\ ps ) -> ( ( ch /\ th ) -> ta ) ) $=
+      wph wps wa wch wth wta wph wps wch wth wta wi wi imp4.1 imp impd $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.)  (Proof
+       shortened by Wolf Lammen, 19-Jul-2021.) $)
+    imp4a $p |- ( ph -> ( ps -> ( ( ch /\ th ) -> ta ) ) ) $=
+      wph wps wch wth wa wta wi wph wps wch wth wta imp4.1 imp4b ex $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp4c $p |- ( ph -> ( ( ( ps /\ ch ) /\ th ) -> ta ) ) $=
+      wph wps wch wa wth wta wph wps wch wth wta wi imp4.1 impd impd $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp4d $p |- ( ph -> ( ( ps /\ ( ch /\ th ) ) -> ta ) ) $=
+      wph wps wch wth wa wta wph wps wch wth wta imp4.1 imp4a impd $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp41 $p |- ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) -> ta ) $=
+      wph wps wa wch wth wta wph wps wch wth wta wi wi imp4.1 imp imp31 $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp42 $p |- ( ( ( ph /\ ( ps /\ ch ) ) /\ th ) -> ta ) $=
+      wph wps wch wa wa wth wta wph wps wch wth wta wi imp4.1 imp32 imp $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp43 $p |- ( ( ( ph /\ ps ) /\ ( ch /\ th ) ) -> ta ) $=
+      wph wps wa wch wth wa wta wph wps wch wth wta imp4.1 imp4b imp $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp44 $p |- ( ( ph /\ ( ( ps /\ ch ) /\ th ) ) -> ta ) $=
+      wph wps wch wa wth wa wta wph wps wch wth wta imp4.1 imp4c imp $.
+
+    $( An importation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    imp45 $p |- ( ( ph /\ ( ps /\ ( ch /\ th ) ) ) -> ta ) $=
+      wph wps wch wth wa wa wta wph wps wch wth wta imp4.1 imp4d imp $.
+  $}
+
+  ${
+    exp4b.1 $e |- ( ( ph /\ ps ) -> ( ( ch /\ th ) -> ta ) ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.)  (Proof
+       shortened by Wolf Lammen, 23-Nov-2012.)  Shorten ~ exp4a .  (Revised by
+       Wolf Lammen, 20-Jul-2021.) $)
+    exp4b $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wi wph wps wa wch wth wta exp4b.1 expd ex $.
+  $}
+
+  ${
+    exp4a.1 $e |- ( ph -> ( ps -> ( ( ch /\ th ) -> ta ) ) ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.)  (Proof
+       shortened by Wolf Lammen, 20-Jul-2021.) $)
+    exp4a $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wph wps wch wth wa wta wi exp4a.1 imp exp4b $.
+  $}
+
+  ${
+    exp4c.1 $e |- ( ph -> ( ( ( ps /\ ch ) /\ th ) -> ta ) ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp4c $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wph wps wch wa wth wta exp4c.1 expd expd $.
+  $}
+
+  ${
+    exp4d.1 $e |- ( ph -> ( ( ps /\ ( ch /\ th ) ) -> ta ) ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp4d $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wph wps wch wth wa wta exp4d.1 expd exp4a $.
+  $}
+
+  ${
+    exp41.1 $e |- ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) -> ta ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp41 $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wph wps wa wch wa wth wta exp41.1 ex exp31 $.
+  $}
+
+  ${
+    exp42.1 $e |- ( ( ( ph /\ ( ps /\ ch ) ) /\ th ) -> ta ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp42 $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wph wps wch wa wth wta exp42.1 exp31 expd $.
+  $}
+
+  ${
+    exp43.1 $e |- ( ( ( ph /\ ps ) /\ ( ch /\ th ) ) -> ta ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp43 $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wph wps wa wch wth wa wta exp43.1 ex exp4b $.
+  $}
+
+  ${
+    exp44.1 $e |- ( ( ph /\ ( ( ps /\ ch ) /\ th ) ) -> ta ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp44 $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wph wps wch wa wth wta exp44.1 exp32 expd $.
+  $}
+
+  ${
+    exp45.1 $e |- ( ( ph /\ ( ps /\ ( ch /\ th ) ) ) -> ta ) $.
+    $( An exportation inference.  (Contributed by NM, 26-Apr-1994.) $)
+    exp45 $p |- ( ph -> ( ps -> ( ch -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wph wps wch wth wa wta exp45.1 exp32 exp4a $.
+  $}
+
+  ${
+    imp5.1 $e |- ( ph -> ( ps -> ( ch -> ( th -> ( ta -> et ) ) ) ) ) $.
+    $( An importation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    imp5d $p |- ( ( ( ph /\ ps ) /\ ch ) -> ( ( th /\ ta ) -> et ) ) $=
+      wph wps wa wch wa wth wta wet wph wps wch wth wta wet wi wi imp5.1 imp31
+      impd $.
+
+    $( An importation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.)
+       (Proof shortened by Wolf Lammen, 2-Aug-2022.) $)
+    imp5a $p |- ( ph -> ( ps -> ( ch -> ( ( th /\ ta ) -> et ) ) ) ) $=
+      wph wps wch wth wta wa wet wi wph wps wch wth wta wet imp5.1 imp5d exp31
+      $.
+
+    $( An importation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    imp5g $p |- ( ( ph /\ ps ) -> ( ( ( ch /\ th ) /\ ta ) -> et ) ) $=
+      wph wps wa wch wth wa wta wet wph wps wch wth wta wet wi imp5.1 imp4b
+      impd $.
+
+    $( An importation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    imp55 $p |- ( ( ( ph /\ ( ps /\ ( ch /\ th ) ) ) /\ ta ) -> et ) $=
+      wph wps wch wth wa wta wet wph wps wch wth wta wet wi imp5.1 imp4a imp42
+      $.
+
+    $( An importation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    imp511 $p |- ( ( ph /\ ( ( ps /\ ( ch /\ th ) ) /\ ta ) ) -> et ) $=
+      wph wps wch wth wa wta wet wph wps wch wth wta wet wi imp5.1 imp4a imp44
+      $.
+  $}
+
+  ${
+    exp5c.1 $e |- ( ph -> ( ( ps /\ ch ) -> ( ( th /\ ta ) -> et ) ) ) $.
+    $( An exportation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    exp5c $p |- ( ph -> ( ps -> ( ch -> ( th -> ( ta -> et ) ) ) ) ) $=
+      wph wps wch wth wta wet wi wi wph wps wch wa wth wta wet exp5c.1 exp4a
+      expd $.
+  $}
+
+  ${
+    exp5j.1 $e |- ( ph -> ( ( ( ( ps /\ ch ) /\ th ) /\ ta ) -> et ) ) $.
+    $( An exportation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    exp5j $p |- ( ph -> ( ps -> ( ch -> ( th -> ( ta -> et ) ) ) ) ) $=
+      wph wps wch wth wta wet wi wph wps wch wa wth wa wta wet exp5j.1 expd
+      exp4c $.
+  $}
+
+  ${
+    exp5l.1 $e |- ( ph -> ( ( ( ps /\ ch ) /\ ( th /\ ta ) ) -> et ) ) $.
+    $( An exportation inference.  (Contributed by Jeff Hankins, 7-Jul-2009.) $)
+    exp5l $p |- ( ph -> ( ps -> ( ch -> ( th -> ( ta -> et ) ) ) ) ) $=
+      wph wps wch wth wta wet wph wps wch wa wth wta wa wet exp5l.1 expd exp5c
+      $.
+  $}
+
+  ${
+    exp53.1 $e |- ( ( ( ( ph /\ ps ) /\ ( ch /\ th ) ) /\ ta ) -> et ) $.
+    $( An exportation inference.  (Contributed by Jeff Hankins,
+       30-Aug-2009.) $)
+    exp53 $p |- ( ph -> ( ps -> ( ch -> ( th -> ( ta -> et ) ) ) ) ) $=
+      wph wps wch wth wta wet wi wph wps wa wch wth wa wa wta wet exp53.1 ex
+      exp43 $.
+  $}
+
+  $( Theorem *3.3 (Exp) of [WhiteheadRussell] p. 112.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 24-Mar-2013.) $)
+  pm3.3 $p |- ( ( ( ph /\ ps ) -> ch ) -> ( ph -> ( ps -> ch ) ) ) $=
+    wph wps wa wch wi wph wps wch wph wps wa wch wi id expd $.
+
+  $( Theorem *3.31 (Imp) of [WhiteheadRussell] p. 112.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 24-Mar-2013.) $)
+  pm3.31 $p |- ( ( ph -> ( ps -> ch ) ) -> ( ( ph /\ ps ) -> ch ) ) $=
+    wph wps wch wi wi wph wps wch wph wps wch wi wi id impd $.
+
+  $( Import-export theorem.  Part of Theorem *4.87 of [WhiteheadRussell]
+     p. 122.  (Contributed by NM, 10-Jan-1993.)  (Proof shortened by Wolf
+     Lammen, 24-Mar-2013.) $)
+  impexp $p |- ( ( ( ph /\ ps ) -> ch ) <-> ( ph -> ( ps -> ch ) ) ) $=
+    wph wps wa wch wi wph wps wch wi wi wph wps wch pm3.3 wph wps wch pm3.31
+    impbii $.
+
+  ${
+    impancom.1 $e |- ( ( ph /\ ps ) -> ( ch -> th ) ) $.
+    $( Mixed importation/commutation inference.  (Contributed by NM,
+       22-Jun-2013.) $)
+    impancom $p |- ( ( ph /\ ch ) -> ( ps -> th ) ) $=
+      wph wch wps wth wi wph wps wch wth wph wps wch wth wi impancom.1 ex com23
+      imp $.
+  $}
+
+  ${
+    expdimp.1 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( A deduction version of exportation, followed by importation.
+       (Contributed by NM, 6-Sep-2008.) $)
+    expdimp $p |- ( ( ph /\ ps ) -> ( ch -> th ) ) $=
+      wph wps wch wth wi wph wps wch wth expdimp.1 expd imp $.
+  $}
+
+  ${
+    expimpd.1 $e |- ( ( ph /\ ps ) -> ( ch -> th ) ) $.
+    $( Exportation followed by a deduction version of importation.
+       (Contributed by NM, 6-Sep-2008.) $)
+    expimpd $p |- ( ph -> ( ( ps /\ ch ) -> th ) ) $=
+      wph wps wch wth wph wps wch wth wi expimpd.1 ex impd $.
+  $}
+
+  ${
+    impr.1 $e |- ( ( ph /\ ps ) -> ( ch -> th ) ) $.
+    $( Import a wff into a right conjunct.  (Contributed by Jeff Hankins,
+       30-Aug-2009.) $)
+    impr $p |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $=
+      wph wps wch wth wph wps wch wth wi impr.1 ex imp32 $.
+  $}
+
+  ${
+    impl.1 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( Export a wff from a left conjunct.  (Contributed by Mario Carneiro,
+       9-Jul-2014.) $)
+    impl $p |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $=
+      wph wps wch wth wph wps wch wth impl.1 expd imp31 $.
+  $}
+
+  ${
+    expr.1 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( Export a wff from a right conjunct.  (Contributed by Jeff Hankins,
+       30-Aug-2009.) $)
+    expr $p |- ( ( ph /\ ps ) -> ( ch -> th ) ) $=
+      wph wps wch wth wi wph wps wch wth expr.1 exp32 imp $.
+  $}
+
+  ${
+    expl.1 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( Export a wff from a left conjunct.  (Contributed by Jeff Hankins,
+       28-Aug-2009.) $)
+    expl $p |- ( ph -> ( ( ps /\ ch ) -> th ) ) $=
+      wph wps wch wth wph wps wch wth expl.1 exp31 impd $.
+  $}
+
+  ${
+    ancoms.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Inference commuting conjunction in antecedent.  (Contributed by NM,
+       21-Apr-1994.) $)
+    ancoms $p |- ( ( ps /\ ph ) -> ch ) $=
+      wps wph wch wph wps wch ancoms.1 expcom imp $.
+  $}
+
+  $( Theorem *3.22 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 13-Nov-2012.) $)
+  pm3.22 $p |- ( ( ph /\ ps ) -> ( ps /\ ph ) ) $=
+    wps wph wps wph wa wps wph wa id ancoms $.
+
+  $( Commutative law for conjunction.  Theorem *4.3 of [WhiteheadRussell]
+     p. 118.  (Contributed by NM, 25-Jun-1998.)  (Proof shortened by Wolf
+     Lammen, 4-Nov-2012.) $)
+  ancom $p |- ( ( ph /\ ps ) <-> ( ps /\ ph ) ) $=
+    wph wps wa wps wph wa wph wps pm3.22 wps wph pm3.22 impbii $.
+
+  ${
+    ancomd.1 $e |- ( ph -> ( ps /\ ch ) ) $.
+    $( Commutation of conjuncts in consequent.  (Contributed by Jeff Hankins,
+       14-Aug-2009.) $)
+    ancomd $p |- ( ph -> ( ch /\ ps ) ) $=
+      wph wps wch wa wch wps wa ancomd.1 wps wch ancom sylib $.
+  $}
+
+  ${
+    biancomi.1 $e |- ( ph <-> ( ch /\ ps ) ) $.
+    $( Commuting conjunction in a biconditional.  (Contributed by Peter Mazsa,
+       17-Jun-2018.) $)
+    biancomi $p |- ( ph <-> ( ps /\ ch ) ) $=
+      wph wch wps wa wps wch wa biancomi.1 wps wch ancom bitr4i $.
+  $}
+
+  ${
+    biancomd.1 $e |- ( ph -> ( ps <-> ( th /\ ch ) ) ) $.
+    $( Commuting conjunction in a biconditional, deduction form.  (Contributed
+       by Peter Mazsa, 3-Oct-2018.) $)
+    biancomd $p |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $=
+      wph wps wth wch wa wch wth wa biancomd.1 wth wch ancom bitrdi $.
+  $}
+
+  $( Closed form of ~ ancoms .  (Contributed by Alan Sare, 31-Dec-2011.) $)
+  ancomst $p |- ( ( ( ph /\ ps ) -> ch ) <-> ( ( ps /\ ph ) -> ch ) ) $=
+    wph wps wa wps wph wa wch wph wps ancom imbi1i $.
+
+  ${
+    ancomsd.1 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( Deduction commuting conjunction in antecedent.  (Contributed by NM,
+       12-Dec-2004.) $)
+    ancomsd $p |- ( ph -> ( ( ch /\ ps ) -> th ) ) $=
+      wph wch wps wth wph wps wch wth ancomsd.1 expcomd impd $.
+  $}
+
+  ${
+    anasss.1 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( Associative law for conjunction applied to antecedent (eliminates
+       syllogism).  (Contributed by NM, 15-Nov-2002.) $)
+    anasss $p |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $=
+      wph wps wch wth wph wps wch wth anasss.1 exp31 imp32 $.
+  $}
+
+  ${
+    anassrs.1 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( Associative law for conjunction applied to antecedent (eliminates
+       syllogism).  (Contributed by NM, 15-Nov-2002.) $)
+    anassrs $p |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $=
+      wph wps wch wth wph wps wch wth anassrs.1 exp32 imp31 $.
+  $}
+
+  $( Associative law for conjunction.  Theorem *4.32 of [WhiteheadRussell]
+     p. 118.  (Contributed by NM, 21-Jun-1993.)  (Proof shortened by Wolf
+     Lammen, 24-Nov-2012.) $)
+  anass $p |- ( ( ( ph /\ ps ) /\ ch ) <-> ( ph /\ ( ps /\ ch ) ) ) $=
+    wph wps wa wch wa wph wps wch wa wa wph wps wch wph wps wch wa wa wph wps
+    wch wa wa id anassrs wph wps wch wph wps wa wch wa wph wps wa wch wa id
+    anasss impbii $.
+
+  $( Join antecedents with conjunction ("conjunction introduction").  Theorem
+     *3.2 of [WhiteheadRussell] p. 111.  Its associated inference is ~ pm3.2i
+     and its associated deduction is ~ jca (and the double deduction is
+     ~ jcad ).  See ~ pm3.2im for a version using only implication and
+     negation.  (Contributed by NM, 5-Jan-1993.)  (Proof shortened by Wolf
+     Lammen, 12-Nov-2012.) $)
+  pm3.2 $p |- ( ph -> ( ps -> ( ph /\ ps ) ) ) $=
+    wph wps wph wps wa wph wps wa id ex $.
+
+  ${
+    pm3.2i.1 $e |- ph $.
+    pm3.2i.2 $e |- ps $.
+    $( Infer conjunction of premises.  Inference associated with ~ pm3.2 .  Its
+       associated deduction is ~ jca (and the double deduction is ~ jcad ).
+       (Contributed by NM, 21-Jun-1993.) $)
+    pm3.2i $p |- ( ph /\ ps ) $=
+      wph wps wph wps wa pm3.2i.1 pm3.2i.2 wph wps pm3.2 mp2 $.
+  $}
+
+  $( Join antecedents with conjunction.  Theorem *3.21 of [WhiteheadRussell]
+     p. 111.  (Contributed by NM, 5-Aug-1993.) $)
+  pm3.21 $p |- ( ph -> ( ps -> ( ps /\ ph ) ) ) $=
+    wps wph wps wph wa wps wph wa id expcom $.
+
+  $( Nested conjunction of antecedents.  (Contributed by NM, 4-Jan-1993.) $)
+  pm3.43i $p |- ( ( ph -> ps )
+      -> ( ( ph -> ch ) -> ( ph -> ( ps /\ ch ) ) ) ) $=
+    wps wch wps wch wa wph wps wch pm3.2 imim3i $.
+
+  $( Theorem *3.43 (Comp) of [WhiteheadRussell] p. 113.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.43 $p |- ( ( ( ph -> ps ) /\ ( ph -> ch ) )
+      -> ( ph -> ( ps /\ ch ) ) ) $=
+    wph wps wi wph wch wi wph wps wch wa wi wph wps wch pm3.43i imp $.
+
+  $( A theorem similar to the standard definition of the biconditional.
+     Definition of [Margaris] p. 49.  (Contributed by NM, 24-Jan-1993.) $)
+  dfbi2 $p |- ( ( ph <-> ps ) <-> ( ( ph -> ps ) /\ ( ps -> ph ) ) ) $=
+    wph wps wb wph wps wi wps wph wi wn wi wn wph wps wi wps wph wi wa wph wps
+    dfbi1 wph wps wi wps wph wi df-an bitr4i $.
+
+  $( Definition ~ df-bi rewritten in an abbreviated form to help intuitive
+     understanding of that definition.  Note that it is a conjunction of two
+     implications; one which asserts properties that follow from the
+     biconditional and one which asserts properties that imply the
+     biconditional.  (Contributed by NM, 15-Aug-2008.) $)
+  dfbi $p |- ( ( ( ph <-> ps ) -> ( ( ph -> ps ) /\ ( ps -> ph ) ) )
+        /\ ( ( ( ph -> ps ) /\ ( ps -> ph ) ) -> ( ph <-> ps ) ) ) $=
+    wph wps wb wph wps wi wps wph wi wa wb wph wps wb wph wps wi wps wph wi wa
+    wi wph wps wi wps wph wi wa wph wps wb wi wa wph wps dfbi2 wph wps wb wph
+    wps wi wps wph wi wa dfbi2 mpbi $.
+
+  ${
+    biimpa.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Importation inference from a logical equivalence.  (Contributed by NM,
+       3-May-1994.) $)
+    biimpa $p |- ( ( ph /\ ps ) -> ch ) $=
+      wph wps wch wph wps wch biimpa.1 biimpd imp $.
+
+    $( Importation inference from a logical equivalence.  (Contributed by NM,
+       3-May-1994.) $)
+    biimpar $p |- ( ( ph /\ ch ) -> ps ) $=
+      wph wch wps wph wps wch biimpa.1 biimprd imp $.
+
+    $( Importation inference from a logical equivalence.  (Contributed by NM,
+       3-May-1994.) $)
+    biimpac $p |- ( ( ps /\ ph ) -> ch ) $=
+      wps wph wch wph wps wch biimpa.1 biimpcd imp $.
+
+    $( Importation inference from a logical equivalence.  (Contributed by NM,
+       3-May-1994.) $)
+    biimparc $p |- ( ( ch /\ ph ) -> ps ) $=
+      wch wph wps wph wps wch biimpa.1 biimprcd imp $.
+  $}
+
+  ${
+    adantr.1 $e |- ( ph -> ps ) $.
+    $( Inference adding a conjunct to the right of an antecedent.  (Contributed
+       by NM, 30-Aug-1993.) $)
+    adantr $p |- ( ( ph /\ ch ) -> ps ) $=
+      wph wch wps wph wps wch adantr.1 a1d imp $.
+  $}
+
+  ${
+    adantl.1 $e |- ( ph -> ps ) $.
+    $( Inference adding a conjunct to the left of an antecedent.  (Contributed
+       by NM, 30-Aug-1993.)  (Proof shortened by Wolf Lammen, 23-Nov-2012.) $)
+    adantl $p |- ( ( ch /\ ph ) -> ps ) $=
+      wph wch wps wph wps wch adantl.1 adantr ancoms $.
+  $}
+
+  $( Elimination of a conjunct.  Theorem *3.26 (Simp) of [WhiteheadRussell]
+     p. 112.  (Contributed by NM, 3-Jan-1993.)  (Proof shortened by Wolf
+     Lammen, 14-Jun-2022.) $)
+  simpl $p |- ( ( ph /\ ps ) -> ph ) $=
+    wph wph wps wph id adantr $.
+
+  ${
+    simpli.1 $e |- ( ph /\ ps ) $.
+    $( Inference eliminating a conjunct.  (Contributed by NM, 15-Jun-1994.) $)
+    simpli $p |- ph $=
+      wph wps wa wph simpli.1 wph wps simpl ax-mp $.
+  $}
+
+  $( Elimination of a conjunct.  Theorem *3.27 (Simp) of [WhiteheadRussell]
+     p. 112.  (Contributed by NM, 3-Jan-1993.)  (Proof shortened by Wolf
+     Lammen, 14-Jun-2022.) $)
+  simpr $p |- ( ( ph /\ ps ) -> ps ) $=
+    wps wps wph wps id adantl $.
+
+  ${
+    simpri.1 $e |- ( ph /\ ps ) $.
+    $( Inference eliminating a conjunct.  (Contributed by NM, 15-Jun-1994.) $)
+    simpri $p |- ps $=
+      wph wps wa wps simpri.1 wph wps simpr ax-mp $.
+  $}
+
+  ${
+    intnan.1 $e |- -. ph $.
+    $( Introduction of conjunct inside of a contradiction.  (Contributed by NM,
+       16-Sep-1993.) $)
+    intnan $p |- -. ( ps /\ ph ) $=
+      wps wph wa wph intnan.1 wps wph simpr mto $.
+
+    $( Introduction of conjunct inside of a contradiction.  (Contributed by NM,
+       3-Apr-1995.) $)
+    intnanr $p |- -. ( ph /\ ps ) $=
+      wph wps wa wph intnan.1 wph wps simpl mto $.
+  $}
+
+  ${
+    intnand.1 $e |- ( ph -> -. ps ) $.
+    $( Introduction of conjunct inside of a contradiction.  (Contributed by NM,
+       10-Jul-2005.) $)
+    intnand $p |- ( ph -> -. ( ch /\ ps ) ) $=
+      wph wps wch wps wa intnand.1 wch wps simpr nsyl $.
+
+    $( Introduction of conjunct inside of a contradiction.  (Contributed by NM,
+       10-Jul-2005.) $)
+    intnanrd $p |- ( ph -> -. ( ps /\ ch ) ) $=
+      wph wps wps wch wa intnand.1 wps wch simpl nsyl $.
+  $}
+
+  ${
+    adantld.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Deduction adding a conjunct to the left of an antecedent.  (Contributed
+       by NM, 4-May-1994.)  (Proof shortened by Wolf Lammen, 20-Dec-2012.) $)
+    adantld $p |- ( ph -> ( ( th /\ ps ) -> ch ) ) $=
+      wth wps wa wps wph wch wth wps simpr adantld.1 syl5 $.
+  $}
+
+  ${
+    adantrd.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Deduction adding a conjunct to the right of an antecedent.  (Contributed
+       by NM, 4-May-1994.) $)
+    adantrd $p |- ( ph -> ( ( ps /\ th ) -> ch ) ) $=
+      wps wth wa wps wph wch wps wth simpl adantrd.1 syl5 $.
+  $}
+
+  $( Theorem *3.41 of [WhiteheadRussell] p. 113.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.41 $p |- ( ( ph -> ch ) -> ( ( ph /\ ps ) -> ch ) ) $=
+    wph wps wa wph wch wph wps simpl imim1i $.
+
+  $( Theorem *3.42 of [WhiteheadRussell] p. 113.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.42 $p |- ( ( ps -> ch ) -> ( ( ph /\ ps ) -> ch ) ) $=
+    wph wps wa wps wch wph wps simpr imim1i $.
+
+  ${
+    simpld.1 $e |- ( ph -> ( ps /\ ch ) ) $.
+    $( Deduction eliminating a conjunct.  A translation of natural deduction
+       rule ` /\ ` EL ( ` /\ ` elimination left), see ~ natded .  (Contributed
+       by NM, 26-May-1993.) $)
+    simpld $p |- ( ph -> ps ) $=
+      wph wps wch wa wps simpld.1 wps wch simpl syl $.
+  $}
+
+  ${
+    simprd.1 $e |- ( ph -> ( ps /\ ch ) ) $.
+    $( Deduction eliminating a conjunct.  (Contributed by NM, 14-May-1993.)  A
+       translation of natural deduction rule ` /\ ` ER ( ` /\ ` elimination
+       right), see ~ natded .  (Proof shortened by Wolf Lammen, 3-Oct-2013.) $)
+    simprd $p |- ( ph -> ch ) $=
+      wph wch wps wph wps wch simprd.1 ancomd simpld $.
+  $}
+
+  ${
+    simprbi.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Deduction eliminating a conjunct.  (Contributed by NM, 27-May-1998.) $)
+    simprbi $p |- ( ph -> ch ) $=
+      wph wps wch wph wps wch wa simprbi.1 biimpi simprd $.
+  $}
+
+  ${
+    simplbi.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Deduction eliminating a conjunct.  (Contributed by NM, 27-May-1998.) $)
+    simplbi $p |- ( ph -> ps ) $=
+      wph wps wch wph wps wch wa simplbi.1 biimpi simpld $.
+  $}
+
+  ${
+    pm3.26bda.1 $e |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $.
+    $( Deduction eliminating a conjunct.  (Contributed by NM, 22-Oct-2007.) $)
+    simprbda $p |- ( ( ph /\ ps ) -> ch ) $=
+      wph wps wa wch wth wph wps wch wth wa pm3.26bda.1 biimpa simpld $.
+
+    $( Deduction eliminating a conjunct.  (Contributed by NM, 22-Oct-2007.) $)
+    simplbda $p |- ( ( ph /\ ps ) -> th ) $=
+      wph wps wa wch wth wph wps wch wth wa pm3.26bda.1 biimpa simprd $.
+  $}
+
+  ${
+    simplbi2.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Deduction eliminating a conjunct.  (Contributed by Alan Sare,
+       31-Dec-2011.) $)
+    simplbi2 $p |- ( ps -> ( ch -> ph ) ) $=
+      wps wch wph wph wps wch wa simplbi2.1 biimpri ex $.
+  $}
+
+  $( Closed form of ~ simplbi2com .  (Contributed by Alan Sare,
+     22-Jul-2012.) $)
+  simplbi2comt $p |- ( ( ph <-> ( ps /\ ch ) ) -> ( ch -> ( ps -> ph ) ) ) $=
+    wph wps wch wa wb wps wch wph wph wps wch wa biimpr expcomd $.
+
+  ${
+    simplbi2com.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( A deduction eliminating a conjunct, similar to ~ simplbi2 .
+       (Contributed by Alan Sare, 22-Jul-2012.)  (Proof shortened by Wolf
+       Lammen, 10-Nov-2012.) $)
+    simplbi2com $p |- ( ch -> ( ps -> ph ) ) $=
+      wps wch wph wph wps wch simplbi2com.1 simplbi2 com12 $.
+  $}
+
+  ${
+    simpl2im.1 $e |- ( ph -> ( ps /\ ch ) ) $.
+    simpl2im.2 $e |- ( ch -> th ) $.
+    $( Implication from an eliminated conjunct implied by the antecedent.
+       (Contributed by BJ/AV, 5-Apr-2021.)  (Proof shortened by Wolf Lammen,
+       26-Mar-2022.) $)
+    simpl2im $p |- ( ph -> th ) $=
+      wph wch wth wph wps wch simpl2im.1 simprd simpl2im.2 syl $.
+  $}
+
+  ${
+    simplbiim.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    simplbiim.2 $e |- ( ch -> th ) $.
+    $( Implication from an eliminated conjunct equivalent to the antecedent.
+       (Contributed by Jonathan Ben-Naim, 3-Jun-2011.)  (Proof shortened by
+       Wolf Lammen, 26-Mar-2022.) $)
+    simplbiim $p |- ( ph -> th ) $=
+      wph wch wth wph wps wch simplbiim.1 simprbi simplbiim.2 syl $.
+  $}
+
+  ${
+    impel.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    impel.2 $e |- ( th -> ps ) $.
+    $( An inference for implication elimination.  (Contributed by Giovanni
+       Mascellani, 23-May-2019.)  (Proof shortened by Wolf Lammen,
+       2-Sep-2020.) $)
+    impel $p |- ( ( ph /\ th ) -> ch ) $=
+      wph wth wch wth wps wph wch impel.2 impel.1 syl5 imp $.
+  $}
+
+  ${
+    mpan9.1 $e |- ( ph -> ps ) $.
+    mpan9.2 $e |- ( ch -> ( ps -> th ) ) $.
+    $( Modus ponens conjoining dissimilar antecedents.  (Contributed by NM,
+       1-Feb-2008.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+    mpan9 $p |- ( ( ph /\ ch ) -> th ) $=
+      wch wph wth wph wps wch wth mpan9.1 mpan9.2 syl5 impcom $.
+  $}
+
+  ${
+    sylan9.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    sylan9.2 $e |- ( th -> ( ch -> ta ) ) $.
+    $( Nested syllogism inference conjoining dissimilar antecedents.
+       (Contributed by NM, 14-May-1993.)  (Proof shortened by Andrew Salmon,
+       7-May-2011.) $)
+    sylan9 $p |- ( ( ph /\ th ) -> ( ps -> ta ) ) $=
+      wph wth wps wta wi wph wps wch wth wta sylan9.1 sylan9.2 syl9 imp $.
+  $}
+
+  ${
+    sylan9r.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    sylan9r.2 $e |- ( th -> ( ch -> ta ) ) $.
+    $( Nested syllogism inference conjoining dissimilar antecedents.
+       (Contributed by NM, 14-May-1993.) $)
+    sylan9r $p |- ( ( th /\ ph ) -> ( ps -> ta ) ) $=
+      wth wph wps wta wi wph wps wch wth wta sylan9r.1 sylan9r.2 syl9r imp $.
+  $}
+
+  ${
+    sylan9bb.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    sylan9bb.2 $e |- ( th -> ( ch <-> ta ) ) $.
+    $( Nested syllogism inference conjoining dissimilar antecedents.
+       (Contributed by NM, 4-Mar-1995.) $)
+    sylan9bb $p |- ( ( ph /\ th ) -> ( ps <-> ta ) ) $=
+      wph wth wa wps wch wta wph wps wch wb wth sylan9bb.1 adantr wth wch wta
+      wb wph sylan9bb.2 adantl bitrd $.
+  $}
+
+  ${
+    sylan9bbr.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    sylan9bbr.2 $e |- ( th -> ( ch <-> ta ) ) $.
+    $( Nested syllogism inference conjoining dissimilar antecedents.
+       (Contributed by NM, 4-Mar-1995.) $)
+    sylan9bbr $p |- ( ( th /\ ph ) -> ( ps <-> ta ) ) $=
+      wph wth wps wta wb wph wps wch wth wta sylan9bbr.1 sylan9bbr.2 sylan9bb
+      ancoms $.
+  $}
+
+  ${
+    jca.1 $e |- ( ph -> ps ) $.
+    jca.2 $e |- ( ph -> ch ) $.
+    $( Deduce conjunction of the consequents of two implications ("join
+       consequents with 'and'").  Deduction form of ~ pm3.2 and ~ pm3.2i .  Its
+       associated deduction is ~ jcad .  Equivalent to the natural deduction
+       rule ` /\ ` I ( ` /\ ` introduction), see ~ natded .  (Contributed by
+       NM, 3-Jan-1993.)  (Proof shortened by Wolf Lammen, 25-Oct-2012.) $)
+    jca $p |- ( ph -> ( ps /\ ch ) ) $=
+      wph wps wch wps wch wa jca.1 jca.2 wps wch pm3.2 sylc $.
+  $}
+
+  ${
+    jcad.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jcad.2 $e |- ( ph -> ( ps -> th ) ) $.
+    $( Deduction conjoining the consequents of two implications.  Deduction
+       form of ~ jca and double deduction form of ~ pm3.2 and ~ pm3.2i .
+       (Contributed by NM, 15-Jul-1993.)  (Proof shortened by Wolf Lammen,
+       23-Jul-2013.) $)
+    jcad $p |- ( ph -> ( ps -> ( ch /\ th ) ) ) $=
+      wph wps wch wth wch wth wa jcad.1 jcad.2 wch wth pm3.2 syl6c $.
+  $}
+
+  ${
+    jca2.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jca2.2 $e |- ( ps -> th ) $.
+    $( Inference conjoining the consequents of two implications.  (Contributed
+       by Rodolfo Medina, 12-Oct-2010.) $)
+    jca2 $p |- ( ph -> ( ps -> ( ch /\ th ) ) ) $=
+      wph wps wch wth jca2.1 wps wth wi wph jca2.2 a1i jcad $.
+  $}
+
+  ${
+    jca31.1 $e |- ( ph -> ps ) $.
+    jca31.2 $e |- ( ph -> ch ) $.
+    jca31.3 $e |- ( ph -> th ) $.
+    $( Join three consequents.  (Contributed by Jeff Hankins, 1-Aug-2009.) $)
+    jca31 $p |- ( ph -> ( ( ps /\ ch ) /\ th ) ) $=
+      wph wps wch wa wth wph wps wch jca31.1 jca31.2 jca jca31.3 jca $.
+
+    $( Join three consequents.  (Contributed by FL, 1-Aug-2009.) $)
+    jca32 $p |- ( ph -> ( ps /\ ( ch /\ th ) ) ) $=
+      wph wps wch wth wa jca31.1 wph wch wth jca31.2 jca31.3 jca jca $.
+  $}
+
+  ${
+    jcai.1 $e |- ( ph -> ps ) $.
+    jcai.2 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Deduction replacing implication with conjunction.  (Contributed by NM,
+       15-Jul-1993.) $)
+    jcai $p |- ( ph -> ( ps /\ ch ) ) $=
+      wph wps wch jcai.1 wph wps wch jcai.1 jcai.2 mpd jca $.
+  $}
+
+  $( Distributive law for implication over conjunction.  Compare Theorem *4.76
+     of [WhiteheadRussell] p. 121.  (Contributed by NM, 3-Apr-1994.)  (Proof
+     shortened by Wolf Lammen, 27-Nov-2013.) $)
+  jcab $p |- ( ( ph -> ( ps /\ ch ) )
+      <-> ( ( ph -> ps ) /\ ( ph -> ch ) ) ) $=
+    wph wps wch wa wi wph wps wi wph wch wi wa wph wps wch wa wi wph wps wi wph
+    wch wi wps wch wa wps wph wps wch simpl imim2i wps wch wa wch wph wps wch
+    simpr imim2i jca wph wps wch pm3.43 impbii $.
+
+  $( Theorem *4.76 of [WhiteheadRussell] p. 121.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.76 $p |- ( ( ( ph -> ps ) /\ ( ph -> ch ) ) <->
+                ( ph -> ( ps /\ ch ) ) ) $=
+    wph wps wch wa wi wph wps wi wph wch wi wa wph wps wch jcab bicomi $.
+
+  ${
+    jctil.1 $e |- ( ph -> ps ) $.
+    jctil.2 $e |- ch $.
+    $( Inference conjoining a theorem to left of consequent in an implication.
+       (Contributed by NM, 31-Dec-1993.) $)
+    jctil $p |- ( ph -> ( ch /\ ps ) ) $=
+      wph wch wps wch wph jctil.2 a1i jctil.1 jca $.
+
+    $( Inference conjoining a theorem to right of consequent in an implication.
+       (Contributed by NM, 31-Dec-1993.) $)
+    jctir $p |- ( ph -> ( ps /\ ch ) ) $=
+      wph wps wch jctil.1 wch wph jctil.2 a1i jca $.
+  $}
+
+  ${
+    jccir.1 $e |- ( ph -> ps ) $.
+    jccir.2 $e |- ( ps -> ch ) $.
+    $( Inference conjoining a consequent of a consequent to the right of the
+       consequent in an implication.  See also ~ ex-natded5.3i .  (Contributed
+       by Mario Carneiro, 9-Feb-2017.)  (Revised by AV, 20-Aug-2019.) $)
+    jccir $p |- ( ph -> ( ps /\ ch ) ) $=
+      wph wps wch jccir.1 wph wps wch jccir.1 jccir.2 syl jca $.
+
+    $( Inference conjoining a consequent of a consequent to the left of the
+       consequent in an implication.  Remark:  One can also prove this theorem
+       using ~ syl and ~ jca (as done in ~ jccir ), which would be 4 bytes
+       shorter, but one step longer than the current proof.
+       (Proof modification is discouraged.)  (Contributed by AV,
+       20-Aug-2019.) $)
+    jccil $p |- ( ph -> ( ch /\ ps ) ) $=
+      wph wps wch wph wps wch jccir.1 jccir.2 jccir ancomd $.
+  $}
+
+  ${
+    jctl.1 $e |- ps $.
+    $( Inference conjoining a theorem to the left of a consequent.
+       (Contributed by NM, 31-Dec-1993.)  (Proof shortened by Wolf Lammen,
+       24-Oct-2012.) $)
+    jctl $p |- ( ph -> ( ps /\ ph ) ) $=
+      wph wph wps wph id jctl.1 jctil $.
+
+    $( Inference conjoining a theorem to the right of a consequent.
+       (Contributed by NM, 18-Aug-1993.)  (Proof shortened by Wolf Lammen,
+       24-Oct-2012.) $)
+    jctr $p |- ( ph -> ( ph /\ ps ) ) $=
+      wph wph wps wph id jctl.1 jctir $.
+  $}
+
+  ${
+    jctild.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jctild.2 $e |- ( ph -> th ) $.
+    $( Deduction conjoining a theorem to left of consequent in an implication.
+       (Contributed by NM, 21-Apr-2005.) $)
+    jctild $p |- ( ph -> ( ps -> ( th /\ ch ) ) ) $=
+      wph wps wth wch wph wth wps jctild.2 a1d jctild.1 jcad $.
+  $}
+
+  ${
+    jctird.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jctird.2 $e |- ( ph -> th ) $.
+    $( Deduction conjoining a theorem to right of consequent in an implication.
+       (Contributed by NM, 21-Apr-2005.) $)
+    jctird $p |- ( ph -> ( ps -> ( ch /\ th ) ) ) $=
+      wph wps wch wth jctird.1 wph wth wps jctird.2 a1d jcad $.
+  $}
+
+  $( Introduction of antecedent as conjunct.  Theorem *4.73 of
+     [WhiteheadRussell] p. 121.  (Contributed by NM, 30-Mar-1994.) $)
+  iba $p |- ( ph -> ( ps <-> ( ps /\ ph ) ) ) $=
+    wph wps wps wph wa wph wps pm3.21 wps wph simpl impbid1 $.
+
+  $( Introduction of antecedent as conjunct.  (Contributed by NM,
+     5-Dec-1995.) $)
+  ibar $p |- ( ph -> ( ps <-> ( ph /\ ps ) ) ) $=
+    wph wps wph wps wph wps iba biancomd $.
+
+  ${
+    biantru.1 $e |- ph $.
+    $( A wff is equivalent to its conjunction with truth.  (Contributed by NM,
+       26-May-1993.) $)
+    biantru $p |- ( ps <-> ( ps /\ ph ) ) $=
+      wph wps wps wph wa wb biantru.1 wph wps iba ax-mp $.
+  $}
+
+  ${
+    biantrur.1 $e |- ph $.
+    $( A wff is equivalent to its conjunction with truth.  (Contributed by NM,
+       3-Aug-1994.) $)
+    biantrur $p |- ( ps <-> ( ph /\ ps ) ) $=
+      wps wph wps wph wps biantrur.1 biantru biancomi $.
+  $}
+
+  ${
+    biantrud.1 $e |- ( ph -> ps ) $.
+    $( A wff is equivalent to its conjunction with truth.  (Contributed by NM,
+       2-Aug-1994.)  (Proof shortened by Wolf Lammen, 23-Oct-2013.) $)
+    biantrud $p |- ( ph -> ( ch <-> ( ch /\ ps ) ) ) $=
+      wph wps wch wch wps wa wb biantrud.1 wps wch iba syl $.
+
+    $( A wff is equivalent to its conjunction with truth.  (Contributed by NM,
+       1-May-1995.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+    biantrurd $p |- ( ph -> ( ch <-> ( ps /\ ch ) ) ) $=
+      wph wps wch wps wch wa wb biantrud.1 wps wch ibar syl $.
+  $}
+
+  ${
+    bianfi.1 $e |- -. ph $.
+    $( A wff conjoined with falsehood is false.  (Contributed by NM,
+       21-Jun-1993.)  (Proof shortened by Wolf Lammen, 26-Nov-2012.) $)
+    bianfi $p |- ( ph <-> ( ps /\ ph ) ) $=
+      wph wps wph wa bianfi.1 wph wps bianfi.1 intnan 2false $.
+  $}
+
+  ${
+    bianfd.1 $e |- ( ph -> -. ps ) $.
+    $( A wff conjoined with falsehood is false.  (Contributed by NM,
+       27-Mar-1995.)  (Proof shortened by Wolf Lammen, 5-Nov-2013.) $)
+    bianfd $p |- ( ph -> ( ps <-> ( ps /\ ch ) ) ) $=
+      wph wps wps wch wa bianfd.1 wph wps wch bianfd.1 intnanrd 2falsed $.
+  $}
+
+  ${
+    baib.1 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Move conjunction outside of biconditional.  (Contributed by NM,
+       13-May-1999.) $)
+    baib $p |- ( ps -> ( ph <-> ch ) ) $=
+      wps wph wps wch wa wch baib.1 wps wch ibar bitr4id $.
+
+    $( Move conjunction outside of biconditional.  (Contributed by NM,
+       11-Jul-1994.) $)
+    baibr $p |- ( ps -> ( ch <-> ph ) ) $=
+      wps wph wch wph wps wch baib.1 baib bicomd $.
+
+    $( Move conjunction outside of biconditional.  (Contributed by Mario
+       Carneiro, 11-Sep-2015.)  (Proof shortened by Wolf Lammen,
+       19-Jan-2020.) $)
+    rbaibr $p |- ( ch -> ( ps <-> ph ) ) $=
+      wph wch wps wph wch wps baib.1 biancomi baibr $.
+
+    $( Move conjunction outside of biconditional.  (Contributed by Mario
+       Carneiro, 11-Sep-2015.)  (Proof shortened by Wolf Lammen,
+       19-Jan-2020.) $)
+    rbaib $p |- ( ch -> ( ph <-> ps ) ) $=
+      wch wps wph wph wps wch baib.1 rbaibr bicomd $.
+  $}
+
+  ${
+    baibd.1 $e |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $.
+    $( Move conjunction outside of biconditional.  (Contributed by Mario
+       Carneiro, 11-Sep-2015.) $)
+    baibd $p |- ( ( ph /\ ch ) -> ( ps <-> th ) ) $=
+      wph wps wch wth wa wch wth baibd.1 wch wth wch wth wa wch wth ibar bicomd
+      sylan9bb $.
+
+    $( Move conjunction outside of biconditional.  (Contributed by Mario
+       Carneiro, 11-Sep-2015.) $)
+    rbaibd $p |- ( ( ph /\ th ) -> ( ps <-> ch ) ) $=
+      wph wps wth wch wph wps wth wch baibd.1 biancomd baibd $.
+  $}
+
+  ${
+    bianabs.1 $e |- ( ph -> ( ps <-> ( ph /\ ch ) ) ) $.
+    $( Absorb a hypothesis into the second member of a biconditional.
+       (Contributed by FL, 15-Feb-2007.) $)
+    bianabs $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wph wch wa wch bianabs.1 wph wch ibar bitr4d $.
+  $}
+
+  $( Theorem *5.44 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.44 $p |- ( ( ph -> ps ) -> ( ( ph -> ch ) <->
+                ( ph -> ( ps /\ ch ) ) ) ) $=
+    wph wps wch wa wi wph wps wi wph wch wi wph wps wch jcab baibr $.
+
+  $( Theorem *5.42 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.42 $p |- ( ( ph -> ( ps -> ch ) ) <->
+                ( ph -> ( ps -> ( ph /\ ch ) ) ) ) $=
+    wph wps wch wi wps wph wch wa wi wph wch wph wch wa wps wph wch ibar imbi2d
+    pm5.74i $.
+
+  $( Conjoin antecedent to left of consequent.  (Contributed by NM,
+     15-Aug-1994.) $)
+  ancl $p |- ( ( ph -> ps ) -> ( ph -> ( ph /\ ps ) ) ) $=
+    wph wps wph wps wa wph wps pm3.2 a2i $.
+
+  $( Conjoin antecedent to left of consequent.  Theorem *4.7 of
+     [WhiteheadRussell] p. 120.  (Contributed by NM, 25-Jul-1999.)  (Proof
+     shortened by Wolf Lammen, 24-Mar-2013.) $)
+  anclb $p |- ( ( ph -> ps ) <-> ( ph -> ( ph /\ ps ) ) ) $=
+    wph wps wph wps wa wph wps ibar pm5.74i $.
+
+  $( Conjoin antecedent to right of consequent.  (Contributed by NM,
+     15-Aug-1994.) $)
+  ancr $p |- ( ( ph -> ps ) -> ( ph -> ( ps /\ ph ) ) ) $=
+    wph wps wps wph wa wph wps pm3.21 a2i $.
+
+  $( Conjoin antecedent to right of consequent.  (Contributed by NM,
+     25-Jul-1999.)  (Proof shortened by Wolf Lammen, 24-Mar-2013.) $)
+  ancrb $p |- ( ( ph -> ps ) <-> ( ph -> ( ps /\ ph ) ) ) $=
+    wph wps wps wph wa wph wps iba pm5.74i $.
+
+  ${
+    ancli.1 $e |- ( ph -> ps ) $.
+    $( Deduction conjoining antecedent to left of consequent.  (Contributed by
+       NM, 12-Aug-1993.) $)
+    ancli $p |- ( ph -> ( ph /\ ps ) ) $=
+      wph wph wps wph id ancli.1 jca $.
+  $}
+
+  ${
+    ancri.1 $e |- ( ph -> ps ) $.
+    $( Deduction conjoining antecedent to right of consequent.  (Contributed by
+       NM, 15-Aug-1994.) $)
+    ancri $p |- ( ph -> ( ps /\ ph ) ) $=
+      wph wps wph ancri.1 wph id jca $.
+  $}
+
+  ${
+    ancld.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Deduction conjoining antecedent to left of consequent in nested
+       implication.  (Contributed by NM, 15-Aug-1994.)  (Proof shortened by
+       Wolf Lammen, 1-Nov-2012.) $)
+    ancld $p |- ( ph -> ( ps -> ( ps /\ ch ) ) ) $=
+      wph wps wps wch wph wps idd ancld.1 jcad $.
+  $}
+
+  ${
+    ancrd.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Deduction conjoining antecedent to right of consequent in nested
+       implication.  (Contributed by NM, 15-Aug-1994.)  (Proof shortened by
+       Wolf Lammen, 1-Nov-2012.) $)
+    ancrd $p |- ( ph -> ( ps -> ( ch /\ ps ) ) ) $=
+      wph wps wch wps ancrd.1 wph wps idd jcad $.
+  $}
+
+  ${
+    impac.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Importation with conjunction in consequent.  (Contributed by NM,
+       9-Aug-1994.) $)
+    impac $p |- ( ( ph /\ ps ) -> ( ch /\ ps ) ) $=
+      wph wps wch wps wa wph wps wch impac.1 ancrd imp $.
+  $}
+
+  $( Conjoin antecedent to left of consequent in nested implication.
+     (Contributed by NM, 10-Aug-1994.)  (Proof shortened by Wolf Lammen,
+     14-Jul-2013.) $)
+  anc2l $p |- ( ( ph -> ( ps -> ch ) ) -> ( ph -> ( ps -> ( ph /\ ch ) ) ) ) $=
+    wph wps wch wi wi wph wps wph wch wa wi wi wph wps wch pm5.42 biimpi $.
+
+  $( Conjoin antecedent to right of consequent in nested implication.
+     (Contributed by NM, 15-Aug-1994.) $)
+  anc2r $p |- ( ( ph -> ( ps -> ch ) ) -> ( ph -> ( ps -> ( ch /\ ph ) ) ) ) $=
+    wph wps wch wi wps wch wph wa wi wph wch wch wph wa wps wph wch pm3.21
+    imim2d a2i $.
