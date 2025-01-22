@@ -671,6 +671,29 @@ th_db = {
                   'simplim', 'ax-mp', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
                   'wn', 'simplim', 'syl']
     },
+    "biimpi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → 𝜓 )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'hyp.1', 'wph',
+                  'wps', 'biimp', 'ax-mp']
+    },
+    "sylbi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ 𝜓 )",
+                "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'wph', 'wps', 'hyp.1', 'biimpi',
+                  'hyp.2', 'syl']
+    },
+    "sylib": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wps', 'wch', 'hyp.2',
+                  'biimpi', 'syl']
+    },
 
 }
 
@@ -681,10 +704,10 @@ th_db = {
 
 
 """
-    "biimp": {
+    "sylib": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → 𝜓 )",
         "proof": []
     },
     
@@ -1078,6 +1101,10 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         #-- (hipotesis + conclusion)
         tam = max([len(f) for f in hyp])
 
+        #-- Extraer la conclusion de la lista de hipotesis
+        #-- (ya no la necesitamos)
+        hyp.pop()
+
         #-- Modo verbose: Mostrar el paso actual
         if (show_proof):
             if name not in ["wn", "wi", "wb", "wa"]:
@@ -1088,6 +1115,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
                 #-- Mostrar las hipotesis
                 for i, h in enumerate(hyp, 1):
                     print(f"{h}")
+                    #print(f"({i}){h}")
 
                 #-- Imprimir linea horizontal
                 print("─" * tam)                
