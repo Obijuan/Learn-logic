@@ -775,6 +775,44 @@ th_db = {
         "proof": ['wph', 'wps', 'wb', 'wps', 'wph', 'wb', 'wph', 'wps',
                   'bicom1', 'wps', 'wph', 'bicom1', 'impbii']
     },
+    "bicomd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 ↔ 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wch', 'wps', 'wb', 'hyp.1',
+                  'wps', 'wch', 'bicom', 'sylib']
+    },
+    "bicomi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜓 ↔ 𝜑 )",
+        "proof": ['wph', 'wps', 'wb', 'wps', 'wph', 'wb', 'hyp.1', 'wph',
+                  'wps', 'bicom1', 'ax-mp']
+    },
+    "impcon4bid": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( ¬𝜓 → ¬𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wph', 'wps', 'wch',
+                  'hyp.2', 'con4d', 'impbid']
+    },
+    "biimpri": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜓 → 𝜑 )",
+        "proof": ['wps', 'wph', 'wph', 'wps', 'hyp.1', 'bicomi',
+                  'biimpi']
+    },
+    "sylib": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wps', 'wch', 'hyp.2',
+                  'biimpi', 'syl']
+    },
+
 
 }
 
@@ -785,7 +823,7 @@ th_db = {
 
 
 """
-    "bicom": {
+    "sylib": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
