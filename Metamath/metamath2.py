@@ -812,18 +812,68 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wps', 'wch', 'hyp.2',
                   'biimpi', 'syl']
     },
-
+    "mpbi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ 𝜓",
+        "proof": ['wph', 'wps', 'hyp.1', 'wph', 'wps', 'hyp.2',
+                  'biimpi', 'ax-mp']
+    },
+    "mpbir": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜓",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ 𝜑",
+        "proof": ['wps', 'wph', 'hyp.1', 'wph', 'wps', 'hyp.2',
+                  'biimpri', 'ax-mp']
+    },
+    "sylibr": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜒 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wch', 'wps', 'hyp.2',
+                  'biimpri', 'syl']
+    },
+    "sylbbr": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ 𝜓 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜒 → 𝜑 )",
+        "proof": ['wch', 'wps', 'wph', 'wps', 'wch', 'hyp.2', 'biimpri',
+                  'hyp.1', 'sylibr'] 
+    },
+    "biimpd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wps', 'wch', 'wi', 'hyp.1',
+                  'wps', 'wch', 'biimp', 'syl']
+    },
+    "syl5ib": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜒 → ( 𝜓 ↔ 𝜃 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 → 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'hyp.1', 'wch', 'wps',
+                  'wth', 'hyp.2', 'biimpd', 'syl5']
+    },
+    "syl5ibr": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → 𝜃 )",
+                "⊢ ( 𝜒 → ( 𝜓 ↔ 𝜃 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wth', 'wch', 'wps', 'hyp.1', 'wch', 'wps',
+                  'wth', 'hyp.2', 'bicomd', 'syl5ib']
+    },
+    
 
 }
 
 
 """
-
-"""
-
-
-"""
-    "sylib": {
+    "syl5ibr": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
