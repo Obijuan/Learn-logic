@@ -11,6 +11,7 @@ HYP_WFF = {
     "wps": 1,
     "wch": 2,
     "wth": 3,
+    "wta": 4,
 }
 
 #-- Diccionario de hipotesis teoremas
@@ -527,6 +528,149 @@ th_db = {
         "proof": ["wph", "wps", "wa", "wph", "wps", "wn", "wi", "wn", 
                   "wb", "ax-th"]
     },
+    #---- TEOREMAS
+    "syl2im": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜒 → 𝜃 )",
+                "⊢ ( 𝜓 → ( 𝜃 → 𝜏 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜏 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wta', 'wi', 'hyp.1', 'wch',
+                  'wth', 'wps', 'wta', 'hyp.2', 'hyp.3',
+                  'syl5', 'syl']
+    },
+    "syl2imc": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜒 → 𝜃 )",
+                "⊢ ( 𝜓 → ( 𝜃 → 𝜏 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 → 𝜏 ) )",
+        "proof": ['wph', 'wch', 'wta', 'wph', 'wps', 'wch', 'wth', 'wta',
+                  'hyp.1', 'hyp.2', 'hyp.3', 'syl2im', 'com12']
+    },
+    "pm2.43i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 → ( 𝜑 → 𝜓 ) )"],
+        "conc": "⊢ ( 𝜑 → 𝜓 )",
+        "proof": ['wph', 'wph', 'wps', 'wph', 'id', 'hyp.1', 'mpd']
+    },
+    "imim3i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( ( 𝜃 → 𝜑 ) → ( ( 𝜃 → 𝜓 ) → ( 𝜃 → 𝜒 ) ) )",
+        "proof": ['wth', 'wph', 'wi', 'wth', 'wps', 'wch', 'wph', 'wps',
+                  'wch', 'wi', 'wth', 'hyp.1', 'imim2i', 'a2d']
+    },
+    "syl6c": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜃 ) )",
+                "⊢ ( 𝜒 → ( 𝜃 → 𝜏 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜏 ) )",
+        "proof": ['wph', 'wps', 'wth', 'wta', 'hyp.2', 'wph', 'wps', 'wch',
+                  'wth', 'wta', 'wi', 'hyp.1', 'hyp.3', 'syl6', 'mpdd']
+    },
+    "imim2d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜃 → 𝜓 ) → ( 𝜃 → 𝜒 ) ) )",
+        "proof": ['wph', 'wth', 'wps', 'wch', 'wph', 'wps', 'wch', 'wi',
+                  'wth', 'hyp.1', 'a1d', 'a2d']
+    },
+    "imim2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) → ( ( 𝜒 → 𝜑 ) → ( 𝜒 → 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wps', 'wch', 'wph', 'wps',
+                  'wi', 'id', 'imim2d']
+    },
+    "syldd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜃 → 𝜏 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜏 ) ) )",
+        "proof": ['wph', 'wps', 'wth', 'wta', 'wi', 'wch', 'wth', 'wi',
+                  'wch', 'wta', 'wi', 'hyp.2', 'hyp.1', 'wth',
+                  'wta', 'wch', 'imim2', 'syl6c']
+    },
+    "syl5d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜃 → ( 𝜒 → 𝜏 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜃 → ( 𝜓 → 𝜏 ) ) )",
+        "proof": ['wph', 'wth', 'wps', 'wch', 'wta', 'wph', 'wps', 'wch',
+                  'wi', 'wth', 'hyp.1', 'a1d', 'hyp.2', 'syldd']
+    },
+    "syl9": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜃 → ( 𝜒 → 𝜏 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜃 → ( 𝜓 → 𝜏 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wta', 'hyp.1', 'wth',
+                  'wch', 'wta', 'wi', 'wi', 'wph', 'hyp.2', 'a1i', 'syl5d']
+    },
+    "com23": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → ( 𝜓 → 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wi', 'wch', 'wth', 'hyp.1',
+                  'wch', 'wth', 'pm2.27', 'syl9']
+    },
+    "pm2.86d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( ( 𝜓 → 𝜒 ) → ( 𝜓 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+        "proof": ['wph', 'wch', 'wps', 'wth', 'wch', 'wps', 'wch', 'wi',
+                  'wph', 'wps', 'wth', 'wi', 'wch', 'wps', 'ax-1',
+                  'hyp.1', 'syl5', 'com23']
+    },
+    "simplim": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ¬( 𝜑 → 𝜓 ) → 𝜑 )",
+        "proof": ['wph', 'wph', 'wps', 'wi', 'wph', 'wps', 'pm2.21', 
+                  'con1i']
+    },
+    "impbidd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜃 → 𝜒 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 ↔ 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wi', 'wth', 'wch', 'wi',
+                  'wch', 'wth', 'wb', 'hyp.1', 'hyp.2', 'wch',
+                  'wth', 'impbi', 'syl6c']
+    },
+    "impbid21d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜓 → ( 𝜒 → 𝜃 ) )",
+                "⊢ ( 𝜑 → ( 𝜃 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 ↔ 𝜃 ) ) )",
+        "proof": ['wps', 'wch', 'wth', 'wi', 'wph', 'wth', 'wch', 'wi',
+                  'wch', 'wth', 'wb', 'hyp.1', 'hyp.2',
+                  'wch', 'wth', 'impbi', 'syl2imc']
+    },
+    "impbid": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wph', 'wph', 'wps', 'wch',
+                  'hyp.1', 'hyp.2', 'impbid21d', 'pm2.43i']
+    },
+    "biimp": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ↔ 𝜓 ) → ( 𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 'wph',
+                  'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wi', 'wph', 'wps',
+                  'wb', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wn', 'wi',
+                  'wn', 'wi', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi', 'wn',
+                  'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wn', 'wi', 'wn',
+                  'wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 'wph',
+                  'wi', 'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 'df-bi',
+                  'wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
+                  'wn', 'wi', 'wn', 'wi', 'wph', 'wps', 'wi', 'wps', 'wph',
+                  'wi', 'wn', 'wi', 'wn', 'wph', 'wps', 'wb', 'wi', 'wn',
+                  'simplim', 'ax-mp', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
+                  'wn', 'simplim', 'syl']
+    },
 
 }
 
@@ -537,15 +681,15 @@ th_db = {
 
 
 """
-    "df-an": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+    "biimp": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
         "proof": []
     },
     
     "pm2.61d": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
         "proof": []
@@ -638,6 +782,10 @@ def wch():
 def wth():
     """La variable 𝜃 es una fórmula bien formada (wff)"""
     stack.append("wff 𝜃")
+
+def wta():
+    """La variable 𝜃 es una fórmula bien formada (wff)"""
+    stack.append("wff 𝜏")
 
 def wn(show_proof = False):
     """Si w es una fórmula bien formada (wff), """
@@ -882,7 +1030,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
     for step,name in enumerate(proof, 1):
 
         #-- Meter las hipotesis wff en la pila
-        if name in ["wph", "wps", "wch", "wth"]:
+        if name in ["wph", "wps", "wch", "wth", "wta"]:
             stack.append(hyp_orig[HYP_WFF[name]])
             continue
 
