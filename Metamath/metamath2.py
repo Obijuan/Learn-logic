@@ -991,14 +991,40 @@ th_db = {
         "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb',
                   'hyp.1', 'wph', 'wps', 'notbi', 'mpbi']
     },
+    "xchbinx": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ ¬𝜓 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜑 ↔ ¬𝜒 )",
+        "proof": ['wph', 'wps', 'wn', 'wch', 'wn', 'hyp.1', 'wps', 'wch',
+                  'hyp.2', 'notbii', 'bitri']
+    },
+    "xchbinxr": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ ¬𝜓 )",
+                "⊢ ( 𝜒 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜑 ↔ ¬𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wch', 'wps',
+                  'hyp.2', 'bicomi', 'xchbinx']
+    },
+    "imbi2i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( ( 𝜒 → 𝜑 ) ↔ ( 𝜒 → 𝜓 ) )",
+        "proof": ['wch', 'wph', 'wps', 'wph', 'wps', 'wb', 'wch', 'hyp.1',
+                  'a1i', 'pm5.74i']
+    },
+    "con2bii": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 ↔ ¬𝜓 )"],
+        "conc": "⊢ ( 𝜓 ↔ ¬𝜑 )",
+        "proof": ['wps', 'wps', 'wn', 'wph', 'wps', 'notnotb', 'hyp.1',
+                  'xchbinxr']
+    },
 }
 
 """
-
-"""
-
-"""
-    "notbii": {
+    "con2bii": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1467,7 +1493,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("notbii", True)
+check_theorem("con2bii", True)
 print(stack)
 
 print()
