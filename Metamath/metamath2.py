@@ -976,13 +976,20 @@ th_db = {
                   'notnotb', 'wch', 'notnotb', '3bitr3g', 'con4bid']
     },
     "notbi": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏"],
+        "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( ( 𝜑 ↔ 𝜓 ) ↔ ( ¬𝜑 ↔ ¬𝜓 ) )",
         "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb', 'wph',
                   'wps', 'wb', 'wph', 'wps', 'wph', 'wps', 'wb', 'id',
                   'notbid', 'wph', 'wn', 'wps', 'wn', 'wb', 'wph', 'wps',
                   'wph', 'wn', 'wps', 'wn', 'wb', 'id', 'con4bid',
                   'impbii']
+    },
+    "notbii": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( ¬𝜑 ↔ ¬𝜓 )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb',
+                  'hyp.1', 'wph', 'wps', 'notbi', 'mpbi']
     },
 }
 
@@ -991,7 +998,7 @@ th_db = {
 """
 
 """
-    "notbi": {
+    "notbii": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1460,7 +1467,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("notbi", True)
+check_theorem("notbii", True)
 print(stack)
 
 print()
