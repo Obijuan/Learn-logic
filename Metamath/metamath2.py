@@ -1057,10 +1057,17 @@ th_db = {
                   'wps', 'wa', 'wch', 'wph', 'wps', 'df-an', 'hyp.1',
                   'sylbir', 'expi']
     },
+    "expcom": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( ( 𝜑 ∧ 𝜓 ) → 𝜒 )"],
+        "conc": "⊢ ( 𝜓 → ( 𝜑 → 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wph', 'wps', 'wch', 'hyp.1', 'ex',
+                  'com12']
+    },
 }
 
 """
-    "sylbir": {
+    "expcom": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1529,7 +1536,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("ex", True)
+check_theorem("expcom", True)
 print(stack)
 
 print()
