@@ -1126,11 +1126,43 @@ th_db = {
         "proof": ['wph', 'wps', 'wa', 'wch', 'wth', 'wph', 'wps', 'wch',
                   'wth', 'wi', 'hyp.1', 'imp', 'imp']
     },
+    "anassrs": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( ( 𝜑 ∧ ( 𝜓 ∧ 𝜒 ) ) → 𝜃 )"],
+        "conc": "⊢ ( ( ( 𝜑 ∧ 𝜓 ) ∧ 𝜒 ) → 𝜃 )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wph', 'wps', 'wch', 'wth',
+                  'hyp.1', 'exp32', 'imp31']
+    },
+    "anass": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
+        "conc": " ⊢ (((𝜑 ∧ 𝜓) ∧ 𝜒) ↔ (𝜑 ∧ (𝜓 ∧ 𝜒)))",
+        "proof": ['wph', 'wps', 'wa', 'wch', 'wa', 'wph', 'wps',
+                  'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wph',
+                  'wps', 'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wa',
+                  'wa', 'id', 'anassrs', 'wph', 'wps', 'wch', 'wph',
+                  'wps', 'wa', 'wch', 'wa', 'wph', 'wps', 'wa', 'wch',
+                  'wa', 'id', 'anasss', 'impbii']
+    },
+    "impd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜓 ∧ 𝜒 ) → 𝜃 ) )",
+        "proof": ['wps', 'wch', 'wa', 'wph', 'wth', 'wps', 'wch', 'wph',
+                  'wth', 'wi', 'wph', 'wps', 'wch', 'wth', 'hyp.1',
+                  'com3l', 'imp', 'com12']
+    },
+    "com3l": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜓 → ( 𝜒 → ( 𝜑 → 𝜃 ) ) )",
+        "proof": ['wch', 'wph', 'wps', 'wth', 'wph', 'wps', 'wch', 'wth',
+                  'hyp.1', 'com3r', 'com3r']
+    },
     
 }
 
 """
-    "imp31": {
+    "com3l": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1599,7 +1631,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imp31", True)
+check_theorem("com3l", True)
 print(stack)
 
 print()
