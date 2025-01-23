@@ -867,13 +867,80 @@ th_db = {
         "proof": ['wph', 'wth', 'wch', 'wps', 'hyp.1', 'wch', 'wps',
                   'wth', 'hyp.2', 'bicomd', 'syl5ib']
     },
-    
-
+    "biimprd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )",
+        "proof": ['wch', 'wps', 'wph', 'wch', 'wch', 'id', 'hyp.1',
+                  'syl5ibr']
+    },
+    "pm5.74": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
+        "conc": "⊢ ( ( 𝜑 → ( 𝜓 ↔ 𝜒 ) ) ↔ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 → 𝜒 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wi', 'wph', 'wps', 'wi',
+                  'wph', 'wch', 'wi', 'wb', 'wph', 'wps', 'wch', 'wb',
+                  'wi', 'wph', 'wps', 'wi', 'wph', 'wch', 'wi', 'wps',
+                  'wch', 'wb', 'wps', 'wch', 'wph', 'wps', 'wch', 'biimp',
+                  'imim3i', 'wps', 'wch', 'wb', 'wch', 'wps', 'wph', 'wps',
+                  'wch', 'biimpr', 'imim3i', 'impbid', 'wph', 'wps', 'wi',
+                  'wph', 'wch', 'wi', 'wb', 'wph', 'wps', 'wch', 'wph',
+                  'wps', 'wi', 'wph', 'wch', 'wi', 'wb', 'wph', 'wps',
+                  'wch', 'wph', 'wps', 'wi', 'wph', 'wch', 'wi', 'biimp',
+                  'pm2.86d', 'wph', 'wps', 'wi', 'wph', 'wch', 'wi', 'wb',
+                  'wph', 'wch', 'wps', 'wph', 'wps', 'wi', 'wph', 'wch',
+                  'wi', 'biimpr', 'pm2.86d', 'impbidd', 'impbii']
+    },
+    "pm5.74i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 → 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wi', 'wph', 'wps', 'wi',
+                  'wph', 'wch', 'wi', 'wb', 'hyp.1', 'wph', 'wps', 
+                  'wch', 'pm5.74', 'mpbi']
+    },
+    "pm5.74ri": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wb', 'wi', 'wph', 'wps', 'wi',
+                  'wph', 'wch', 'wi', 'wb', 'hyp.1', 'wph', 'wps',
+                  'wch', 'pm5.74', 'mpbir']
+    },
+    "bitri": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒",
+                "⊢ ( 𝜑 ↔ 𝜓 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜒 )",
+        "proof": ['wph', 'wch', 'wph', 'wps', 'wch', 'hyp.1', 'hyp.2',
+                  'sylbb', 'wph', 'wps', 'wch', 'hyp.1', 'hyp.2',
+                  'sylbbr', 'impbii']
+    },
+    "bitrd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜒 ↔ 𝜃 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wth', 'wph', 'wps', 'wi', 'wph', 'wch',
+                  'wi', 'wph', 'wth', 'wi', 'wph', 'wps', 'wch',
+                  'hyp.1', 'pm5.74i', 'wph', 'wch', 'wth',
+                  'hyp.2', 'pm5.74i', 'bitri', 'pm5.74ri']
+    },
+    "bitrid": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 ↔ 𝜓 )",
+                "⊢ ( 𝜒 → ( 𝜓 ↔ 𝜃 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 ↔ 𝜃 ) )",
+        "proof": ['wch', 'wph', 'wps', 'wth', 'wph', 'wps', 'wb', 'wch',
+                  'hyp.1', 'a1i', 'hyp.2', 'bitrd']
+    },
 }
 
+"""
 
 """
-    "syl5ibr": {
+
+"""
+    "bitrd": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1327,6 +1394,8 @@ def check_theorem(name: str, show_proof=False):
         print("❌️ Prueba incorrecta")
         print(conclusion)
         print(th_db[name]["conc"])
+        print(stack)
+
         sys.exit(1)
 
 
@@ -1335,10 +1404,14 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-for th in th_db:
-    check_theorem(th, True)
+#for th in th_db:
+#    check_theorem(th, True)
 
 print("-----------------------")
+
+check_theorem("bitrid", True)
+#check_theorem("bitr3id", True)
+print(stack)
 
 print()
  
