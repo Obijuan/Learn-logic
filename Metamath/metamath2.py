@@ -933,6 +933,14 @@ th_db = {
         "proof": ['wch', 'wph', 'wps', 'wth', 'wph', 'wps', 'wb', 'wch',
                   'hyp.1', 'a1i', 'hyp.2', 'bitrd']
     },
+    "bitr3id": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜓 ↔ 𝜑 )",
+                "⊢ ( 𝜒 → ( 𝜓 ↔ 𝜃 ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 ↔ 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wps', 'wph', 'hyp.1',
+                  'bicomi', 'hyp.2', 'bitrid']
+    },
 }
 
 """
@@ -940,7 +948,7 @@ th_db = {
 """
 
 """
-    "bitrd": {
+    "bitr3id": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1409,8 +1417,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("bitrid", True)
-#check_theorem("bitr3id", True)
+check_theorem("bitr3id", True)
 print(stack)
 
 print()
