@@ -1051,8 +1051,8 @@ th_db = {
     },
     "ex": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
-                " ⊢ ((𝜑 ∧ 𝜓) → 𝜒)"],
-        "conc": " ⊢ (𝜑 → (𝜓 → 𝜒))",
+                "⊢ ( ( 𝜑 ∧ 𝜓 ) → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
         "proof": ['wph', 'wps', 'wch', 'wph', 'wps', 'wn', 'wi', 'wn', 'wph',
                   'wps', 'wa', 'wch', 'wph', 'wps', 'df-an', 'hyp.1',
                   'sylbir', 'expi']
@@ -1529,7 +1529,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("sylbir", True)
+check_theorem("ex", True)
 print(stack)
 
 print()
