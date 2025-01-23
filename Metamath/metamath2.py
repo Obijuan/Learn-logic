@@ -941,6 +941,14 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'wth', 'wps', 'wph', 'hyp.1',
                   'bicomi', 'hyp.2', 'bitrid']
     },
+    "bitrdi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+                "⊢ ( 𝜒 ↔ 𝜃 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜃 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'hyp.1', 'wch', 'wth', 'wb',
+                  'wph', 'hyp.2', 'a1i', 'bitrd']
+    },
 }
 
 """
@@ -948,7 +956,7 @@ th_db = {
 """
 
 """
-    "bitr3id": {
+    "bitrdi": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1412,13 +1420,13 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-#for th in th_db:
-#    check_theorem(th, True)
+for th in th_db:
+    check_theorem(th, True)
 
 print("-----------------------")
 
-check_theorem("bitr3id", True)
-print(stack)
+#check_theorem("bitr3id", True)
+#print(stack)
 
 print()
  
