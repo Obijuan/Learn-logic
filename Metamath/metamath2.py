@@ -1079,10 +1079,58 @@ th_db = {
         "proof": ['wps', 'wph', 'wch', 'wph', 'wps', 'wch', 'hyp.1',
                   'expcom', 'imp']
     },
+    "pm3.22": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜓 ) → ( 𝜓 ∧ 𝜑 ) )",
+        "proof": ['wps', 'wph', 'wps', 'wph', 'wa', 'wps', 'wph', 'wa',
+                  'id', 'ancoms']
+    },
+    "ancom": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜓 ) ↔ ( 𝜓 ∧ 𝜑 ) )",
+        "proof": ['wph', 'wps', 'wa', 'wps', 'wph', 'wa', 'wph', 'wps',
+                  'pm3.22', 'wps', 'wph', 'pm3.22', 'impbii']
+    },
+    "expdcom": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( ( 𝜓 ∧ 𝜒 ) → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜓 → ( 𝜒 → ( 𝜑 → 𝜃 ) ) )",
+        "proof": ['wps', 'wch', 'wph', 'wth', 'wi', 'wph', 'wps', 'wch',
+                  'wa', 'wth', 'hyp.1', 'com12', 'ex']
+    },
+    "com3r": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( 𝜒 → ( 𝜑 → ( 𝜓 → 𝜃 ) ) )",
+        "proof": ['wph', 'wch', 'wps', 'wth', 'wi', 'wph', 'wps', 'wch',
+                  'wth', 'hyp.1', 'com23', 'com12']
+    },
+    "expd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃",
+                "⊢ ( 𝜑 → ( ( 𝜓 ∧ 𝜒 ) → 𝜃 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+        "proof": ['wps', 'wch', 'wph', 'wth', 'wph', 'wps', 'wch', 'wth',
+                  'hyp.1', 'expdcom', 'com3r']
+    },
+    "exp32": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( ( 𝜑 ∧ ( 𝜓 ∧ 𝜒 ) ) → 𝜃 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wph', 'wps', 'wch', 'wa',
+                  'wth', 'hyp.1', 'ex', 'expd']
+    },
+    "imp31": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( ( ( 𝜑 ∧ 𝜓 ) ∧ 𝜒 ) → 𝜃 )",
+        "proof": ['wph', 'wps', 'wa', 'wch', 'wth', 'wph', 'wps', 'wch',
+                  'wth', 'wi', 'hyp.1', 'imp', 'imp']
+    },
+    
 }
 
 """
-    "pm2.61d": {
+    "imp31": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1551,7 +1599,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("ancoms", True)
+check_theorem("imp31", True)
 print(stack)
 
 print()
