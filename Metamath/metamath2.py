@@ -958,6 +958,32 @@ th_db = {
         "proof": ['wph', 'wth', 'wch', 'wta', 'wth', 'wps', 'wph', 'wch',
                    'hyp.2', 'hyp.1', 'bitr3id', 'hyp.3', 'bitrdi']
     },
+    "con4bid": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( ¬𝜓 ↔ ¬𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'wph', 'wch', 'wps', 'wph', 'wps',
+                  'wn', 'wch', 'wn', 'hyp.1', 'biimprd', 'con4d', 'wph',
+                  'wps', 'wn', 'wch', 'wn', 'hyp.1', 'biimpd',
+                  'impcon4bid']
+    },
+    "notbid": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ¬𝜓 ↔ ¬𝜒 ) )",
+        "proof": ['wph', 'wps', 'wn', 'wch', 'wn', 'wph', 'wps', 'wch',
+                  'wps', 'wn', 'wn', 'wch', 'wn', 'wn', 'hyp.1', 'wps',
+                  'notnotb', 'wch', 'notnotb', '3bitr3g', 'con4bid']
+    },
+    "notbi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏"],
+        "conc": "⊢ ( ( 𝜑 ↔ 𝜓 ) ↔ ( ¬𝜑 ↔ ¬𝜓 ) )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb', 'wph',
+                  'wps', 'wb', 'wph', 'wps', 'wph', 'wps', 'wb', 'id',
+                  'notbid', 'wph', 'wn', 'wps', 'wn', 'wb', 'wph', 'wps',
+                  'wph', 'wn', 'wps', 'wn', 'wb', 'id', 'con4bid',
+                  'impbii']
+    },
 }
 
 """
@@ -965,7 +991,7 @@ th_db = {
 """
 
 """
-    "3bitr3g": {
+    "notbi": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1429,13 +1455,13 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-for th in th_db:
-    check_theorem(th, True)
+#for th in th_db:
+#    check_theorem(th, True)
 
 print("-----------------------")
 
-#check_theorem("bitr3id", True)
-#print(stack)
+check_theorem("notbi", True)
+print(stack)
 
 print()
  
