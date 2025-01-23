@@ -1021,10 +1021,46 @@ th_db = {
         "proof": ['wps', 'wps', 'wn', 'wph', 'wps', 'notnotb', 'hyp.1',
                   'xchbinxr']
     },
+    "imnan": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → ¬𝜓 ) ↔ ¬( 𝜑 ∧ 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wa', 'wph', 'wps', 'wn', 'wi', 'wph', 'wps',
+                  'df-an', 'con2bii']
+    },
+    "iman": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ¬( 𝜑 ∧ ¬𝜓 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wps', 'wn', 'wn', 'wi', 'wph',
+                  'wps', 'wn', 'wa', 'wn', 'wps', 'wps', 'wn', 'wn', 'wph',
+                  'wps', 'notnotb', 'imbi2i', 'wph', 'wps', 'wn', 'imnan',
+                  'bitri']
+    },
+    "pm3.24": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ¬( 𝜑 ∧ ¬𝜑 )",
+        "proof": ['wph', 'wph', 'wi', 'wph', 'wph', 'wn', 'wa', 'wn', 'wph',
+                  'id', 'wph', 'wph', 'iman', 'mpbi']
+    },
+    "sylbir": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜓 ↔ 𝜑 )",
+                "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'wps', 'wph', 'hyp.1', 'biimpri',
+                  'hyp.2', 'syl']
+    },
+    "ex": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                " ⊢ ((𝜑 ∧ 𝜓) → 𝜒)"],
+        "conc": " ⊢ (𝜑 → (𝜓 → 𝜒))",
+        "proof": ['wph', 'wps', 'wch', 'wph', 'wps', 'wn', 'wi', 'wn', 'wph',
+                  'wps', 'wa', 'wch', 'wph', 'wps', 'df-an', 'hyp.1',
+                  'sylbir', 'expi']
+    },
 }
 
 """
-    "con2bii": {
+    "sylbir": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1493,7 +1529,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("con2bii", True)
+check_theorem("sylbir", True)
 print(stack)
 
 print()
