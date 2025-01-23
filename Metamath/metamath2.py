@@ -949,6 +949,15 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'wth', 'hyp.1', 'wch', 'wth', 'wb',
                   'wph', 'hyp.2', 'a1i', 'bitrd']
     },
+    "3bitr3g": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+                "⊢ ( 𝜓 ↔ 𝜃 )",
+                "⊢ ( 𝜒 ↔ 𝜏 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜃 ↔ 𝜏 ) )",
+        "proof": ['wph', 'wth', 'wch', 'wta', 'wth', 'wps', 'wph', 'wch',
+                   'hyp.2', 'hyp.1', 'bitr3id', 'hyp.3', 'bitrdi']
+    },
 }
 
 """
@@ -956,7 +965,7 @@ th_db = {
 """
 
 """
-    "bitrdi": {
+    "3bitr3g": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
