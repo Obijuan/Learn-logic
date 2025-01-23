@@ -1072,10 +1072,17 @@ th_db = {
                   'wph', 'wps', 'df-an', 'wph', 'wps', 'wch', 'hyp.1', 'impi',
                   'sylbi']
     },
+    "ancoms": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( ( 𝜑 ∧ 𝜓 ) → 𝜒 )"],
+        "conc": "⊢ ( ( 𝜓 ∧ 𝜑 ) → 𝜒 )",
+        "proof": ['wps', 'wph', 'wch', 'wph', 'wps', 'wch', 'hyp.1',
+                  'expcom', 'imp']
+    },
 }
 
 """
-    "imp": {
+    "pm2.61d": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
@@ -1544,7 +1551,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imp", True)
+check_theorem("ancoms", True)
 print(stack)
 
 print()
