@@ -1133,16 +1133,6 @@ th_db = {
         "proof": ['wph', 'wps', 'wch', 'wth', 'wph', 'wps', 'wch', 'wth',
                   'hyp.1', 'exp32', 'imp31']
     },
-    "anass": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
-        "conc": " ⊢ (((𝜑 ∧ 𝜓) ∧ 𝜒) ↔ (𝜑 ∧ (𝜓 ∧ 𝜒)))",
-        "proof": ['wph', 'wps', 'wa', 'wch', 'wa', 'wph', 'wps',
-                  'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wph',
-                  'wps', 'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wa',
-                  'wa', 'id', 'anassrs', 'wph', 'wps', 'wch', 'wph',
-                  'wps', 'wa', 'wch', 'wa', 'wph', 'wps', 'wa', 'wch',
-                  'wa', 'id', 'anasss', 'impbii']
-    },
     "impd": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
                 "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
@@ -1158,24 +1148,85 @@ th_db = {
         "proof": ['wch', 'wph', 'wps', 'wth', 'wph', 'wps', 'wch', 'wth',
                   'hyp.1', 'com3r', 'com3r']
     },
+    "imp32": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )"],
+        "conc": "⊢ ( ( 𝜑 ∧ ( 𝜓 ∧ 𝜒 ) ) → 𝜃 )",
+        "proof": ['wph', 'wps', 'wch', 'wa', 'wth', 'wph', 'wps', 'wch',
+                  'wth', 'hyp.1', 'impd', 'imp']
+    },
+    "exp31": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( ( ( 𝜑 ∧ 𝜓 ) ∧ 𝜒 ) → 𝜃 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜒 → 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wi', 'wph', 'wps', 'wa',
+                  'wch', 'wth', 'hyp.1', 'ex', 'ex']
+    },
+    "anasss": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( ( ( 𝜑 ∧ 𝜓 ) ∧ 𝜒 ) → 𝜃 )"],
+        "conc": "⊢ ( ( 𝜑 ∧ ( 𝜓 ∧ 𝜒 ) ) → 𝜃 )",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wph', 'wps', 'wch', 'wth',
+                  'hyp.1', 'exp31', 'imp32']
+    },
+    "anass": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒"],
+        "conc": "⊢ ( ( ( 𝜑 ∧ 𝜓 ) ∧ 𝜒 ) ↔ ( 𝜑 ∧ ( 𝜓 ∧ 𝜒 ) ) )",
+        "proof": ['wph', 'wps', 'wa', 'wch', 'wa', 'wph', 'wps',
+                  'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wph',
+                  'wps', 'wch', 'wa', 'wa', 'wph', 'wps', 'wch', 'wa',
+                  'wa', 'id', 'anassrs', 'wph', 'wps', 'wch', 'wph',
+                  'wps', 'wa', 'wch', 'wa', 'wph', 'wps', 'wa', 'wch',
+                  'wa', 'id', 'anasss', 'impbii']
+    },
+    "bitr4i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ 𝜓 )", 
+                "⊢ ( 𝜒 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wch', 'wps', 'hyp.2',
+                  'bicomi', 'bitri']
+    },
+    "dfbi2": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ↔ 𝜓 ) ↔ ( ( 𝜑 → 𝜓 ) ∧ ( 𝜓 → 𝜑 ) ) )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
+                  'wn', 'wi', 'wn', 'wph', 'wps', 'wi', 'wps', 'wph', 'wi',
+                  'wa', 'wph', 'wps', 'dfbi1', 'wph', 'wps', 'wi', 'wps',
+                  'wph', 'wi', 'df-an', 'bitr4i']
+    },
+    "adantr": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜒 ) → 𝜓 )",
+        "proof": ['wph', 'wch', 'wps', 'wph', 'wps', 'wch', 'hyp.1',
+                  'a1d', 'imp']
+    },
+    "simpl": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜓 ) → 𝜑 )",
+        "proof": ['wph', 'wph', 'wps', 'wph', 'id', 'adantr']
+    },
+    "pm4.71": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 ↔ ( 𝜑 ∧ 𝜓 ) ) )",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     
 }
 
-"""
-    "com3l": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
-    },
-    
-    "pm2.61d": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
-    },
-"""
 
 def count_wff(wffs: list):
     """Obtener el numero de wffs en una lista"""
@@ -1631,7 +1682,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("com3l", True)
+check_theorem("pm4.71", True)
 print(stack)
 
 print()
