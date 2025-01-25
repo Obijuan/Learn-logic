@@ -40,6 +40,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 ∧ 𝜓 )"
     },
+    "wo": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "wff ( 𝜑 ∨ 𝜓 )"
+    },
     "ax-th": {
         "hyp": ["wff 𝜑"],
         "conc": "⊢ 𝜑"
@@ -1289,6 +1293,18 @@ th_db = {
         "proof": ['wph', 'wph', 'wps', 'wi', 'wps', 'wph', 'wps', 'pm2.27',
                   'imp']
     },
+    "df-or": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜓 ) ↔ ( ¬𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wo', 'wph', 'wn', 'wps', 'wi', 'wb',
+                  'ax-th']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1460,6 +1476,24 @@ def wa(show_proof = False):
 
     #-- Crear la cadena wff
     w = f"wff ( {𝜑} ∧ {𝜓} )"
+
+    #-- Meterla en la pila
+    stack.append(w)
+
+def wo(show_proof = False):
+    """Si wa y wb son fórmulas bien formadas (wff), """
+    """entonces (wa ∨ wb) es una fórmula bien formada (wff)"""
+    
+    #-- Leer formulas de la pila
+    w2 = stack.pop()
+    w1 = stack.pop()
+
+    #-- Obtener las dos fórmulas
+    𝜑 = assert_wff(w1)
+    𝜓 = assert_wff(w2)
+
+    #-- Crear la cadena wff
+    w = f"wff ( {𝜑} ∨ {𝜓} )"
 
     #-- Meterla en la pila
     stack.append(w)
@@ -1687,7 +1721,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         #-- Modo verbose: Mostrar el paso actual
         if (show_proof):
-            if name not in ["wn", "wi", "wb", "wa"]:
+            if name not in ["wn", "wi", "wb", "wa", "wo"]:
                 #print(f"\n🟢️ Paso {step}: {name}")
                 print(f"\n🟢️ Paso {step_shown}: {name}")
                 step_shown += 1
@@ -1753,7 +1787,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("pm3.35", True)
+check_theorem("df-or", True)
 print(stack)
 
 print()
