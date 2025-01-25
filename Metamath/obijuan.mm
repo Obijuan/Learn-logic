@@ -15,8 +15,8 @@ $)
   $( ----------------- Simbolos NO terminales ---------------- $)
   $( --- Variables para refereirse a wff ---- $)
   $( --- wff: Well formed formula $)
-  $( psi chi theta tau eta $)
-  $v ph ps ch th ta et $. 
+  $( psi chi theta tau eta zeta $)
+  $v ph ps ch th ta et ze si rh mu la ka $. 
 
   $( --- Reglas de contruccion de formulas (Gramatica) ------- $)
 
@@ -32,6 +32,12 @@ $)
   wth $f wff th $.
   wta $f wff ta $.
   wet $f wff et $.
+  wze $f wff ze $.
+  wsi $f wff si $.
+  wrh $f wff rh $.
+  wmu $f wff mu $.
+  wla $f wff la $.
+  wka $f wff ka $.
   
   $( Regla 2: Si ph es wff, entonces .- ph es una wff $)
   wn $a wff -. ph $.
@@ -5889,3 +5895,1637 @@ $)
     mp2and $p |- ( ph -> th ) $=
       wph wch wth mp2and.2 wph wps wch wth mp2and.1 mp2and.3 mpand mpd $.
   $}
+  ${
+    mpanl1.1 $e |- ph $.
+    mpanl1.2 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM, 16-Aug-1994.)
+       (Proof shortened by Wolf Lammen, 7-Apr-2013.) $)
+    mpanl1 $p |- ( ( ps /\ ch ) -> th ) $=
+      wps wph wps wa wch wth wps wph mpanl1.1 jctl mpanl1.2 sylan $.
+  $}
+
+  ${
+    mpanl2.1 $e |- ps $.
+    mpanl2.2 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM, 16-Aug-1994.)
+       (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+    mpanl2 $p |- ( ( ph /\ ch ) -> th ) $=
+      wph wph wps wa wch wth wph wps mpanl2.1 jctr mpanl2.2 sylan $.
+  $}
+
+  ${
+    mpanl12.1 $e |- ph $.
+    mpanl12.2 $e |- ps $.
+    mpanl12.3 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM,
+       13-Jul-2005.) $)
+    mpanl12 $p |- ( ch -> th ) $=
+      wps wch wth mpanl12.2 wph wps wch wth mpanl12.1 mpanl12.3 mpanl1 mpan $.
+  $}
+
+  ${
+    mpanr1.1 $e |- ps $.
+    mpanr1.2 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM, 3-May-1994.)
+       (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+    mpanr1 $p |- ( ( ph /\ ch ) -> th ) $=
+      wph wps wch wth mpanr1.1 wph wps wch wth mpanr1.2 anassrs mpanl2 $.
+  $}
+
+  ${
+    mpanr2.1 $e |- ch $.
+    mpanr2.2 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM, 3-May-1994.)
+       (Proof shortened by Andrew Salmon, 7-May-2011.)  (Proof shortened by
+       Wolf Lammen, 7-Apr-2013.) $)
+    mpanr2 $p |- ( ( ph /\ ps ) -> th ) $=
+      wps wph wps wch wa wth wps wch mpanr2.1 jctr mpanr2.2 sylan2 $.
+  $}
+
+  ${
+    mpanr12.1 $e |- ps $.
+    mpanr12.2 $e |- ch $.
+    mpanr12.3 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( An inference based on modus ponens.  (Contributed by NM,
+       24-Jul-2009.) $)
+    mpanr12 $p |- ( ph -> th ) $=
+      wph wch wth mpanr12.2 wph wps wch wth mpanr12.1 mpanr12.3 mpanr1 mpan2 $.
+  $}
+
+  ${
+    mpanlr1.1 $e |- ps $.
+    mpanlr1.2 $e |- ( ( ( ph /\ ( ps /\ ch ) ) /\ th ) -> ta ) $.
+    $( An inference based on modus ponens.  (Contributed by NM, 30-Dec-2004.)
+       (Proof shortened by Wolf Lammen, 7-Apr-2013.) $)
+    mpanlr1 $p |- ( ( ( ph /\ ch ) /\ th ) -> ta ) $=
+      wch wph wps wch wa wth wta wch wps mpanlr1.1 jctl mpanlr1.2 sylanl2 $.
+  $}
+
+  ${
+    mpbirand.1 $e |- ( ph -> ch ) $.
+    mpbirand.2 $e |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $.
+    $( Detach truth from conjunction in biconditional.  (Contributed by Glauco
+       Siliprandi, 3-Mar-2021.) $)
+    mpbirand $p |- ( ph -> ( ps <-> th ) ) $=
+      wph wps wch wth wa wth mpbirand.2 wph wch wth mpbirand.1 biantrurd bitr4d
+      $.
+  $}
+
+  ${
+    mpbiran2d.1 $e |- ( ph -> th ) $.
+    mpbiran2d.2 $e |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $.
+    $( Detach truth from conjunction in biconditional.  Deduction form.
+       (Contributed by Peter Mazsa, 24-Sep-2022.) $)
+    mpbiran2d $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wth wch mpbiran2d.1 wph wps wth wch mpbiran2d.2 biancomd mpbirand
+      $.
+  $}
+
+  ${
+    mpbiran.1 $e |- ps $.
+    mpbiran.2 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Detach truth from conjunction in biconditional.  (Contributed by NM,
+       27-Feb-1996.) $)
+    mpbiran $p |- ( ph <-> ch ) $=
+      wph wps wch wa wch mpbiran.2 wps wch mpbiran.1 biantrur bitr4i $.
+  $}
+
+  ${
+    mpbiran2.1 $e |- ch $.
+    mpbiran2.2 $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Detach truth from conjunction in biconditional.  (Contributed by NM,
+       22-Feb-1996.) $)
+    mpbiran2 $p |- ( ph <-> ps ) $=
+      wph wch wps mpbiran2.1 wph wch wps mpbiran2.2 biancomi mpbiran $.
+  $}
+
+  ${
+    mpbir2an.1 $e |- ps $.
+    mpbir2an.2 $e |- ch $.
+    mpbir2an.maj $e |- ( ph <-> ( ps /\ ch ) ) $.
+    $( Detach a conjunction of truths in a biconditional.  (Contributed by NM,
+       10-May-2005.) $)
+    mpbir2an $p |- ph $=
+      wph wch mpbir2an.2 wph wps wch mpbir2an.1 mpbir2an.maj mpbiran mpbir $.
+  $}
+
+  ${
+    mpbi2and.1 $e |- ( ph -> ps ) $.
+    mpbi2and.2 $e |- ( ph -> ch ) $.
+    mpbi2and.3 $e |- ( ph -> ( ( ps /\ ch ) <-> th ) ) $.
+    $( Detach a conjunction of truths in a biconditional.  (Contributed by NM,
+       6-Nov-2011.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    mpbi2and $p |- ( ph -> th ) $=
+      wph wps wch wa wth wph wps wch mpbi2and.1 mpbi2and.2 jca mpbi2and.3 mpbid
+      $.
+  $}
+
+  ${
+    mpbir2and.1 $e |- ( ph -> ch ) $.
+    mpbir2and.2 $e |- ( ph -> th ) $.
+    mpbir2and.3 $e |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $.
+    $( Detach a conjunction of truths in a biconditional.  (Contributed by NM,
+       6-Nov-2011.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    mpbir2and $p |- ( ph -> ps ) $=
+      wph wps wch wth wa wph wch wth mpbir2and.1 mpbir2and.2 jca mpbir2and.3
+      mpbird $.
+  $}
+
+  ${
+    adant2.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       4-May-1994.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    adantll $p |- ( ( ( th /\ ph ) /\ ps ) -> ch ) $=
+      wth wph wa wph wps wch wth wph simpr adant2.1 sylan $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       4-May-1994.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    adantlr $p |- ( ( ( ph /\ th ) /\ ps ) -> ch ) $=
+      wph wth wa wph wps wch wph wth simpl adant2.1 sylan $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       4-May-1994.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    adantrl $p |- ( ( ph /\ ( th /\ ps ) ) -> ch ) $=
+      wth wps wa wph wps wch wth wps simpr adant2.1 sylan2 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       4-May-1994.)  (Proof shortened by Wolf Lammen, 24-Nov-2012.) $)
+    adantrr $p |- ( ( ph /\ ( ps /\ th ) ) -> ch ) $=
+      wps wth wa wph wps wch wps wth simpl adant2.1 sylan2 $.
+  $}
+
+  ${
+    adantl2.1 $e |- ( ( ( ph /\ ps ) /\ ch ) -> th ) $.
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 2-Dec-2012.) $)
+    adantlll $p |- ( ( ( ( ta /\ ph ) /\ ps ) /\ ch ) -> th ) $=
+      wta wph wa wph wps wch wth wta wph simpr adantl2.1 sylanl1 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantllr $p |- ( ( ( ( ph /\ ta ) /\ ps ) /\ ch ) -> th ) $=
+      wph wta wa wph wps wch wth wph wta simpl adantl2.1 sylanl1 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantlrl $p |- ( ( ( ph /\ ( ta /\ ps ) ) /\ ch ) -> th ) $=
+      wta wps wa wph wps wch wth wta wps simpr adantl2.1 sylanl2 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantlrr $p |- ( ( ( ph /\ ( ps /\ ta ) ) /\ ch ) -> th ) $=
+      wps wta wa wph wps wch wth wps wta simpl adantl2.1 sylanl2 $.
+  $}
+
+  ${
+    adantr2.1 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantrll $p |- ( ( ph /\ ( ( ta /\ ps ) /\ ch ) ) -> th ) $=
+      wta wps wa wph wps wch wth wta wps simpr adantr2.1 sylanr1 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantrlr $p |- ( ( ph /\ ( ( ps /\ ta ) /\ ch ) ) -> th ) $=
+      wps wta wa wph wps wch wth wps wta simpl adantr2.1 sylanr1 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantrrl $p |- ( ( ph /\ ( ps /\ ( ta /\ ch ) ) ) -> th ) $=
+      wta wch wa wph wps wch wth wta wch simpr adantr2.1 sylanr2 $.
+
+    $( Deduction adding a conjunct to antecedent.  (Contributed by NM,
+       26-Dec-2004.)  (Proof shortened by Wolf Lammen, 4-Dec-2012.) $)
+    adantrrr $p |- ( ( ph /\ ( ps /\ ( ch /\ ta ) ) ) -> th ) $=
+      wch wta wa wph wps wch wth wch wta simpl adantr2.1 sylanr2 $.
+  $}
+
+  ${
+    ad2ant.1 $e |- ( ph -> ps ) $.
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       19-Oct-1999.)  (Proof shortened by Wolf Lammen, 20-Nov-2012.) $)
+    ad2antrr $p |- ( ( ( ph /\ ch ) /\ th ) -> ps ) $=
+      wph wth wps wch wph wps wth ad2ant.1 adantr adantlr $.
+
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       19-Oct-1999.)  (Proof shortened by Wolf Lammen, 20-Nov-2012.) $)
+    ad2antlr $p |- ( ( ( ch /\ ph ) /\ th ) -> ps ) $=
+      wph wth wps wch wph wps wth ad2ant.1 adantr adantll $.
+
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       19-Oct-1999.) $)
+    ad2antrl $p |- ( ( ch /\ ( ph /\ th ) ) -> ps ) $=
+      wch wph wps wth wph wps wch ad2ant.1 adantl adantrr $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by NM,
+       19-Oct-1999.) $)
+    ad2antll $p |- ( ( ch /\ ( th /\ ph ) ) -> ps ) $=
+      wth wph wa wps wch wph wps wth ad2ant.1 adantl adantl $.
+
+    $( Deduction adding three conjuncts to antecedent.  (Contributed by NM,
+       28-Jul-2012.) $)
+    ad3antrrr $p |- ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) -> ps ) $=
+      wph wch wa wps wth wta wph wps wch ad2ant.1 adantr ad2antrr $.
+
+    $( Deduction adding three conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad3antlr $p |- ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) -> ps ) $=
+      wch wph wa wps wth wta wph wps wch ad2ant.1 adantl ad2antrr $.
+
+    $( Deduction adding 4 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad4antr $p |- ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et ) -> ps ) $=
+      wph wch wa wps wth wta wet wph wps wch ad2ant.1 adantr ad3antrrr $.
+
+    $( Deduction adding 4 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad4antlr $p |- ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et ) -> ps ) $=
+      wch wph wa wps wth wta wet wph wps wch ad2ant.1 adantl ad3antrrr $.
+
+    $( Deduction adding 5 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad5antr $p |- ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wph wps wch ad2ant.1 adantr ad4antr $.
+
+    $( Deduction adding 5 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad5antlr $p |- ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wph wps wch ad2ant.1 adantl ad4antr $.
+
+    $( Deduction adding 6 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad6antr $p |- ( ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wsi wph wps wch ad2ant.1 adantr ad5antr $.
+
+    $( Deduction adding 6 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad6antlr $p |- ( ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wsi wph wps wch ad2ant.1 adantl ad5antr $.
+
+    $( Deduction adding 7 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad7antr $p |- ( ( ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wsi wrh wph wps wch ad2ant.1 adantr
+      ad6antr $.
+
+    $( Deduction adding 7 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad7antlr $p |- ( ( ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wsi wrh wph wps wch ad2ant.1 adantl
+      ad6antr $.
+
+    $( Deduction adding 8 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad8antr $p |- ( ( ( ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wsi wrh wmu wph wps wch ad2ant.1 adantr
+      ad7antr $.
+
+    $( Deduction adding 8 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad8antlr $p |- ( ( ( ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wsi wrh wmu wph wps wch ad2ant.1 adantl
+      ad7antr $.
+
+    $( Deduction adding 9 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad9antr $p |- ( ( ( ( ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wsi wrh wmu wla wph wps wch ad2ant.1
+      adantr ad8antr $.
+
+    $( Deduction adding 9 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad9antlr $p |- ( ( ( ( ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wsi wrh wmu wla wph wps wch ad2ant.1
+      adantl ad8antr $.
+
+    $( Deduction adding 10 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 4-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad10antr $p |- ( ( ( ( ( ( ( ( ( ( ( ph /\ ch ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) /\ ka ) -> ps ) $=
+      wph wch wa wps wth wta wet wze wsi wrh wmu wla wka wph wps wch ad2ant.1
+      adantr ad9antr $.
+
+    $( Deduction adding 10 conjuncts to antecedent.  (Contributed by Mario
+       Carneiro, 5-Jan-2017.)  (Proof shortened by Wolf Lammen, 5-Apr-2022.) $)
+    ad10antlr $p |- ( ( ( ( ( ( ( ( ( ( ( ch /\ ph ) /\ th ) /\ ta ) /\ et )
+      /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) /\ ka ) -> ps ) $=
+      wch wph wa wps wth wta wet wze wsi wrh wmu wla wka wph wps wch ad2ant.1
+      adantl ad9antr $.
+  $}
+
+  ${
+    ad2ant2.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       8-Jan-2006.) $)
+    ad2ant2l $p |- ( ( ( th /\ ph ) /\ ( ta /\ ps ) ) -> ch ) $=
+      wph wta wps wa wch wth wph wps wch wta ad2ant2.1 adantrl adantll $.
+
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       8-Jan-2006.) $)
+    ad2ant2r $p |- ( ( ( ph /\ th ) /\ ( ps /\ ta ) ) -> ch ) $=
+      wph wps wta wa wch wth wph wps wch wta ad2ant2.1 adantrr adantlr $.
+
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       23-Nov-2007.) $)
+    ad2ant2lr $p |- ( ( ( th /\ ph ) /\ ( ps /\ ta ) ) -> ch ) $=
+      wph wps wta wa wch wth wph wps wch wta ad2ant2.1 adantrr adantll $.
+
+    $( Deduction adding two conjuncts to antecedent.  (Contributed by NM,
+       24-Nov-2007.) $)
+    ad2ant2rl $p |- ( ( ( ph /\ th ) /\ ( ta /\ ps ) ) -> ch ) $=
+      wph wta wps wa wch wth wph wps wch wta ad2ant2.1 adantrl adantlr $.
+  $}
+
+  ${
+    adantl3r.1 $e |- ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) -> ta ) $.
+    $( Deduction adding 1 conjunct to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.) $)
+    adantl3r $p |- ( ( ( ( ( ph /\ et ) /\ ps ) /\ ch ) /\ th ) -> ta ) $=
+      wph wet wa wps wa wph wps wa wch wth wta wph wps wph wps wa wet wph wps
+      wa id adantlr adantl3r.1 sylanl1 $.
+  $}
+
+  ${
+    ad4ant2.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad4ant13 $p |- ( ( ( ( ph /\ th ) /\ ps ) /\ ta ) -> ch ) $=
+      wph wps wta wch wth wph wps wa wch wta ad4ant2.1 adantr adantllr $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad4ant14 $p |- ( ( ( ( ph /\ th ) /\ ta ) /\ ps ) -> ch ) $=
+      wph wth wa wps wch wta wph wps wch wth ad4ant2.1 adantlr adantlr $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad4ant23 $p |- ( ( ( ( th /\ ph ) /\ ps ) /\ ta ) -> ch ) $=
+      wph wps wta wch wth wph wps wa wch wta ad4ant2.1 adantr adantlll $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad4ant24 $p |- ( ( ( ( th /\ ph ) /\ ta ) /\ ps ) -> ch ) $=
+      wph wta wps wch wth wph wps wch wta ad4ant2.1 adantlr adantlll $.
+  $}
+
+  ${
+    adantl4r.1 $e |- ( ( ( ( ( ph /\ si ) /\ rh ) /\ mu ) /\ la ) -> ka ) $.
+    $( Deduction adding 1 conjunct to antecedent.  (Contributed by Thierry
+       Arnoux, 11-Feb-2018.) $)
+    adantl4r $p |- ( ( ( ( ( ( ph /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la )
+      -> ka ) $=
+      wph wze wa wsi wa wrh wa wmu wa wla wka wph wsi wrh wmu wla wka wi wze
+      wph wsi wa wrh wa wmu wa wla wka adantl4r.1 ex adantl3r imp $.
+  $}
+
+  ${
+    ad5ant2.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.) $)
+    ad5ant12 $p |- ( ( ( ( ( ph /\ ps ) /\ th ) /\ ta ) /\ et ) -> ch ) $=
+      wph wps wa wch wth wta wet ad5ant2.1 ad3antrrr $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant13 $p |- ( ( ( ( ( ph /\ th ) /\ ps ) /\ ta ) /\ et ) -> ch ) $=
+      wph wth wa wps wa wch wta wet wph wps wch wth ad5ant2.1 adantlr ad2antrr
+      $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant14 $p |- ( ( ( ( ( ph /\ th ) /\ ta ) /\ ps ) /\ et ) -> ch ) $=
+      wph wth wa wps wch wta wet wph wps wch wth ad5ant2.1 adantlr ad4ant13 $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant15 $p |- ( ( ( ( ( ph /\ th ) /\ ta ) /\ et ) /\ ps ) -> ch ) $=
+      wph wth wa wps wch wta wet wph wps wch wth ad5ant2.1 adantlr ad4ant14 $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant23 $p |- ( ( ( ( ( th /\ ph ) /\ ps ) /\ ta ) /\ et ) -> ch ) $=
+      wth wph wa wps wa wch wta wet wph wps wch wth ad5ant2.1 adantll ad2antrr
+      $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant24 $p |- ( ( ( ( ( th /\ ph ) /\ ta ) /\ ps ) /\ et ) -> ch ) $=
+      wth wph wa wps wch wta wet wph wps wch wth ad5ant2.1 adantll ad4ant13 $.
+
+    $( Deduction adding conjuncts to antecedent.  (Contributed by Alan Sare,
+       17-Oct-2017.)  (Proof shortened by Wolf Lammen, 14-Apr-2022.) $)
+    ad5ant25 $p |- ( ( ( ( ( th /\ ph ) /\ ta ) /\ et ) /\ ps ) -> ch ) $=
+      wth wph wa wps wch wta wet wph wps wch wth ad5ant2.1 adantll ad4ant14 $.
+  $}
+
+  ${
+    adantl5r.1 $e |- ( ( ( ( ( ( ph /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la )
+      -> ka ) $.
+    $( Deduction adding 1 conjunct to antecedent.  (Contributed by Thierry
+       Arnoux, 11-Feb-2018.) $)
+    adantl5r $p |- ( ( ( ( ( ( ( ph /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu )
+      /\ la ) -> ka ) $=
+      wph wet wa wze wa wsi wa wrh wa wmu wa wla wka wph wet wze wsi wrh wmu
+      wla wka wi wph wze wa wsi wa wrh wa wmu wa wla wka adantl5r.1 ex adantl4r
+      imp $.
+  $}
+
+  ${
+    adantl6r.1 $e |- ( ( ( ( ( ( ( ph /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu )
+      /\ la ) -> ka ) $.
+    $( Deduction adding 1 conjunct to antecedent.  (Contributed by Thierry
+       Arnoux, 11-Feb-2018.) $)
+    adantl6r $p |- ( ( ( ( ( ( ( ( ph /\ ta ) /\ et ) /\ ze ) /\ si ) /\ rh )
+      /\ mu ) /\ la ) -> ka ) $=
+      wph wta wa wet wa wze wa wsi wa wrh wa wmu wa wla wka wph wta wet wze wsi
+      wrh wmu wla wka wi wph wet wa wze wa wsi wa wrh wa wmu wa wla wka
+      adantl6r.1 ex adantl5r imp $.
+  $}
+
+  $( Theorem *3.33 (Syll) of [WhiteheadRussell] p. 112.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.33 $p |- ( ( ( ph -> ps ) /\ ( ps -> ch ) ) -> ( ph -> ch ) ) $=
+    wph wps wi wps wch wi wph wch wi wph wps wch imim1 imp $.
+
+  $( Theorem *3.34 (Syll) of [WhiteheadRussell] p. 112.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.34 $p |- ( ( ( ps -> ch ) /\ ( ph -> ps ) ) -> ( ph -> ch ) ) $=
+    wps wch wi wph wps wi wph wch wi wps wch wph imim2 imp $.
+
+  $( Simplification of a conjunction.  (Contributed by NM, 18-Mar-2007.) $)
+  simpll $p |- ( ( ( ph /\ ps ) /\ ch ) -> ph ) $=
+    wph wph wps wch wph id ad2antrr $.
+
+  ${
+    simplld.1 $e |- ( ph -> ( ( ps /\ ch ) /\ th ) ) $.
+    $( Deduction form of ~ simpll , eliminating a double conjunct.
+       (Contributed by Glauco Siliprandi, 11-Dec-2019.) $)
+    simplld $p |- ( ph -> ps ) $=
+      wph wps wch wph wps wch wa wth simplld.1 simpld simpld $.
+  $}
+
+  $( Simplification of a conjunction.  (Contributed by NM, 20-Mar-2007.) $)
+  simplr $p |- ( ( ( ph /\ ps ) /\ ch ) -> ps ) $=
+    wps wps wph wch wps id ad2antlr $.
+
+  ${
+    simplrd.1 $e |- ( ph -> ( ( ps /\ ch ) /\ th ) ) $.
+    $( Deduction eliminating a double conjunct.  (Contributed by Glauco
+       Siliprandi, 11-Dec-2019.) $)
+    simplrd $p |- ( ph -> ch ) $=
+      wph wps wch wph wps wch wa wth simplrd.1 simpld simprd $.
+  $}
+
+  $( Simplification of a conjunction.  (Contributed by NM, 21-Mar-2007.) $)
+  simprl $p |- ( ( ph /\ ( ps /\ ch ) ) -> ps ) $=
+    wps wps wph wch wps id ad2antrl $.
+
+  ${
+    simprld.1 $e |- ( ph -> ( ps /\ ( ch /\ th ) ) ) $.
+    $( Deduction eliminating a double conjunct.  (Contributed by Glauco
+       Siliprandi, 11-Dec-2019.) $)
+    simprld $p |- ( ph -> ch ) $=
+      wph wch wth wph wps wch wth wa simprld.1 simprd simpld $.
+  $}
+
+  $( Simplification of a conjunction.  (Contributed by NM, 21-Mar-2007.) $)
+  simprr $p |- ( ( ph /\ ( ps /\ ch ) ) -> ch ) $=
+    wch wch wph wps wch id ad2antll $.
+
+  ${
+    simprrd.1 $e |- ( ph -> ( ps /\ ( ch /\ th ) ) ) $.
+    $( Deduction form of ~ simprr , eliminating a double conjunct.
+       (Contributed by Glauco Siliprandi, 11-Dec-2019.) $)
+    simprrd $p |- ( ph -> th ) $=
+      wph wch wth wph wps wch wth wa simprrd.1 simprd simprd $.
+  $}
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.)  (Proof shortened by Wolf Lammen, 6-Apr-2022.) $)
+  simplll $p |- ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) -> ph ) $=
+    wph wph wps wch wth wph id ad3antrrr $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.)  (Proof shortened by Wolf Lammen, 6-Apr-2022.) $)
+  simpllr $p |- ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) -> ps ) $=
+    wps wps wph wch wth wps id ad3antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simplrl $p |- ( ( ( ph /\ ( ps /\ ch ) ) /\ th ) -> ps ) $=
+    wps wch wa wps wph wth wps wch simpl ad2antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simplrr $p |- ( ( ( ph /\ ( ps /\ ch ) ) /\ th ) -> ch ) $=
+    wps wch wa wch wph wth wps wch simpr ad2antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simprll $p |- ( ( ph /\ ( ( ps /\ ch ) /\ th ) ) -> ps ) $=
+    wps wch wa wps wph wth wps wch simpl ad2antrl $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simprlr $p |- ( ( ph /\ ( ( ps /\ ch ) /\ th ) ) -> ch ) $=
+    wps wch wa wch wph wth wps wch simpr ad2antrl $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simprrl $p |- ( ( ph /\ ( ps /\ ( ch /\ th ) ) ) -> ch ) $=
+    wch wth wa wch wph wps wch wth simpl ad2antll $.
+
+  $( Simplification of a conjunction.  (Contributed by Jeff Hankins,
+     28-Jul-2009.) $)
+  simprrr $p |- ( ( ph /\ ( ps /\ ( ch /\ th ) ) ) -> th ) $=
+    wch wth wa wth wph wps wch wth simpr ad2antll $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-4l $p |- ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta ) -> ph ) $=
+    wph wph wps wch wth wta wph id ad4antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-4r $p |- ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta ) -> ps ) $=
+    wps wps wph wch wth wta wps id ad4antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-5l $p |- ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) -> ph ) $=
+    wph wph wps wch wth wta wet wph id ad5antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-5r $p |- ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) -> ps ) $=
+    wps wps wph wch wth wta wet wps id ad5antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-6l $p |- ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) -> ph ) $=
+    wph wph wps wch wth wta wet wze wph id ad6antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-6r $p |- ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) -> ps ) $=
+    wps wps wph wch wth wta wet wze wps id ad6antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-7l $p |- ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) -> ph ) $=
+    wph wph wps wch wth wta wet wze wsi wph id ad7antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-7r $p |- ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) -> ps ) $=
+    wps wps wph wch wth wta wet wze wsi wps id ad7antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-8l $p |- ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) -> ph ) $=
+    wph wph wps wch wth wta wet wze wsi wrh wph id ad8antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-8r $p |- ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) -> ps ) $=
+    wps wps wph wch wth wta wet wze wsi wrh wps id ad8antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-9l $p |- ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) -> ph ) $=
+    wph wph wps wch wth wta wet wze wsi wrh wmu wph id ad9antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-9r $p |- ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) -> ps ) $=
+    wps wps wph wch wth wta wet wze wsi wrh wmu wps id ad9antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-10l $p |- ( ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) -> ph ) $=
+    wph wph wps wch wth wta wet wze wsi wrh wmu wla wph id ad10antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-10r $p |- ( ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) -> ps ) $=
+    wps wps wph wch wth wta wet wze wsi wrh wmu wla wps id ad10antlr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-11l $p |- ( ( ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) /\ ka ) -> ph ) $=
+    wph wps wa wph wch wth wta wet wze wsi wrh wmu wla wka wph wps simpl
+    ad10antr $.
+
+  $( Simplification of a conjunction.  (Contributed by Mario Carneiro,
+     4-Jan-2017.)  (Proof shortened by Wolf Lammen, 24-May-2022.) $)
+  simp-11r $p |- ( ( ( ( ( ( ( ( ( ( ( ( ph /\ ps ) /\ ch ) /\ th ) /\ ta )
+    /\ et ) /\ ze ) /\ si ) /\ rh ) /\ mu ) /\ la ) /\ ka ) -> ps ) $=
+    wph wps wa wps wch wth wta wet wze wsi wrh wmu wla wka wph wps simpr
+    ad10antr $.
+
+$( Restating theorems using conjunction. $)
+
+  ${
+    pm2.01da.1 $e |- ( ( ph /\ ps ) -> -. ps ) $.
+    $( Deduction based on reductio ad absurdum.  See ~ pm2.01 .  (Contributed
+       by Mario Carneiro, 9-Feb-2017.) $)
+    pm2.01da $p |- ( ph -> -. ps ) $=
+      wph wps wph wps wps wn pm2.01da.1 ex pm2.01d $.
+  $}
+
+  ${
+    pm2.18da.1 $e |- ( ( ph /\ -. ps ) -> ps ) $.
+    $( Deduction based on reductio ad absurdum.  See ~ pm2.18 .  (Contributed
+       by Mario Carneiro, 9-Feb-2017.) $)
+    pm2.18da $p |- ( ph -> ps ) $=
+      wph wps wph wps wn wps pm2.18da.1 ex pm2.18d $.
+  $}
+
+  ${
+    impbida.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    impbida.2 $e |- ( ( ph /\ ch ) -> ps ) $.
+    $( Deduce an equivalence from two implications.  Variant of ~ impbid .
+       (Contributed by NM, 17-Feb-2007.) $)
+    impbida $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wps wch wph wps wch impbida.1 ex wph wch wps impbida.2 ex impbid $.
+  $}
+
+  ${
+    pm5.21nd.1 $e |- ( ( ph /\ ps ) -> th ) $.
+    pm5.21nd.2 $e |- ( ( ph /\ ch ) -> th ) $.
+    pm5.21nd.3 $e |- ( th -> ( ps <-> ch ) ) $.
+    $( Eliminate an antecedent implied by each side of a biconditional.
+       Variant of ~ pm5.21ndd .  (Contributed by NM, 20-Nov-2005.)  (Proof
+       shortened by Wolf Lammen, 4-Nov-2013.) $)
+    pm5.21nd $p |- ( ph -> ( ps <-> ch ) ) $=
+      wph wth wps wch wph wps wth pm5.21nd.1 ex wph wch wth pm5.21nd.2 ex wth
+      wps wch wb wi wph pm5.21nd.3 a1i pm5.21ndd $.
+  $}
+
+  $( Conjunctive detachment.  Theorem *3.35 of [WhiteheadRussell] p. 112.
+     Variant of ~ pm2.27 .  (Contributed by NM, 14-Dec-2002.) $)
+  pm3.35 $p |- ( ( ph /\ ( ph -> ps ) ) -> ps ) $=
+    wph wph wps wi wps wph wps pm2.27 imp $.
+
+  ${
+    pm5.74da.1 $e |- ( ( ph /\ ps ) -> ( ch <-> th ) ) $.
+    $( Distribution of implication over biconditional (deduction form).
+       Variant of ~ pm5.74d .  (Contributed by NM, 4-May-2007.) $)
+    pm5.74da $p |- ( ph -> ( ( ps -> ch ) <-> ( ps -> th ) ) ) $=
+      wph wps wch wth wph wps wch wth wb pm5.74da.1 ex pm5.74d $.
+  $}
+
+  $( Theorem *4.22 of [WhiteheadRussell] p. 117. ~ bitri in closed form.
+     (Contributed by NM, 3-Jan-2005.) $)
+  bitr $p |- ( ( ( ph <-> ps ) /\ ( ps <-> ch ) ) -> ( ph <-> ch ) ) $=
+    wph wps wb wph wch wb wps wch wb wph wps wch bibi1 biimpar $.
+
+  $( A transitive law of equivalence.  Compare Theorem *4.22 of
+     [WhiteheadRussell] p. 117.  (Contributed by NM, 18-Aug-1993.) $)
+  biantr $p |- ( ( ( ph <-> ps ) /\ ( ch <-> ps ) ) -> ( ph <-> ch ) ) $=
+    wch wps wb wph wch wb wph wps wb wch wps wb wch wps wph wch wps wb id
+    bibi2d biimparc $.
+
+  $( Theorem *4.14 of [WhiteheadRussell] p. 117.  Related to ~ con34b .
+     (Contributed by NM, 3-Jan-2005.)  (Proof shortened by Wolf Lammen,
+     23-Oct-2012.) $)
+  pm4.14 $p |- ( ( ( ph /\ ps ) -> ch ) <-> ( ( ph /\ -. ch ) -> -. ps ) ) $=
+    wph wps wch wi wi wph wch wn wps wn wi wi wph wps wa wch wi wph wch wn wa
+    wps wn wi wps wch wi wch wn wps wn wi wph wps wch con34b imbi2i wph wps wch
+    impexp wph wch wn wps wn impexp 3bitr4i $.
+
+  $( Theorem *3.37 (Transp) of [WhiteheadRussell] p. 112.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 23-Oct-2012.) $)
+  pm3.37 $p |- ( ( ( ph /\ ps ) -> ch ) -> ( ( ph /\ -. ch ) -> -. ps ) ) $=
+    wph wps wa wch wi wph wch wn wa wps wn wi wph wps wch pm4.14 biimpi $.
+
+  $( Conjoin antecedents and consequents of two premises.  This is the closed
+     theorem form of ~ anim12d .  Theorem *3.47 of [WhiteheadRussell] p. 113.
+     It was proved by Leibniz, and it evidently pleased him enough to call it
+     _praeclarum theorema_ (splendid theorem).  (Contributed by NM,
+     12-Aug-1993.)  (Proof shortened by Wolf Lammen, 7-Apr-2013.) $)
+  anim12 $p |- ( ( ( ph -> ps ) /\ ( ch -> th ) )
+              -> ( ( ph /\ ch ) -> ( ps /\ th ) ) ) $=
+    wph wps wi wph wps wch wth wi wch wth wph wps wi id wch wth wi id im2anan9
+    $.
+
+$( Replacing conjunction. $)
+
+  $( Conjunction implies implication.  Theorem *3.4 of [WhiteheadRussell]
+     p. 113.  (Contributed by NM, 31-Jul-1995.) $)
+  pm3.4 $p |- ( ( ph /\ ps ) -> ( ph -> ps ) ) $=
+    wph wps wa wps wph wph wps simpr a1d $.
+
+  ${
+    exbiri.1 $e |- ( ( ph /\ ps ) -> ( ch <-> th ) ) $.
+    $( Inference form of ~ exbir .  This proof is ~ exbiriVD automatically
+       translated and minimized.  (Contributed by Alan Sare, 31-Dec-2011.)
+       (Proof shortened by Wolf Lammen, 27-Jan-2013.) $)
+    exbiri $p |- ( ph -> ( ps -> ( th -> ch ) ) ) $=
+      wph wps wth wch wph wps wa wch wth exbiri.1 biimpar exp31 $.
+  $}
+
+$( Contradiction using conjunction. $)
+
+  ${
+    pm2.61ian.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    pm2.61ian.2 $e |- ( ( -. ph /\ ps ) -> ch ) $.
+    $( Elimination of an antecedent.  (Contributed by NM, 1-Jan-2005.) $)
+    pm2.61ian $p |- ( ps -> ch ) $=
+      wph wps wch wi wph wps wch pm2.61ian.1 ex wph wn wps wch pm2.61ian.2 ex
+      pm2.61i $.
+  $}
+
+  ${
+    pm2.61dan.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    pm2.61dan.2 $e |- ( ( ph /\ -. ps ) -> ch ) $.
+    $( Elimination of an antecedent.  (Contributed by NM, 1-Jan-2005.) $)
+    pm2.61dan $p |- ( ph -> ch ) $=
+      wph wps wch wph wps wch pm2.61dan.1 ex wph wps wn wch pm2.61dan.2 ex
+      pm2.61d $.
+  $}
+
+  ${
+    pm2.61ddan.1 $e |- ( ( ph /\ ps ) -> th ) $.
+    pm2.61ddan.2 $e |- ( ( ph /\ ch ) -> th ) $.
+    pm2.61ddan.3 $e |- ( ( ph /\ ( -. ps /\ -. ch ) ) -> th ) $.
+    $( Elimination of two antecedents.  (Contributed by NM, 9-Jul-2013.) $)
+    pm2.61ddan $p |- ( ph -> th ) $=
+      wph wps wth pm2.61ddan.1 wph wps wn wa wch wth wph wch wth wps wn
+      pm2.61ddan.2 adantlr wph wps wn wch wn wth pm2.61ddan.3 anassrs pm2.61dan
+      pm2.61dan $.
+  $}
+
+  ${
+    pm2.61dda.1 $e |- ( ( ph /\ -. ps ) -> th ) $.
+    pm2.61dda.2 $e |- ( ( ph /\ -. ch ) -> th ) $.
+    pm2.61dda.3 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    $( Elimination of two antecedents.  (Contributed by NM, 9-Jul-2013.) $)
+    pm2.61dda $p |- ( ph -> th ) $=
+      wph wps wth wph wps wa wch wth wph wps wch wth pm2.61dda.3 anassrs wph
+      wch wn wth wps pm2.61dda.2 adantlr pm2.61dan pm2.61dda.1 pm2.61dan $.
+  $}
+
+  ${
+    mtand.1 $e |- ( ph -> -. ch ) $.
+    mtand.2 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( A modus tollens deduction.  (Contributed by Jeff Hankins,
+       19-Aug-2009.) $)
+    mtand $p |- ( ph -> -. ps ) $=
+      wph wps wch mtand.1 wph wps wch mtand.2 ex mtod $.
+  $}
+
+  ${
+    pm2.65da.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    pm2.65da.2 $e |- ( ( ph /\ ps ) -> -. ch ) $.
+    $( Deduction for proof by contradiction.  (Contributed by NM,
+       12-Jun-2014.) $)
+    pm2.65da $p |- ( ph -> -. ps ) $=
+      wph wps wch wph wps wch pm2.65da.1 ex wph wps wch wn pm2.65da.2 ex
+      pm2.65d $.
+  $}
+
+  ${
+    condan.1 $e |- ( ( ph /\ -. ps ) -> ch ) $.
+    condan.2 $e |- ( ( ph /\ -. ps ) -> -. ch ) $.
+    $( Proof by contradiction.  (Contributed by NM, 9-Feb-2006.)  (Proof
+       shortened by Wolf Lammen, 19-Jun-2014.) $)
+    condan $p |- ( ph -> ps ) $=
+      wph wps wph wps wn wch condan.1 condan.2 pm2.65da notnotrd $.
+  $}
+
+$( Relation of conjunction to biconditional. $)
+
+  $( An implication is equivalent to the equivalence of some implied
+     equivalence and some other equivalence involving a conjunction.  A utility
+     lemma as illustrated in ~ biadanii and ~ elelb .  (Contributed by BJ,
+     4-Mar-2023.)  (Proof shortened by Wolf Lammen, 8-Mar-2023.) $)
+  biadan $p |- ( ( ph -> ps ) <->
+                   ( ( ps -> ( ph <-> ch ) ) <-> ( ph <-> ( ps /\ ch ) ) ) ) $=
+    wph wps wi wph wps wph wa wb wps wph wa wph wb wps wph wch wb wi wph wps
+    wch wa wb wb wph wps pm4.71r wph wps wph wa bicom wph wps wch wa wb wps wph
+    wch wb wi wb wps wch wa wph wb wps wph wa wps wch wa wb wb wps wph wch wb
+    wi wph wps wch wa wb wb wps wph wa wph wb wph wps wch wa wb wps wch wa wph
+    wb wps wph wch wb wi wps wph wa wps wch wa wb wph wps wch wa bicom wps wph
+    wch pm5.32 bibi12i wps wph wch wb wi wph wps wch wa wb bicom wps wph wa wph
+    wps wch wa biluk 3bitr4ri 3bitri $.
+
+  ${
+    biadani.1 $e |- ( ph -> ps ) $.
+    $( Inference associated with ~ biadan .  (Contributed by BJ,
+       4-Mar-2023.) $)
+    biadani $p |- ( ( ps -> ( ph <-> ch ) ) <-> ( ph <-> ( ps /\ ch ) ) ) $=
+      wph wps wi wps wph wch wb wi wph wps wch wa wb wb biadani.1 wph wps wch
+      biadan mpbi $.
+
+    $( Alternate proof of ~ biadani not using ~ biadan .  (Contributed by BJ,
+       4-Mar-2023.)  (Proof modification is discouraged.)
+       (New usage is discouraged.) $)
+    biadaniALT $p |- ( ( ps -> ( ph <-> ch ) ) <-> ( ph <-> ( ps /\ ch ) ) ) $=
+      wps wph wch wb wi wps wph wa wps wch wa wb wph wps wch wa wb wps wph wch
+      pm5.32 wph wps wph wa wps wch wa wph wps biadani.1 pm4.71ri bibi1i bitr4i
+      $.
+
+    biadanii.2 $e |- ( ps -> ( ph <-> ch ) ) $.
+    $( Inference associated with ~ biadani .  Add a conjunction to an
+       equivalence.  (Contributed by Jeff Madsen, 20-Jun-2011.)  (Proof
+       shortened by BJ, 4-Mar-2023.) $)
+    biadanii $p |- ( ph <-> ( ps /\ ch ) ) $=
+      wps wph wch wb wi wph wps wch wa wb biadanii.2 wph wps wch biadani.1
+      biadani mpbi $.
+  $}
+
+  ${
+    biadanid.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    biadanid.2 $e |- ( ( ph /\ ch ) -> ( ps <-> th ) ) $.
+    $( Deduction associated with ~ biadani .  Add a conjunction to an
+       equivalence.  (Contributed by Thierry Arnoux, 16-Jun-2024.) $)
+    biadanid $p |- ( ph -> ( ps <-> ( ch /\ th ) ) ) $=
+      wph wps wch wth wa wph wps wa wch wth biadanid.1 wph wps wa wch wth
+      biadanid.1 wph wch wps wth wph wch wa wps wth biadanid.2 biimpa an32s
+      mpdan jca wph wch wth wps wph wch wa wps wth biadanid.2 biimpar anasss
+      impbida $.
+  $}
+
+  $( Two propositions are equivalent if they are both true.  Theorem *5.1 of
+     [WhiteheadRussell] p. 123.  (Contributed by NM, 21-May-1994.) $)
+  pm5.1 $p |- ( ( ph /\ ps ) -> ( ph <-> ps ) ) $=
+    wph wps wph wps wb wph wps pm5.501 biimpa $.
+
+  $( Two propositions are equivalent if they are both false.  Theorem *5.21 of
+     [WhiteheadRussell] p. 124.  (Contributed by NM, 21-May-1994.) $)
+  pm5.21 $p |- ( ( -. ph /\ -. ps ) -> ( ph <-> ps ) ) $=
+    wph wn wps wn wph wps wb wph wps pm5.21im imp $.
+
+  $( Theorem *5.35 of [WhiteheadRussell] p. 125.  Closed form of ~ 2thd .
+     (Contributed by NM, 3-Jan-2005.) $)
+  pm5.35 $p |- ( ( ( ph -> ps ) /\ ( ph -> ch ) ) ->
+                ( ph -> ( ps <-> ch ) ) ) $=
+    wph wps wi wph wch wi wa wph wps wch wph wps wi wph wch wi pm5.1 pm5.74rd
+    $.
+
+  $( Introduce one conjunct as an antecedent to the other.  "abai" stands for
+     "and, biconditional, and, implication".  (Contributed by NM, 12-Aug-1993.)
+     (Proof shortened by Wolf Lammen, 7-Dec-2012.) $)
+  abai $p |- ( ( ph /\ ps ) <-> ( ph /\ ( ph -> ps ) ) ) $=
+    wph wps wph wps wi wph wps biimt pm5.32i $.
+
+  $( Conjunction with implication.  Compare Theorem *4.45 of [WhiteheadRussell]
+     p. 119.  (Contributed by NM, 17-May-1998.) $)
+  pm4.45im $p |- ( ph <-> ( ph /\ ( ps -> ph ) ) ) $=
+    wph wps wph wi wph wps ax-1 pm4.71i $.
+
+  $( An implication and its reverse are equivalent exactly when both operands
+     are equivalent.  The right hand side resembles that of ~ dfbi2 , but
+     ` <-> ` is a weaker operator than ` /\ ` .  Note that an implication and
+     its reverse can never be simultaneously false, because of ~ pm2.521 .
+     (Contributed by Wolf Lammen, 18-Dec-2023.) $)
+  impimprbi $p |- ( ( ph <-> ps ) <-> ( ( ph -> ps ) <-> ( ps -> ph ) ) ) $=
+    wph wps wb wph wps wi wps wph wi wb wph wps wb wph wps wi wps wph wi wa wph
+    wps wi wps wph wi wb wph wps dfbi2 wph wps wi wps wph wi pm5.1 sylbi wph
+    wps wi wps wph wi wph wps wb wph wps impbi wph wps wi wn wps wph wi wph wps
+    wb wph wps pm2.521 pm2.24d bija impbii $.
+
+$( Moving subexpressions in/out of a conjunction. $)
+
+  $( Theorem to move a conjunct in and out of a negation.  (Contributed by NM,
+     9-Nov-2003.) $)
+  nan $p |- ( ( ph -> -. ( ps /\ ch ) ) <-> ( ( ph /\ ps ) -> -. ch ) ) $=
+    wph wps wa wch wn wi wph wps wch wn wi wi wph wps wch wa wn wi wph wps wch
+    wn impexp wps wch wn wi wps wch wa wn wph wps wch imnan imbi2i bitr2i $.
+
+  $( Theorem *5.31 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.31 $p |- ( ( ch /\ ( ph -> ps ) ) -> ( ph -> ( ps /\ ch ) ) ) $=
+    wch wph wps wi wa wph wps wch wch wph wps wi simpr wch wph wps wi simpl
+    jctird $.
+
+  $( Variant of ~ pm5.31 .  (Contributed by Rodolfo Medina, 15-Oct-2010.) $)
+  pm5.31r $p |- ( ( ch /\ ( ph -> ps ) ) -> ( ph -> ( ch /\ ps ) ) ) $=
+    wch wph wch wph wps wi wps wch wph ax-1 wph wps wi id anim12ii $.
+
+  $( Theorem *4.15 of [WhiteheadRussell] p. 117.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 18-Nov-2012.) $)
+  pm4.15 $p |- ( ( ( ph /\ ps ) -> -. ch ) <-> ( ( ps /\ ch ) -> -. ph ) ) $=
+    wps wch wa wph wn wi wph wps wch wa wn wi wph wps wa wch wn wi wps wch wa
+    wph con2b wph wps wch nan bitr2i $.
+
+  $( Theorem *5.36 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.36 $p |- ( ( ph /\ ( ph <-> ps ) ) <-> ( ps /\ ( ph <-> ps ) ) ) $=
+    wph wps wb wph wps wph wps wb id pm5.32ri $.
+
+$( Absorption in conjunction. $)
+
+  $( A conjunction with a negated conjunction.  (Contributed by AV,
+     8-Mar-2022.)  (Proof shortened by Wolf Lammen, 1-Apr-2022.) $)
+  annotanannot $p |- ( ( ph /\ -. ( ph /\ ps ) ) <-> ( ph /\ -. ps ) ) $=
+    wph wph wps wa wn wps wn wph wph wps wa wps wph wps wph wps wa wph wps ibar
+    bicomd notbid pm5.32i $.
+
+  $( Theorem *5.33 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.33 $p |- ( ( ph /\ ( ps -> ch ) ) <->
+                ( ph /\ ( ( ph /\ ps ) -> ch ) ) ) $=
+    wph wps wch wi wph wps wa wch wi wph wps wph wps wa wch wph wps ibar imbi1d
+    pm5.32i $.
+
+$( Miscellaneous theorems using conjunction. $)
+
+  ${
+    syl12anc.1 $e |- ( ph -> ps ) $.
+    syl12anc.2 $e |- ( ph -> ch ) $.
+    syl12anc.3 $e |- ( ph -> th ) $.
+    ${
+      syl12anc.4 $e |- ( ( ps /\ ( ch /\ th ) ) -> ta ) $.
+      $( Syllogism combined with contraction.  (Contributed by Jeff Hankins,
+         1-Aug-2009.) $)
+      syl12anc $p |- ( ph -> ta ) $=
+        wph wps wch wth wa wta syl12anc.1 wph wch wth syl12anc.2 syl12anc.3 jca
+        syl12anc.4 syl2anc $.
+    $}
+
+    ${
+      syl21anc.4 $e |- ( ( ( ps /\ ch ) /\ th ) -> ta ) $.
+      $( Syllogism combined with contraction.  (Contributed by Jeff Hankins,
+         1-Aug-2009.) $)
+      syl21anc $p |- ( ph -> ta ) $=
+        wph wps wch wa wth wta wph wps wch syl12anc.1 syl12anc.2 jca syl12anc.3
+        syl21anc.4 syl2anc $.
+    $}
+
+    ${
+      syl22anc.4 $e |- ( ph -> ta ) $.
+      syl22anc.5 $e |- ( ( ( ps /\ ch ) /\ ( th /\ ta ) ) -> et ) $.
+      $( Syllogism combined with contraction.  (Contributed by NM,
+         11-Mar-2012.) $)
+      syl22anc $p |- ( ph -> et ) $=
+        wph wps wch wa wth wta wet wph wps wch syl12anc.1 syl12anc.2 jca
+        syl12anc.3 syl22anc.4 syl22anc.5 syl12anc $.
+    $}
+  $}
+
+  ${
+    syl1111anc.1 $e |- ( ph -> ps ) $.
+    syl1111anc.2 $e |- ( ph -> ch ) $.
+    syl1111anc.3 $e |- ( ph -> th ) $.
+    syl1111anc.4 $e |- ( ph -> ta ) $.
+    syl1111anc.5 $e |- ( ( ( ( ps /\ ch ) /\ th ) /\ ta ) -> et ) $.
+    $( Four-hypothesis elimination deduction for an assertion with a singleton
+       virtual hypothesis collection.  Similar to ~ syl112anc except the
+       unification theorem uses left-nested conjunction.  (Contributed by Alan
+       Sare, 17-Oct-2017.) $)
+    syl1111anc $p |- ( ph -> et ) $=
+      wph wps wch wa wth wta wet wph wps wch syl1111anc.1 syl1111anc.2 jca
+      syl1111anc.3 syl1111anc.4 syl1111anc.5 syl21anc $.
+  $}
+
+  ${
+    syldbl2.1 $e |- ( ( ph /\ ps ) -> ( ps -> th ) ) $.
+    $( Stacked hypotheseis implies goal.  (Contributed by Stanislas Polu,
+       9-Mar-2020.) $)
+    syldbl2 $p |- ( ( ph /\ ps ) -> th ) $=
+      wph wps wth wph wps wa wps wth syldbl2.1 com12 anabsi7 $.
+  $}
+
+  ${
+    mpsyl4anc.1 $e |- ph $.
+    mpsyl4anc.2 $e |- ps $.
+    mpsyl4anc.3 $e |- ch $.
+    mpsyl4anc.4 $e |- ( th -> ta ) $.
+    mpsyl4anc.5 $e |- ( ( ( ( ph /\ ps ) /\ ch ) /\ ta ) -> et ) $.
+    $( An elimination deduction.  (Contributed by Alan Sare, 17-Oct-2017.) $)
+    mpsyl4anc $p |- ( th -> et ) $=
+      wth wph wps wch wta wet wph wth mpsyl4anc.1 a1i wps wth mpsyl4anc.2 a1i
+      wch wth mpsyl4anc.3 a1i mpsyl4anc.4 mpsyl4anc.5 syl1111anc $.
+  $}
+
+  $( Theorem *4.87 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Eric Schmidt, 26-Oct-2006.) $)
+  pm4.87 $p |- ( ( ( ( ( ph /\ ps ) -> ch ) <-> ( ph -> ( ps -> ch ) ) ) /\
+                ( ( ph -> ( ps -> ch ) ) <-> ( ps -> ( ph -> ch ) ) ) ) /\
+                ( ( ps -> ( ph -> ch ) ) <-> ( ( ps /\ ph ) -> ch ) ) ) $=
+    wph wps wa wch wi wph wps wch wi wi wb wph wps wch wi wi wps wph wch wi wi
+    wb wa wps wph wch wi wi wps wph wa wch wi wb wph wps wa wch wi wph wps wch
+    wi wi wb wph wps wch wi wi wps wph wch wi wi wb wph wps wch impexp wph wps
+    wch bi2.04 pm3.2i wps wph wa wch wi wps wph wch wi wi wps wph wch impexp
+    bicomi pm3.2i $.
+
+  $( Removal of conjunct from one side of an equivalence.  (Contributed by NM,
+     21-Jun-1993.) $)
+  bimsc1 $p |- ( ( ( ph -> ps ) /\ ( ch <-> ( ps /\ ph ) ) )
+               -> ( ch <-> ph ) ) $=
+    wch wps wph wa wb wch wps wph wa wph wps wi wph wch wps wph wa wb id wph
+    wps wi wps wph wa wph wps wph simpr wph wps ancr impbid2 sylan9bbr $.
+
+  ${
+    a2and.1 $e |- ( ph -> ( ( ps /\ rh ) -> ( ta -> th ) ) ) $.
+    a2and.2 $e |- ( ph -> ( ( ps /\ rh ) -> ch ) ) $.
+    $( Deduction distributing a conjunction as embedded antecedent.
+       (Contributed by AV, 25-Oct-2019.)  (Proof shortened by Wolf Lammen,
+       19-Jan-2020.) $)
+    a2and $p |- ( ph -> ( ( ( ps /\ ch ) -> ta )
+                            -> ( ( ps /\ rh ) -> th ) ) ) $=
+      wph wps wrh wa wps wch wa wta wi wth wph wps wrh wa wta wth wi wps wch wa
+      wps wch wa wta wi wth wi a2and.1 wph wps wrh wch wph wps wrh wch a2and.2
+      expd imdistand wps wch wa wta wi wta wth wi wps wch wa wth wps wch wa wta
+      wth imim1 com3l syl6c com23 $.
+  $}
+
+  ${
+    animpimp2impd.1 $e |- ( ( ps /\ ph ) -> ( ch -> ( th -> et ) ) ) $.
+    animpimp2impd.2 $e |- ( ( ps /\ ( ph /\ th ) ) -> ( et -> ta ) ) $.
+    $( Deduction deriving nested implications from conjunctions.  (Contributed
+       by AV, 21-Aug-2022.) $)
+    animpimp2impd $p |- ( ph -> ( ( ps -> ch ) -> ( ps -> ( th -> ta ) ) ) ) $=
+      wph wps wch wth wta wi wps wph wch wth wta wi wi wps wph wa wch wth wet
+      wi wth wta wi animpimp2impd.1 wps wph wa wth wet wta wps wph wth wet wta
+      wi animpimp2impd.2 expr a2d syld expcom a2d $.
+  $}
+
+
+$(
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  Logical disjunction
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+  This section defines disjunction of two formulas, denoted by infix " ` \/ ` "
+  and read "or".  It is defined in terms of implication and negation, which is
+  possible in classical logic (but not in intuitionistic logic: see iset.mm).
+  This section contains only theorems proved without ~ df-an (theorems that are
+  proved using ~ df-an are deferred to the next section).  Basic theorems that
+  help simplifying and applying disjunction are ~ olc , ~ orc , and ~ orcom .
+
+  As mentioned in the "note on definitions" in the section comment for logical
+  equivalence, all theorems in this and the previous section can be stated in
+  terms of implication and negation only.  Additionally, in classical logic
+  (but not in intuitionistic logic: see iset.mm), it is also possible to
+  translate conjunction into disjunction and conversely via the De Morgan law
+  ~ anor : conjunction and disjunction are dual connectives.  Either is
+  sufficient to develop all propositional calculus of the logic (together with
+  implication and negation).  In practice, conjunction is more efficient, its
+  big advantage being the possibility to use it to group antecedents in a
+  convenient way, using ~ imp and ~ ex as noted in the previous section.
+
+  An illustration of the conservativity of ~ df-an is given by ~ orim12dALT ,
+  which is an alternate proof of ~ orim12d not using ~ df-an .
+
+$)
+
+  $( Declare connectives for disjunction ("or"). $)
+  $c \/ $.  $( Vee (read:  "or") $)
+
+  $( Extend wff definition to include disjunction ("or"). $)
+  wo $a wff ( ph \/ ps ) $.
+
+  $( Define disjunction (logical "or").  Definition of [Margaris] p. 49.  When
+     the left operand, right operand, or both are true, the result is true;
+     when both sides are false, the result is false.  For example, it is true
+     that ` ( 2 = 3 \/ 4 = 4 ) ` ( ~ ex-or ).  After we define the constant
+     true ` T. ` ( ~ df-tru ) and the constant false ` F. ` ( ~ df-fal ), we
+     will be able to prove these truth table values:
+     ` ( ( T. \/ T. ) <-> T. ) ` ( ~ truortru ), ` ( ( T. \/ F. ) <-> T. ) `
+     ( ~ truorfal ), ` ( ( F. \/ T. ) <-> T. ) ` ( ~ falortru ), and
+     ` ( ( F. \/ F. ) <-> F. ) ` ( ~ falorfal ).
+
+     Contrast with ` /\ ` ( ~ df-an ), ` -> ` ( ~ wi ), ` -/\ ` ( ~ df-nan ),
+     and ` \/_ ` ( ~ df-xor ).  (Contributed by NM, 27-Dec-1992.) $)
+  df-or $a |- ( ( ph \/ ps ) <-> ( -. ph -> ps ) ) $.
+
+  $( Theorem *4.64 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.64 $p |- ( ( -. ph -> ps ) <-> ( ph \/ ps ) ) $=
+    wph wps wo wph wn wps wi wph wps df-or bicomi $.
+
+  $( Theorem *4.66 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.66 $p |- ( ( -. ph -> -. ps ) <-> ( ph \/ -. ps ) ) $=
+    wph wps wn pm4.64 $.
+
+  $( Theorem *2.53 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.53 $p |- ( ( ph \/ ps ) -> ( -. ph -> ps ) ) $=
+    wph wps wo wph wn wps wi wph wps df-or biimpi $.
+
+  $( Theorem *2.54 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.54 $p |- ( ( -. ph -> ps ) -> ( ph \/ ps ) ) $=
+    wph wps wo wph wn wps wi wph wps df-or biimpri $.
+
+  $( Implication in terms of disjunction.  Theorem *4.6 of [WhiteheadRussell]
+     p. 120.  (Contributed by NM, 3-Jan-1993.) $)
+  imor $p |- ( ( ph -> ps ) <-> ( -. ph \/ ps ) ) $=
+    wph wps wi wph wn wn wps wi wph wn wps wo wph wph wn wn wps wph notnotb
+    imbi1i wph wn wps df-or bitr4i $.
+
+  ${
+    imori.1 $e |- ( ph -> ps ) $.
+    $( Infer disjunction from implication.  (Contributed by NM,
+       12-Mar-2012.) $)
+    imori $p |- ( -. ph \/ ps ) $=
+      wph wps wi wph wn wps wo imori.1 wph wps imor mpbi $.
+  $}
+
+  ${
+    imorri.1 $e |- ( -. ph \/ ps ) $.
+    $( Infer implication from disjunction.  (Contributed by Jonathan Ben-Naim,
+       3-Jun-2011.) $)
+    imorri $p |- ( ph -> ps ) $=
+      wph wps wi wph wn wps wo imorri.1 wph wps imor mpbir $.
+  $}
+
+  $( Theorem *4.62 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.62 $p |- ( ( ph -> -. ps ) <-> ( -. ph \/ -. ps ) ) $=
+    wph wps wn imor $.
+
+  ${
+    jaoi.1 $e |- ( ph -> ps ) $.
+    jaoi.2 $e |- ( ch -> ps ) $.
+    $( Inference disjoining the antecedents of two implications.  (Contributed
+       by NM, 5-Apr-1994.) $)
+    jaoi $p |- ( ( ph \/ ch ) -> ps ) $=
+      wph wch wo wph wps wph wch wo wph wn wch wps wph wch pm2.53 jaoi.2 syl6
+      jaoi.1 pm2.61d2 $.
+  $}
+
+  ${
+    jao1i.1 $e |- ( ps -> ( ch -> ph ) ) $.
+    $( Add a disjunct in the antecedent of an implication.  (Contributed by
+       Rodolfo Medina, 24-Sep-2010.) $)
+    jao1i $p |- ( ( ph \/ ps ) -> ( ch -> ph ) ) $=
+      wph wch wph wi wps wph wch ax-1 jao1i.1 jaoi $.
+  $}
+
+  ${
+    jaod.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jaod.2 $e |- ( ph -> ( th -> ch ) ) $.
+    $( Deduction disjoining the antecedents of two implications.  (Contributed
+       by NM, 18-Aug-1994.) $)
+    jaod $p |- ( ph -> ( ( ps \/ th ) -> ch ) ) $=
+      wps wth wo wph wch wps wph wch wi wth wph wps wch jaod.1 com12 wph wth
+      wch jaod.2 com12 jaoi com12 $.
+
+    jaod.3 $e |- ( ph -> ( ps \/ th ) ) $.
+    $( Eliminate a disjunction in a deduction.  (Contributed by Mario Carneiro,
+       29-May-2016.) $)
+    mpjaod $p |- ( ph -> ch ) $=
+      wph wps wth wo wch jaod.3 wph wps wch wth jaod.1 jaod.2 jaod mpd $.
+  $}
+
+  ${
+    ori.1 $e |- ( ph \/ ps ) $.
+    $( Infer implication from disjunction.  (Contributed by NM,
+       11-Jun-1994.) $)
+    ori $p |- ( -. ph -> ps ) $=
+      wph wps wo wph wn wps wi ori.1 wph wps df-or mpbi $.
+  $}
+
+  ${
+    orri.1 $e |- ( -. ph -> ps ) $.
+    $( Infer disjunction from implication.  (Contributed by NM,
+       11-Jun-1994.) $)
+    orri $p |- ( ph \/ ps ) $=
+      wph wps wo wph wn wps wi orri.1 wph wps df-or mpbir $.
+  $}
+
+  ${
+    orrd.1 $e |- ( ph -> ( -. ps -> ch ) ) $.
+    $( Deduce disjunction from implication.  (Contributed by NM,
+       27-Nov-1995.) $)
+    orrd $p |- ( ph -> ( ps \/ ch ) ) $=
+      wph wps wn wch wi wps wch wo orrd.1 wps wch pm2.54 syl $.
+  $}
+
+  ${
+    ord.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    $( Deduce implication from disjunction.  (Contributed by NM,
+       18-May-1994.) $)
+    ord $p |- ( ph -> ( -. ps -> ch ) ) $=
+      wph wps wch wo wps wn wch wi ord.1 wps wch df-or sylib $.
+  $}
+
+  ${
+    orci.1 $e |- ph $.
+    $( Deduction introducing a disjunct.  (Contributed by NM, 19-Jan-2008.)
+       (Proof shortened by Wolf Lammen, 14-Nov-2012.) $)
+    orci $p |- ( ph \/ ps ) $=
+      wph wps wph wps orci.1 pm2.24i orri $.
+
+    $( Deduction introducing a disjunct.  (Contributed by NM, 19-Jan-2008.)
+       (Proof shortened by Wolf Lammen, 14-Nov-2012.) $)
+    olci $p |- ( ps \/ ph ) $=
+      wps wph wph wps wn orci.1 a1i orri $.
+  $}
+
+  $( Introduction of a disjunct.  Theorem *2.2 of [WhiteheadRussell] p. 104.
+     (Contributed by NM, 30-Aug-1993.) $)
+  orc $p |- ( ph -> ( ph \/ ps ) ) $=
+    wph wph wps wph wps pm2.24 orrd $.
+
+  $( Introduction of a disjunct.  Axiom *1.3 of [WhiteheadRussell] p. 96.
+     (Contributed by NM, 30-Aug-1993.) $)
+  olc $p |- ( ph -> ( ps \/ ph ) ) $=
+    wph wps wph wph wps wn ax-1 orrd $.
+
+  $( Axiom *1.4 of [WhiteheadRussell] p. 96.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm1.4 $p |- ( ( ph \/ ps ) -> ( ps \/ ph ) ) $=
+    wph wps wph wo wps wph wps olc wps wph orc jaoi $.
+
+  $( Commutative law for disjunction.  Theorem *4.31 of [WhiteheadRussell]
+     p. 118.  (Contributed by NM, 3-Jan-1993.)  (Proof shortened by Wolf
+     Lammen, 15-Nov-2012.) $)
+  orcom $p |- ( ( ph \/ ps ) <-> ( ps \/ ph ) ) $=
+    wph wps wo wps wph wo wph wps pm1.4 wps wph pm1.4 impbii $.
+
+  ${
+    orcomd.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    $( Commutation of disjuncts in consequent.  (Contributed by NM,
+       2-Dec-2010.) $)
+    orcomd $p |- ( ph -> ( ch \/ ps ) ) $=
+      wph wps wch wo wch wps wo orcomd.1 wps wch orcom sylib $.
+  $}
+
+  ${
+    orcoms.1 $e |- ( ( ph \/ ps ) -> ch ) $.
+    $( Commutation of disjuncts in antecedent.  (Contributed by NM,
+       2-Dec-2012.) $)
+    orcoms $p |- ( ( ps \/ ph ) -> ch ) $=
+      wps wph wo wph wps wo wch wps wph pm1.4 orcoms.1 syl $.
+  $}
+
+  ${
+    orcd.1 $e |- ( ph -> ps ) $.
+    $( Deduction introducing a disjunct.  A translation of natural deduction
+       rule ` \/ ` IR ( ` \/ ` insertion right), see ~ natded .  (Contributed
+       by NM, 20-Sep-2007.) $)
+    orcd $p |- ( ph -> ( ps \/ ch ) ) $=
+      wph wps wps wch wo orcd.1 wps wch orc syl $.
+
+    $( Deduction introducing a disjunct.  A translation of natural deduction
+       rule ` \/ ` IL ( ` \/ ` insertion left), see ~ natded .  (Contributed by
+       NM, 11-Apr-2008.)  (Proof shortened by Wolf Lammen, 3-Oct-2013.) $)
+    olcd $p |- ( ph -> ( ch \/ ps ) ) $=
+      wph wps wch wph wps wch orcd.1 orcd orcomd $.
+  $}
+
+  ${
+    orcs.1 $e |- ( ( ph \/ ps ) -> ch ) $.
+    $( Deduction eliminating disjunct. _Notational convention_:  We sometimes
+       suffix with "s" the label of an inference that manipulates an
+       antecedent, leaving the consequent unchanged.  The "s" means that the
+       inference eliminates the need for a syllogism ( ~ syl ) -type inference
+       in a proof.  (Contributed by NM, 21-Jun-1994.) $)
+    orcs $p |- ( ph -> ch ) $=
+      wph wph wps wo wch wph wps orc orcs.1 syl $.
+  $}
+
+  ${
+    olcs.1 $e |- ( ( ph \/ ps ) -> ch ) $.
+    $( Deduction eliminating disjunct.  (Contributed by NM, 21-Jun-1994.)
+       (Proof shortened by Wolf Lammen, 3-Oct-2013.) $)
+    olcs $p |- ( ps -> ch ) $=
+      wps wph wch wph wps wch olcs.1 orcoms orcs $.
+  $}
+
+  ${
+    olcnd.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    olcnd.2 $e |- ( ph -> -. ch ) $.
+    $( A lemma for Conjunctive Normal Form unit propagation, in deduction form.
+       (Contributed by Giovanni Mascellani, 15-Sep-2017.)  (Proof shortened by
+       Wolf Lammen, 13-Apr-2024.) $)
+    olcnd $p |- ( ph -> ps ) $=
+      wph wps wch olcnd.2 wph wps wch olcnd.1 ord mt3d $.
+
+    $( Obsolete version of ~ olcnd as of 13-Apr-2024.  (Contributed by Giovanni
+       Mascellani, 15-Sep-2017.)  (Proof modification is discouraged.)
+       (New usage is discouraged.) $)
+    unitreslOLD $p |- ( ph -> ps ) $=
+      wph wps wch wo wch wn wps olcnd.1 olcnd.2 wps wch wo wch wps wo wch wn
+      wps wi wps wch orcom wch wps df-or sylbb sylc $.
+  $}
+
+  ${
+    orcnd.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    orcnd.2 $e |- ( ph -> -. ps ) $.
+    $( A lemma for Conjunctive Normal Form unit propagation, in deduction form.
+       (Contributed by Giovanni Mascellani, 15-Sep-2017.) $)
+    orcnd $p |- ( ph -> ch ) $=
+      wph wch wps wph wps wch orcnd.1 orcomd orcnd.2 olcnd $.
+  $}
+
+  ${
+    mtord.1 $e |- ( ph -> -. ch ) $.
+    mtord.2 $e |- ( ph -> -. th ) $.
+    mtord.3 $e |- ( ph -> ( ps -> ( ch \/ th ) ) ) $.
+    $( A modus tollens deduction involving disjunction.  (Contributed by Jeff
+       Hankins, 15-Jul-2009.) $)
+    mtord $p |- ( ph -> -. ps ) $=
+      wph wps wth mtord.2 wph wps wch wth wo wch wn wth mtord.3 mtord.1 wch wth
+      pm2.53 syl6ci mtod $.
+  $}
+
+  ${
+    pm3.2ni.1 $e |- -. ph $.
+    pm3.2ni.2 $e |- -. ps $.
+    $( Infer negated disjunction of negated premises.  (Contributed by NM,
+       4-Apr-1995.) $)
+    pm3.2ni $p |- -. ( ph \/ ps ) $=
+      wph wps wo wph pm3.2ni.1 wph wph wps wph id wps wph pm3.2ni.2 pm2.21i
+      jaoi mto $.
+  $}
+
+  $( Theorem *2.45 of [WhiteheadRussell] p. 106.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.45 $p |- ( -. ( ph \/ ps ) -> -. ph ) $=
+    wph wph wps wo wph wps orc con3i $.
+
+  $( Theorem *2.46 of [WhiteheadRussell] p. 106.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.46 $p |- ( -. ( ph \/ ps ) -> -. ps ) $=
+    wps wph wps wo wps wph olc con3i $.
+
+  $( Theorem *2.47 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.47 $p |- ( -. ( ph \/ ps ) -> ( -. ph \/ ps ) ) $=
+    wph wps wo wn wph wn wps wph wps pm2.45 orcd $.
+
+  $( Theorem *2.48 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.48 $p |- ( -. ( ph \/ ps ) -> ( ph \/ -. ps ) ) $=
+    wph wps wo wn wps wn wph wph wps pm2.46 olcd $.
+
+  $( Theorem *2.49 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.49 $p |- ( -. ( ph \/ ps ) -> ( -. ph \/ -. ps ) ) $=
+    wph wps wo wn wps wn wph wn wph wps pm2.46 olcd $.
+
+  $( If neither of two propositions is true, then these propositions are
+     equivalent.  (Contributed by BJ, 26-Apr-2019.) $)
+  norbi $p |- ( -. ( ph \/ ps ) -> ( ph <-> ps ) ) $=
+    wph wph wps wo wps wph wps orc wps wph olc pm5.21ni $.
+
+  $( If two propositions are not equivalent, then at least one is true.
+     (Contributed by BJ, 19-Apr-2019.)  (Proof shortened by Wolf Lammen,
+     19-Jan-2020.) $)
+  nbior $p |- ( -. ( ph <-> ps ) -> ( ph \/ ps ) ) $=
+    wph wps wo wph wps wb wph wps norbi con1i $.
+
+  $( Elimination of disjunction by denial of a disjunct.  Theorem *2.55 of
+     [WhiteheadRussell] p. 107.  (Contributed by NM, 12-Aug-1994.)  (Proof
+     shortened by Wolf Lammen, 21-Jul-2012.) $)
+  orel1 $p |- ( -. ph -> ( ( ph \/ ps ) -> ps ) ) $=
+    wph wps wo wph wn wps wph wps pm2.53 com12 $.
+
+  $( Theorem *2.25 of [WhiteheadRussell] p. 104.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.25 $p |- ( ph \/ ( ( ph \/ ps ) -> ps ) ) $=
+    wph wph wps wo wps wi wph wps orel1 orri $.
+
+  $( Elimination of disjunction by denial of a disjunct.  Theorem *2.56 of
+     [WhiteheadRussell] p. 107.  (Contributed by NM, 12-Aug-1994.)  (Proof
+     shortened by Wolf Lammen, 5-Apr-2013.) $)
+  orel2 $p |- ( -. ph -> ( ( ps \/ ph ) -> ps ) ) $=
+    wph wn wps wps wph wph wn wps idd wph wps pm2.21 jaod $.
+
+  $( Slight generalization of Theorem *2.67 of [WhiteheadRussell] p. 107.
+     (Contributed by NM, 3-Jan-2005.) $)
+  pm2.67-2 $p |- ( ( ( ph \/ ch ) -> ps ) -> ( ph -> ps ) ) $=
+    wph wph wch wo wps wph wch orc imim1i $.
+
+  $( Theorem *2.67 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.67 $p |- ( ( ( ph \/ ps ) -> ps ) -> ( ph -> ps ) ) $=
+    wph wps wps pm2.67-2 $.
+
+  $( A non-intuitionistic positive statement, sometimes called a paradox of
+     material implication.  Sometimes called Curry's axiom.  Similar to ~ exmid
+     (obtained by substituting ` F. ` for ` ps ` ) but positive.  For another
+     non-intuitionistic positive statement, see ~ peirce .  (Contributed by BJ,
+     4-Apr-2021.) $)
+  curryax $p |- ( ph \/ ( ph -> ps ) ) $=
+    wph wph wps wi wph wps pm2.21 orri $.
+
+  $( Law of excluded middle, also called the principle of _tertium non datur_.
+     Theorem *2.11 of [WhiteheadRussell] p. 101.  It says that something is
+     either true or not true; there are no in-between values of truth.  This is
+     an essential distinction of our classical logic and is not a theorem of
+     intuitionistic logic.  In intuitionistic logic, if this statement is true
+     for some ` ph ` , then ` ph ` is decidable.  (Contributed by NM,
+     29-Dec-1992.) $)
+  exmid $p |- ( ph \/ -. ph ) $=
+    wph wph wn wph wn id orri $.
+
+  $( Law of excluded middle in a context.  (Contributed by Mario Carneiro,
+     9-Feb-2017.) $)
+  exmidd $p |- ( ph -> ( ps \/ -. ps ) ) $=
+    wps wps wn wo wph wps exmid a1i $.
+
+  $( Theorem *2.1 of [WhiteheadRussell] p. 101.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 23-Nov-2012.) $)
+  pm2.1 $p |- ( -. ph \/ ph ) $=
+    wph wph wph id imori $.
+
+  $( Theorem *2.13 of [WhiteheadRussell] p. 101.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.13 $p |- ( ph \/ -. -. -. ph ) $=
+    wph wph wn wn wn wph wn notnot orri $.
+
+  $( Theorem *2.621 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.621 $p |- ( ( ph -> ps ) -> ( ( ph \/ ps ) -> ps ) ) $=
+    wph wps wi wph wps wps wph wps wi id wph wps wi wps idd jaod $.
+
+  $( Theorem *2.62 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 13-Dec-2013.) $)
+  pm2.62 $p |- ( ( ph \/ ps ) -> ( ( ph -> ps ) -> ps ) ) $=
+    wph wps wi wph wps wo wps wph wps pm2.621 com12 $.
+
+  $( Theorem *2.68 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.68 $p |- ( ( ( ph -> ps ) -> ps ) -> ( ph \/ ps ) ) $=
+    wph wps wi wps wi wph wps wph wps wps jarl orrd $.
+
+  $( Logical 'or' expressed in terms of implication only.  Theorem *5.25 of
+     [WhiteheadRussell] p. 124.  (Contributed by NM, 12-Aug-2004.)  (Proof
+     shortened by Wolf Lammen, 20-Oct-2012.) $)
+  dfor2 $p |- ( ( ph \/ ps ) <-> ( ( ph -> ps ) -> ps ) ) $=
+    wph wps wo wph wps wi wps wi wph wps pm2.62 wph wps pm2.68 impbii $.
+
+  $( Theorem *2.07 of [WhiteheadRussell] p. 101.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.07 $p |- ( ph -> ( ph \/ ph ) ) $=
+    wph wph olc $.
+
+  $( Axiom *1.2 of [WhiteheadRussell] p. 96, which they call "Taut".
+     (Contributed by NM, 3-Jan-2005.) $)
+  pm1.2 $p |- ( ( ph \/ ph ) -> ph ) $=
+    wph wph wph wph id wph id jaoi $.
+
+  $( Idempotent law for disjunction.  Theorem *4.25 of [WhiteheadRussell]
+     p. 117.  (Contributed by NM, 11-May-1993.)  (Proof shortened by Andrew
+     Salmon, 16-Apr-2011.)  (Proof shortened by Wolf Lammen, 10-Mar-2013.) $)
+  oridm $p |- ( ( ph \/ ph ) <-> ph ) $=
+    wph wph wo wph wph pm1.2 wph pm2.07 impbii $.
+
+  $( Theorem *4.25 of [WhiteheadRussell] p. 117.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.25 $p |- ( ph <-> ( ph \/ ph ) ) $=
+    wph wph wo wph wph oridm bicomi $.
+
+  $( Theorem *2.4 of [WhiteheadRussell] p. 106.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.4 $p |- ( ( ph \/ ( ph \/ ps ) ) -> ( ph \/ ps ) ) $=
+    wph wph wps wo wph wps wo wph wps orc wph wps wo id jaoi $.
+
+  $( Theorem *2.41 of [WhiteheadRussell] p. 106.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.41 $p |- ( ( ps \/ ( ph \/ ps ) ) -> ( ph \/ ps ) ) $=
+    wps wph wps wo wph wps wo wps wph olc wph wps wo id jaoi $.
+
+  ${
+    orim12i.1 $e |- ( ph -> ps ) $.
+    orim12i.2 $e |- ( ch -> th ) $.
+    $( Disjoin antecedents and consequents of two premises.  (Contributed by
+       NM, 6-Jun-1994.)  (Proof shortened by Wolf Lammen, 25-Jul-2012.) $)
+    orim12i $p |- ( ( ph \/ ch ) -> ( ps \/ th ) ) $=
+      wph wps wth wo wch wph wps wth orim12i.1 orcd wch wth wps orim12i.2 olcd
+      jaoi $.
+  $}
+
+  ${
+    orim1i.1 $e |- ( ph -> ps ) $.
+    $( Introduce disjunct to both sides of an implication.  (Contributed by NM,
+       6-Jun-1994.) $)
+    orim1i $p |- ( ( ph \/ ch ) -> ( ps \/ ch ) ) $=
+      wph wps wch wch orim1i.1 wch id orim12i $.
+
+    $( Introduce disjunct to both sides of an implication.  (Contributed by NM,
+       6-Jun-1994.) $)
+    orim2i $p |- ( ( ch \/ ph ) -> ( ch \/ ps ) ) $=
+      wch wch wph wps wch id orim1i.1 orim12i $.
+  $}
+
+  ${
+    orim12dALT.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    orim12dALT.2 $e |- ( ph -> ( th -> ta ) ) $.
+    $( Alternate proof of ~ orim12d which does not depend on ~ df-an .  This is
+       an illustration of the conservativity of definitions (definitions do not
+       permit to prove additional theorems whose statements do not contain the
+       defined symbol).  (Contributed by Wolf Lammen, 8-Aug-2022.)
+       (Proof modification is discouraged.)  (New usage is discouraged.) $)
+    orim12dALT $p |- ( ph -> ( ( ps \/ th ) -> ( ch \/ ta ) ) ) $=
+      wps wth wo wps wn wth wi wph wch wn wta wi wch wta wo wps wth pm2.53 wph
+      wch wn wps wn wth wta wph wps wch orim12dALT.1 con3d orim12dALT.2 imim12d
+      wch wta pm2.54 syl56 $.
+  $}
+
+  ${
+    orbi2i.1 $e |- ( ph <-> ps ) $.
+    $( Inference adding a left disjunct to both sides of a logical equivalence.
+       (Contributed by NM, 3-Jan-1993.)  (Proof shortened by Wolf Lammen,
+       12-Dec-2012.) $)
+    orbi2i $p |- ( ( ch \/ ph ) <-> ( ch \/ ps ) ) $=
+      wch wph wo wch wps wo wph wps wch wph wps orbi2i.1 biimpi orim2i wps wph
+      wch wph wps orbi2i.1 biimpri orim2i impbii $.
+
+    $( Inference adding a right disjunct to both sides of a logical
+       equivalence.  (Contributed by NM, 3-Jan-1993.) $)
+    orbi1i $p |- ( ( ph \/ ch ) <-> ( ps \/ ch ) ) $=
+      wph wch wo wch wph wo wch wps wo wps wch wo wph wch orcom wph wps wch
+      orbi2i.1 orbi2i wch wps orcom 3bitri $.
+  $}
+
+  ${
+    orbi12i.1 $e |- ( ph <-> ps ) $.
+    orbi12i.2 $e |- ( ch <-> th ) $.
+    $( Infer the disjunction of two equivalences.  (Contributed by NM,
+       3-Jan-1993.) $)
+    orbi12i $p |- ( ( ph \/ ch ) <-> ( ps \/ th ) ) $=
+      wph wch wo wph wth wo wps wth wo wch wth wph orbi12i.2 orbi2i wph wps wth
+      orbi12i.1 orbi1i bitri $.
+  $}
+
+  ${
+    bid.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    $( Deduction adding a left disjunct to both sides of a logical equivalence.
+       (Contributed by NM, 21-Jun-1993.) $)
+    orbi2d $p |- ( ph -> ( ( th \/ ps ) <-> ( th \/ ch ) ) ) $=
+      wph wth wn wps wi wth wn wch wi wth wps wo wth wch wo wph wps wch wth wn
+      bid.1 imbi2d wth wps df-or wth wch df-or 3bitr4g $.
+
+    $( Deduction adding a right disjunct to both sides of a logical
+       equivalence.  (Contributed by NM, 21-Jun-1993.) $)
+    orbi1d $p |- ( ph -> ( ( ps \/ th ) <-> ( ch \/ th ) ) ) $=
+      wph wth wps wo wth wch wo wps wth wo wch wth wo wph wps wch wth bid.1
+      orbi2d wps wth orcom wch wth orcom 3bitr4g $.
+  $}
+
+  $( Theorem *4.37 of [WhiteheadRussell] p. 118.  (Contributed by NM,
+     3-Jan-2005.) $)
+  orbi1 $p |- ( ( ph <-> ps ) -> ( ( ph \/ ch ) <-> ( ps \/ ch ) ) ) $=
+    wph wps wb wph wps wch wph wps wb id orbi1d $.
+
+  ${
+    bi12d.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    bi12d.2 $e |- ( ph -> ( th <-> ta ) ) $.
+    $( Deduction joining two equivalences to form equivalence of disjunctions.
+       (Contributed by NM, 21-Jun-1993.) $)
+    orbi12d $p |- ( ph -> ( ( ps \/ th ) <-> ( ch \/ ta ) ) ) $=
+      wph wps wth wo wch wth wo wch wta wo wph wps wch wth bi12d.1 orbi1d wph
+      wth wta wch bi12d.2 orbi2d bitrd $.
+  $}
+
+  $( Axiom *1.5 (Assoc) of [WhiteheadRussell] p. 96.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm1.5 $p |- ( ( ph \/ ( ps \/ ch ) ) -> ( ps \/ ( ph \/ ch ) ) ) $=
+    wph wps wph wch wo wo wps wch wo wph wph wch wo wps wph wch orc olcd wch
+    wph wch wo wps wch wph olc orim2i jaoi $.
+
+  $( Swap two disjuncts.  (Contributed by NM, 5-Aug-1993.)  (Proof shortened by
+     Wolf Lammen, 14-Nov-2012.) $)
+  or12 $p |- ( ( ph \/ ( ps \/ ch ) ) <-> ( ps \/ ( ph \/ ch ) ) ) $=
+    wph wps wch wo wo wps wph wch wo wo wph wps wch pm1.5 wps wph wch pm1.5
+    impbii $.
+
+  $( Associative law for disjunction.  Theorem *4.33 of [WhiteheadRussell]
+     p. 118.  (Contributed by NM, 5-Aug-1993.)  (Proof shortened by Andrew
+     Salmon, 26-Jun-2011.) $)
+  orass $p |- ( ( ( ph \/ ps ) \/ ch ) <-> ( ph \/ ( ps \/ ch ) ) ) $=
+    wph wps wo wch wo wch wph wps wo wo wph wch wps wo wo wph wps wch wo wo wph
+    wps wo wch orcom wch wph wps or12 wch wps wo wps wch wo wph wch wps orcom
+    orbi2i 3bitri $.
+
+  $( Theorem *2.31 of [WhiteheadRussell] p. 104.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.31 $p |- ( ( ph \/ ( ps \/ ch ) ) -> ( ( ph \/ ps ) \/ ch ) ) $=
+    wph wps wo wch wo wph wps wch wo wo wph wps wch orass biimpri $.
+
+  $( Theorem *2.32 of [WhiteheadRussell] p. 105.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.32 $p |- ( ( ( ph \/ ps ) \/ ch ) -> ( ph \/ ( ps \/ ch ) ) ) $=
+    wph wps wo wch wo wph wps wch wo wo wph wps wch orass biimpi $.
