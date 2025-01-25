@@ -1317,6 +1317,51 @@ th_db = {
         "conc": "⊢ ( 𝜑 → ( 𝜓 ∨ 𝜑 ) )",
         "proof": ['wph', 'wps', 'wph', 'wph', 'wps', 'wn', 'ax-1', 'orrd']
     },
+    "pm2.24": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( ¬𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wn', 'wph', 'wps', 'wph', 'wps', 'pm2.21', 'com12']
+    },
+    "orc": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜑 ∨ 𝜓 ) )",
+        "proof": ['wph', 'wph', 'wps', 'wph', 'wps', 'pm2.24', 'orrd']
+    },
+    "pm2.53": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜓 ) → ( ¬𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wo', 'wph', 'wn', 'wps', 'wi', 'wph',
+                  'wps', 'df-or', 'biimpi']
+    },
+    "pm2.61d2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( ¬𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜓 → 𝜒 )"],
+        "conc": "⊢ ( 𝜑 → 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'wps', 'wch', 'wi', 'wph',
+                  'hyp.2', 'a1i', 'hyp.1', 'pm2.61d']
+    },
+    "jaoi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → 𝜓 )",
+                "⊢ ( 𝜒 → 𝜓 )"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜒 ) → 𝜓 )",
+        "proof": ['wph', 'wch', 'wo', 'wph', 'wps', 'wph', 'wch', 'wo',
+                  'wph', 'wn', 'wch', 'wps', 'wph', 'wch', 'pm2.53',
+                  'hyp.2', 'syl6', 'hyp.1', 'pm2.61d2']
+    },
+     "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1805,7 +1850,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("olc", True)
+check_theorem("jaoi", True)
 print(stack)
 
 print()
