@@ -1271,17 +1271,17 @@ th_db = {
                   'simpl', 'biantru', 'wph', 'wps', 'anclb', 'wph', 'wph',
                   'wps', 'wa', 'dfbi2', '3bitr4i']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "pm4.71i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( 𝜑 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 ↔ ( 𝜑 ∧ 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wph', 'wps', 'wa', 'wb',
+                  'hyp.1', 'wph', 'wps', 'pm4.71', 'mpbi']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "pm4.24": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ( 𝜑 ∧ 𝜑 ) )",
+        "proof": ['wph', 'wph', 'wph', 'id', 'pm4.71i']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1748,12 +1748,12 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-#for th in th_db:
-#    check_theorem(th, True)
+for th in th_db:
+    check_theorem(th, True)
 
 print("-----------------------")
 
-check_theorem("pm4.71", True)
+check_theorem("pm4.24", True)
 print(stack)
 
 print()
