@@ -1350,17 +1350,17 @@ th_db = {
                   'wph', 'wn', 'wch', 'wps', 'wph', 'wch', 'pm2.53',
                   'hyp.2', 'syl6', 'hyp.1', 'pm2.61d2']
     },
-     "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "pm1.4": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜓 ) → ( 𝜓 ∨ 𝜑 ) )",
+        "proof": ['wph', 'wps', 'wph', 'wo', 'wps', 'wph', 'wps', 'olc',
+                  'wps', 'wph', 'orc', 'jaoi']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "orcom": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜓 ) ↔ ( 𝜓 ∨ 𝜑 ) )",
+        "proof": ['wph', 'wps', 'wo', 'wps', 'wph', 'wo', 'wph', 'wps',
+                  'pm1.4', 'wps', 'wph', 'pm1.4', 'impbii']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1850,7 +1850,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("jaoi", True)
+check_theorem("orcom", True)
 print(stack)
 
 print()
