@@ -1312,11 +1312,10 @@ th_db = {
         "proof": ['wph', 'wps', 'wn', 'wch', 'wi', 'wps', 'wch', 'wo',
                   'hyp.1', 'wps', 'wch', 'pm2.54', 'syl']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "olc": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ∨ 𝜑 ) )",
+        "proof": ['wph', 'wps', 'wph', 'wph', 'wps', 'wn', 'ax-1', 'orrd']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1806,7 +1805,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("orrd", True)
+check_theorem("olc", True)
 print(stack)
 
 print()
