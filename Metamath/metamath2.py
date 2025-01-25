@@ -1207,10 +1207,54 @@ th_db = {
         "conc": "⊢ ( ( 𝜑 ∧ 𝜓 ) → 𝜑 )",
         "proof": ['wph', 'wph', 'wps', 'wph', 'id', 'adantr']
     },
+    "pm3.21": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜓 ∧ 𝜑 ) ) )",
+        "proof": ['wps', 'wph', 'wps', 'wph', 'wa', 'wps', 'wph', 'wa', 'id',
+                  'expcom']
+    },
+    "impbid1": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜒 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wch', 'hyp.1', 'wch', 'wps', 'wi', 'wph',
+                  'hyp.2', 'a1i', 'impbid']
+    },
+    "iba": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜓 ∧ 𝜑 ) ) )",
+        "proof": ['wph', 'wps', 'wps', 'wph', 'wa', 'wph', 'wps', 'pm3.21',
+                  'wps', 'wph', 'simpl', 'impbid1']
+    },
+    "biantru": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 ↔ ( 𝜓 ∧ 𝜑 ) )",
+        "proof": ['wph', 'wps', 'wps', 'wph', 'wa', 'wb', 'hyp.1', 'wph',
+                  'wps', 'iba', 'ax-mp']
+    },
+    "biancomd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜃 ∧ 𝜒 ) ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜒 ∧ 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wth', 'wch', 'wa', 'wch', 'wth', 'wa',
+                  'hyp.1', 'wth', 'wch', 'ancom', 'bitrdi']
+    },
+    "ibar": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜑 ∧ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wph', 'wps', 'iba', 'biancomd']
+    },
     "pm4.71": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 ↔ ( 𝜑 ∧ 𝜓 ) ) )",
-        "proof": []
+        "proof": ['wph', 'wph', 'wps', 'wa', 'wi', 'wph', 'wph', 'wps', 'wa',
+                  'wi', 'wph', 'wps', 'wa', 'wph', 'wi', 'wa', 'wph', 'wps',
+                  'wi', 'wph', 'wph', 'wps', 'wa', 'wb', 'wph', 'wps', 'wa',
+                  'wph', 'wi', 'wph', 'wph', 'wps', 'wa', 'wi', 'wph', 'wps',
+                  'simpl', 'biantru', 'wph', 'wps', 'anclb', 'wph', 'wph',
+                  'wps', 'wa', 'dfbi2', '3bitr4i']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1682,7 +1726,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("pm4.71", True)
+check_theorem("ibar", True)
 print(stack)
 
 print()
