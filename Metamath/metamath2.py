@@ -1246,6 +1246,21 @@ th_db = {
         "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜑 ∧ 𝜓 ) ) )",
         "proof": ['wph', 'wps', 'wph', 'wps', 'wph', 'wps', 'iba', 'biancomd']
     },
+    "anclb": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 → ( 𝜑 ∧ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wa', 'wph', 'wps', 'ibar',
+                  'pm5.74i']
+    },
+    "3bitr4i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 ↔ 𝜓 )",
+                "⊢ ( 𝜒 ↔ 𝜑 )",
+                "⊢ ( 𝜃 ↔ 𝜓 )"],
+        "conc": "⊢ ( 𝜒 ↔ 𝜃 )",
+        "proof": ['wch', 'wph', 'wth', 'hyp.2', 'wph', 'wps', 'wth',
+                  'hyp.1', 'hyp.3', 'bitr4i', 'bitri']
+    },
     "pm4.71": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 ↔ ( 𝜑 ∧ 𝜓 ) ) )",
@@ -1255,6 +1270,18 @@ th_db = {
                   'wph', 'wi', 'wph', 'wph', 'wps', 'wa', 'wi', 'wph', 'wps',
                   'simpl', 'biantru', 'wph', 'wps', 'anclb', 'wph', 'wph',
                   'wps', 'wa', 'dfbi2', '3bitr4i']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1726,7 +1753,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("ibar", True)
+check_theorem("pm4.71", True)
 print(stack)
 
 print()
