@@ -1299,6 +1299,25 @@ th_db = {
         "proof": ['wph', 'wps', 'wo', 'wph', 'wn', 'wps', 'wi', 'wb',
                   'ax-th']
     },
+    "pm2.54": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( ¬𝜑 → 𝜓 ) → ( 𝜑 ∨ 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wo', 'wph', 'wn', 'wps', 'wi', 'wph', 'wps',
+                  'df-or', 'biimpri']
+    },
+    "orrd": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 → ( ¬𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ∨ 𝜒 ) )",
+        "proof": ['wph', 'wps', 'wn', 'wch', 'wi', 'wps', 'wch', 'wo',
+                  'hyp.1', 'wps', 'wch', 'pm2.54', 'syl']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1787,7 +1806,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("df-or", True)
+check_theorem("orrd", True)
 print(stack)
 
 print()
