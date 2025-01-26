@@ -1423,8 +1423,8 @@ th_db = {
     },
     "imbi1i": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
-                " ⊢ (𝜑 ↔ 𝜓)"],
-        "conc": " ⊢ ((𝜑 → 𝜒) ↔ (𝜓 → 𝜒))",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ( ( 𝜑 → 𝜒 ) ↔ ( 𝜓 → 𝜒 ) )",
         "proof": ['wph', 'wps', 'wb', 'wph', 'wch', 'wi', 'wps', 'wch',
                   'wi', 'wb', 'hyp.1', 'wph', 'wps', 'wch', 'imbi1',
                   'ax-mp']
@@ -1923,7 +1923,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imbi1", True)
+check_theorem("imbi1i", True)
 print(stack)
 
 print()
