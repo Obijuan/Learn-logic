@@ -1401,8 +1401,8 @@ th_db = {
     },
     "imim1d": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
-                " ⊢ (𝜑 → (𝜓 → 𝜒))"],
-        "conc": " ⊢ (𝜑 → ((𝜒 → 𝜃) → (𝜓 → 𝜃)))",
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜒 → 𝜃 ) → ( 𝜓 → 𝜃 ) ) )",
         "proof": ['wph', 'wps', 'wch', 'wth', 'wth', 'hyp.1', 'wph', 'wth',
                   'idd', 'imim12d']
     },
@@ -1903,7 +1903,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imim12d", True)
+check_theorem("imim1d", True)
 print(stack)
 
 print()
