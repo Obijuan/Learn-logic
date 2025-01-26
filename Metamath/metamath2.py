@@ -1379,11 +1379,16 @@ th_db = {
         "conc": "⊢ ( ( 𝜑 ∨ 𝜑 ) → 𝜑 )",
         "proof": ['wph', 'wph', 'wph', 'wph', 'id', 'wph', 'id', 'jaoi']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "pm2.07": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 → ( 𝜑 ∨ 𝜑 ) )",
+        "proof": ['wph', 'wph', 'olc']
+    },
+    "oridm": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜑 ) ↔ 𝜑 )",
+        "proof": ['wph', 'wph', 'wo', 'wph', 'wph', 'pm1.2', 'wph',
+                  'pm2.07', 'impbii']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1879,7 +1884,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("pm1.2", True)
+check_theorem("oridm", True)
 print(stack)
 
 print()
