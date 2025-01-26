@@ -1903,7 +1903,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imim1d", True)
+check_theorem("imbi1d", True)
 print(stack)
 
 print()
