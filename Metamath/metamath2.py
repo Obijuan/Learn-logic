@@ -1429,11 +1429,12 @@ th_db = {
                   'wi', 'wb', 'hyp.1', 'wph', 'wps', 'wch', 'imbi1',
                   'ax-mp']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "imor": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( ¬𝜑 ∨ 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wi', 'wph', 'wn', 'wn', 'wps', 'wi', 'wph',
+                  'wn', 'wps', 'wo', 'wph', 'wph', 'wn', 'wn', 'wps', 'wph',
+                  'notnotb', 'imbi1i', 'wph', 'wn', 'wps', 'df-or', 'bitr4i']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1923,7 +1924,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imbi1i", True)
+check_theorem("imor", True)
 print(stack)
 
 print()
