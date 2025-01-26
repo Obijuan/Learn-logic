@@ -44,6 +44,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 ∨ 𝜓 )"
     },
+    "wtru": {
+        "hyp": [],
+        "conc": "wff T."
+    },
     "ax-th": {
         "hyp": ["wff 𝜑"],
         "conc": "⊢ 𝜑"
@@ -1655,6 +1659,16 @@ def wo(show_proof = False):
     #-- Meterla en la pila
     stack.append(w)
 
+def wtru(show_proof = False):
+    """ ⊤ es una fórmula bien formada """
+
+    #-- Crear la cadena wff
+    w = f"wff T."
+
+    #-- Meterla en la pila
+    stack.append(w)
+
+
 def ax_th(show_proof = False):
     """Axioma de generacion de teoremas
     Si 𝜑 es una wff, entonces esta formula es un teorema:
@@ -1781,12 +1795,18 @@ def proof(ths: list[str]):
 def print_theorem(name: str):
     """Imprimir un teorema"""
 
-    #-- Primero se imprimen las hipotesis
-    for hyp in th_db[name]["hyp"]:
-        print(hyp)
+    #-- Imprimir las hipotesis, si las hay
+    if th_db[name]["hyp"]:
 
-    #-- Calcular el tamaño de la hipotesis mas larga
-    tam = max([len(hyp) for hyp in th_db[name]["hyp"]])
+        #-- Primero se imprimen las hipotesis
+        for hyp in th_db[name]["hyp"]:
+            print(hyp)
+
+        #-- Calcular el tamaño de la hipotesis mas larga
+        tam = max([len(hyp) for hyp in th_db[name]["hyp"]])
+    else:
+        #-- No hay hipotesis. El tamaño es 0
+        tam = 0
 
     #-- Calcular el tamaño maximo de cualquier formula
     #-- (hipotesis + conclusion)
@@ -1939,12 +1959,12 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-#for th in th_db:
-#    check_theorem(th, True)
+for th in th_db:
+    check_theorem(th, True)
 
 print("-----------------------")
 
-check_theorem("ianor", True)
+check_theorem("wtru", True)
 print(stack)
 
 print()
