@@ -1514,6 +1514,21 @@ def assert_wff(w : str) -> str:
     #-- Retornar la fórmula
     return w
 
+def assert_setvar(f : str) -> str:
+    """Comprobar que f es una variable"""
+    """En caso de serlo, se retorna la variable (sin setvar)"""
+
+    #-- Comprobar si f es una variable
+    if f.startswith("setvar "):
+        f = f[7:]
+    else:
+        print(f"Error: {f} no es una variable")
+        print()
+        sys.exit(1)
+
+    #-- Retornar la variable
+    return f
+
 def assert_theorem(th : str) -> str:
     """Comprobar que th es un teorema"""
     """En caso de serlo, se retorna la fórmula"""
@@ -1532,6 +1547,10 @@ def assert_theorem(th : str) -> str:
 def wff(w : str) -> str:
     """Convertir una cadena en una fórmula bien formada (wff)"""
     return f"wff {w}"
+
+def setvar(v : str) -> str:
+    """Convertir una cadena en una variable"""
+    return f"setvar {v}"
 
 def theorem(w : str) -> str:
     """Afirmar que w es un teorema"""
@@ -1571,6 +1590,10 @@ def wth():
 def wta():
     """La variable 𝜃 es una fórmula bien formada (wff)"""
     stack.append("wff 𝜏")
+
+def vx():
+    """El símbolo x es una variable (setvar)"""
+    stack.append("setvar x")
 
 def wn(show_proof = False):
     """Si w es una fórmula bien formada (wff), """
@@ -1672,6 +1695,21 @@ def wtru(show_proof = False):
 
     #-- Meterla en la pila
     stack.append(w)
+
+def cv(show_proof = False):
+    """Si x es una variable, entonces x es una clase  (class)"""
+
+    #-- Leer la variable de la pila
+    vx = stack.pop()
+
+    #-- Comprobar que es una variable
+    x=assert_setvar(vx)
+
+    #-- Crear la cadena class
+    f = f"class {x}"
+
+    #-- Meterla en la pila
+    stack.append(f)
 
 def ax_th(show_proof = False):
     """Axioma de generacion de teoremas
@@ -1968,7 +2006,12 @@ print()
 
 print("-----------------------")
 
-check_theorem("tru", True)
+#check_theorem("tru", True)
+#print(stack)
+
+vx()
+cv()
+print_top()
 print(stack)
 
 print()
