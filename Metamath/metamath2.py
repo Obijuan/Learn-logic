@@ -1436,6 +1436,17 @@ th_db = {
                   'wn', 'wps', 'wo', 'wph', 'wph', 'wn', 'wn', 'wps', 'wph',
                   'notnotb', 'imbi1i', 'wph', 'wn', 'wps', 'df-or', 'bitr4i']
     },
+    "pm4.62": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → ¬𝜓 ) ↔ ( ¬𝜑 ∨ ¬𝜓 ) )",
+        "proof": ['wph', 'wps', 'wn', 'imor']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1924,7 +1935,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("imor", True)
+check_theorem("pm4.62", True)
 print(stack)
 
 print()
