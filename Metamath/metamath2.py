@@ -1362,6 +1362,35 @@ th_db = {
         "proof": ['wph', 'wps', 'wo', 'wps', 'wph', 'wo', 'wph', 'wps',
                   'pm1.4', 'wps', 'wph', 'pm1.4', 'impbii']
     },
+    "orri": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ ( ¬𝜑 → 𝜓 )"],
+        "conc": "⊢ ( 𝜑 ∨ 𝜓 )",
+        "proof": ['wph', 'wps', 'wo', 'wph', 'wn', 'wps', 'wi', 'hyp.1',
+                  'wph', 'wps', 'df-or', 'mpbir']
+    },
+    "exmid": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ∨ ¬𝜑 )",
+        "proof": ['wph', 'wph', 'wn', 'wph', 'wn', 'id', 'orri']  
+    },
+    "pm1.2": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ( 𝜑 ∨ 𝜑 ) → 𝜑 )",
+        "proof": ['wph', 'wph', 'wph', 'wph', 'id', 'wph', 'id', 'jaoi']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1850,7 +1879,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("orcom", True)
+check_theorem("pm1.2", True)
 print(stack)
 
 print()
