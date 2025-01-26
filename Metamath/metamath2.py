@@ -1441,11 +1441,20 @@ th_db = {
         "conc": "⊢ ( ( 𝜑 → ¬𝜓 ) ↔ ( ¬𝜑 ∨ ¬𝜓 ) )",
         "proof": ['wph', 'wps', 'wn', 'imor']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "bitr3i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜓 ↔ 𝜑 )",
+                "⊢ ( 𝜓 ↔ 𝜒 )"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜒 )",
+        "proof": ['wph', 'wps', 'wch', 'wps', 'wph', 'hyp.1', 'bicomi',
+                  'hyp.2', 'bitri']
+    },
+    "ianor": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": " ⊢ (¬ (𝜑 ∧ 𝜓) ↔ (¬ 𝜑 ∨ ¬ 𝜓))",
+        "proof": ['wph', 'wps', 'wa', 'wn', 'wph', 'wps', 'wn', 'wi', 'wph',
+                  'wn', 'wps', 'wn', 'wo', 'wph', 'wps', 'imnan', 'wph',
+                  'wps', 'pm4.62', 'bitr3i']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1935,7 +1944,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("pm4.62", True)
+check_theorem("bitr3i", True)
 print(stack)
 
 print()

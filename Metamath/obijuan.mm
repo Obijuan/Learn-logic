@@ -7529,3 +7529,1095 @@ $)
      3-Jan-2005.) $)
   pm2.32 $p |- ( ( ( ph \/ ps ) \/ ch ) -> ( ph \/ ( ps \/ ch ) ) ) $=
     wph wps wo wch wo wph wps wch wo wo wph wps wch orass biimpi $.
+
+$( Theorem *2.3 of [WhiteheadRussell] p. 104.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.3 $p |- ( ( ph \/ ( ps \/ ch ) ) -> ( ph \/ ( ch \/ ps ) ) ) $=
+    wps wch wo wch wps wo wph wps wch pm1.4 orim2i $.
+
+  $( A rearrangement of disjuncts.  (Contributed by NM, 18-Oct-1995.)  (Proof
+     shortened by Andrew Salmon, 26-Jun-2011.) $)
+  or32 $p |- ( ( ( ph \/ ps ) \/ ch ) <-> ( ( ph \/ ch ) \/ ps ) ) $=
+    wph wps wo wch wo wph wps wch wo wo wps wph wch wo wo wph wch wo wps wo wph
+    wps wch orass wph wps wch or12 wps wph wch wo orcom 3bitri $.
+
+  $( Rearrangement of 4 disjuncts.  (Contributed by NM, 12-Aug-1994.) $)
+  or4 $p |- ( ( ( ph \/ ps ) \/ ( ch \/ th ) ) <->
+                ( ( ph \/ ch ) \/ ( ps \/ th ) ) ) $=
+    wph wps wch wth wo wo wo wph wch wps wth wo wo wo wph wps wo wch wth wo wo
+    wph wch wo wps wth wo wo wps wch wth wo wo wch wps wth wo wo wph wps wch
+    wth or12 orbi2i wph wps wch wth wo orass wph wch wps wth wo orass 3bitr4i
+    $.
+
+  $( Rearrangement of 4 disjuncts.  (Contributed by NM, 10-Jan-2005.) $)
+  or42 $p |- ( ( ( ph \/ ps ) \/ ( ch \/ th ) ) <->
+                 ( ( ph \/ ch ) \/ ( th \/ ps ) ) ) $=
+    wph wps wo wch wth wo wo wph wch wo wps wth wo wo wph wch wo wth wps wo wo
+    wph wps wch wth or4 wps wth wo wth wps wo wph wch wo wps wth orcom orbi2i
+    bitri $.
+
+  $( Distribution of disjunction over disjunction.  (Contributed by NM,
+     25-Feb-1995.) $)
+  orordi $p |- ( ( ph \/ ( ps \/ ch ) ) <->
+               ( ( ph \/ ps ) \/ ( ph \/ ch ) ) ) $=
+    wph wps wch wo wo wph wph wo wps wch wo wo wph wps wo wph wch wo wo wph wph
+    wo wph wps wch wo wph oridm orbi1i wph wph wps wch or4 bitr3i $.
+
+  $( Distribution of disjunction over disjunction.  (Contributed by NM,
+     25-Feb-1995.) $)
+  orordir $p |- ( ( ( ph \/ ps ) \/ ch ) <->
+               ( ( ph \/ ch ) \/ ( ps \/ ch ) ) ) $=
+    wph wps wo wch wo wph wps wo wch wch wo wo wph wch wo wps wch wo wo wch wch
+    wo wch wph wps wo wch oridm orbi2i wph wps wch wch or4 bitr3i $.
+
+  $( Disjunction distributes over implication.  (Contributed by Wolf Lammen,
+     5-Jan-2013.) $)
+  orimdi $p |- ( ( ph \/ ( ps -> ch ) )
+        <-> ( ( ph \/ ps ) -> ( ph \/ ch ) ) ) $=
+    wph wn wps wch wi wi wph wn wps wi wph wn wch wi wi wph wps wch wi wo wph
+    wps wo wph wch wo wi wph wn wps wch imdi wph wps wch wi df-or wph wps wo
+    wph wn wps wi wph wch wo wph wn wch wi wph wps df-or wph wch df-or imbi12i
+    3bitr4i $.
+
+  $( Theorem *2.76 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.76 $p |- ( ( ph \/ ( ps -> ch ) )
+      -> ( ( ph \/ ps ) -> ( ph \/ ch ) ) ) $=
+    wph wps wch wi wo wph wps wo wph wch wo wi wph wps wch orimdi biimpi $.
+
+  $( Theorem *2.85 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 5-Jan-2013.) $)
+  pm2.85 $p |- ( ( ( ph \/ ps ) -> ( ph \/ ch ) )
+      -> ( ph \/ ( ps -> ch ) ) ) $=
+    wph wps wch wi wo wph wps wo wph wch wo wi wph wps wch orimdi biimpri $.
+
+  $( Theorem *2.75 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 4-Jan-2013.) $)
+  pm2.75 $p |- ( ( ph \/ ps )
+       -> ( ( ph \/ ( ps -> ch ) ) -> ( ph \/ ch ) ) ) $=
+    wph wps wch wi wo wph wps wo wph wch wo wph wps wch pm2.76 com12 $.
+
+  $( Implication distributes over disjunction.  Theorem *4.78 of
+     [WhiteheadRussell] p. 121.  (Contributed by NM, 3-Jan-2005.)  (Proof
+     shortened by Wolf Lammen, 19-Nov-2012.) $)
+  pm4.78 $p |- ( ( ( ph -> ps ) \/ ( ph -> ch ) ) <->
+                ( ph -> ( ps \/ ch ) ) ) $=
+    wph wn wps wch wo wo wph wn wps wo wph wn wch wo wo wph wps wch wo wi wph
+    wps wi wph wch wi wo wph wn wps wch orordi wph wps wch wo imor wph wps wi
+    wph wn wps wo wph wch wi wph wn wch wo wph wps imor wph wch imor orbi12i
+    3bitr4ri $.
+
+  $( A disjunction with a true formula is equivalent to that true formula.
+     (Contributed by NM, 23-May-1999.) $)
+  biort $p |- ( ph -> ( ph <-> ( ph \/ ps ) ) ) $=
+    wph wph wph wps wo wph id wph wps orc 2thd $.
+
+  $( A wff is equivalent to its disjunction with falsehood.  Theorem *4.74 of
+     [WhiteheadRussell] p. 121.  (Contributed by NM, 23-Mar-1995.)  (Proof
+     shortened by Wolf Lammen, 18-Nov-2012.) $)
+  biorf $p |- ( -. ph -> ( ps <-> ( ph \/ ps ) ) ) $=
+    wph wn wps wph wps wo wps wph olc wph wps orel1 impbid2 $.
+
+  $( A wff is equivalent to its negated disjunction with falsehood.
+     (Contributed by NM, 9-Jul-2012.) $)
+  biortn $p |- ( ph -> ( ps <-> ( -. ph \/ ps ) ) ) $=
+    wph wph wn wn wps wph wn wps wo wb wph notnot wph wn wps biorf syl $.
+
+  ${
+    biorfi.1 $e |- -. ph $.
+    $( A wff is equivalent to its disjunction with falsehood.  (Contributed by
+       NM, 23-Mar-1995.)  (Proof shortened by Wolf Lammen, 16-Jul-2021.) $)
+    biorfi $p |- ( ps <-> ( ps \/ ph ) ) $=
+      wps wps wph wo wps wph orc wps wph wo wps wph biorfi.1 wps wph pm2.53
+      mt3i impbii $.
+  $}
+
+  $( Rewriting implication based theorems using disjunction. $)
+
+  $( Theorem *2.26 of [WhiteheadRussell] p. 104.  See ~ pm2.27 .  (Contributed
+     by NM, 3-Jan-2005.)  (Proof shortened by Wolf Lammen, 23-Nov-2012.) $)
+  pm2.26 $p |- ( -. ph \/ ( ( ph -> ps ) -> ps ) ) $=
+    wph wph wps wi wps wi wph wps pm2.27 imori $.
+
+  $( Contradiction and disjunction. $)
+
+  $( Theorem *2.63 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.63 $p |- ( ( ph \/ ps ) -> ( ( -. ph \/ ps ) -> ps ) ) $=
+    wph wps wo wph wn wps wps wph wps pm2.53 wph wps wo wps idd jaod $.
+
+  $( Theorem *2.64 of [WhiteheadRussell] p. 107.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.64 $p |- ( ( ph \/ ps ) -> ( ( ph \/ -. ps ) -> ph ) ) $=
+    wph wps wn wo wph wps wo wph wph wps wn wph wps wo wps wph orel2 jao1i
+    com12 $.
+
+  $( Theorem *2.42 of [WhiteheadRussell] p. 106.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.42 $p |- ( ( -. ph \/ ( ph -> ps ) ) -> ( ph -> ps ) ) $=
+    wph wn wph wps wi wph wps wi wph wps pm2.21 wph wps wi id jaoi $.
+
+$( Some expressions connecting implication and disjunction. $)
+
+  $( A general instance of Theorem *5.11 of [WhiteheadRussell] p. 123.
+     (Contributed by NM, 3-Jan-2005.) $)
+  pm5.11g $p |- ( ( ph -> ps ) \/ ( -. ph -> ch ) ) $=
+    wph wps wi wph wn wch wi wph wps wch pm2.5g orri $.
+
+  $( Theorem *5.11 of [WhiteheadRussell] p. 123.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.11 $p |- ( ( ph -> ps ) \/ ( -. ph -> ps ) ) $=
+    wph wps wps pm5.11g $.
+
+  $( Theorem *5.12 of [WhiteheadRussell] p. 123.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.12 $p |- ( ( ph -> ps ) \/ ( ph -> -. ps ) ) $=
+    wph wps wi wph wps wn wi wph wps pm2.51 orri $.
+
+  $( Theorem *5.14 of [WhiteheadRussell] p. 123.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.14 $p |- ( ( ph -> ps ) \/ ( ps -> ch ) ) $=
+    wph wps wi wps wch wi wph wps wch pm2.521g orri $.
+
+  $( Theorem *5.13 of [WhiteheadRussell] p. 123.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 14-Nov-2012.) $)
+  pm5.13 $p |- ( ( ph -> ps ) \/ ( ps -> ph ) ) $=
+    wph wps wph pm5.14 $.
+
+  $( Theorem *5.55 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 20-Jan-2013.) $)
+  pm5.55 $p |- ( ( ( ph \/ ps ) <-> ph ) \/ ( ( ph \/ ps ) <-> ps ) ) $=
+    wph wps wo wph wb wph wps wo wps wb wph wph wps wo wph wb wph wps wo wps wb
+    wph wph wph wps wo wph wps biort bicomd wph wn wps wph wps wo wph wps biorf
+    bicomd nsyl5 orri $.
+
+  $( Implication in terms of biconditional and disjunction.  Theorem *4.72 of
+     [WhiteheadRussell] p. 121.  (Contributed by NM, 30-Aug-1993.)  (Proof
+     shortened by Wolf Lammen, 30-Jan-2013.) $)
+  pm4.72 $p |- ( ( ph -> ps ) <-> ( ps <-> ( ph \/ ps ) ) ) $=
+    wph wps wi wps wph wps wo wb wph wps wi wps wph wps wo wps wph olc wph wps
+    pm2.621 impbid2 wph wph wps wo wps wph wps wo wb wps wph wps orc wps wph
+    wps wo biimpr syl5 impbii $.
+
+  $( Simplify an implication between implications.  (Contributed by Paul
+     Chapman, 17-Nov-2012.)  (Proof shortened by Wolf Lammen, 3-Apr-2013.) $)
+  imimorb $p |- ( ( ( ps -> ch ) -> ( ph -> ch ) ) <->
+                  ( ph -> ( ps \/ ch ) ) ) $=
+    wps wch wi wph wch wi wi wph wps wch wi wch wi wi wph wps wch wo wi wps wch
+    wi wph wch bi2.04 wps wch wo wps wch wi wch wi wph wps wch dfor2 imbi2i
+    bitr4i $.
+
+  $( Absorption of disjunction into equivalence.  (Contributed by NM,
+     6-Aug-1995.)  (Proof shortened by Wolf Lammen, 3-Nov-2013.) $)
+  oibabs $p |- ( ( ( ph \/ ps ) -> ( ph <-> ps ) ) <-> ( ph <-> ps ) ) $=
+    wph wps wo wph wps wb wi wph wps wb wph wps wo wph wps wb wph wps wb wph
+    wps norbi wph wps wb id ja wph wps wb wph wps wo ax-1 impbii $.
+
+  $( Disjunction distributes over the biconditional.  An axiom of system DS in
+     Vladimir Lifschitz, "On calculational proofs" (1998),
+     ~ http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.25.3384 .
+     (Contributed by NM, 8-Jan-2005.)  (Proof shortened by Wolf Lammen,
+     4-Feb-2013.) $)
+  orbidi $p |- ( ( ph \/ ( ps <-> ch ) ) <->
+                ( ( ph \/ ps ) <-> ( ph \/ ch ) ) ) $=
+    wph wn wps wch wb wi wph wn wps wi wph wn wch wi wb wph wps wch wb wo wph
+    wps wo wph wch wo wb wph wn wps wch pm5.74 wph wps wch wb df-or wph wps wo
+    wph wn wps wi wph wch wo wph wn wch wi wph wps df-or wph wch df-or bibi12i
+    3bitr4i $.
+
+  $( Disjunction distributes over the biconditional.  Theorem *5.7 of
+     [WhiteheadRussell] p. 125.  This theorem is similar to ~ orbidi .
+     (Contributed by Roy F. Longton, 21-Jun-2005.) $)
+  pm5.7 $p |- ( ( ( ph \/ ch ) <-> ( ps \/ ch ) ) <->
+               ( ch \/ ( ph <-> ps ) ) ) $=
+    wch wph wps wb wo wch wph wo wch wps wo wb wph wch wo wps wch wo wb wch wph
+    wps orbidi wch wph wo wph wch wo wch wps wo wps wch wo wch wph orcom wch
+    wps orcom bibi12i bitr2i $.
+
+
+$(
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  Mixed connectives
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+  This section gathers theorems of propositional calculus which use (either in
+  their statement or proof) mixed connectives (at least conjunction and
+  disjunction).
+
+  As noted in the "note on definitions" in the section comment for logical
+  equivalence, some theorem statements may contain for instance only
+  conjunction or only disjunction, but both definitions are used in their
+  proofs to make them shorter (this is exemplified in ~ orim12d versus
+  ~ orim12dALT ).  These theorems are mostly grouped at the beginning of this
+  section.
+
+  The family of theorems starting with ~ animorl focus on the relation between
+  conjunction and disjunction and can be seen as the starting point of mixed
+  connectives in statements.  This sectioning is not rigorously true, since for
+  instance the section begins with ~ jaao and related theorems.
+
+$)
+
+  ${
+    jaao.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    jaao.2 $e |- ( th -> ( ta -> ch ) ) $.
+    $( Inference conjoining and disjoining the antecedents of two implications.
+       (Contributed by NM, 30-Sep-1999.) $)
+    jaao $p |- ( ( ph /\ th ) -> ( ( ps \/ ta ) -> ch ) ) $=
+      wph wth wa wps wch wta wph wps wch wi wth jaao.1 adantr wth wta wch wi
+      wph jaao.2 adantl jaod $.
+
+    $( Inference disjoining and conjoining the antecedents of two implications.
+       (Contributed by Stefan Allan, 1-Nov-2008.) $)
+    jaoa $p |- ( ( ph \/ th ) -> ( ( ps /\ ta ) -> ch ) ) $=
+      wph wps wta wa wch wi wth wph wps wch wta jaao.1 adantrd wth wta wch wps
+      jaao.2 adantld jaoi $.
+  $}
+
+  ${
+    jaoian.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    jaoian.2 $e |- ( ( th /\ ps ) -> ch ) $.
+    $( Inference disjoining the antecedents of two implications.  (Contributed
+       by NM, 23-Oct-2005.) $)
+    jaoian $p |- ( ( ( ph \/ th ) /\ ps ) -> ch ) $=
+      wph wth wo wps wch wph wps wch wi wth wph wps wch jaoian.1 ex wth wps wch
+      jaoian.2 ex jaoi imp $.
+  $}
+
+  ${
+    jaodan.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    jaodan.2 $e |- ( ( ph /\ th ) -> ch ) $.
+    $( Deduction disjoining the antecedents of two implications.  (Contributed
+       by NM, 14-Oct-2005.) $)
+    jaodan $p |- ( ( ph /\ ( ps \/ th ) ) -> ch ) $=
+      wph wps wth wo wch wph wps wch wth wph wps wch jaodan.1 ex wph wth wch
+      jaodan.2 ex jaod imp $.
+
+    jaodan.3 $e |- ( ph -> ( ps \/ th ) ) $.
+    $( Eliminate a disjunction in a deduction.  A translation of natural
+       deduction rule ` \/ ` E ( ` \/ ` elimination), see ~ natded .
+       (Contributed by Mario Carneiro, 29-May-2016.) $)
+    mpjaodan $p |- ( ph -> ch ) $=
+      wph wps wth wo wch jaodan.3 wph wps wch wth jaodan.1 jaodan.2 jaodan
+      mpdan $.
+  $}
+
+  $( Theorem *3.44 of [WhiteheadRussell] p. 113.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 3-Oct-2013.) $)
+  pm3.44 $p |- ( ( ( ps -> ph ) /\ ( ch -> ph ) )
+      -> ( ( ps \/ ch ) -> ph ) ) $=
+    wps wph wi wps wph wch wph wi wch wps wph wi id wch wph wi id jaao $.
+
+  $( Disjunction of antecedents.  Compare Theorem *3.44 of [WhiteheadRussell]
+     p. 113.  (Contributed by NM, 5-Apr-1994.)  (Proof shortened by Wolf
+     Lammen, 4-Apr-2013.) $)
+  jao $p |- ( ( ph -> ps ) -> ( ( ch -> ps ) -> ( ( ph \/ ch ) -> ps ) ) ) $=
+    wph wps wi wch wps wi wph wch wo wps wi wps wph wch pm3.44 ex $.
+
+  $( Disjunction of antecedents.  Compare Theorem *4.77 of [WhiteheadRussell]
+     p. 121.  (Contributed by NM, 30-May-1994.)  (Proof shortened by Wolf
+     Lammen, 9-Dec-2012.) $)
+  jaob $p |- ( ( ( ph \/ ch ) -> ps ) <-> ( ( ph -> ps ) /\ ( ch -> ps ) ) ) $=
+    wph wch wo wps wi wph wps wi wch wps wi wa wph wch wo wps wi wph wps wi wch
+    wps wi wph wps wch pm2.67-2 wch wph wch wo wps wch wph olc imim1i jca wps
+    wph wch pm3.44 impbii $.
+
+  $( Theorem *4.77 of [WhiteheadRussell] p. 121.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.77 $p |- ( ( ( ps -> ph ) /\ ( ch -> ph ) ) <->
+                ( ( ps \/ ch ) -> ph ) ) $=
+    wps wch wo wph wi wps wph wi wch wph wi wa wps wph wch jaob bicomi $.
+
+  $( Theorem *3.48 of [WhiteheadRussell] p. 114.  (Contributed by NM,
+     28-Jan-1997.) $)
+  pm3.48 $p |- ( ( ( ph -> ps ) /\ ( ch -> th ) )
+      -> ( ( ph \/ ch ) -> ( ps \/ th ) ) ) $=
+    wph wps wi wph wps wth wo wch wth wi wch wps wps wth wo wph wps wth orc
+    imim2i wth wps wth wo wch wth wps olc imim2i jaao $.
+
+  ${
+    orim12d.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    orim12d.2 $e |- ( ph -> ( th -> ta ) ) $.
+    $( Disjoin antecedents and consequents in a deduction.  See ~ orim12dALT
+       for a proof which does not depend on ~ df-an .  (Contributed by NM,
+       10-May-1994.) $)
+    orim12d $p |- ( ph -> ( ( ps \/ th ) -> ( ch \/ ta ) ) ) $=
+      wph wps wch wi wth wta wi wps wth wo wch wta wo wi orim12d.1 orim12d.2
+      wps wch wth wta pm3.48 syl2anc $.
+  $}
+
+  ${
+    orim1d.1 $e |- ( ph -> ( ps -> ch ) ) $.
+    $( Disjoin antecedents and consequents in a deduction.  (Contributed by NM,
+       23-Apr-1995.) $)
+    orim1d $p |- ( ph -> ( ( ps \/ th ) -> ( ch \/ th ) ) ) $=
+      wph wps wch wth wth orim1d.1 wph wth idd orim12d $.
+
+    $( Disjoin antecedents and consequents in a deduction.  (Contributed by NM,
+       23-Apr-1995.) $)
+    orim2d $p |- ( ph -> ( ( th \/ ps ) -> ( th \/ ch ) ) ) $=
+      wph wth wth wps wch wph wth idd orim1d.1 orim12d $.
+  $}
+
+  $( Axiom *1.6 (Sum) of [WhiteheadRussell] p. 97.  (Contributed by NM,
+     3-Jan-2005.) $)
+  orim2 $p |- ( ( ps -> ch ) -> ( ( ph \/ ps ) -> ( ph \/ ch ) ) ) $=
+    wps wch wi wps wch wph wps wch wi id orim2d $.
+
+  $( Theorem *2.38 of [WhiteheadRussell] p. 105.  (Contributed by NM,
+     6-Mar-2008.) $)
+  pm2.38 $p |- ( ( ps -> ch ) -> ( ( ps \/ ph ) -> ( ch \/ ph ) ) ) $=
+    wps wch wi wps wch wph wps wch wi id orim1d $.
+
+  $( Theorem *2.36 of [WhiteheadRussell] p. 105.  (Contributed by NM,
+     6-Mar-2008.) $)
+  pm2.36 $p |- ( ( ps -> ch ) -> ( ( ph \/ ps ) -> ( ch \/ ph ) ) ) $=
+    wph wps wo wps wph wo wps wch wi wch wph wo wph wps pm1.4 wph wps wch
+    pm2.38 syl5 $.
+
+  $( Theorem *2.37 of [WhiteheadRussell] p. 105.  (Contributed by NM,
+     6-Mar-2008.) $)
+  pm2.37 $p |- ( ( ps -> ch ) -> ( ( ps \/ ph ) -> ( ph \/ ch ) ) ) $=
+    wps wch wi wps wph wo wch wph wo wph wch wo wph wps wch pm2.38 wch wph
+    pm1.4 syl6 $.
+
+  $( Theorem *2.81 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.81 $p |- ( ( ps -> ( ch -> th ) )
+      -> ( ( ph \/ ps ) -> ( ( ph \/ ch ) -> ( ph \/ th ) ) ) ) $=
+    wps wch wth wi wi wph wps wo wph wch wth wi wo wph wch wo wph wth wo wi wph
+    wps wch wth wi orim2 wph wch wth pm2.76 syl6 $.
+
+  $( Theorem *2.8 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 5-Jan-2013.) $)
+  pm2.8 $p |- ( ( ph \/ ps ) -> ( ( -. ps \/ ch ) -> ( ph \/ ch ) ) ) $=
+    wph wps wo wps wn wph wch wph wps wo wph wps wph wps pm2.53 con1d orim1d $.
+
+  $( Theorem *2.73 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.73 $p |- ( ( ph -> ps )
+       -> ( ( ( ph \/ ps ) \/ ch ) -> ( ps \/ ch ) ) ) $=
+    wph wps wi wph wps wo wps wch wph wps pm2.621 orim1d $.
+
+  $( Theorem *2.74 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+  pm2.74 $p |- ( ( ps -> ph )
+      -> ( ( ( ph \/ ps ) \/ ch ) -> ( ph \/ ch ) ) ) $=
+    wps wph wi wph wps wo wph wch wps wph wph wps wo wph wi wps wph orel2 wph
+    wph wps wo ax-1 ja orim1d $.
+
+  $( Theorem *2.82 of [WhiteheadRussell] p. 108.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm2.82 $p |- ( ( ( ph \/ ps ) \/ ch ) -> ( ( ( ph \/ -. ch ) \/ th )
+      -> ( ( ph \/ ps ) \/ th ) ) ) $=
+    wph wps wo wch wo wph wch wn wo wph wps wo wth wph wps wo wch wph wch wn wo
+    wch wch wn wps wph wch wps pm2.24 orim2d jao1i orim1d $.
+
+  $( Theorem *4.39 of [WhiteheadRussell] p. 118.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.39 $p |- ( ( ( ph <-> ch ) /\ ( ps <-> th ) ) ->
+                ( ( ph \/ ps ) <-> ( ch \/ th ) ) ) $=
+    wph wch wb wps wth wb wa wph wch wps wth wph wch wb wps wth wb simpl wph
+    wch wb wps wth wb simpr orbi12d $.
+
+  $( Conjunction implies disjunction with one common formula (1/4).
+     (Contributed by BJ, 4-Oct-2019.) $)
+  animorl $p |- ( ( ph /\ ps ) -> ( ph \/ ch ) ) $=
+    wph wps wa wph wch wph wps simpl orcd $.
+
+  $( Conjunction implies disjunction with one common formula (2/4).
+     (Contributed by BJ, 4-Oct-2019.) $)
+  animorr $p |- ( ( ph /\ ps ) -> ( ch \/ ps ) ) $=
+    wph wps wa wps wch wph wps simpr olcd $.
+
+  $( Conjunction implies disjunction with one common formula (3/4).
+     (Contributed by BJ, 4-Oct-2019.) $)
+  animorlr $p |- ( ( ph /\ ps ) -> ( ch \/ ph ) ) $=
+    wph wps wa wph wch wph wps simpl olcd $.
+
+  $( Conjunction implies disjunction with one common formula (4/4).
+     (Contributed by BJ, 4-Oct-2019.) $)
+  animorrl $p |- ( ( ph /\ ps ) -> ( ps \/ ch ) ) $=
+    wph wps wa wps wch wph wps simpr orcd $.
+
+  $( Negated conjunction in terms of disjunction (De Morgan's law).  Theorem
+     *4.51 of [WhiteheadRussell] p. 120.  (Contributed by NM, 14-May-1993.)
+     (Proof shortened by Andrew Salmon, 13-May-2011.) $)
+  ianor $p |- ( -. ( ph /\ ps ) <-> ( -. ph \/ -. ps ) ) $=
+    wph wps wa wn wph wps wn wi wph wn wps wn wo wph wps imnan wph wps pm4.62
+    bitr3i $.
+
+  $( Conjunction in terms of disjunction (De Morgan's law).  Theorem *4.5 of
+     [WhiteheadRussell] p. 120.  (Contributed by NM, 3-Jan-1993.)  (Proof
+     shortened by Wolf Lammen, 3-Nov-2012.) $)
+  anor $p |- ( ( ph /\ ps ) <-> -. ( -. ph \/ -. ps ) ) $=
+    wph wps wa wph wps wa wn wph wn wps wn wo wph wps wa notnotb wph wps ianor
+    xchbinx $.
+
+  $( Negated disjunction in terms of conjunction (De Morgan's law).  Compare
+     Theorem *4.56 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-1993.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+  ioran $p |- ( -. ( ph \/ ps ) <-> ( -. ph /\ -. ps ) ) $=
+    wph wn wps wi wph wn wps wn wa wph wps wo wph wps pm4.65 wph wps pm4.64
+    xchnxbi $.
+
+  $( Theorem *4.52 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 5-Nov-2012.) $)
+  pm4.52 $p |- ( ( ph /\ -. ps ) <-> -. ( -. ph \/ ps ) ) $=
+    wph wps wn wa wph wps wi wph wn wps wo wph wps annim wph wps imor xchbinx
+    $.
+
+  $( Theorem *4.53 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.53 $p |- ( -. ( ph /\ -. ps ) <-> ( -. ph \/ ps ) ) $=
+    wph wn wps wo wph wps wn wa wn wph wps wn wa wph wn wps wo wph wps pm4.52
+    con2bii bicomi $.
+
+  $( Theorem *4.54 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 5-Nov-2012.) $)
+  pm4.54 $p |- ( ( -. ph /\ ps ) <-> -. ( ph \/ -. ps ) ) $=
+    wph wn wps wa wph wn wps wn wi wph wps wn wo wph wn wps df-an wph wps
+    pm4.66 xchbinx $.
+
+  $( Theorem *4.55 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.55 $p |- ( -. ( -. ph /\ ps ) <-> ( ph \/ -. ps ) ) $=
+    wph wps wn wo wph wn wps wa wn wph wn wps wa wph wps wn wo wph wps pm4.54
+    con2bii bicomi $.
+
+  $( Theorem *4.56 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.56 $p |- ( ( -. ph /\ -. ps ) <-> -. ( ph \/ ps ) ) $=
+    wph wps wo wn wph wn wps wn wa wph wps ioran bicomi $.
+
+  $( Disjunction in terms of conjunction (De Morgan's law).  Compare Theorem
+     *4.57 of [WhiteheadRussell] p. 120.  (Contributed by NM, 3-Jan-1993.)
+     (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+  oran $p |- ( ( ph \/ ps ) <-> -. ( -. ph /\ -. ps ) ) $=
+    wph wn wps wn wa wph wps wo wph wps pm4.56 con2bii $.
+
+  $( Theorem *4.57 of [WhiteheadRussell] p. 120.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.57 $p |- ( -. ( -. ph /\ -. ps ) <-> ( ph \/ ps ) ) $=
+    wph wps wo wph wn wps wn wa wn wph wps oran bicomi $.
+
+  $( Theorem *3.1 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.1 $p |- ( ( ph /\ ps ) -> -. ( -. ph \/ -. ps ) ) $=
+    wph wps wa wph wn wps wn wo wn wph wps anor biimpi $.
+
+  $( Theorem *3.11 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.11 $p |- ( -. ( -. ph \/ -. ps ) -> ( ph /\ ps ) ) $=
+    wph wps wa wph wn wps wn wo wn wph wps anor biimpri $.
+
+  $( Theorem *3.12 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.12 $p |- ( ( -. ph \/ -. ps ) \/ ( ph /\ ps ) ) $=
+    wph wn wps wn wo wph wps wa wph wps pm3.11 orri $.
+
+  $( Theorem *3.13 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.13 $p |- ( -. ( ph /\ ps ) -> ( -. ph \/ -. ps ) ) $=
+    wph wn wps wn wo wph wps wa wph wps pm3.11 con1i $.
+
+  $( Theorem *3.14 of [WhiteheadRussell] p. 111.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm3.14 $p |- ( ( -. ph \/ -. ps ) -> -. ( ph /\ ps ) ) $=
+    wph wps wa wph wn wps wn wo wph wps pm3.1 con2i $.
+
+  $( Theorem *4.44 of [WhiteheadRussell] p. 119.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.44 $p |- ( ph <-> ( ph \/ ( ph /\ ps ) ) ) $=
+    wph wph wph wps wa wo wph wph wps wa orc wph wph wph wps wa wph id wph wps
+    simpl jaoi impbii $.
+
+  $( Theorem *4.45 of [WhiteheadRussell] p. 119.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.45 $p |- ( ph <-> ( ph /\ ( ph \/ ps ) ) ) $=
+    wph wph wps wo wph wps orc pm4.71i $.
+
+  $( Absorption of redundant internal disjunct.  Compare Theorem *4.45 of
+     [WhiteheadRussell] p. 119.  (Contributed by NM, 21-Jun-1993.)  (Proof
+     shortened by Wolf Lammen, 28-Feb-2014.) $)
+  orabs $p |- ( ph <-> ( ( ph \/ ps ) /\ ph ) ) $=
+    wph wph wps wo wph wps orc pm4.71ri $.
+
+  $( Absorb a disjunct into a conjunct.  (Contributed by Roy F. Longton,
+     23-Jun-2005.)  (Proof shortened by Wolf Lammen, 10-Nov-2013.) $)
+  oranabs $p |- ( ( ( ph \/ -. ps ) /\ ps ) <-> ( ph /\ ps ) ) $=
+    wps wph wps wn wo wph wps wph wps wn wph wo wph wps wn wo wps wph biortn
+    wps wn wph orcom bitr2di pm5.32ri $.
+
+  $( Theorem *5.61 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 30-Jun-2013.) $)
+  pm5.61 $p |- ( ( ( ph \/ ps ) /\ -. ps ) <-> ( ph /\ -. ps ) ) $=
+    wps wn wph wps wo wph wps wn wph wps wo wph wps wph orel2 wph wps orc
+    impbid1 pm5.32ri $.
+
+  $( Conjunction in antecedent versus disjunction in consequent.  Theorem *5.6
+     of [WhiteheadRussell] p. 125.  (Contributed by NM, 8-Jun-1994.) $)
+  pm5.6 $p |- ( ( ( ph /\ -. ps ) -> ch ) <-> ( ph -> ( ps \/ ch ) ) ) $=
+    wph wps wn wa wch wi wph wps wn wch wi wi wph wps wch wo wi wph wps wn wch
+    impexp wps wch wo wps wn wch wi wph wps wch df-or imbi2i bitr4i $.
+
+  ${
+    orcanai.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    $( Change disjunction in consequent to conjunction in antecedent.
+       (Contributed by NM, 8-Jun-1994.) $)
+    orcanai $p |- ( ( ph /\ -. ps ) -> ch ) $=
+      wph wps wn wch wph wps wch orcanai.1 ord imp $.
+  $}
+
+  $( Theorem *4.79 of [WhiteheadRussell] p. 121.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 27-Jun-2013.) $)
+  pm4.79 $p |- ( ( ( ps -> ph ) \/ ( ch -> ph ) ) <->
+                ( ( ps /\ ch ) -> ph ) ) $=
+    wps wph wi wch wph wi wo wps wch wa wph wi wps wph wi wps wph wch wph wi
+    wch wps wph wi id wch wph wi id jaoa wps wch wa wph wi wps wph wi wch wph
+    wi wps wph wi wn wps wps wch wa wph wi wch wph wi wps wph simplim wps wch
+    wph pm3.3 syl5 orrd impbii $.
+
+  $( Theorem *5.53 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.53 $p |- ( ( ( ( ph \/ ps ) \/ ch ) -> th ) <->
+                ( ( ( ph -> th ) /\ ( ps -> th ) ) /\ ( ch -> th ) ) ) $=
+    wph wps wo wch wo wth wi wph wps wo wth wi wch wth wi wa wph wth wi wps wth
+    wi wa wch wth wi wa wph wps wo wth wch jaob wph wps wo wth wi wph wth wi
+    wps wth wi wa wch wth wi wph wth wps jaob anbi1i bitri $.
+
+  $( Distributive law for disjunction.  Theorem *4.41 of [WhiteheadRussell]
+     p. 119.  (Contributed by NM, 5-Jan-1993.)  (Proof shortened by Andrew
+     Salmon, 7-May-2011.)  (Proof shortened by Wolf Lammen, 28-Nov-2013.) $)
+  ordi $p |- ( ( ph \/ ( ps /\ ch ) ) <-> ( ( ph \/ ps ) /\ ( ph \/ ch ) ) ) $=
+    wph wn wps wch wa wi wph wn wps wi wph wn wch wi wa wph wps wch wa wo wph
+    wps wo wph wch wo wa wph wn wps wch jcab wph wps wch wa df-or wph wps wo
+    wph wn wps wi wph wch wo wph wn wch wi wph wps df-or wph wch df-or anbi12i
+    3bitr4i $.
+
+  $( Distributive law for disjunction.  (Contributed by NM, 12-Aug-1994.) $)
+  ordir $p |- ( ( ( ph /\ ps ) \/ ch ) <->
+              ( ( ph \/ ch ) /\ ( ps \/ ch ) ) ) $=
+    wch wph wps wa wo wch wph wo wch wps wo wa wph wps wa wch wo wph wch wo wps
+    wch wo wa wch wph wps ordi wph wps wa wch orcom wph wch wo wch wph wo wps
+    wch wo wch wps wo wph wch orcom wps wch orcom anbi12i 3bitr4i $.
+
+  $( Distributive law for conjunction.  Theorem *4.4 of [WhiteheadRussell]
+     p. 118.  (Contributed by NM, 21-Jun-1993.)  (Proof shortened by Wolf
+     Lammen, 5-Jan-2013.) $)
+  andi $p |- ( ( ph /\ ( ps \/ ch ) ) <-> ( ( ph /\ ps ) \/ ( ph /\ ch ) ) ) $=
+    wph wps wch wo wa wph wps wa wph wch wa wo wph wps wph wps wa wph wch wa wo
+    wch wph wps wa wph wch wa orc wph wch wa wph wps wa olc jaodan wph wps wa
+    wph wps wch wo wa wph wch wa wps wps wch wo wph wps wch orc anim2i wch wps
+    wch wo wph wch wps olc anim2i jaoi impbii $.
+
+  $( Distributive law for conjunction.  (Contributed by NM, 12-Aug-1994.) $)
+  andir $p |- ( ( ( ph \/ ps ) /\ ch ) <->
+              ( ( ph /\ ch ) \/ ( ps /\ ch ) ) ) $=
+    wch wph wps wo wa wch wph wa wch wps wa wo wph wps wo wch wa wph wch wa wps
+    wch wa wo wch wph wps andi wph wps wo wch ancom wph wch wa wch wph wa wps
+    wch wa wch wps wa wph wch ancom wps wch ancom orbi12i 3bitr4i $.
+
+  $( Double distributive law for disjunction.  (Contributed by NM,
+     12-Aug-1994.) $)
+  orddi $p |- ( ( ( ph /\ ps ) \/ ( ch /\ th ) ) <->
+              ( ( ( ph \/ ch ) /\ ( ph \/ th ) ) /\
+              ( ( ps \/ ch ) /\ ( ps \/ th ) ) ) ) $=
+    wph wps wa wch wth wa wo wph wch wth wa wo wps wch wth wa wo wa wph wch wo
+    wph wth wo wa wps wch wo wps wth wo wa wa wph wps wch wth wa ordir wph wch
+    wth wa wo wph wch wo wph wth wo wa wps wch wth wa wo wps wch wo wps wth wo
+    wa wph wch wth ordi wps wch wth ordi anbi12i bitri $.
+
+  $( Double distributive law for conjunction.  (Contributed by NM,
+     12-Aug-1994.) $)
+  anddi $p |- ( ( ( ph \/ ps ) /\ ( ch \/ th ) ) <->
+              ( ( ( ph /\ ch ) \/ ( ph /\ th ) ) \/
+              ( ( ps /\ ch ) \/ ( ps /\ th ) ) ) ) $=
+    wph wps wo wch wth wo wa wph wch wth wo wa wps wch wth wo wa wo wph wch wa
+    wph wth wa wo wps wch wa wps wth wa wo wo wph wps wch wth wo andir wph wch
+    wth wo wa wph wch wa wph wth wa wo wps wch wth wo wa wps wch wa wps wth wa
+    wo wph wch wth andi wps wch wth andi orbi12i bitri $.
+
+$( Theorems relating XOR to conjunction or disjunction. $)
+
+  $( Theorem *5.17 of [WhiteheadRussell] p. 124.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 3-Jan-2013.) $)
+  pm5.17 $p |- ( ( ( ph \/ ps ) /\ -. ( ph /\ ps ) ) <-> ( ph <-> -. ps ) ) $=
+    wph wps wn wb wps wn wph wb wps wn wph wi wph wps wn wi wa wph wps wo wph
+    wps wa wn wa wph wps wn bicom wps wn wph dfbi2 wps wn wph wi wph wps wo wph
+    wps wn wi wph wps wa wn wph wps wo wps wph wo wps wn wph wi wph wps orcom
+    wps wph df-or bitr2i wph wps imnan anbi12i 3bitrri $.
+
+  $( Theorem *5.15 of [WhiteheadRussell] p. 124.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 15-Oct-2013.) $)
+  pm5.15 $p |- ( ( ph <-> ps ) \/ ( ph <-> -. ps ) ) $=
+    wph wps wb wph wps wn wb wph wps wb wn wph wps wn wb wph wps xor3 biimpi
+    orri $.
+
+  $( Theorem *5.16 of [WhiteheadRussell] p. 124.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 17-Oct-2013.) $)
+  pm5.16 $p |- -. ( ( ph <-> ps ) /\ ( ph <-> -. ps ) ) $=
+    wph wps wb wph wps wn wb wn wi wph wps wb wph wps wn wb wa wn wph wps wb
+    wph wps wn wb wn wph wps pm5.18 biimpi wph wps wb wph wps wn wb imnan mpbi
+    $.
+
+  $( Two ways to express exclusive disjunction ( ~ df-xor ).  Theorem *5.22 of
+     [WhiteheadRussell] p. 124.  (Contributed by NM, 3-Jan-2005.)  (Proof
+     shortened by Wolf Lammen, 22-Jan-2013.) $)
+  xor $p |- ( -. ( ph <-> ps ) <->
+                ( ( ph /\ -. ps ) \/ ( ps /\ -. ph ) ) ) $=
+    wph wps wn wa wps wph wn wa wo wph wps wb wph wps wi wps wph wi wa wph wps
+    wn wa wn wps wph wn wa wn wa wph wps wb wph wps wn wa wps wph wn wa wo wn
+    wph wps wi wph wps wn wa wn wps wph wi wps wph wn wa wn wph wps iman wps
+    wph iman anbi12i wph wps dfbi2 wph wps wn wa wps wph wn wa ioran 3bitr4ri
+    con1bii $.
+
+  $( Two ways to express "exclusive or".  (Contributed by NM, 3-Jan-2005.)
+     (Proof shortened by Wolf Lammen, 24-Jan-2013.) $)
+  nbi2 $p |- ( -. ( ph <-> ps ) <-> ( ( ph \/ ps ) /\ -. ( ph /\ ps ) ) ) $=
+    wph wps wb wn wph wps wn wb wph wps wo wph wps wa wn wa wph wps xor3 wph
+    wps pm5.17 bitr4i $.
+
+  $( Conjunction distributes over exclusive-or, using ` -. ( ph <-> ps ) ` to
+     express exclusive-or.  This is one way to interpret the distributive law
+     of multiplication over addition in modulo 2 arithmetic.  This is not
+     necessarily true in intuitionistic logic, though ~ anxordi does hold in
+     it.  (Contributed by NM, 3-Oct-2008.) $)
+  xordi $p |- ( ( ph /\ -. ( ps <-> ch ) ) <->
+                -. ( ( ph /\ ps ) <-> ( ph /\ ch ) ) ) $=
+    wph wps wch wb wn wa wph wps wch wb wi wph wps wa wph wch wa wb wph wps wch
+    wb annim wph wps wch pm5.32 xchbinx $.
+
+  $( Theorem *5.54 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 7-Nov-2013.) $)
+  pm5.54 $p |- ( ( ( ph /\ ps ) <-> ph ) \/ ( ( ph /\ ps ) <-> ps ) ) $=
+    wph wps wa wph wb wph wps wa wps wb wph wps wa wph wps wa wph wb wps wps
+    wph wps wa wph wb wph wps wph wph wps wa wps wph iba bicomd adantl wps wph
+    wph wps wa wps wph iba bicomd pm5.21ni orri $.
+
+  $( Theorem *5.62 of [WhiteheadRussell] p. 125.  (Contributed by Roy F.
+     Longton, 21-Jun-2005.) $)
+  pm5.62 $p |- ( ( ( ph /\ ps ) \/ -. ps ) <-> ( ph \/ -. ps ) ) $=
+    wph wps wa wps wn wo wph wps wn wo wps wps wn wo wps exmid wph wps wps wn
+    ordir mpbiran2 $.
+
+  $( Theorem *5.63 of [WhiteheadRussell] p. 125.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 25-Dec-2012.) $)
+  pm5.63 $p |- ( ( ph \/ ps ) <-> ( ph \/ ( -. ph /\ ps ) ) ) $=
+    wph wph wn wps wa wo wph wps wo wph wph wn wps wa wo wph wph wn wo wph wps
+    wo wph exmid wph wph wn wps ordi mpbiran bicomi $.
+
+  ${
+    niabn.1 $e |- ph $.
+    $( Miscellaneous inference relating falsehoods.  (Contributed by NM,
+       31-Mar-1994.) $)
+    niabn $p |- ( -. ps -> ( ( ch /\ ps ) <-> -. ph ) ) $=
+      wch wps wa wps wph wn wch wps simpr wph wps niabn.1 pm2.24i pm5.21ni $.
+  $}
+
+  ${
+    ninba.1 $e |- ph $.
+    $( Miscellaneous inference relating falsehoods.  (Contributed by NM,
+       31-Mar-1994.) $)
+    ninba $p |- ( -. ps -> ( -. ph <-> ( ch /\ ps ) ) ) $=
+      wps wn wch wps wa wph wn wph wps wch ninba.1 niabn bicomd $.
+  $}
+
+  $( Theorem *4.43 of [WhiteheadRussell] p. 119.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Wolf Lammen, 26-Nov-2012.) $)
+  pm4.43 $p |- ( ph <-> ( ( ph \/ ps ) /\ ( ph \/ -. ps ) ) ) $=
+    wph wph wps wps wn wa wo wph wps wo wph wps wn wo wa wps wps wn wa wph wps
+    pm3.24 biorfi wph wps wps wn ordi bitri $.
+
+  $( Theorem *4.82 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.82 $p |- ( ( ( ph -> ps ) /\ ( ph -> -. ps ) ) <-> -. ph ) $=
+    wph wps wi wph wps wn wi wa wph wn wph wps wi wph wps wn wi wph wn wph wps
+    pm2.65 imp wph wn wph wps wi wph wps wn wi wph wps pm2.21 wph wps wn pm2.21
+    jca impbii $.
+
+  $( Theorem *4.83 of [WhiteheadRussell] p. 122.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm4.83 $p |- ( ( ( ph -> ps ) /\ ( -. ph -> ps ) ) <-> ps ) $=
+    wps wph wph wn wo wps wi wph wps wi wph wn wps wi wa wph wph wn wo wps wph
+    exmid a1bi wph wps wph wn jaob bitr2i $.
+
+  $( Negation inferred from embedded conjunct.  (Contributed by NM,
+     20-Aug-1993.)  (Proof shortened by Wolf Lammen, 25-Nov-2012.) $)
+  pclem6 $p |- ( ( ph <-> ( ps /\ -. ph ) ) -> -. ps ) $=
+    wps wph wps wph wn wa wb wps wph wn wps wph wn wa wb wph wps wph wn wa wb
+    wn wps wph wn ibar wph wps wph wn wa nbbn sylib con2i $.
+
+  $( Dijkstra-Scholten's Golden Rule for calculational proofs.  (Contributed by
+     NM, 10-Jan-2005.) $)
+  bigolden $p |- ( ( ( ph /\ ps ) <-> ph ) <-> ( ps <-> ( ph \/ ps ) ) ) $=
+    wph wps wi wph wph wps wa wb wps wph wps wo wb wph wps wa wph wb wph wps
+    pm4.71 wph wps pm4.72 wph wph wps wa bicom 3bitr3ri $.
+
+  $( Theorem *5.71 of [WhiteheadRussell] p. 125.  (Contributed by Roy F.
+     Longton, 23-Jun-2005.) $)
+  pm5.71 $p |- ( ( ps -> -. ch ) -> ( ( ( ph \/ ps ) /\ ch ) <->
+                ( ph /\ ch ) ) ) $=
+    wps wch wn wph wps wo wch wa wph wch wa wb wps wn wph wps wo wph wch wps wn
+    wph wps wo wph wps wph orel2 wph wps orc impbid1 anbi1d wch wn wch wph wps
+    wo wph wch wph wps wo wph wb pm2.21 pm5.32rd ja $.
+
+  $( Theorem *5.75 of [WhiteheadRussell] p. 126.  (Contributed by NM,
+     3-Jan-2005.)  (Proof shortened by Andrew Salmon, 7-May-2011.)  (Proof
+     shortened by Wolf Lammen, 23-Dec-2012.)  (Proof shortened by Kyle Wyonch,
+     12-Feb-2021.) $)
+  pm5.75 $p |- ( ( ( ch -> -. ps ) /\ ( ph <-> ( ps \/ ch ) ) )
+      -> ( ( ph /\ -. ps ) <-> ch ) ) $=
+    wph wps wch wo wb wph wps wn wa wch wps wn wa wch wps wn wi wch wph wps wch
+    wo wb wph wps wn wa wps wch wo wps wn wa wch wps wn wa wph wps wch wo wps
+    wn anbi1 wps wn wps wch wo wch wps wn wch wps wch wo wps wch biorf bicomd
+    pm5.32ri bitrdi wch wps wn wa wch wch wps wn wi wch wps wn abai rbaib
+    sylan9bbr $.
+
+  ${
+    ecase2d.1 $e |- ( ph -> ps ) $.
+    ecase2d.2 $e |- ( ph -> -. ( ps /\ ch ) ) $.
+    ecase2d.3 $e |- ( ph -> -. ( ps /\ th ) ) $.
+    ecase2d.4 $e |- ( ph -> ( ta \/ ( ch \/ th ) ) ) $.
+    $( Deduction for elimination by cases.  (Contributed by NM, 21-Apr-1994.)
+       (Proof shortened by Wolf Lammen, 19-Sep-2024.) $)
+    ecase2d $p |- ( ph -> ta ) $=
+      wph wta wph wta wn wch wth wph wps wch ecase2d.1 ecase2d.2 mpnanrd wph
+      wps wth ecase2d.1 ecase2d.3 mpnanrd wph wta wch wth wo ecase2d.4 ord
+      mtord notnotrd $.
+
+    $( Obsolete version of ~ ecase2d as of 19-Sep-2024.  (Contributed by NM,
+       21-Apr-1994.)  (Proof shortened by Wolf Lammen, 22-Dec-2012.)
+       (New usage is discouraged.)  (Proof modification is discouraged.) $)
+    ecase2dOLD $p |- ( ph -> ta ) $=
+      wph wta wta wch wth wo wph wta idd wph wch wta wth wph wps wch wta
+      ecase2d.1 wph wps wch wa wta ecase2d.2 pm2.21d mpand wph wps wth wta
+      ecase2d.1 wph wps wth wa wta ecase2d.3 pm2.21d mpand jaod ecase2d.4
+      mpjaod $.
+  $}
+
+  ${
+    ecase3.1 $e |- ( ph -> ch ) $.
+    ecase3.2 $e |- ( ps -> ch ) $.
+    ecase3.3 $e |- ( -. ( ph \/ ps ) -> ch ) $.
+    $( Inference for elimination by cases.  (Contributed by NM, 23-Mar-1995.)
+       (Proof shortened by Wolf Lammen, 26-Nov-2012.) $)
+    ecase3 $p |- ch $=
+      wph wps wo wch wph wch wps ecase3.1 ecase3.2 jaoi ecase3.3 pm2.61i $.
+  $}
+
+  ${
+    ecase.1 $e |- ( -. ph -> ch ) $.
+    ecase.2 $e |- ( -. ps -> ch ) $.
+    ecase.3 $e |- ( ( ph /\ ps ) -> ch ) $.
+    $( Inference for elimination by cases.  (Contributed by NM,
+       13-Jul-2005.) $)
+    ecase $p |- ch $=
+      wph wps wch wph wps wch ecase.3 ex ecase.1 ecase.2 pm2.61nii $.
+  $}
+
+  ${
+    ecase3d.1 $e |- ( ph -> ( ps -> th ) ) $.
+    ecase3d.2 $e |- ( ph -> ( ch -> th ) ) $.
+    ecase3d.3 $e |- ( ph -> ( -. ( ps \/ ch ) -> th ) ) $.
+    $( Deduction for elimination by cases.  (Contributed by NM, 2-May-1996.)
+       (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+    ecase3d $p |- ( ph -> th ) $=
+      wph wps wch wo wth wph wps wth wch ecase3d.1 ecase3d.2 jaod ecase3d.3
+      pm2.61d $.
+  $}
+
+  ${
+    ecased.1 $e |- ( ph -> ( -. ps -> th ) ) $.
+    ecased.2 $e |- ( ph -> ( -. ch -> th ) ) $.
+    ecased.3 $e |- ( ph -> ( ( ps /\ ch ) -> th ) ) $.
+    $( Deduction for elimination by cases.  (Contributed by NM, 8-Oct-2012.) $)
+    ecased $p |- ( ph -> th ) $=
+      wph wps wn wch wn wth ecased.1 ecased.2 wps wn wch wn wo wn wps wch wa
+      wph wth wps wch pm3.11 ecased.3 syl5 ecase3d $.
+  $}
+
+  ${
+    ecase3ad.1 $e |- ( ph -> ( ps -> th ) ) $.
+    ecase3ad.2 $e |- ( ph -> ( ch -> th ) ) $.
+    ecase3ad.3 $e |- ( ph -> ( ( -. ps /\ -. ch ) -> th ) ) $.
+    $( Deduction for elimination by cases.  (Contributed by NM, 24-May-2013.)
+       (Proof shortened by Wolf Lammen, 20-Sep-2024.) $)
+    ecase3ad $p |- ( ph -> th ) $=
+      wph wps wch wth wph wps wth ecase3ad.1 imp wph wch wth ecase3ad.2 imp wph
+      wps wn wch wn wa wth ecase3ad.3 imp pm2.61ddan $.
+
+    $( Obsolete version of ~ ecase3ad as of 20-Sep-2024.  (Contributed by NM,
+       24-May-2013.)  (Proof modification is discouraged.)
+       (New usage is discouraged.) $)
+    ecase3adOLD $p |- ( ph -> th ) $=
+      wph wps wn wch wn wth wps wn wn wps wph wth wps notnotr ecase3ad.1 syl5
+      wch wn wn wch wph wth wch notnotr ecase3ad.2 syl5 ecase3ad.3 ecased $.
+  $}
+
+  ${
+    ccase.1 $e |- ( ( ph /\ ps ) -> ta ) $.
+    ccase.2 $e |- ( ( ch /\ ps ) -> ta ) $.
+    ccase.3 $e |- ( ( ph /\ th ) -> ta ) $.
+    ccase.4 $e |- ( ( ch /\ th ) -> ta ) $.
+    $( Inference for combining cases.  (Contributed by NM, 29-Jul-1999.)
+       (Proof shortened by Wolf Lammen, 6-Jan-2013.) $)
+    ccase $p |- ( ( ( ph \/ ch ) /\ ( ps \/ th ) ) -> ta ) $=
+      wph wch wo wps wta wth wph wps wta wch ccase.1 ccase.2 jaoian wph wth wta
+      wch ccase.3 ccase.4 jaoian jaodan $.
+  $}
+
+  ${
+    ccased.1 $e |- ( ph -> ( ( ps /\ ch ) -> et ) ) $.
+    ccased.2 $e |- ( ph -> ( ( th /\ ch ) -> et ) ) $.
+    ccased.3 $e |- ( ph -> ( ( ps /\ ta ) -> et ) ) $.
+    ccased.4 $e |- ( ph -> ( ( th /\ ta ) -> et ) ) $.
+    $( Deduction for combining cases.  (Contributed by NM, 9-May-2004.) $)
+    ccased $p |- ( ph -> ( ( ( ps \/ th ) /\ ( ch \/ ta ) ) -> et ) ) $=
+      wps wth wo wch wta wo wa wph wet wps wch wth wta wph wet wi wph wps wch
+      wa wet ccased.1 com12 wph wth wch wa wet ccased.2 com12 wph wps wta wa
+      wet ccased.3 com12 wph wth wta wa wet ccased.4 com12 ccase com12 $.
+  $}
+
+  ${
+    ccase2.1 $e |- ( ( ph /\ ps ) -> ta ) $.
+    ccase2.2 $e |- ( ch -> ta ) $.
+    ccase2.3 $e |- ( th -> ta ) $.
+    $( Inference for combining cases.  (Contributed by NM, 29-Jul-1999.) $)
+    ccase2 $p |- ( ( ( ph \/ ch ) /\ ( ps \/ th ) ) -> ta ) $=
+      wph wps wch wth wta ccase2.1 wch wta wps ccase2.2 adantr wth wta wph
+      ccase2.3 adantl wth wta wch ccase2.3 adantl ccase $.
+  $}
+
+  ${
+    4cases.1 $e |- ( ( ph /\ ps ) -> ch ) $.
+    4cases.2 $e |- ( ( ph /\ -. ps ) -> ch ) $.
+    4cases.3 $e |- ( ( -. ph /\ ps ) -> ch ) $.
+    4cases.4 $e |- ( ( -. ph /\ -. ps ) -> ch ) $.
+    $( Inference eliminating two antecedents from the four possible cases that
+       result from their true/false combinations.  (Contributed by NM,
+       25-Oct-2003.) $)
+    4cases $p |- ch $=
+      wps wch wph wps wch 4cases.1 4cases.3 pm2.61ian wph wps wn wch 4cases.2
+      4cases.4 pm2.61ian pm2.61i $.
+  $}
+
+  ${
+    4casesdan.1 $e |- ( ( ph /\ ( ps /\ ch ) ) -> th ) $.
+    4casesdan.2 $e |- ( ( ph /\ ( ps /\ -. ch ) ) -> th ) $.
+    4casesdan.3 $e |- ( ( ph /\ ( -. ps /\ ch ) ) -> th ) $.
+    4casesdan.4 $e |- ( ( ph /\ ( -. ps /\ -. ch ) ) -> th ) $.
+    $( Deduction eliminating two antecedents from the four possible cases that
+       result from their true/false combinations.  (Contributed by NM,
+       19-Mar-2013.) $)
+    4casesdan $p |- ( ph -> th ) $=
+      wps wch wph wth wi wph wps wch wa wth 4casesdan.1 expcom wph wps wch wn
+      wa wth 4casesdan.2 expcom wph wps wn wch wa wth 4casesdan.3 expcom wph
+      wps wn wch wn wa wth 4casesdan.4 expcom 4cases $.
+  $}
+
+  ${
+    cases.1 $e |- ( ph -> ( ps <-> ch ) ) $.
+    cases.2 $e |- ( -. ph -> ( ps <-> th ) ) $.
+    $( Case disjunction according to the value of ` ph ` .  (Contributed by NM,
+       25-Apr-2019.) $)
+    cases $p |- ( ps <-> ( ( ph /\ ch ) \/ ( -. ph /\ th ) ) ) $=
+      wps wph wph wn wo wps wa wph wps wa wph wn wps wa wo wph wch wa wph wn
+      wth wa wo wph wph wn wo wps wph exmid biantrur wph wph wn wps andir wph
+      wps wa wph wch wa wph wn wps wa wph wn wth wa wph wps wch cases.1 pm5.32i
+      wph wn wps wth cases.2 pm5.32i orbi12i 3bitri $.
+  $}
+
+  $( Lemma for an alternate version of weak deduction theorem.  (Contributed by
+     NM, 2-Apr-1994.)  (Proof shortened by Andrew Salmon, 7-May-2011.)  (Proof
+     shortened by Wolf Lammen, 4-Dec-2012.) $)
+  dedlem0a $p |- ( ph -> ( ps <-> ( ( ch -> ph ) -> ( ps /\ ph ) ) ) ) $=
+    wph wps wps wph wa wch wph wi wps wph wa wi wph wps iba wch wph wps wph wa
+    wch wph wi wps wph wa wi wb wch wph wi wps wph wa biimt jarri bitrd $.
+
+  $( Lemma for an alternate version of weak deduction theorem.  (Contributed by
+     NM, 2-Apr-1994.) $)
+  dedlem0b $p |- ( -. ph -> ( ps <-> ( ( ps -> ph ) -> ( ch /\ ph ) ) ) ) $=
+    wph wn wps wps wph wi wch wph wa wi wph wn wps wph wi wps wch wph wa wph wn
+    wph wch wph wa wps wph wch wph wa pm2.21 imim2d com23 wps wph wi wch wph wa
+    wi wph wn wps wps wph wi wch wph wa wi wps wph wps wn wps wph wi wch wph wa
+    wph wps wph pm2.21 wch wph simpr imim12i con1d com12 impbid $.
+
+  $( Lemma for weak deduction theorem.  See also ~ ifptru .  (Contributed by
+     NM, 26-Jun-2002.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+  dedlema $p |- ( ph -> ( ps <-> ( ( ps /\ ph ) \/ ( ch /\ -. ph ) ) ) ) $=
+    wph wps wps wph wa wch wph wn wa wo wps wph wps wph wa wch wph wn wa wo wps
+    wph wa wch wph wn wa orc expcom wph wps wph wa wps wch wph wn wa wps wph wa
+    wps wi wph wps wph simpl a1i wph wph wn wps wch wph wps pm2.24 adantld jaod
+    impbid $.
+
+  $( Lemma for weak deduction theorem.  See also ~ ifpfal .  (Contributed by
+     NM, 15-May-1999.)  (Proof shortened by Andrew Salmon, 7-May-2011.) $)
+  dedlemb $p |- ( -. ph -> ( ch <-> ( ( ps /\ ph ) \/ ( ch /\ -. ph ) ) ) ) $=
+    wph wn wch wps wph wa wch wph wn wa wo wch wph wn wps wph wa wch wph wn wa
+    wo wch wph wn wa wps wph wa olc expcom wph wn wps wph wa wch wch wph wn wa
+    wph wn wph wch wps wph wch pm2.21 adantld wch wph wn wa wch wi wph wn wch
+    wph wn simpl a1i jaod impbid $.
+
+  $( Case disjunction according to the value of ` ph ` .  (Contributed by BJ,
+     6-Apr-2019.)  (Proof shortened by Wolf Lammen, 28-Feb-2022.) $)
+  cases2 $p |- ( ( ( ph /\ ps ) \/ ( -. ph /\ ch ) )
+                                   <-> ( ( ph -> ps ) /\ ( -. ph -> ch ) ) ) $=
+    wph wps wph wa wch wph wn wa wo wi wph wn wps wph wa wch wph wn wa wo wi wa
+    wps wph wa wch wph wn wa wo wph wps wi wph wn wch wi wa wph wps wa wph wn
+    wch wa wo wph wps wph wa wch wph wn wa wo pm4.83 wph wps wi wph wps wph wa
+    wch wph wn wa wo wi wph wn wch wi wph wn wps wph wa wch wph wn wa wo wi wph
+    wps wps wph wa wch wph wn wa wo wph wps wch dedlema pm5.74i wph wn wch wps
+    wph wa wch wph wn wa wo wph wps wch dedlemb pm5.74i anbi12i wph wps wa wps
+    wph wa wph wn wch wa wch wph wn wa wph wps ancom wph wn wch ancom orbi12i
+    3bitr4ri $.
+
+  $( Alternate proof of ~ cases2 , not using ~ dedlema or ~ dedlemb .
+     (Contributed by BJ, 6-Apr-2019.)  (Proof shortened by Wolf Lammen,
+     2-Jan-2020.)  (Proof modification is discouraged.)
+     (New usage is discouraged.) $)
+  cases2ALT $p |- ( ( ( ph /\ ps ) \/ ( -. ph /\ ch ) )
+                                   <-> ( ( ph -> ps ) /\ ( -. ph -> ch ) ) ) $=
+    wph wps wa wph wn wch wa wo wph wps wi wph wn wch wi wa wph wps wa wph wps
+    wi wph wn wch wi wa wph wn wch wa wph wps wa wph wps wi wph wn wch wi wph
+    wps pm3.4 wph wph wn wch wi wps wph wch pm2.24 adantr jca wph wn wch wa wph
+    wps wi wph wn wch wi wph wn wph wps wi wch wph wps pm2.21 adantr wph wn wch
+    pm3.4 jca jaoi wph wph wps wi wph wn wch wi wa wph wps wa wph wn wch wa wo
+    wph wph wps wi wph wps wa wph wn wch wa wo wph wn wch wi wph wph wps wi wa
+    wph wps wa wph wn wch wa wph wph wps wi wps wph wps pm2.27 imdistani orcd
+    adantrr wph wn wph wn wch wi wph wps wa wph wn wch wa wo wph wps wi wph wn
+    wph wn wch wi wa wph wn wch wa wph wps wa wph wn wph wn wch wi wch wph wn
+    wch pm2.27 imdistani olcd adantrl pm2.61ian impbii $.
+
+  $( An alternate definition of the biconditional.  Theorem *5.23 of
+     [WhiteheadRussell] p. 124.  (Contributed by NM, 27-Jun-2002.)  (Proof
+     shortened by Wolf Lammen, 3-Nov-2013.)  (Proof shortened by NM,
+     29-Oct-2021.) $)
+  dfbi3 $p |- ( ( ph <-> ps ) <-> ( ( ph /\ ps ) \/ ( -. ph /\ -. ps ) ) ) $=
+    wph wps wi wps wph wi wa wph wps wi wph wn wps wn wi wa wph wps wb wph wps
+    wa wph wn wps wn wa wo wps wph wi wph wn wps wn wi wph wps wi wps wph
+    con34b anbi2i wph wps dfbi2 wph wps wps wn cases2 3bitr4i $.
+
+  $( Theorem *5.24 of [WhiteheadRussell] p. 124.  (Contributed by NM,
+     3-Jan-2005.) $)
+  pm5.24 $p |- ( -. ( ( ph /\ ps ) \/ ( -. ph /\ -. ps ) ) <->
+                ( ( ph /\ -. ps ) \/ ( ps /\ -. ph ) ) ) $=
+    wph wps wb wph wps wn wa wps wph wn wa wo wph wps wa wph wn wps wn wa wo
+    wph wps xor wph wps dfbi3 xchnxbi $.
+
+  $( The disjunction of the four possible combinations of two wffs and their
+     negations is always true.  A four-way excluded middle (see ~ exmid ).
+     (Contributed by David Abernethy, 28-Jan-2014.)  (Proof shortened by NM,
+     29-Oct-2021.) $)
+  4exmid $p |- ( ( ( ph /\ ps ) \/ ( -. ph /\ -. ps ) )
+              \/ ( ( ph /\ -. ps ) \/ ( ps /\ -. ph ) ) ) $=
+    wph wps wa wph wn wps wn wa wo wph wps wn wa wps wph wn wa wo wph wps wa
+    wph wn wps wn wa wo wn wph wps wn wa wps wph wn wa wo wph wps pm5.24 biimpi
+    orri $.
+
+  $( The consensus theorem.  This theorem and its dual (with ` \/ ` and ` /\ `
+     interchanged) are commonly used in computer logic design to eliminate
+     redundant terms from Boolean expressions.  Specifically, we prove that the
+     term ` ( ps /\ ch ) ` on the left-hand side is redundant.  (Contributed by
+     NM, 16-May-2003.)  (Proof shortened by Andrew Salmon, 13-May-2011.)
+     (Proof shortened by Wolf Lammen, 20-Jan-2013.) $)
+  consensus $p |- ( ( ( ( ph /\ ps ) \/ ( -. ph /\ ch ) ) \/ ( ps /\ ch ) ) <->
+                      ( ( ph /\ ps ) \/ ( -. ph /\ ch ) ) ) $=
+    wph wps wa wph wn wch wa wo wps wch wa wo wph wps wa wph wn wch wa wo wph
+    wps wa wph wn wch wa wo wph wps wa wph wn wch wa wo wps wch wa wph wps wa
+    wph wn wch wa wo id wph wps wch wa wph wps wa wph wn wch wa wo wph wps wph
+    wps wa wph wn wch wa wo wch wph wps wa wph wn wch wa orc adantrr wph wn wch
+    wph wps wa wph wn wch wa wo wps wph wn wch wa wph wps wa olc adantrl
+    pm2.61ian jaoi wph wps wa wph wn wch wa wo wps wch wa orc impbii $.
+
+  $( Theorem *4.42 of [WhiteheadRussell] p. 119.  See also ~ ifpid .
+     (Contributed by Roy F. Longton, 21-Jun-2005.) $)
+  pm4.42 $p |- ( ph <-> ( ( ph /\ ps ) \/ ( ph /\ -. ps ) ) ) $=
+    wps wph wph wps wa wph wps wn wa wo wb wps wph wph dedlema wps wph wph
+    dedlemb pm2.61i $.
+
+  ${
+    prlem1.1 $e |- ( ph -> ( et <-> ch ) ) $.
+    prlem1.2 $e |- ( ps -> -. th ) $.
+    $( A specialized lemma for set theory (to derive the Axiom of Pairing).
+       (Contributed by NM, 18-Oct-1995.)  (Proof shortened by Andrew Salmon,
+       13-May-2011.)  (Proof shortened by Wolf Lammen, 5-Jan-2013.) $)
+    prlem1 $p |- ( ph -> ( ps ->
+                  ( ( ( ps /\ ch ) \/ ( th /\ ta ) ) -> et ) ) ) $=
+      wph wps wps wch wa wth wta wa wo wet wi wph wps wch wa wet wps wth wta wa
+      wph wch wet wps wph wet wch prlem1.1 biimprd adantld wps wth wet wta wps
+      wth wet prlem1.2 pm2.21d adantrd jaao ex $.
+  $}
+
+  $( A specialized lemma for set theory (to derive the Axiom of Pairing).
+     (Contributed by NM, 21-Jun-1993.)  (Proof shortened by Andrew Salmon,
+     13-May-2011.)  (Proof shortened by Wolf Lammen, 9-Dec-2012.) $)
+  prlem2 $p |- ( ( ( ph /\ ps ) \/ ( ch /\ th ) ) <->
+              ( ( ph \/ ch ) /\ ( ( ph /\ ps ) \/ ( ch /\ th ) ) ) ) $=
+    wph wps wa wch wth wa wo wph wch wo wph wps wa wph wch wth wa wch wph wps
+    simpl wch wth simpl orim12i pm4.71ri $.
+
+  ${
+    oplem1.1 $e |- ( ph -> ( ps \/ ch ) ) $.
+    oplem1.2 $e |- ( ph -> ( th \/ ta ) ) $.
+    oplem1.3 $e |- ( ps <-> th ) $.
+    oplem1.4 $e |- ( ch -> ( th <-> ta ) ) $.
+    $( A specialized lemma for set theory (ordered pair theorem).  (Contributed
+       by NM, 18-Oct-1995.)  (Proof shortened by Wolf Lammen, 8-Dec-2012.) $)
+    oplem1 $p |- ( ph -> ps ) $=
+      wph wth wps wph wth wph wth wn wch wta wa wth wph wth wn wch wta wth wn
+      wps wn wph wch wps wth oplem1.3 notbii wph wps wch oplem1.1 ord syl5bir
+      wph wth wta oplem1.2 ord jcad wch wth wta oplem1.4 biimpar syl6 pm2.18d
+      oplem1.3 sylibr $.
+  $}
+
+  $( A single axiom for Boolean algebra known as DN_1.  See McCune, Veroff,
+     Fitelson, Harris, Feist, Wos, _Short single axioms for Boolean algebra_,
+     Journal of Automated Reasoning, 29(1):1--16, 2002.
+     ( ~ https://www.cs.unm.edu/~~mccune/papers/basax/v12.pdf ).  (Contributed
+     by Jeff Hankins, 3-Jul-2009.)  (Proof shortened by Andrew Salmon,
+     13-May-2011.)  (Proof shortened by Wolf Lammen, 6-Jan-2013.) $)
+  dn1 $p |- ( -. ( -. ( -. ( ph \/ ps ) \/ ch ) \/
+            -. ( ph \/ -. ( -. ch \/ -. ( ch \/ th ) ) ) ) <-> ch ) $=
+    wch wph wps wo wn wch wo wph wch wo wa wph wps wo wn wch wo wph wch wn wch
+    wth wo wn wo wn wo wa wph wps wo wn wch wo wn wph wch wn wch wth wo wn wo
+    wn wo wn wo wn wch wch wph wps wo wn wph wa wo wph wps wo wn wph wa wch wo
+    wph wps wo wn wch wo wph wch wo wa wph wps wo wn wph wa wch wph wps wo wn
+    wph wn wi wph wps wo wn wph wa wn wph wps pm2.45 wph wps wo wn wph imnan
+    mpbi biorfi wch wph wps wo wn wph wa orcom wph wps wo wn wph wch ordir
+    3bitri wph wch wo wph wch wn wch wth wo wn wo wn wo wph wps wo wn wch wo
+    wch wch wn wch wth wo wn wo wn wph wch wch wch wth wo wa wch wn wch wth wo
+    wn wo wn wch wth pm4.45 wch wch wth wo anor bitri orbi2i anbi2i wph wps wo
+    wn wch wo wph wch wn wch wth wo wn wo wn wo anor 3bitrri $.
+
+  $( A closed form of ~ mpbir , analogous to ~ pm2.27 (assertion).
+     (Contributed by Jonathan Ben-Naim, 3-Jun-2011.)  (Proof shortened by Roger
+     Witte, 17-Aug-2020.) $)
+  bianir $p |- ( ( ph /\ ( ps <-> ph ) ) -> ps ) $=
+    wps wph wb wph wps wps wph biimpr impcom $.
+
+  ${
+    jaoi2.1 $e |- ( ( ph \/ ( -. ph /\ ch ) ) -> ps ) $.
+    $( Inference removing a negated conjunct in a disjunction of an antecedent
+       if this conjunct is part of the disjunction.  (Contributed by Alexander
+       van der Vekens, 3-Nov-2017.)  (Proof shortened by Wolf Lammen,
+       21-Sep-2018.) $)
+    jaoi2 $p |- ( ( ph \/ ch ) -> ps ) $=
+      wph wch wo wph wph wn wch wa wo wps wph wch pm5.63 jaoi2.1 sylbi $.
+  $}
+
+  ${
+    jaoi3.1 $e |- ( ph -> ps ) $.
+    jaoi3.2 $e |- ( ( -. ph /\ ch ) -> ps ) $.
+    $( Inference separating a disjunct of an antecedent.  (Contributed by
+       Alexander van der Vekens, 25-May-2018.) $)
+    jaoi3 $p |- ( ( ph \/ ch ) -> ps ) $=
+      wph wps wch wph wps wph wn wch wa jaoi3.1 jaoi3.2 jaoi jaoi2 $.
+  $}
+
+  $( Selecting one statement from a disjunction if one of the disjuncted
+     statements is false.  (Contributed by AV, 6-Sep-2018.)  (Proof shortened
+     by AV, 13-Oct-2018.)  (Proof shortened by Wolf Lammen, 19-Jan-2020.) $)
+  ornld $p |- ( ph -> ( ( ( ph -> ( th \/ ta ) ) /\ -. th ) -> ta ) ) $=
+    wph wph wth wta wo wi wth wn wta wph wph wth wta wo wi wa wth wta wph wth
+    wta wo pm3.35 ord expimpd $.
