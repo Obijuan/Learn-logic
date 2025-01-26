@@ -46,7 +46,7 @@ th_db = {
     },
     "wtru": {
         "hyp": [],
-        "conc": "wff T."
+        "conc": "wff ⊤"
     },
     "ax-th": {
         "hyp": ["wff 𝜑"],
@@ -1460,6 +1460,11 @@ th_db = {
                   'wn', 'wps', 'wn', 'wo', 'wph', 'wps', 'imnan', 'wph',
                   'wps', 'pm4.62', 'bitr3i']
     },
+    "tru": {
+        "hyp": [],
+        "conc": "⊢ ⊤",
+        "proof": ['wtru','ax-th']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1663,11 +1668,10 @@ def wtru(show_proof = False):
     """ ⊤ es una fórmula bien formada """
 
     #-- Crear la cadena wff
-    w = f"wff T."
+    w = f"wff ⊤"
 
     #-- Meterla en la pila
     stack.append(w)
-
 
 def ax_th(show_proof = False):
     """Axioma de generacion de teoremas
@@ -1964,7 +1968,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("wtru", True)
+check_theorem("tru", True)
 print(stack)
 
 print()
