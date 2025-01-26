@@ -1451,7 +1451,7 @@ th_db = {
     },
     "ianor": {
         "hyp": ["wff 𝜑", "wff 𝜓"],
-        "conc": " ⊢ (¬ (𝜑 ∧ 𝜓) ↔ (¬ 𝜑 ∨ ¬ 𝜓))",
+        "conc": "⊢ ( ¬( 𝜑 ∧ 𝜓 ) ↔ ( ¬𝜑 ∨ ¬𝜓 ) )",
         "proof": ['wph', 'wps', 'wa', 'wn', 'wph', 'wps', 'wn', 'wi', 'wph',
                   'wn', 'wps', 'wn', 'wo', 'wph', 'wps', 'imnan', 'wph',
                   'wps', 'pm4.62', 'bitr3i']
@@ -1944,7 +1944,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("bitr3i", True)
+check_theorem("ianor", True)
 print(stack)
 
 print()
