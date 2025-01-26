@@ -1390,11 +1390,30 @@ th_db = {
         "proof": ['wph', 'wph', 'wo', 'wph', 'wph', 'pm1.2', 'wph',
                   'pm2.07', 'impbii']
     },
-    "test": {
+    "imim12d": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+                "⊢ ( 𝜑 → ( 𝜓 → 𝜒 ) )",
+                "⊢ ( 𝜑 → ( 𝜃 → 𝜏 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜒 → 𝜃 ) → ( 𝜓 → 𝜏 ) ) )",
+        "proof": ['wph', 'wps', 'wch', 'wch', 'wth', 'wi', 'wta',
+                  'hyp.1', 'wph', 'wth', 'wta', 'wch', 'hyp.2',
+                  'imim2d', 'syl5d']
+    },
+    "imim1d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                " ⊢ (𝜑 → (𝜓 → 𝜒))"],
+        "conc": " ⊢ (𝜑 → ((𝜒 → 𝜃) → (𝜓 → 𝜃)))",
+        "proof": ['wph', 'wps', 'wch', 'wth', 'wth', 'hyp.1', 'wph', 'wth',
+                  'idd', 'imim12d']
+    },
+    "imbi1d": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", 
+                "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )"],
+        "conc": "⊢ ( 𝜑 → ( ( 𝜓 → 𝜃 ) ↔ ( 𝜒 → 𝜃 ) ) )",
+        "proof": ['wph', 'wps', 'wth', 'wi', 'wch', 'wth', 'wi', 'wph',
+                  'wch', 'wps', 'wth', 'wph', 'wps', 'wch', 'hyp.1',
+                  'biimprd', 'imim1d', 'wph', 'wps', 'wch', 'wth', 'wph',
+                  'wps', 'wch', 'hyp.1', 'biimpd', 'imim1d', 'impbid']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1884,7 +1903,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("oridm", True)
+check_theorem("imim12d", True)
 print(stack)
 
 print()
