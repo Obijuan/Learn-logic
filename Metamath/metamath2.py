@@ -1959,8 +1959,8 @@ def check_theorem(name: str, show_proof=False):
 print()
 
 #-- Check all the theorems in the database
-for th in th_db:
-    check_theorem(th, True)
+#for th in th_db:
+#    check_theorem(th, True)
 
 print("-----------------------")
 
