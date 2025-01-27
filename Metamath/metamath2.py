@@ -2023,7 +2023,8 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
 
         #-- Modo verbose: Mostrar el paso actual
         if (show_proof):
-            if name not in ["wn", "wi", "wb", "wa", "wo"]:
+            if name not in ["wn", "wi", "wb", "wa", "wo", "vx", "cv", "wceq",
+                            "wal", "wtru"]:
                 #print(f"\n🟢️ Paso {step}: {name}")
                 print(f"\n🟢️ Paso {step_shown}: {name}")
                 step_shown += 1
