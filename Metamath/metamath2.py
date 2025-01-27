@@ -44,6 +44,10 @@ th_db = {
         "hyp": ["wff 𝜑", "wff 𝜓"],
         "conc": "wff ( 𝜑 ∨ 𝜓 )"
     },
+    "wal": {
+        "hyp": ["wff 𝜑", "setvar x"],
+        "conc": "wff ∀𝑥𝜑"
+    },
     "wtru": {
         "hyp": [],
         "conc": "wff ⊤"
@@ -1687,6 +1691,28 @@ def wo(show_proof = False):
     #-- Meterla en la pila
     stack.append(w)
 
+def wal(show_proof = False):
+    """Si 𝜑 es una wff y x es una variable, entonces
+       ∀𝑥𝜑 es una wff"""
+
+    #--- Leer la variable de la pila
+    vx = stack.pop()
+
+    #-- Comprobar que es una variable
+    x = assert_setvar(vx)
+
+    #-- Leer la fórmula de la pila
+    w = stack.pop()
+
+    #-- Obtener la formula
+    𝜑 = assert_wff(w)
+
+    #-- Crear la cadena wff
+    f = f"wff ∀{x}{𝜑}"
+
+    #-- Meterla en la pila
+    stack.append(f) 
+
 def wtru(show_proof = False):
     """ ⊤ es una fórmula bien formada """
 
@@ -2009,8 +2035,10 @@ print("-----------------------")
 #check_theorem("tru", True)
 #print(stack)
 
+wph()
 vx()
-cv()
+#cv()
+wal()
 print_top()
 print(stack)
 
