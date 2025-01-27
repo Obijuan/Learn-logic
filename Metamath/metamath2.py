@@ -1512,11 +1512,51 @@ th_db = {
         "conc": "⊢ ( ( ⊤ → ⊤ ) ↔ ⊤ )",
         "proof": ['wtru', 'wtru', 'wi', 'wtru', 'id', 'bitru']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "a1bi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 ↔ ( 𝜑 → 𝜓 ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wi', 'wb', 'hyp.1', 'wph',
+                  'wps', 'biimt', 'ax-mp']
+    },
+    "trut": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ( ⊤ → 𝜑 ) )",
+        "proof": ['wtru', 'wph', 'tru', 'a1bi']
+    },
+    "truimfal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ → ⊥ ) ↔ ⊥ )",
+        "proof": ['wfal', 'wtru', 'wfal', 'wi', 'wfal', 'trut', 'bicomi']
+    },
+    "impbid2": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜓 → 𝜒 )",
+                "⊢ ( 𝜑 → ( 𝜒 → 𝜓 ) )"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ 𝜒 ) )",
+        "proof": ['wph', 'wch', 'wps', 'wph', 'wch', 'wps', 'hyp.2',
+                  'hyp.1', 'impbid1', 'bicomd']
+    },
+    "biimt": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜑 → 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wi', 'wps', 'wph', 'ax-1',
+                  'wph', 'wps', 'pm2.27', 'impbid2']
+    },
+    "trud": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 → ⊤ )",
+        "proof": ['wtru', 'wph', 'tru', 'a1i']
+    },
+    "falimtru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ → ⊤ ) ↔ ⊤ )",
+        "proof": ['wfal', 'wtru', 'wi', 'wfal', 'trud', 'bitru']
+    },
+    "falimfal": {
+        "hyp": [],
+        "conc": " ⊢ ((⊥ → ⊥) ↔ ⊤)",
+        "proof": ['wfal', 'wfal', 'wi', 'wfal', 'id', 'bitru']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2122,10 +2162,7 @@ print("-----------------------")
 #check_theorem("tru", True)
 #check_theorem("wal", True)
 #check_theorem("wceq", True)
-#check_theorem("df-tru", True)
-#check_theorem("tru", True)
-check_theorem("bitru", True)
-#check_theorem("truimtru", True)
+check_theorem("falimtru", True)
 #print(stack)
 
 #wph()
