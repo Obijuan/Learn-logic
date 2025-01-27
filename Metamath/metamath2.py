@@ -45,12 +45,24 @@ th_db = {
         "conc": "wff ( 𝜑 ∨ 𝜓 )"
     },
     "wal": {
-        "hyp": ["wff 𝜑", "setvar x"],
+        "hyp": ["wff 𝜑", "setvar 𝑥"],
         "conc": "wff ∀𝑥𝜑"
+    },
+    "wceq": {
+        "hyp": ["class 𝐴", "class 𝐵"],
+        "conc": "wff 𝐴=𝐵"
     },
     "wtru": {
         "hyp": [],
         "conc": "wff ⊤"
+    },
+    "vx": {
+        "hyp": [],
+        "conc": "setvar 𝑥"
+    },
+    "cv": {
+        "hyp": ["setvar 𝑥"],
+        "conc": "class 𝑥"
     },
     "ax-th": {
         "hyp": ["wff 𝜑"],
@@ -1464,10 +1476,21 @@ th_db = {
                   'wn', 'wps', 'wn', 'wo', 'wph', 'wps', 'imnan', 'wph',
                   'wps', 'pm4.62', 'bitr3i']
     },
+    "df-tru": {
+        "hyp": ["setvar 𝑥"],
+        "conc": "⊢ ( ⊤ ↔ ( ∀𝑥𝑥=𝑥 → ∀𝑥𝑥=𝑥 ) )",
+        "proof": ['wtru', 'vx', 'cv', 'vx', 'cv', 'wceq', 'vx', 'wal',
+                  'vx', 'cv', 'vx', 'cv', 'wceq', 'vx', 'wal', 'wi', 'wb',
+                  'ax-th']
+
+    },
     "tru": {
         "hyp": [],
         "conc": "⊢ ⊤",
-        "proof": ['wtru','ax-th']
+        "proof": ['wtru', 'vx', 'cv', 'vx', 'cv', 'wceq', 'vx',
+                  'wal', 'vx', 'cv', 'vx', 'cv', 'wceq', 'vx',
+                  'wal', 'wi', 'vx', 'cv', 'vx', 'cv', 'wceq',
+                  'vx', 'wal', 'id', 'vx', 'df-tru', 'mpbir']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -1533,6 +1556,21 @@ def assert_setvar(f : str) -> str:
     #-- Retornar la variable
     return f
 
+def assert_class(c : str) -> str:
+    """Comprobar que c es una clase"""
+    """En caso de serlo, se retorna la clase (sin class)"""
+
+    #-- Comprobar si c es una clase
+    if c.startswith("class "):
+        c = c[6:]
+    else:
+        print(f"Error: {c} no es una clase")
+        print()
+        sys.exit(1)
+
+    #-- Retornar la clase
+    return c
+
 def assert_theorem(th : str) -> str:
     """Comprobar que th es un teorema"""
     """En caso de serlo, se retorna la fórmula"""
@@ -1594,10 +1632,6 @@ def wth():
 def wta():
     """La variable 𝜃 es una fórmula bien formada (wff)"""
     stack.append("wff 𝜏")
-
-def vx():
-    """El símbolo x es una variable (setvar)"""
-    stack.append("setvar x")
 
 def wn(show_proof = False):
     """Si w es una fórmula bien formada (wff), """
@@ -1713,6 +1747,24 @@ def wal(show_proof = False):
     #-- Meterla en la pila
     stack.append(f) 
 
+def wceq(show_proof = False):
+    """Si 𝐴 y 𝐵 son dos clases, entonces esto es
+       una fórmula bien formada (wff):  wff A=B"""
+
+    #-- Leer las dos clases de la pila
+    B = stack.pop()
+    A = stack.pop()
+
+    #-- Asegurarse de que A y B son clases
+    CA = assert_class(A)
+    CB = assert_class(B)
+
+    #-- Crear la cadena wff
+    w = f"wff {CA}={CB}"
+
+    #-- Meterla en la pila
+    stack.append(w)
+
 def wtru(show_proof = False):
     """ ⊤ es una fórmula bien formada """
 
@@ -1736,6 +1788,11 @@ def cv(show_proof = False):
 
     #-- Meterla en la pila
     stack.append(f)
+
+def vx(show_proof = False):
+    """El símbolo x es una variable (setvar)"""
+    #-- TODO: No estoy nada seguro de esta implementacion!!
+    stack.append("setvar 𝑥")
 
 def ax_th(show_proof = False):
     """Axioma de generacion de teoremas
@@ -2033,14 +2090,20 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-#print(stack)
-
-wph()
-vx()
-#cv()
-wal()
-print_top()
+#check_theorem("wal", True)
+#check_theorem("wceq", True)
+check_theorem("df-tru", True)
 print(stack)
+
+#wph()
+#vx()
+#cv()
+#vx()
+#cv()
+#wceq()
+#wal()
+#print_top()
+#print(stack)
 
 print()
  
