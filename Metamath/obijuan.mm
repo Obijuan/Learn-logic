@@ -12374,3 +12374,225 @@ $)
      (Proof shortened by Wolf Lammen, 21-Jul-2019.) $)
   truan $p |- ( ( T. /\ ph ) <-> ph ) $=
     wph wtru wph wa wtru wph tru biantrur bicomi $.
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  The false constant
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $c F. $.  $( Symbol for the false constant. $)
+
+  $( The constant ` F. ` is a wff. $)
+  wfal $a wff F. $.
+
+  $( Definition of the truth value "false", or "falsum", denoted by ` F. ` .
+     See also ~ df-tru .  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  df-fal $a |- ( F. <-> -. T. ) $.
+
+  $( The truth value ` F. ` is refutable.  (Contributed by Anthony Hart,
+     22-Oct-2010.)  (Proof shortened by Mel L. O'Cat, 11-Mar-2012.) $)
+  fal $p |- -. F. $=
+    wfal wtru wn wtru tru notnoti df-fal mtbir $.
+
+  $( The negation of a proposition is equivalent to itself being equivalent to
+     ` F. ` .  (Contributed by Anthony Hart, 14-Aug-2011.) $)
+  nbfal $p |- ( -. ph <-> ( ph <-> F. ) ) $=
+    wfal wph fal nbn $.
+
+  ${
+    bifal.1 $e |- -. ph $.
+    $( A contradiction is equivalent to falsehood.  (Contributed by Mario
+       Carneiro, 9-May-2015.) $)
+    bifal $p |- ( ph <-> F. ) $=
+      wph wfal bifal.1 fal 2false $.
+  $}
+
+  $( The truth value ` F. ` implies anything.  Also called the "principle of
+     explosion", or "ex falso [[sequitur]] quodlibet" (Latin for "from
+     falsehood, anything [[follows]]").  Dual statement of ~ trud .
+     (Contributed by FL, 20-Mar-2011.)  (Proof shortened by Anthony Hart,
+     1-Aug-2011.) $)
+  falim $p |- ( F. -> ph ) $=
+    wfal wph fal pm2.21i $.
+
+  $( The truth value ` F. ` implies anything.  (Contributed by Mario Carneiro,
+     9-Feb-2017.) $)
+  falimd $p |- ( ( ph /\ F. ) -> ps ) $=
+    wfal wps wph wps falim adantl $.
+
+  $( Given falsum ` F. ` , we can define the negation of a wff ` ph ` as the
+     statement that ` F. ` follows from assuming ` ph ` .  (Contributed by
+     Mario Carneiro, 9-Feb-2017.)  (Proof shortened by Wolf Lammen,
+     21-Jul-2019.) $)
+  dfnot $p |- ( -. ph <-> ( ph -> F. ) ) $=
+    wfal wn wph wn wph wfal wi wb fal wfal wph mtt ax-mp $.
+
+  ${
+    inegd.1 $e |- ( ( ph /\ ps ) -> F. ) $.
+    $( Negation introduction rule from natural deduction.  (Contributed by
+       Mario Carneiro, 9-Feb-2017.) $)
+    inegd $p |- ( ph -> -. ps ) $=
+      wph wps wfal wi wps wn wph wps wfal inegd.1 ex wps dfnot sylibr $.
+  $}
+
+  ${
+    efald.1 $e |- ( ( ph /\ -. ps ) -> F. ) $.
+    $( Deduction based on reductio ad absurdum.  (Contributed by Mario
+       Carneiro, 9-Feb-2017.) $)
+    efald $p |- ( ph -> ps ) $=
+      wph wps wph wps wn efald.1 inegd notnotrd $.
+  $}
+
+  ${
+    pm2.21fal.1 $e |- ( ph -> ps ) $.
+    pm2.21fal.2 $e |- ( ph -> -. ps ) $.
+    $( If a wff and its negation are provable, then falsum is provable.
+       (Contributed by Mario Carneiro, 9-Feb-2017.) $)
+    pm2.21fal $p |- ( ph -> F. ) $=
+      wph wps wfal pm2.21fal.1 pm2.21fal.2 pm2.21dd $.
+  $}
+
+
+$(
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  Truth tables
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+  Some sources define logical connectives by their truth tables.  These are
+  tables that give the truth value of the composed expression for all possible
+  combinations of the truth values of their arguments.  In this section, we
+  show that our definitions and axioms produce equivalent results for all the
+  logical connectives we have introduced (either axiomatically or by a
+  definition): implication ~ wi , negation ~ wn , biconditional ~ df-bi ,
+  conjunction ~ df-an , disjunction ~ df-or , alternative denial ~ df-nan ,
+  exclusive disjunction ~ df-xor .
+
+$)
+
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  Implication
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $( A ` -> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  An
+     alternate proof is possible using ~ trud instead of ~ id but the principle
+     of identity ~ id is more basic, and the present proof indicates that the
+     result still holds in relevance logic.
+     (Proof modification is discouraged.) $)
+  truimtru $p |- ( ( T. -> T. ) <-> T. ) $=
+    wtru wtru wi wtru id bitru $.
+
+  $( A ` -> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  truimfal $p |- ( ( T. -> F. ) <-> F. ) $=
+    wfal wtru wfal wi wfal trut bicomi $.
+
+  $( A ` -> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  An
+     alternate proof is possible using ~ falim instead of ~ trud but the
+     present proof using ~ trud emphasizes that the result does not require the
+     principle of explosion.  (Proof modification is discouraged.) $)
+  falimtru $p |- ( ( F. -> T. ) <-> T. ) $=
+    wfal wtru wi wfal trud bitru $.
+
+  $( A ` -> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  An
+     alternate proof is possible using ~ falim instead of ~ id but the present
+     proof using ~ id emphasizes that the result does not require the principle
+     of explosion.  (Proof modification is discouraged.) $)
+  falimfal $p |- ( ( F. -> F. ) <-> T. ) $=
+    wfal wfal wi wfal id bitru $.
+
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  Negation
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $( A ` -. ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  nottru $p |- ( -. T. <-> F. ) $=
+    wfal wtru wn df-fal bicomi $.
+
+  $( A ` -. ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  notfal $p |- ( -. F. <-> T. ) $=
+    wfal wn fal bitru $.
+
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  Equivalence
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $( A ` <-> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  trubitru $p |- ( ( T. <-> T. ) <-> T. ) $=
+    wtru wtru wb wtru biid bitru $.
+
+  $( A ` <-> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.)  (Proof shortened by Wolf
+     Lammen, 10-Jul-2020.) $)
+  falbitru $p |- ( ( F. <-> T. ) <-> F. ) $=
+    wfal wfal wtru wb wfal tbtru bicomi $.
+
+  $( A ` <-> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.)  (Proof shortened by Wolf
+     Lammen, 10-Jul-2020.) $)
+  trubifal $p |- ( ( T. <-> F. ) <-> F. ) $=
+    wtru wfal wb wfal wtru wb wfal wtru wfal bicom falbitru bitri $.
+
+  $( A ` <-> ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  falbifal $p |- ( ( F. <-> F. ) <-> T. ) $=
+    wfal wfal wb wfal biid bitru $.
+
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  Conjunction
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $( A ` /\ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  truantru $p |- ( ( T. /\ T. ) <-> T. ) $=
+    wtru anidm $.
+
+  $( A ` /\ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  truanfal $p |- ( ( T. /\ F. ) <-> F. ) $=
+    wfal truan $.
+
+  $( A ` /\ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  falantru $p |- ( ( F. /\ T. ) <-> F. ) $=
+    wfal wtru wa wfal wtru fal intnanr bifal $.
+
+  $( A ` /\ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  falanfal $p |- ( ( F. /\ F. ) <-> F. ) $=
+    wfal anidm $.
+
+
+$(
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+  Disjunction
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+$)
+
+  $( A ` \/ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  truortru $p |- ( ( T. \/ T. ) <-> T. ) $=
+    wtru oridm $.
+
+  $( A ` \/ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  truorfal $p |- ( ( T. \/ F. ) <-> T. ) $=
+    wtru wfal wo wtru wfal tru orci bitru $.
+
+  $( A ` \/ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.) $)
+  falortru $p |- ( ( F. \/ T. ) <-> T. ) $=
+    wfal wtru wo wtru wfal tru olci bitru $.
+
+  $( A ` \/ ` identity.  (Contributed by Anthony Hart, 22-Oct-2010.)  (Proof
+     shortened by Andrew Salmon, 13-May-2011.) $)
+  falorfal $p |- ( ( F. \/ F. ) <-> F. ) $=
+    wfal oridm $.

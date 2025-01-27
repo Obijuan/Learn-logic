@@ -56,6 +56,10 @@ th_db = {
         "hyp": [],
         "conc": "wff ⊤"
     },
+    "wfal": {
+        "hyp": [],
+        "conc": "wff ⊥"
+    },
     "vx": {
         "hyp": [],
         "conc": "setvar 𝑥"
@@ -1492,6 +1496,22 @@ th_db = {
                   'wal', 'wi', 'vx', 'cv', 'vx', 'cv', 'wceq',
                   'vx', 'wal', 'id', 'vx', 'df-tru', 'mpbir']
     },
+    "df-fal": {
+        "hyp": [],
+        "conc": "⊢ ( ⊥ ↔ ¬⊤ )",
+        "proof": ['wfal', 'wtru', 'wn', 'wb', 'ax-th']
+    },
+    "bitru": {
+        "hyp": ["wff 𝜑",
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ⊤ )",
+        "proof": ['wph', 'wtru', 'hyp.1', 'tru', '2th']
+    },
+    "truimtru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ → ⊤ ) ↔ ⊤ )",
+        "proof": ['wtru', 'wtru', 'wi', 'wtru', 'id', 'bitru']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -1774,6 +1794,15 @@ def wtru(show_proof = False):
     #-- Meterla en la pila
     stack.append(w)
 
+def wfal(show_proof = False):
+    """ ⊥ es una fórmula bien formada """
+
+    #-- Crear la cadena wff
+    w = f"wff ⊥"
+
+    #-- Meterla en la pila
+    stack.append(w)
+
 def cv(show_proof = False):
     """Si x es una variable, entonces x es una clase  (class)"""
 
@@ -2024,7 +2053,7 @@ def proof_theorems(proof: list[str], nh_orig: int, wffs: int,
         #-- Modo verbose: Mostrar el paso actual
         if (show_proof):
             if name not in ["wn", "wi", "wb", "wa", "wo", "vx", "cv", "wceq",
-                            "wal", "wtru"]:
+                            "wal", "wtru", "wfal"]:
                 #print(f"\n🟢️ Paso {step}: {name}")
                 print(f"\n🟢️ Paso {step_shown}: {name}")
                 step_shown += 1
@@ -2093,8 +2122,11 @@ print("-----------------------")
 #check_theorem("tru", True)
 #check_theorem("wal", True)
 #check_theorem("wceq", True)
-check_theorem("df-tru", True)
-print(stack)
+#check_theorem("df-tru", True)
+#check_theorem("tru", True)
+check_theorem("bitru", True)
+#check_theorem("truimtru", True)
+#print(stack)
 
 #wph()
 #vx()
@@ -2104,7 +2136,9 @@ print(stack)
 #wceq()
 #wal()
 #print_top()
-#print(stack)
+
+#wfal()
+print(stack)
 
 print()
  
