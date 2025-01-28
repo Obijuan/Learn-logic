@@ -1723,6 +1723,24 @@ th_db = {
         "conc": "⊢ ( ( ⊥ ∧ ⊥ ) ↔ ⊥ )",
         "proof": ['wfal', 'anidm']
     },
+    "truortru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ∨ ⊤ ) ↔ ⊤ )",
+        "proof": ['wtru', 'oridm']
+    },
+    "pm2.24i": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ( ¬𝜑 → 𝜓 )",
+        "proof": ['wps', 'wph', 'wph', 'wps', 'wn', 'hyp.1', 'a1i',
+                  'con1i']
+    },
+    "orci": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜑 ∨ 𝜓 )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'hyp.1', 'pm2.24i', 'orri']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2337,8 +2355,8 @@ print()
 
 print("-----------------------")
 
-#check_theorem("tru", True)
-check_theorem("falanfal", True)
+check_theorem("pm2.24i", True)
+check_theorem("orci", True)
 #print(stack)
 
 #wph()
