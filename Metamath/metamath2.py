@@ -1684,6 +1684,25 @@ th_db = {
         "conc": "⊢ ( ( ⊤ ∧ ⊥ ) ↔ ⊥ )",
         "proof": ['wfal', 'truan']
     },
+    "con4bii": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ( ¬𝜑 ↔ ¬𝜓 )"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜓 )",
+        "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb',
+                  'hyp.1', 'wph', 'wps', 'notbi', 'mpbir']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2293,7 +2312,7 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("truanfal", True)
+check_theorem("con4bii", True)
 #print(stack)
 
 #wph()
