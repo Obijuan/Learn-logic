@@ -1654,17 +1654,24 @@ th_db = {
         "conc": "⊢ ( ( 𝜑 ∧ 𝜑 ) ↔ 𝜑 )",
         "proof": ['wph', 'wph', 'wph', 'wa', 'wph', 'pm4.24', 'bicomi']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "truantru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ∧ ⊤ ) ↔ ⊤ )",
+        "proof": ['wtru', 'anidm']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "biancomi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", 
+                "⊢ ( 𝜑 ↔ ( 𝜒 ∧ 𝜓 ) )"],
+        "conc": "⊢ ( 𝜑 ↔ ( 𝜓 ∧ 𝜒 ) )",
+        "proof": ['wph', 'wch', 'wps', 'wa', 'wps', 'wch', 'wa', 'hyp.1',
+                  'wps', 'wch', 'ancom', 'bitr4i']
+    },
+    "biantrur": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 ↔ ( 𝜑 ∧ 𝜓 ) )",
+        "proof": ['wps', 'wph', 'wps', 'wph', 'wps', 'hyp.1',
+                  'biantru', 'biancomi']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2275,7 +2282,8 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("anidm", True)
+check_theorem("biancomi", True)
+check_theorem("biantrur", True)
 #print(stack)
 
 #wph()
