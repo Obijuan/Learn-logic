@@ -1759,11 +1759,10 @@ th_db = {
         "proof": ['wfal', 'wtru', 'wo', 'wtru', 'wfal', 'tru', 'olci',
                   'bitru']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "falorfal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ ∨ ⊥ ) ↔ ⊥ )",
+        "proof": ['wfal', 'oridm']
     },
     
     
@@ -2361,7 +2360,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("falortru", True)
+check_theorem("falorfal", True)
 #print(stack)
 
 #wph()
