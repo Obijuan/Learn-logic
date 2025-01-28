@@ -1753,11 +1753,11 @@ th_db = {
         "conc": "⊢ ( 𝜓 ∨ 𝜑 )",
         "proof": ['wps', 'wph', 'wph', 'wps', 'wn', 'hyp.1', 'a1i', 'orri']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "falortru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ ∨ ⊤ ) ↔ ⊤ )",
+        "proof": ['wfal', 'wtru', 'wo', 'wtru', 'wfal', 'tru', 'olci',
+                  'bitru']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2361,7 +2361,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("olci", True)
+check_theorem("falortru", True)
 #print(stack)
 
 #wph()
