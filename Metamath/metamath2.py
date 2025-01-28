@@ -1558,12 +1558,39 @@ th_db = {
         "conc": " ⊢ ((⊥ → ⊥) ↔ ⊤)",
         "proof": ['wfal', 'wfal', 'wi', 'wfal', 'id', 'bitru']
     },
+    "nottru": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ¬⊤ ↔ ⊥ )",
+        "proof": ['wfal', 'wtru', 'wn', 'df-fal', 'bicomi']
+    },
+    "mtbi": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ¬𝜑",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ¬𝜓",
+        "proof": ['wps', 'wph', 'hyp.1', 'wph', 'wps', 'hyp.2', 'biimpri', 'mto']
+    },
+    "mtbir": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                "⊢ ¬𝜓",
+                "⊢ ( 𝜑 ↔ 𝜓 )"],
+        "conc": "⊢ ¬𝜑",
+        "proof": ['wps', 'wph', 'hyp.1', 'wph', 'wps', 'hyp.2',
+                  'bicomi', 'mtbi']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
         "conc": "",
         "proof": []
     },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    
     
 }
 
@@ -2162,7 +2189,7 @@ print("-----------------------")
 #check_theorem("tru", True)
 #check_theorem("wal", True)
 #check_theorem("wceq", True)
-check_theorem("falimtru", True)
+check_theorem("mtbir", True)
 #print(stack)
 
 #wph()
