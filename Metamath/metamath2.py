@@ -1673,6 +1673,17 @@ th_db = {
         "proof": ['wps', 'wph', 'wps', 'wph', 'wps', 'hyp.1',
                   'biantru', 'biancomi']
     },
+    "truan": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ( ⊤ ∧ 𝜑 ) ↔ 𝜑 )",
+        "proof": ['wph', 'wtru', 'wph', 'wa', 'wtru', 'wph', 'tru',
+                  'biantrur', 'bicomi']
+    },
+    "truanfal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ∧ ⊥ ) ↔ ⊥ )",
+        "proof": ['wfal', 'truan']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2282,8 +2293,7 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("biancomi", True)
-check_theorem("biantrur", True)
+check_theorem("truanfal", True)
 #print(stack)
 
 #wph()
