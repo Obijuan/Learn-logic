@@ -1635,7 +1635,7 @@ th_db = {
     },
     "falbitru": {
         "hyp": [],
-        "conc": " ⊢ ((⊥ ↔ ⊤) ↔ ⊥)",
+        "conc": "⊢ ( ( ⊥ ↔ ⊤ ) ↔ ⊥ )",
         "proof": ['wfal', 'wfal', 'wtru', 'wb', 'wfal', 'tbtru', 'bicomi']
     },
     "test": {
@@ -2247,7 +2247,6 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("tbtru", True)
 check_theorem("falbitru", True)
 #print(stack)
 
