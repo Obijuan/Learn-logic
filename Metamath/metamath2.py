@@ -1736,16 +1736,16 @@ th_db = {
                   'con1i']
     },
     "orci": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+        "hyp": ["wff 𝜑", "wff 𝜓", 
                 "⊢ 𝜑"],
         "conc": "⊢ ( 𝜑 ∨ 𝜓 )",
         "proof": ['wph', 'wps', 'wph', 'wps', 'hyp.1', 'pm2.24i', 'orri']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "truorfal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ∨ ⊥ ) ↔ ⊤ )",
+        "proof": ['wtru', 'wfal', 'wo', 'wtru', 'wfal', 'tru', 'orci',
+                  'bitru']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2355,8 +2355,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("pm2.24i", True)
-check_theorem("orci", True)
+check_theorem("truorfal", True)
 #print(stack)
 
 #wph()
