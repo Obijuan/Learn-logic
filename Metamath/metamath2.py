@@ -1613,6 +1613,13 @@ th_db = {
                   'wph', 'wps', 'wb', 'wph', 'wps', 'wph', 'wps', 'biimp',
                   'com12', 'impbid']
     },
+    "ibibr": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( ( 𝜑 → 𝜓 ) ↔ ( 𝜑 → ( 𝜓 ↔ 𝜑 ) ) )",
+        "proof": ['wph', 'wps', 'wps', 'wph', 'wb', 'wph', 'wps', 'wph',
+                  'wps', 'wb', 'wps', 'wph', 'wb', 'wph', 'wps', 'pm5.501',
+                  'wph', 'wps', 'bicom', 'bitrdi', 'pm5.74i']
+    },
     "falbitru": {
         "hyp": [],
         "conc": " ⊢ ((⊥ ↔ ⊤) ↔ ⊥)",
@@ -2227,8 +2234,8 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-#check_theorem("wal", True)
-check_theorem("pm5.501", True)
+check_theorem("ibibr", True)
+check_theorem("falbitru", True)
 #print(stack)
 
 #wph()
