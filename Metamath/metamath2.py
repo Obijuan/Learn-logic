@@ -1571,12 +1571,30 @@ th_db = {
         "proof": ['wps', 'wph', 'hyp.1', 'wph', 'wps', 'hyp.2', 'biimpri', 'mto']
     },
     "mtbir": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+        "hyp": ["wff 𝜑", "wff 𝜓", 
                 "⊢ ¬𝜓",
                 "⊢ ( 𝜑 ↔ 𝜓 )"],
         "conc": "⊢ ¬𝜑",
         "proof": ['wps', 'wph', 'hyp.1', 'wph', 'wps', 'hyp.2',
                   'bicomi', 'mtbi']
+    },
+    "notnoti": {
+        "hyp": ["wff 𝜑", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ¬¬𝜑",
+        "proof": ['wph', 'wph', 'wn', 'wn', 'hyp.1', 'wph', 'notnot', 'ax-mp']
+    },
+    "fal": {
+        "hyp": [],
+        "conc": "⊢ ¬⊥",
+        "proof": ['wfal', 'wtru', 'wn', 'wtru', 'tru', 'notnoti', 'df-fal',
+                  'mtbir']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2188,8 +2206,7 @@ print("-----------------------")
 
 #check_theorem("tru", True)
 #check_theorem("wal", True)
-#check_theorem("wceq", True)
-check_theorem("mtbir", True)
+check_theorem("fal", True)
 #print(stack)
 
 #wph()
