@@ -1638,6 +1638,18 @@ th_db = {
         "conc": "⊢ ( ( ⊥ ↔ ⊤ ) ↔ ⊥ )",
         "proof": ['wfal', 'wfal', 'wtru', 'wb', 'wfal', 'tbtru', 'bicomi']
     },
+    "trubifal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ↔ ⊥ ) ↔ ⊥ )",
+        "proof": ['wtru', 'wfal', 'wb', 'wfal', 'wtru', 'wb', 'wfal', 'wtru',
+                  'wfal', 'bicom', 'falbitru', 'bitri']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
