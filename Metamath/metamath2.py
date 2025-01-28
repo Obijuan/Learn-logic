@@ -1644,6 +1644,22 @@ th_db = {
         "proof": ['wtru', 'wfal', 'wb', 'wfal', 'wtru', 'wb', 'wfal', 'wtru',
                   'wfal', 'bicom', 'falbitru', 'bitri']
     },
+    "falbifal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ ↔ ⊥ ) ↔ ⊤ )",
+        "proof": ['wfal', 'wfal', 'wb', 'wfal', 'biid', 'bitru']
+    },
+    "anidm": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( ( 𝜑 ∧ 𝜑 ) ↔ 𝜑 )",
+        "proof": ['wph', 'wph', 'wph', 'wa', 'wph', 'pm4.24', 'bicomi']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2259,7 +2275,7 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("falbitru", True)
+check_theorem("anidm", True)
 #print(stack)
 
 #wph()
