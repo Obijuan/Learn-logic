@@ -1628,6 +1628,11 @@ th_db = {
                   'wps', 'wps', 'wph', 'wb', 'wph', 'wps', 'ibibr',
                   'pm5.74ri', 'ax-mp']
     },
+    "tbtru": {
+        "hyp": ["wff 𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ( 𝜑 ↔ ⊤ ) )",
+        "proof": ['wtru', 'wph', 'tru', 'tbt']
+    },
     "falbitru": {
         "hyp": [],
         "conc": " ⊢ ((⊥ ↔ ⊤) ↔ ⊥)",
@@ -2242,7 +2247,7 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("tbt", True)
+check_theorem("tbtru", True)
 check_theorem("falbitru", True)
 #print(stack)
 
