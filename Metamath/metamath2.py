@@ -1747,6 +1747,12 @@ th_db = {
         "proof": ['wtru', 'wfal', 'wo', 'wtru', 'wfal', 'tru', 'orci',
                   'bitru']
     },
+    "olci": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ 𝜑"],
+        "conc": "⊢ ( 𝜓 ∨ 𝜑 )",
+        "proof": ['wps', 'wph', 'wph', 'wps', 'wn', 'hyp.1', 'a1i', 'orri']
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2355,7 +2361,7 @@ print()
 
 print("-----------------------")
 
-check_theorem("truorfal", True)
+check_theorem("olci", True)
 #print(stack)
 
 #wph()
