@@ -1691,23 +1691,32 @@ th_db = {
         "proof": ['wph', 'wps', 'wb', 'wph', 'wn', 'wps', 'wn', 'wb',
                   'hyp.1', 'wph', 'wps', 'notbi', 'mpbir']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "2false": {
+        "hyp": ["wff 𝜑", "wff 𝜓", 
+                "⊢ ¬𝜑", 
+                "⊢ ¬𝜓"],
+        "conc": "⊢ ( 𝜑 ↔ 𝜓 )",
+        "proof": ['wph', 'wps', 'wph', 'wn', 'wps', 'wn', 'hyp.1',
+                  'hyp.2', '2th', 'con4bii']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "bifal": {
+        "hyp": ["wff 𝜑", 
+                "⊢ ¬𝜑"],
+        "conc": "⊢ ( 𝜑 ↔ ⊥ )",
+        "proof": ['wph', 'wfal', 'hyp.1', 'fal', '2false']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "intnanr": {
+        "hyp": ["wff 𝜑", "wff 𝜓",
+                "⊢ ¬𝜑"],
+        "conc": "⊢ ¬( 𝜑 ∧ 𝜓 )",
+        "proof": ['wph', 'wps', 'wa', 'wph', 'hyp.1', 'wph', 'wps',
+                  'simpl', 'mto']
+    },
+    "falantru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ ∧ ⊤ ) ↔ ⊥ )",
+        "proof": ['wfal', 'wtru', 'wa', 'wfal', 'wtru', 'fal', 'intnanr',
+                  'bifal']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2312,7 +2321,8 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("con4bii", True)
+check_theorem("intnanr", True)
+check_theorem("falantru", True)
 #print(stack)
 
 #wph()
