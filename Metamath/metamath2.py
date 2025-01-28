@@ -1718,6 +1718,23 @@ th_db = {
         "proof": ['wfal', 'wtru', 'wa', 'wfal', 'wtru', 'fal', 'intnanr',
                   'bifal']
     },
+    "falanfal": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊥ ∧ ⊥ ) ↔ ⊥ )",
+        "proof": ['wfal', 'anidm']
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
+    "test": {
+        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
+                ""],
+        "conc": "",
+        "proof": []
+    },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
                 ""],
@@ -2321,8 +2338,7 @@ print()
 print("-----------------------")
 
 #check_theorem("tru", True)
-check_theorem("intnanr", True)
-check_theorem("falantru", True)
+check_theorem("falanfal", True)
 #print(stack)
 
 #wph()
