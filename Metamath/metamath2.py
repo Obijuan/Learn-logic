@@ -1590,11 +1590,33 @@ th_db = {
         "proof": ['wfal', 'wtru', 'wn', 'wtru', 'tru', 'notnoti', 'df-fal',
                   'mtbir']
     },
-    "test": {
-        "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
-                ""],
-        "conc": "",
-        "proof": []
+    "notfal": {
+        "hyp": [],
+        "conc": "⊢ ( ¬⊥ ↔ ⊤ )",
+        "proof": ['wfal', 'wn', 'fal', 'bitru']
+    },
+    "trubitru": {
+        "hyp": [],
+        "conc": "⊢ ( ( ⊤ ↔ ⊤ ) ↔ ⊤ )",
+        "proof": ['wtru', 'wtru', 'wb', 'wtru', 'biid', 'bitru']
+    },
+    "pm5.1im": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 → ( 𝜑 ↔ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wps', 'wph', 'ax-1', 'wph',
+                  'wps', 'ax-1', 'impbid21d']
+    },
+    "pm5.501": {
+        "hyp": ["wff 𝜑", "wff 𝜓"],
+        "conc": "⊢ ( 𝜑 → ( 𝜓 ↔ ( 𝜑 ↔ 𝜓 ) ) )",
+        "proof": ['wph', 'wps', 'wph', 'wps', 'wb', 'wph', 'wps', 'pm5.1im',
+                  'wph', 'wps', 'wb', 'wph', 'wps', 'wph', 'wps', 'biimp',
+                  'com12', 'impbid']
+    },
+    "falbitru": {
+        "hyp": [],
+        "conc": " ⊢ ((⊥ ↔ ⊤) ↔ ⊥)",
+        "proof": ['wfal', 'wfal', 'wtru', 'wb', 'wfal', 'tbtru', 'bicomi']
     },
     "test": {
         "hyp": ["wff 𝜑", "wff 𝜓", "wff 𝜒", "wff 𝜃", "wff 𝜏",
@@ -2206,7 +2228,7 @@ print("-----------------------")
 
 #check_theorem("tru", True)
 #check_theorem("wal", True)
-check_theorem("fal", True)
+check_theorem("pm5.501", True)
 #print(stack)
 
 #wph()
